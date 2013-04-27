@@ -1,0 +1,98 @@
+//
+// Prefix header for all source files of the 'PathoPhys' target in the 'PathoPhys' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_4_0
+#warning "This project uses features only available in iOS SDK 4.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+#endif
+
+#define MSG_CORRECT @"That's Correct!"
+#define MSG_INCORRECT @"That's Incorrect!"
+
+#define COLOR_CUSTOMBUTTON_BLUE [UIColor colorWithRed:0 green:0.478 blue:0.749 alpha:1]
+#define COLOR_CUSTOMBUTTON_GRAY [UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1]
+#define COLOR_CLEAR [UIColor clearColor]
+#define COLOR_WHITE [UIColor whiteColor]
+#define COLOR_BLACK [UIColor blackColor]
+#define COLOR_BLUE [UIColor blueColor]
+#define COLOR_DARKGRAY [UIColor darkGrayColor]
+#define COLOR_LIGHTGRAY [UIColor lightGrayColor]
+
+
+#define COLOR_FlashcardHeadingText [UIColor colorWithRed:0 green:0.478 blue:0.749 alpha:1]
+#define COLOR_BottomGrayButton [UIColor colorWithRed:0.565 green:0.565 blue:0.565 alpha:1]
+#define COLOR_BottomBlueButton [UIColor colorWithRed:0 green:0.478 blue:0.749 alpha:1]
+
+
+#define FONT_10 [UIFont fontWithName:@"Helvetica" size:10]
+#define FONT_11 [UIFont fontWithName:@"Helvetica" size:11]
+#define FONT_12 [UIFont fontWithName:@"Helvetica" size:12]
+#define FONT_14 [UIFont fontWithName:@"Helvetica" size:14]
+#define FONT_15 [UIFont fontWithName:@"Helvetica" size:15]
+#define FONT_17 [UIFont fontWithName:@"Helvetica" size:17]
+#define FONT_18 [UIFont fontWithName:@"Helvetica" size:18]
+#define FONT_20 [UIFont fontWithName:@"Helvetica" size:20]
+#define FONT_25 [UIFont fontWithName:@"Helvetica" size:25]
+#define FONT_31 [UIFont fontWithName:@"Helvetica" size:31]
+
+#import "MyAppAppDelegate.h"
+#import "DatabaseOperation.h"
+
+
+/*
+ "Helvetica-LightOblique",
+ Helvetica,
+ "Helvetica-Oblique",
+ "Helvetica-BoldOblique",
+ "Helvetica-Bold",
+ "Helvetica-Light"
+ 
+*/
+
+MyAppAppDelegate *md;
+DatabaseOperation *db;
+int categoryNumber;
+
+NSString *str_BarTitle;
+NSString *strCurrentChapterName;
+NSString *strCurrentThematicName;
+NSMutableArray *arr_chaptersTestAndFlashcard;
+NSMutableArray *arr_chaptersCaseStudy;
+NSInteger intCurrentFlashcard_ChapterId;
+NSInteger intCurrentTestYourSelf_ChapterId;
+NSInteger intCurrentTestYourSelf_ThematicId;
+NSInteger intCurrentCaseStudy_ChapterId;
+NSInteger intCurrentCaseStudy_ThematicId;
+
+enum {
+    QUESTION_TYPE_MCMS = 1,
+    QUESTION_TYPE_FILLINBLANKS = 2,
+    QUESTION_TYPE_RADIOBUTTONS = 3,
+    QUESTION_TYPE_TRUEFLASE = 4,
+    QUESTION_TYPE_MATCHTERMS = 5,
+    QUESTION_TYPE_MCSS = 6,
+    QUESTION_TYPE_DRAGDROP = 7,
+    QUESTION_TYPE_DRAGDROPRADIOBUTTONS = 8
+};
+typedef NSInteger QuestionType;
+
+
+float feedbackpopupX;
+float feedbackpopupY;
+int feedbackFlag;
+
+float DEVICE_VERSION;
+NSString *DEVICE_TYPE;
+int DEVICE_ORIENTATION;
+int NOTES_MODE;
+
+int viewAllFlashCards;
+
+
