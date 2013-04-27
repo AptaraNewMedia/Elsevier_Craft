@@ -62,7 +62,12 @@
     
     lblTitle.font = FONT_20;
     lblTitle.textColor = COLOR_WHITE;
-
+    //Code for Exclusive Touch Enabling.
+    for (UIView *myview in [self.view subviews]){
+        if([myview isKindOfClass:[UIButton class]]){
+            myview.exclusiveTouch = YES;
+        }
+    }
 }
 -(IBAction)onClose:(id)sender{
     [md Fn_SubNotesList];

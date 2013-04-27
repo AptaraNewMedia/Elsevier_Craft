@@ -84,6 +84,13 @@
         
         [arrHeaderSection addObject:customView];
     }
+    
+    //Code for Exclusive Touch Enabling.
+    for (UIView *myview in [self.view subviews]){
+        if([myview isKindOfClass:[UIButton class]]){
+            myview.exclusiveTouch = YES;
+        }
+    }
 }
 
 - (void) viewWillAppear:(BOOL)animated{

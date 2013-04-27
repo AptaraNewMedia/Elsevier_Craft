@@ -35,6 +35,13 @@
     // Do any additional setup after loading the view from its nib.
     lblQuestionText.text = objMCMS.strQuestionText ;
     lblInstructions.text = objMCMS.strInstruction;
+    
+    //Code for Exclusive Touch Enabling.
+    for (UIView *myview in [self.view subviews]){
+        if([myview isKindOfClass:[UIButton class]]){
+            myview.exclusiveTouch = YES;
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning

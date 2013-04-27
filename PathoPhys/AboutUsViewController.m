@@ -37,6 +37,12 @@
     lblTitle.textColor = COLOR_WHITE;
     webView.scrollView.scrollEnabled = NO;
     
+    //Code for Exclusive Touch Enabling.
+    for (UIView *myview in [self.view subviews]){
+        if([myview isKindOfClass:[UIButton class]]){
+            myview.exclusiveTouch = YES;
+        }
+    }
 }
 
 - (void) Fn_LoadAboutData:(int)index

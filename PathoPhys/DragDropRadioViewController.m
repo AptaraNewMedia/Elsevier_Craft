@@ -100,6 +100,13 @@
     
     [self createRadioButtons];
     
+    //Code for Exclusive Touch Enabling.
+    for (UIView *myview in [self.view subviews]){
+        if([myview isKindOfClass:[UIButton class]]){
+            myview.exclusiveTouch = YES;
+        }
+    }
+    
 
 }
 

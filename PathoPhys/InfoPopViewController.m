@@ -45,6 +45,13 @@
     [Bn_ElsevierAustralia setTitleColor:COLOR_BottomGrayButton forState:UIControlStateNormal];
     [Bn_ElsevierAustralia setTitleColor:COLOR_BottomBlueButton forState:UIControlStateHighlighted];
     Bn_ElsevierAustralia.titleLabel.font=FONT_12;
+    
+    //Code for Exclusive Touch Enabling.
+    for (UIView *myview in [self.view subviews]){
+        if([myview isKindOfClass:[UIButton class]]){
+            myview.exclusiveTouch = YES;
+        }
+    }
 }
 
 -(IBAction)Bn_BGButton_Tapped:(id)sender

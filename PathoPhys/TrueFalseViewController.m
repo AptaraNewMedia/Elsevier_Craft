@@ -85,7 +85,14 @@
     else {
         answer = 1;
     }
-    [self Fn_createInvisibleBtn];    
+    [self Fn_createInvisibleBtn];
+    
+    //Code for Exclusive Touch Enabling.
+    for (UIView *myview in [self.view subviews]){
+        if([myview isKindOfClass:[UIButton class]]){
+            myview.exclusiveTouch = YES;
+        }
+    }
 }
 
 - (void)viewDidUnload
