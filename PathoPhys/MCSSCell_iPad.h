@@ -15,6 +15,7 @@
     IBOutlet UIImageView *imgAns;
     IBOutlet UILabel *lblAlphabet;
     IBOutlet UIButton *btnFeedback;
+    IBOutlet UIButton *btnInvisible;
 }
 
 @property (nonatomic, retain) IBOutlet UIImageView *imgTableCellBG;
@@ -23,4 +24,5 @@
 @property (nonatomic, retain) IBOutlet UILabel *lblAlphabet;
 @property (nonatomic, retain) IBOutlet UIButton *btnFeedback;
 @property (nonatomic, retain) NSString *strFeedback;
+@property (nonatomic, retain) IBOutlet UIButton *btnInvisible;
 @end

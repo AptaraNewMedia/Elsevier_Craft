@@ -13,6 +13,7 @@
     IBOutlet UIImageView *ImgQuestionBg;
     IBOutlet UIImageView *ImgQuestionTextBg;
     IBOutlet UIImageView *ImgQuestionSeperator;
+    IBOutlet UIImageView *ImgOption;
     
     IBOutlet UILabel *lblQuestionNo;
     IBOutlet UITextView *lblQuestionText;

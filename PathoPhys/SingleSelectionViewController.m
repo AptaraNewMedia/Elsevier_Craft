@@ -19,10 +19,19 @@
     BOOL flagForAnyOptionSelect;
     BOOL flagForCheckAnswer;
     BOOL MultipleSelect;
+    BOOL isImage;
+    BOOL isSubmit;
     NSMutableArray *cellArray;
     UIView *feedbackView;
     UIButton *btnInvisible;
-    NSInteger currentOrientaion;    
+    NSInteger currentOrientaion;
+    
+    float y_feedback_p;
+    float y_feedback_l;
+    float x_feedback_p;
+    float x_feedback_l;    
+
+    NSMutableArray *selectedCells;
 }
 @end
 
@@ -76,8 +85,26 @@
         [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Select the correct option and tap <b>Submit.</b></body></html>" baseURL:nil];
         
     }
+    
+    if(objMCSS.strImageName == (id)[NSNull null]){
+        isImage = NO;
+        [ImgOption setImage:nil];
+    }
+    else {
+        [ImgOption setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.png", objMCSS.strImageName]]];
+        isImage = YES;
+    }
+    
+    isSubmit = NO;
+    
+    //Code for Exclusive Touch Enabling.
+    for (UIView *myview in [self.view subviews]){
+        if([myview isKindOfClass:[UIButton class]]){
+            myview.exclusiveTouch = YES;
+        }
+    }
+    
 
-    [self Fn_createInvisibleBtn];
 }
 
 - (void)viewDidUnload
@@ -108,9 +135,9 @@
 {
     flagForAnyOptionSelect = NO;
     
-    NSArray *selectedCells = [tblOptions indexPathsForSelectedRows];
+    NSArray *selectedCells_temp = [tblOptions indexPathsForSelectedRows];
     
-    if ([selectedCells count] == 0) {
+    if ([selectedCells_temp count] == 0) {
         flagForAnyOptionSelect = YES;
         intVisited = 0;
     }
@@ -159,15 +186,15 @@
     
     NSMutableString *strAns = [[NSMutableString alloc] init];
     
-    NSArray *selectedCells = [tblOptions indexPathsForSelectedRows];
+    NSArray *selectedCells_temp = [tblOptions indexPathsForSelectedRows];
     
     int answer_count = [objMCSS.arrAnswer count];
-    int selected_count = [selectedCells count];
+    int selected_count = [selectedCells_temp count];
     
     if (selected_count == answer_count) {
         for (int i = 0; i < selected_count; i++) {
 
-            NSIndexPath *indexPath = [selectedCells objectAtIndex:i];
+            NSIndexPath *indexPath = [selectedCells_temp objectAtIndex:i];
             
             NSString *ss = [objMCSS.arrOptions objectAtIndex:indexPath.row];
             ss = [ss stringByReplacingOccurrencesOfString:@" " withString:@""];            
@@ -201,63 +228,65 @@
 }
 
 - (void) handleRevealScore{
-    NSArray *selectedCells = [tblOptions indexPathsForSelectedRows];
+    NSArray *selectedCells_temp = [tblOptions indexPathsForSelectedRows];
     
     int answer_count = [objMCSS.arrAnswer count];
-    int selected_count = [selectedCells count];
+    int selected_count = [selectedCells_temp count];
     
     //if (selected_count == answer_count) {
-        for (int i = 0; i < selected_count; i++) {
-            
-            NSIndexPath *indexPath = [selectedCells objectAtIndex:i];
-            
-            NSString *ss = [objMCSS.arrOptions objectAtIndex:indexPath.row];
-            ss = [ss stringByReplacingOccurrencesOfString:@" " withString:@""];
-            ss = [ss lowercaseString];
-            MCSSCell_iPad *cell = [cellArray objectAtIndex:indexPath.row];
-            
-            for (int j = 0; j < answer_count; j++) {
-                NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
-                sa = [sa lowercaseString];
-                if (![ss isEqualToString:sa]) {
-                    [cell.imgAns setImage:[UIImage imageNamed:@"img_false.png"]];
-                    NSString *feeback = [self fn_getFeeback:indexPath.row];
-                    if (feeback.length > 0) {
-                        cell.btnFeedback.hidden = NO;
-                        cell.strFeedback = feeback;
-                    }
-                    
-                }else {
-                    [cell.imgAns setImage:[UIImage imageNamed:@"img_true.png"]];
-                    NSString *feeback = [self fn_getFeeback:indexPath.row];
-                    if (feeback.length > 0) {
-                        cell.btnFeedback.hidden = NO;
-                        cell.strFeedback = feeback;
-                    }
-                    break;
+    for (int i = 0; i < selected_count; i++) {
+        
+        NSIndexPath *indexPath = [selectedCells_temp objectAtIndex:i];
+        
+        NSString *ss = [objMCSS.arrOptions objectAtIndex:indexPath.row];
+        ss = [ss stringByReplacingOccurrencesOfString:@" " withString:@""];
+        ss = [ss lowercaseString];
+        
+        
+        
+        MCSSCell_iPad *cell = [cellArray objectAtIndex:indexPath.row];
+        
+        for (int j = 0; j < answer_count; j++) {
+            NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
+            sa = [sa lowercaseString];
+            if (![ss isEqualToString:sa]) {
+                [cell.imgAns setImage:[UIImage imageNamed:@"img_false.png"]];
+                NSString *feeback = [self fn_getFeeback:indexPath.row];
+                if (feeback.length > 0) {
+                    cell.btnFeedback.hidden = NO;
+                    cell.strFeedback = feeback;
                 }
+                
+            }else {
+                [cell.imgAns setImage:[UIImage imageNamed:@"img_true.png"]];
+                NSString *feeback = [self fn_getFeeback:indexPath.row];
+                if (feeback.length > 0) {
+                    cell.btnFeedback.hidden = NO;
+                    cell.strFeedback = feeback;
+                }
+                break;
             }
-            
         }
+        
+    }
     //}
     
-    btnInvisible.hidden = NO;
+    [self Fn_createInvisibleBtn];
 }
 //--------------------------------
 
 -(void) Fn_createInvisibleBtn
-{
+{    
+    [btnInvisible removeFromSuperview];
     btnInvisible = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btnInvisible setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [btnInvisible setFrame:CGRectMake(0, 0, self.view.frame.size.width - 70, self.view.frame.size.height)];
     btnInvisible.backgroundColor = [UIColor clearColor];
     [btnInvisible addTarget:self action:@selector(onInvisible:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btnInvisible];
-    btnInvisible.hidden = YES;
+    [self.view addSubview:btnInvisible];    
 }
 
 -(IBAction)onInvisible:(id)sender
 {
-    btnInvisible.hidden = YES;
     feedbackView.hidden = YES;
 }
 
@@ -325,16 +354,21 @@
     if (alertView.tag == 2) {
         if (buttonIndex == 0)
         {
+            isSubmit = YES;
+            [parentObject Fn_DisableSubmit];
             [self handleRevealScore];
         }
     }
     if (alertView.tag == 3) {
         if (buttonIndex == 0)
         {
+            isSubmit = YES;
+            [parentObject Fn_DisableSubmit];            
             [self handleRevealScore];
         }
         else if (buttonIndex == 1)
         {
+            isSubmit = NO;
             [parentObject onTryAgain];
         }
     }
@@ -365,16 +399,83 @@
     static NSString *MyIdentifier = @"tblCellView";
     MCSSCell_iPad *cell = (MCSSCell_iPad *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     if(cell == nil) {
-        NSArray *cellArray2 = [[NSBundle mainBundle] loadNibNamed:@"MCSSCell_iPad" owner:self options:nil];
-        cell = [cellArray2 lastObject];
+        
+        if (currentOrientaion==1||currentOrientaion==2) {
+            NSArray *cellArray2 = [[NSBundle mainBundle] loadNibNamed:@"MCSSCell_iPad_P" owner:self options:nil];
+            cell = [cellArray2 lastObject];            
+        }
+        else {
+            
+            if (isImage) {
+                NSArray *cellArray2 = [[NSBundle mainBundle] loadNibNamed:@"MCSSCell_iPad_half" owner:self options:nil];
+                cell = [cellArray2 lastObject];
+            }
+            else {
+                NSArray *cellArray2 = [[NSBundle mainBundle] loadNibNamed:@"MCSSCell_iPad" owner:self options:nil];
+                cell = [cellArray2 lastObject];
+            }
+        }
+        
+        UIView *v = [[UIView alloc] init];
+    	v.backgroundColor = [UIColor clearColor];
+    	cell.selectedBackgroundView = v;
     }
+    
+    
+    cell.btnInvisible.backgroundColor = COLOR_CLEAR;
+    // Set Images BG
+    
+    if (currentOrientaion==1||currentOrientaion==2) {
+        
+        if (MultipleSelect) {
+            cell.imgTableCellBG.image=[UIImage imageNamed:@"P_Question_multiple.png"];
+            cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"P_Question_multiple_select.png"];
+        }
+        else {
+            cell.imgTableCellBG.image=[UIImage imageNamed:@"P_Question_redio_btn.png"];
+            cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"P_Question_redio_btn_select.png"];
+        }
+    }
+    else {
+        
+        if (isImage) {
+            if (MultipleSelect) {
+                cell.imgTableCellBG.image=[UIImage imageNamed:@"L_Que-Box_Multiple_half.png"];
+                cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"L_Que-Box_Multiple_select_half.png"];
+            }
+            else {
+                cell.imgTableCellBG.image=[UIImage imageNamed:@"L_Que-Box_redio_btn_half.png"];
+                cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"L_Que-Box_redio_btn_select_half.png"];
+            }
+            
+        }
+        else {
+            if (MultipleSelect) {
+                cell.imgTableCellBG.image=[UIImage imageNamed:@"L_Que-Box_Multiple.png"];
+                cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"L_Que-Box_Multiple_select.png"];
+            }
+            else {
+                cell.imgTableCellBG.image=[UIImage imageNamed:@"L_Que-Box_redio_btn.png"];
+                cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"L_Que-Box_redio_btn_select.png"];
+            }
+        }
+    }
+    
+    if (selectedCells) {
+        
+        if ([selectedCells containsObject:[NSNumber numberWithInt:indexPath.row]]) {
+          [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone          ];
+
+        }        
+    }
+    
     cell.tag = indexPath.row;
     cell.lblOptionName.lineBreakMode = UILineBreakModeWordWrap;
     cell.lblOptionName.numberOfLines = 3;
     cell.lblOptionName.font = FONT_17;
     cell.lblOptionName.textColor = COLOR_BLACK;
     cell.lblOptionName.highlightedTextColor = COLOR_BottomBlueButton;
-
+    cell.lblOptionName.numberOfLines = 5;
     cell.lblOptionName.text = [objMCSS.arrOptions objectAtIndex:indexPath.row];
     
     char letter = (char) indexPath.row + 65;
@@ -387,25 +488,38 @@
     cell.btnFeedback.tag = indexPath.row;
     [cell.btnFeedback addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
     
-    //if (currentOrientaion==UIInterfaceOrientationLandscapeRight||currentOrientaion==UIInterfaceOrientationLandscapeLeft)
-        cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"Selected_chapter_tbl_row_center.png"];
-    //else
-        //cell.imgTableCellBG.image=[UIImage imageNamed:@"Selected_chapter_tbl_row_center_p.png"];
-    
     [cellArray addObject:cell];
     
+    if (indexPath.row == [objMCSS.arrOptions count] - 1) {
+        if (isSubmit) {
+            [self handleRevealScore];
+        }
+    }
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    UIFont *cellFont = FONT_17;
-//    CGSize constraintSize = CGSizeMake(280.0f, MAXFLOAT);
-//    CGSize labelSize = [[objMCSS.arrOptions objectAtIndex:indexPath.row] sizeWithFont:cellFont constrainedToSize:constraintSize lineBreakMode:UILineBreakModeWordWrap];
-//    
-//    return labelSize.height + 20;
+    float height = 55;
+    if (currentOrientaion == 1 || currentOrientaion == 2) {
+        height = 70;
+    }
+    else {
+        if (isImage) {
+            height = 80;
+        }
+    }
+    return height;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSArray *Cells = [tblOptions indexPathsForSelectedRows];
+    selectedCells = [[NSMutableArray alloc] init];
+    for (NSIndexPath *indexPath in Cells) {
+        [selectedCells addObject:[NSNumber numberWithInt:indexPath.row]];
+    }
     
-    return 56;
+    
 }
 //---------------------------------------------------------
 
@@ -469,49 +583,81 @@
 
 -(void)Fn_rotatePortrait
 {
-    [lblQuestionNo setFrame:CGRectMake(17, 25, 93, 114) ];
+    // Self View
+    [self.view setFrame:CGRectMake(0, 0, 767, 803)];
+    
+    // Question Bg
+    [ImgQuestionBg setImage:[UIImage imageNamed:@"question_bg_p.png"]];
+    [ImgQuestionBg setFrame:CGRectMake(0, 0, 767, 803)];
+    
+    // Instruction
+    [webviewInstructions setFrame:CGRectMake(19, 130, 725, 70)];
+    
+    // Feedback
+    [feedbackView setFrame:CGRectMake(x_feedback_p, y_feedback_p, 261, 131)];
+    
+    // Question No
+    [lblQuestionNo setFrame:CGRectMake(17, 20, 93, 75)];
+    
+    // Question text
+    [lblQuestionText setFrame:CGRectMake(125, 20, 570, 72)];
     
     
-    [webviewInstructions setFrame:CGRectMake(20, 140, 727, 32) ];
+    // ScrollView
+    //[imgScroller setFrame:CGRectMake(20, 370, 730, 360)];
+    //imgScroller.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, imgScroller.bounds.size.width - 730);
+    //[scrollViewDrag setFrame:CGRectMake(20, 220, 730, 150)];
     
-    [tblOptions setFrame:CGRectMake(20,200, 727, 425) ];
-
-    
-    [ImgQuestionBg setImage:[UIImage imageNamed:@"text-box.png"]];
-    [ImgQuestionBg setFrame:CGRectMake(0, 17, 767, 803)];
-    
-    [ImgQuestionTextBg setImage:[UIImage imageNamed:@"blue_5text_bar.png"]];
-    [ImgQuestionTextBg setFrame:CGRectMake(0, 17, 767, 177)];
-    
-    [webviewInstructions setFrame:CGRectMake(19, 190, 725, 45)];
-    
-    [ImgQuestionSeperator setImage:[UIImage imageNamed:@"img_question_seperator_P.png"]];
-    [ImgQuestionSeperator setFrame:CGRectMake(4, 225, 767, 53)];
-    
-    [lblQuestionText setFrame:CGRectMake(118, 40, 570, 114) ];
-
-    
+    //Table
+    if (isImage) {
+        [ImgOption setFrame:CGRectMake(100, 200, 250, 200) ];
+        [tblOptions setFrame:CGRectMake(0,400, 767, 350) ];
+    }
+    else
+        [tblOptions setFrame:CGRectMake(0, 200, 767, 525) ];
+    //[tblOptions setBackgroundColor:COLOR_BottomBlueButton];
+    cellArray = [[NSMutableArray alloc] init];
     [tblOptions reloadData];
-    
-    
 }
 -(void)Fn_rotateLandscape
 {
-    [lblQuestionNo setFrame:CGRectMake(17, 17, 93, 75) ];
+    // Self View
+    [self.view setFrame:CGRectMake(0, 0, 1005, 600)];
     
-    [webviewInstructions setFrame:CGRectMake(17, 93, 968, 32) ];
-    [tblOptions setFrame:CGRectMake(17,156, 968, 425) ];
+    // Question Bg
+    [ImgQuestionBg setImage:[UIImage imageNamed:@"question_bg.png"]];
     [ImgQuestionBg setFrame:CGRectMake(0, 0, 1005, 600)];
-    [ImgQuestionBg setImage:[UIImage imageNamed:@"img_question_bg.png"]];
     
-    [ImgQuestionTextBg setFrame:CGRectMake(0, 17, 1005, 75)];
-    [ImgQuestionTextBg setImage:[UIImage imageNamed:@"img_questiontext2_bg.png"]];
+    // Instruction
+    [webviewInstructions setFrame:CGRectMake(17, 93, 968, 45)];
     
-    [ImgQuestionSeperator setFrame:CGRectMake(13, 128, 977, 54)];
-    [ImgQuestionSeperator setImage:[UIImage imageNamed:@"img_question_seperator.png"]];
+    // Feedback
+    [feedbackView setFrame:CGRectMake(x_feedback_l, y_feedback_l, 261, 131)];
     
-        [lblQuestionText setFrame:CGRectMake(118, 19, 867, 72) ];
+    
+    // Question No
+    [lblQuestionNo setFrame:CGRectMake(17, 17, 93, 75)];
+    
+    // Question text
+    [lblQuestionText setFrame:CGRectMake(118, 19, 867, 72)];
+    
+    
+    // ScrollView
+    //[imgScroller setFrame:CGRectMake(258, 153, 727, 427)];
+    //imgScroller.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, imgScroller.bounds.size.width - 727);
+    //[scrollViewDrag setFrame:CGRectMake(20, 153, 237, 427)];
+    
+    // Table
+    //516
+    
+    if (isImage) {
+        [tblOptions setFrame:CGRectMake(470,156, 516, 425) ];
+        [ImgOption setFrame:CGRectMake(30,156, 250, 200) ];
+    }
+    else
+        [tblOptions setFrame:CGRectMake(0,156, 1005, 425) ];
+    //[tblOptions setBackgroundColor:COLOR_BottomBlueButton];
+    cellArray = [[NSMutableArray alloc] init];    
     [tblOptions reloadData];
-    
 }
 @end

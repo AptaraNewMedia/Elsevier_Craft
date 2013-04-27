@@ -108,6 +108,13 @@
     
     //
     [self Fn_LoadQuestionData];
+    
+    //Code for Exclusive Touch Enabling.
+    for (UIView *myview in [self.view subviews]){
+        if([myview isKindOfClass:[UIButton class]]){
+            myview.exclusiveTouch = YES;
+        }
+    }
 }
 
 -(void) fnAddNavigationItems
@@ -192,11 +199,11 @@
             break;
         case QUESTION_TYPE_MCSS: {
             
-            singleSelectionImageView = [[SingleSelectionImageViewController alloc] initWithNibName:@"SingleSelectionImageViewController_iPad" bundle:nil];
-            [singleSelectionImageView fn_LoadDbData:objQue.strQuestionId];
-            [viewMain addSubview:singleSelectionImageView.view];
-            singleSelectionImageView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
-            singleSelectionImageView.parentObject = self;
+            singleSelectionView = [[SingleSelectionViewController alloc] initWithNibName:@"SingleSelectionViewController_iPad" bundle:nil];
+            [singleSelectionView fn_LoadDbData:objQue.strQuestionId];
+            [viewMain addSubview:singleSelectionView.view];
+            singleSelectionView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
+            singleSelectionView.parentObject = self;
             
         }
             break;
@@ -267,7 +274,7 @@
             [matchPairsView.view removeFromSuperview];
             break;
         case QUESTION_TYPE_MCSS:
-            [singleSelectionImageView.view removeFromSuperview];
+            [singleSelectionView.view removeFromSuperview];
             break;
         case QUESTION_TYPE_DRAGDROP:
             [dragDropView.view removeFromSuperview];
@@ -367,13 +374,13 @@
             [matchPairsView fn_OnSubmitTapped];
             break;
         case QUESTION_TYPE_MCSS:
-            [singleSelectionImageView fn_CheckAnswersBeforeSubmit];
+            [singleSelectionView fn_CheckAnswersBeforeSubmit];
             if (TryAgainFlag != 1) {
-                if (singleSelectionImageView.strVisitedAnswer.length > 0)
-                    [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:singleSelectionImageView.strVisitedAnswer];
-                [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:singleSelectionImageView.intVisited]];
+                if (singleSelectionView.strVisitedAnswer.length > 0)
+                    [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:singleSelectionView.strVisitedAnswer];
+                [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:singleSelectionView.intVisited]];
             }
-            [singleSelectionImageView fn_OnSubmitTapped];
+            [singleSelectionView fn_OnSubmitTapped];
             break;
         case QUESTION_TYPE_DRAGDROP:
             
@@ -459,7 +466,7 @@
             [matchPairsView shouldAutorotateToInterfaceOrientation:currentOrientaion];
             break;
         case QUESTION_TYPE_MCSS:
-            [singleSelectionImageView shouldAutorotateToInterfaceOrientation:currentOrientaion];
+            [singleSelectionView shouldAutorotateToInterfaceOrientation:currentOrientaion];
             break;
         case QUESTION_TYPE_DRAGDROP:
             [dragDropView shouldAutorotateToInterfaceOrientation:currentOrientaion];
@@ -493,7 +500,7 @@
             [matchPairsView supportedInterfaceOrientations];
             break;
         case QUESTION_TYPE_MCSS:
-            [singleSelectionImageView supportedInterfaceOrientations];
+            [singleSelectionView supportedInterfaceOrientations];
             break;
         case QUESTION_TYPE_DRAGDROP:
             [dragDropView supportedInterfaceOrientations];

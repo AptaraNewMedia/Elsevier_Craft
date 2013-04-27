@@ -15,6 +15,7 @@
 @synthesize lblAlphabet;
 @synthesize btnFeedback;
 @synthesize strFeedback;
+@synthesize btnInvisible;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

@@ -561,6 +561,8 @@
 		870B8BA7171AA5510085F49B /* ScoreCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 870B8BA5171AA5510085F49B /* ScoreCardViewController.m */; };
 		870B8BA8171AA5510085F49B /* ScoreCardViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 870B8BA6171AA5510085F49B /* ScoreCardViewController_iPad.xib */; };
 		870B8C2C171ADDC70085F49B /* CustomDragButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 870B8C2B171ADDC70085F49B /* CustomDragButton.m */; };
+		870E9E85172C03E200DD52A8 /* MCSSCell_iPad_half.xib in Resources */ = {isa = PBXBuildFile; fileRef = 870E9E83172C03E200DD52A8 /* MCSSCell_iPad_half.xib */; };
+		870E9E86172C03E200DD52A8 /* MCSSCell_iPad_P.xib in Resources */ = {isa = PBXBuildFile; fileRef = 870E9E84172C03E200DD52A8 /* MCSSCell_iPad_P.xib */; };
 		870EB1791727B07E000BFE0C /* L_Note_BG_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 870EB1711727B07E000BFE0C /* L_Note_BG_01.png */; };
 		870EB17A1727B07E000BFE0C /* L_Note_BG_01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 870EB1721727B07E000BFE0C /* L_Note_BG_01@2x.png */; };
 		870EB17B1727B07E000BFE0C /* P_note_BG_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 870EB1731727B07E000BFE0C /* P_note_BG_01.png */; };
@@ -1363,6 +1365,8 @@
 		870B8BA6171AA5510085F49B /* ScoreCardViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreCardViewController_iPad.xib; sourceTree = "<group>"; };
 		870B8C2A171ADDC60085F49B /* CustomDragButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDragButton.h; sourceTree = "<group>"; };
 		870B8C2B171ADDC70085F49B /* CustomDragButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDragButton.m; sourceTree = "<group>"; };
+		870E9E83172C03E200DD52A8 /* MCSSCell_iPad_half.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCSSCell_iPad_half.xib; sourceTree = "<group>"; };
+		870E9E84172C03E200DD52A8 /* MCSSCell_iPad_P.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCSSCell_iPad_P.xib; sourceTree = "<group>"; };
 		870EB1711727B07E000BFE0C /* L_Note_BG_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L_Note_BG_01.png; sourceTree = "<group>"; };
 		870EB1721727B07E000BFE0C /* L_Note_BG_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "L_Note_BG_01@2x.png"; sourceTree = "<group>"; };
 		870EB1731727B07E000BFE0C /* P_note_BG_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = P_note_BG_01.png; sourceTree = "<group>"; };
@@ -2943,6 +2947,8 @@
 				87FA7EFA171CEB9B00558B8A /* MCSSCell_iPad.h */,
 				87FA7EFB171CEB9B00558B8A /* MCSSCell_iPad.m */,
 				87FA7EFC171CEB9B00558B8A /* MCSSCell_iPad.xib */,
+				870E9E83172C03E200DD52A8 /* MCSSCell_iPad_half.xib */,
+				870E9E84172C03E200DD52A8 /* MCSSCell_iPad_P.xib */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -3613,6 +3619,8 @@
 				87ED0A8D172ACB26002F5B6E /* NotesCellP.xib in Resources */,
 				87ED0A8F172AD27A002F5B6E /* ScoreCardCellP.xib in Resources */,
 				399D2DCA172BAB3A0073B760 /* SingleSelectionImageViewController_iPad.xib in Resources */,
+				870E9E85172C03E200DD52A8 /* MCSSCell_iPad_half.xib in Resources */,
+				870E9E86172C03E200DD52A8 /* MCSSCell_iPad_P.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
