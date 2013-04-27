@@ -99,11 +99,18 @@
     else{
         //Temporary
         //==========================================
-        testscore = @"90";
-        thematicAreaName = @"(Thematic Area Name)";
-        chapterName = @"(Chapter Name)";
+        if(categoryNumber == 2){
+            thematicAreaName = strCurrentThematicName;
+            chapterName = strCurrentChapterName;
+            testscore = [NSString stringWithFormat:@"%d",int_currentScore];
+        }
+        
+        
+        //testscore = @"90";
+//        thematicAreaName = @"(Thematic Area Name)";
+//        chapterName = @"(Chapter Name)";
         //==========================================
-          NSString *messageBody = [NSString stringWithFormat:@"Hurray!!! I have score %d%% in %@ of %@",[testscore intValue],thematicAreaName,chapterName];
+          NSString *messageBody = [NSString stringWithFormat:@"I just took  the Pathophysiology quiz to evaluate %@ of %@ and scored %@!  Find out how much you know Pathophysiology.",thematicAreaName,chapterName,testscore];
         
         NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                         nil];
@@ -123,15 +130,17 @@
     
     //Temporary
     //==========================================
-    testscore = @"90";
-    thematicAreaName = @"(Thematic Area Name)";
-    chapterName = @"(Chapter Name)";
+    if(categoryNumber == 2){
+        thematicAreaName = strCurrentThematicName;
+        chapterName = strCurrentChapterName;
+        testscore = [NSString stringWithFormat:@"%d",int_currentScore];
+    }
     //==========================================
     
     if ([MFMailComposeViewController canSendMail]) {
         NSString *emailTitle = @"Test Yourself Score";
         // Email Content
-        NSString *messageBody = [NSString stringWithFormat:@"Hurray!!! I have score %d%% in %@ of %@",[testscore intValue],thematicAreaName,chapterName];
+        NSString *messageBody = [NSString stringWithFormat:@"I just took  the Pathophysiology quiz to evaluate %@ of %@ and scored %@!  Find out how much you know Pathophysiology.",thematicAreaName,chapterName,testscore];
     
         MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
         mc.mailComposeDelegate = self;

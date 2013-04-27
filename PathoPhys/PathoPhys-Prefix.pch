@@ -98,4 +98,7 @@ int NOTES_MODE;
 
 int viewAllFlashCards;
 
+int int_currentScore;
+
+
 

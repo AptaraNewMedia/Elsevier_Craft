@@ -422,6 +422,8 @@
     resultView.lblScore.text = [NSString stringWithFormat:@"%d out of %d questions answered correctly.", total_score, intTotalQuestions];
     resultView.view.hidden = NO;
     
+    int_currentScore =total_score;
+    
     //bnShowScore.enabled = NO;
     
     
