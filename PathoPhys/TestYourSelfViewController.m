@@ -109,6 +109,8 @@
     //
     [self Fn_LoadQuestionData];
     
+    bnPrev.enabled = NO;
+    
     //Code for Exclusive Touch Enabling.
     for (UIView *myview in [self.view subviews]){
         if([myview isKindOfClass:[UIButton class]]){
