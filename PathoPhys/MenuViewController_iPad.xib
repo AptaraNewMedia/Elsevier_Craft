@@ -309,7 +309,7 @@
 					<object class="IBUILabel" id="819587569">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{445, 1}, {131, 43}}</string>
+						<string key="NSFrame">{{406, 0}, {208, 43}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="51211785"/>
@@ -403,7 +403,6 @@
 						<string key="NSFrame">{{635, 573}, {247, 74}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<int key="IBUITag">2</int>
@@ -831,6 +830,7 @@
 						<string key="Bn_CS_Tapped:">id</string>
 						<string key="Bn_FC_Tapped:">id</string>
 						<string key="Bn_TY_Tapped:">id</string>
+						<string key="onSegment:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="Bn_CS_Tapped:">
@@ -843,6 +843,10 @@
 						</object>
 						<object class="IBActionInfo" key="Bn_TY_Tapped:">
 							<string key="name">Bn_TY_Tapped:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="onSegment:">
+							<string key="name">onSegment:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

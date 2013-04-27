@@ -348,10 +348,10 @@
     
     
     UITextView *txt_feedback = [[UITextView alloc] init];
-    txt_feedback.text = textValue;
+    txt_feedback.text = [NSString stringWithFormat:@"Feedback: %@",textValue];
     txt_feedback.textColor = [UIColor whiteColor];
     txt_feedback.backgroundColor = [UIColor clearColor];
-    txt_feedback.font = FONT_14;
+    txt_feedback.font = BOLD_FONT_14;
     txt_feedback.editable = NO;
     [txt_feedback setFrame:CGRectMake(13, 13, 235, 104)];
     [feedbackView addSubview:txt_feedback];

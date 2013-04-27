@@ -51,13 +51,14 @@
     lblFlashcard.font = FONT_18;
     lblTestyorself.font = FONT_18;
     lblCasestudy.font = FONT_18;
-    lbl_Title.font = FONT_20;
+    lbl_Title.font = BOLD_FONT_20;
     
     
     lblFlashcard.textColor = COLOR_FlashcardHeadingText;
     lblTestyorself.textColor = COLOR_FlashcardHeadingText;
     lblCasestudy.textColor = COLOR_FlashcardHeadingText;
     lbl_Title.textColor = COLOR_WHITE;
+    
     
     
     /*
@@ -184,7 +185,7 @@
     [imgMenuBgTestyourself setFrame:CGRectMake(255, 250, 258, 399)];
     [imgMenuBgCasestudy setFrame:CGRectMake(500, 250, 258, 399)];
     
-    [lbl_Title setFrame:CGRectMake(340, 1, 76, 43)];
+    [lbl_Title setFrame:CGRectMake(280, 1, 208, 43)];
     
     [lblFlashcard setFrame:CGRectMake(30, 286, 227, 30)];
     [lblTestyorself setFrame:CGRectMake(270, 286, 227, 30)];
@@ -216,7 +217,7 @@
     [imgMenuBgTestyourself setFrame:CGRectMake(381, 180, 258, 399)];
     [imgMenuBgCasestudy setFrame:CGRectMake(632, 180, 258, 399)];
 
-    [lbl_Title setFrame:CGRectMake(474, 1, 76, 43)];
+    [lbl_Title setFrame:CGRectMake(406, 1, 208, 43)];
     
     [lblFlashcard setFrame:CGRectMake(146, 216, 227, 30)];
     [lblTestyorself setFrame:CGRectMake(398, 216, 227, 30)];

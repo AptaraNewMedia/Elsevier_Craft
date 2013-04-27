@@ -42,6 +42,9 @@
 #define FONT_25 [UIFont fontWithName:@"Helvetica" size:25]
 #define FONT_31 [UIFont fontWithName:@"Helvetica" size:31]
 
+#define BOLD_FONT_20 [UIFont boldSystemFontOfSize:20]
+#define BOLD_FONT_14 [UIFont boldSystemFontOfSize:14]
+
 #import "MyAppAppDelegate.h"
 #import "DatabaseOperation.h"
 

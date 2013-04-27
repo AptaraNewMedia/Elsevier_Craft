@@ -176,8 +176,8 @@
     //[ChapterName setFrame:CGRectMake(100,210,156,21)];
     //[lblInstruction setFrame:CGRectMake(110,350,188,21)];
     [txtNote setFrame:CGRectMake(106, 320 ,582 ,390)];
-    [btnSave setFrame:CGRectMake( 430,770,100,33)];
-    [btnClear setFrame:CGRectMake( 560,770,100,33)];
+    [btnSave setFrame:CGRectMake( 560,770,100,33)];
+    [btnClear setFrame:CGRectMake( 430,770,100,33)];
 }
 -(void)Fn_rotateLandscape
 {
@@ -189,8 +189,8 @@
     //[ChapterName setFrame:CGRectMake(150,170,156,21)];
     //[lblInstruction setFrame:CGRectMake(200,296,188,21)];
     [txtNote setFrame:CGRectMake(171, 245 ,682 ,282)];
-    [btnSave setFrame:CGRectMake(638,564,100,33)];
-    [btnClear setFrame:CGRectMake(760,564,100,33)];
+    [btnSave setFrame:CGRectMake(760,564,100,33)];
+    [btnClear setFrame:CGRectMake(638,564,100,33)];
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView{    
