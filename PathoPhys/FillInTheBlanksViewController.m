@@ -118,7 +118,7 @@
         y=y+45+10;
     }
 
-    [scrollViewDrag setContentSize:CGSizeMake(scrollViewDrag.frame.size.width, y)];
+    [scrollViewDrag setContentSize:CGSizeMake(objFillBlanks.fWidth, y)];
 }
 
 - (void) droppablePoints

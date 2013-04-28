@@ -151,7 +151,7 @@
         [draggableSubjects addObject:bnDrag];
         
     }
-    [scrollViewDrag setContentSize:CGSizeMake(scrollViewDrag.frame.size.width, y)];
+    [scrollViewDrag setContentSize:CGSizeMake(objDRAGDROP.fWidth, y)];
 }
 
 - (void) droppablePoints
