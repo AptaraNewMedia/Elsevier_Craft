@@ -657,7 +657,7 @@ NSError *error;
 -(MCSS *)fnGetCasestudyMCSS:(NSString *)question_id
 {
     MCSS *objMCSS;
-    strQuery = [NSString stringWithFormat:@"select mcss_id, question_text, options, answers, question_image, feedback, instruction from mcss_cs where question_id = '%@'",question_id];
+    strQuery = [NSString stringWithFormat:@"select mcss_id, question_text, options, answers, question_image, feedback, instruction, casestudy_text from mcss_cs where question_id = '%@'",question_id];
     
     arrTempList = [dbOperation getRowsForQuery:strQuery];
     intRowCount = [arrTempList count];
@@ -673,6 +673,8 @@ NSError *error;
         objMCSS.strImageName = [[arrTempList objectAtIndex:i] objectForKey:@"question_image"];
         
         objMCSS.strInstruction = [[arrTempList objectAtIndex:i] objectForKey:@"instruction"];
+        
+        objMCSS.strCasestudyText = [[arrTempList objectAtIndex:i] objectForKey:@"casestudy_text"];
         
         NSString *strfeedback = [[arrTempList objectAtIndex:i] objectForKey:@"feedback"];
         
@@ -712,7 +714,7 @@ NSError *error;
 -(MATCHTERMS *)fnGetCasestudyMatchTerms:(NSString *)question_id
 {
     MATCHTERMS *objMatch;
-    strQuery = [NSString stringWithFormat:@"select mc_id, question_text, option_1, option_2, answers, feedback, instruction from matching_cs where question_id = '%@'",question_id];
+    strQuery = [NSString stringWithFormat:@"select mc_id, question_text, option_1, option_2, answers, feedback, instruction, casestudy_text from matching_cs where question_id = '%@'",question_id];
     
     arrTempList = [dbOperation getRowsForQuery:strQuery];
     intRowCount = [arrTempList count];
@@ -728,6 +730,8 @@ NSError *error;
         //objMatch.strImageName = [[arrTempList objectAtIndex:i] objectForKey:@"question_image"];
         
         objMatch.strInstruction = [[arrTempList objectAtIndex:i] objectForKey:@"instruction"];
+        
+        objMatch.strCasestudyText = [[arrTempList objectAtIndex:i] objectForKey:@"casestudy_text"];
         
         NSString *strfeedback = [[arrTempList objectAtIndex:i] objectForKey:@"feedback"];
         
@@ -766,7 +770,7 @@ NSError *error;
 -(DRAGDROP *)fnGetCasestudyDRAGDROP:(NSString *)question_id
 {
     DRAGDROP *objDRAGDROP;
-    strQuery = [NSString stringWithFormat:@"select mcms_id, question_text, options, options_text, answers, question_image, feedback, instruction, ipad_normal_points, ipad_size from mcms_cs where question_id = '%@'",question_id];
+    strQuery = [NSString stringWithFormat:@"select mcms_id, question_text, options, options_text, answers, question_image, feedback, instruction, ipad_normal_points, ipad_size, casestudy_text from mcms_cs where question_id = '%@'",question_id];
     arrTempList = [dbOperation getRowsForQuery:strQuery];
     intRowCount = [arrTempList count];
     for (int i = 0; i < intRowCount; i++) {
@@ -781,6 +785,8 @@ NSError *error;
         objDRAGDROP.strImageName = [[arrTempList objectAtIndex:i] objectForKey:@"question_image"];
         //objDRAGDROP.strFeedback = [[arrTempList objectAtIndex:i] objectForKey:@"feedback"];
         objDRAGDROP.strInstruction = [[arrTempList objectAtIndex:i] objectForKey:@"instruction"];
+        
+        objDRAGDROP.strCasestudyText = [[arrTempList objectAtIndex:i] objectForKey:@"casestudy_text"];
         
         objDRAGDROP.arrXYpoints = [[[arrTempList objectAtIndex:i] objectForKey:@"ipad_normal_points"] componentsSeparatedByString:@"#$#"];
         

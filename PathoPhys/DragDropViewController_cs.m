@@ -253,7 +253,11 @@
     y_point = y_point - visibleRect.origin.y;    
     [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
 }
-
+- (IBAction)onCasestudyTextTapped:(id)sender
+{
+    strCaseStudyText = objDRAGDROP.strCasestudyText;
+    [md Fn_AddCaseStudyText];
+}
 
 //Get db data from question_id
 //--------------------------------

@@ -192,6 +192,7 @@
 
 - (IBAction)onCasestudyTextTapped:(id)sender
 {
+    strCaseStudyText = objMCSS.strCasestudyText;
     [md Fn_AddCaseStudyText];
 }
 

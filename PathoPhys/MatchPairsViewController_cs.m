@@ -414,7 +414,8 @@
 
 - (IBAction)onCasestudyTextTapped:(id)sender
 {
-    
+    strCaseStudyText = objMatch.strCasestudyText;
+    [md Fn_AddCaseStudyText];
 }
 
 // Get Size of text
