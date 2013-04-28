@@ -346,8 +346,10 @@ UITextView *txt_feedback;
 
 -(NSUInteger)supportedInterfaceOrientations
 {
+
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     DEVICE_ORIENTATION = interfaceOrientation;
+    //NSLog(@"Navigation Orientation   %d", DEVICE_ORIENTATION);
     [md Fn_CallPopupOrientaion];
     return [self.topViewController supportedInterfaceOrientations];
 }
