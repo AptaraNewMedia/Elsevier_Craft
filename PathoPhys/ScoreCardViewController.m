@@ -150,6 +150,8 @@
 
 -(void)Fn_rotatePortrait
 {
+    
+    [self.view setFrame:CGRectMake(0,0,768,1024)];
 //    [imgBG setImage:[UIImage imageNamed:@"P_Img_Result.png"]];
 //    [imgBG  setFrame:CGRectMake(0,0,768,1024)];
     
@@ -174,6 +176,8 @@
 }
 -(void)Fn_rotateLandscape
 {
+    [self.view setFrame:CGRectMake(0,0,1024,768)];
+    
     [imgPatch setImage:[UIImage imageNamed:@"L_Black_patch.png"]];
     [imgPatch  setFrame:CGRectMake(0,0,1024,768)];
     

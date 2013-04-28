@@ -233,6 +233,8 @@
 
 -(void)Fn_rotatePortrait
 {
+    [self.view setFrame:CGRectMake(0,0,768,1024)];
+    
     [imgPatch setImage:[UIImage imageNamed:@"Portrait_Result_BG_01.png"]];
     [imgPatch  setFrame:CGRectMake(0,0,768,1024)];
     
@@ -263,6 +265,8 @@
 }
 -(void)Fn_rotateLandscape
 {
+    [self.view setFrame:CGRectMake(0,0,1024,768)];
+    
     [imgPatch setImage:[UIImage imageNamed:@"landscape_Result_box_01.png"]];
     [imgPatch  setFrame:CGRectMake(0,0,1024,768)];
     

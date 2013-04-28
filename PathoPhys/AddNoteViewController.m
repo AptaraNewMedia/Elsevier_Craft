@@ -170,6 +170,8 @@
 
 -(void)Fn_rotatePortrait
 {
+    [self.view setFrame:CGRectMake(0,0,768,1024)];
+    
     [imgBG setImage:[UIImage imageNamed:@"P_note_BG_01.png"]];
     [imgBG setFrame:CGRectMake(0, 0, 768, 1024)];
     [lblTitle setFrame:CGRectMake(46,134,683,36)];
@@ -184,6 +186,8 @@
 }
 -(void)Fn_rotateLandscape
 {
+    [self.view setFrame:CGRectMake(0,0,1024,768)];
+    
     [imgBG setImage:[UIImage imageNamed:@"L_Note_BG_01.png"]];
     [imgBG setFrame:CGRectMake(0, 0, 1024, 768)];
     [lblTitle setFrame:CGRectMake(186,104,683,36)];

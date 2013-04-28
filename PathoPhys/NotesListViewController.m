@@ -199,6 +199,8 @@
 }
 - (void)Fn_rotatePortrait{
     
+    [self.view setFrame:CGRectMake(0,0,768,1024)];
+    
     [imgPatch setImage:[UIImage imageNamed:@"Portrait_Note_BG_01.png"]];
     [imgPatch  setFrame:CGRectMake(0,0,768,1024)];
 
@@ -219,6 +221,8 @@
     //white_patch_with_line.png
 }
 - (void)Fn_rotateLandscape{
+    
+    [self.view setFrame:CGRectMake(0,0,1024,768)];
     
     [imgPatch setImage:[UIImage imageNamed:@"landscape_Note_box_01.png"]];
     [imgPatch  setFrame:CGRectMake(0,0,1024,768)];
