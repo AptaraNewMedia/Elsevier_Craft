@@ -41,7 +41,9 @@
 // CaseStudy
 -(void) fnGetCaseStudyChapterList;
 -(NSMutableArray *) fnGetCaseStudyQuestions:(int)chapter_id AndThematicId:(int)thematic_id;
-
+-(MCSS *)fnGetCasestudyMCSS:(NSString *)question_id;
+-(MATCHTERMS *)fnGetCasestudyMatchTerms:(NSString *)question_id;
+-(DRAGDROP *)fnGetCasestudyDRAGDROP:(NSString *)question_id;
 
 //Notes
 -(void) fnSetNote:(Notes *)notes;

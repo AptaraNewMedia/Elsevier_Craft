@@ -180,9 +180,7 @@ NSError *error;
 {
     MCMS *objMCMS;
     strQuery = [NSString stringWithFormat:@"select mcms_id, question_text, options, options_text, answers, question_image, feedback, instruction from mcms where question_id = '%@'",question_id];
-    if (categoryNumber == 3) {
-        strQuery = [NSString stringWithFormat:@"select mcms_id, question_text, options, options_text, answers, question_image, feedback, instruction from mcms_cs where question_id = '%@'",question_id];
-    }
+
     arrTempList = [dbOperation getRowsForQuery:strQuery];
     intRowCount = [arrTempList count];
     for (int i = 0; i < intRowCount; i++) {
@@ -362,9 +360,6 @@ NSError *error;
 {
     MATCHTERMS *objMatch;
     strQuery = [NSString stringWithFormat:@"select mc_id, question_text, option_1, option_2, answers, feedback, instruction from matching where question_id = '%@'",question_id];
-    if (categoryNumber == 3) {
-        strQuery = [NSString stringWithFormat:@"select mc_id, question_text, option_1, option_2, answers, feedback, instruction from matching_cs where question_id = '%@'",question_id];
-    }
     arrTempList = [dbOperation getRowsForQuery:strQuery];
     intRowCount = [arrTempList count];
     for (int i = 0; i < intRowCount; i++) {
@@ -418,9 +413,6 @@ NSError *error;
 {
     MCSS *objMCSS;
     strQuery = [NSString stringWithFormat:@"select mcss_id, question_text, options, answers, question_image, feedback, instruction from mcss where question_id = '%@'",question_id];
-    if (categoryNumber == 3) {
-        strQuery = [NSString stringWithFormat:@"select mcss_id, question_text, options, answers, question_image, feedback, instruction from mcss_cs where question_id = '%@'",question_id];
-    }
     
     arrTempList = [dbOperation getRowsForQuery:strQuery];
     intRowCount = [arrTempList count];
@@ -660,6 +652,170 @@ NSError *error;
 }
 //--------------------------------------------------------------
 
+//MCSS
+//--------------------------------------------------------------
+-(MCSS *)fnGetCasestudyMCSS:(NSString *)question_id
+{
+    MCSS *objMCSS;
+    strQuery = [NSString stringWithFormat:@"select mcss_id, question_text, options, answers, question_image, feedback, instruction from mcss_cs where question_id = '%@'",question_id];
+    
+    arrTempList = [dbOperation getRowsForQuery:strQuery];
+    intRowCount = [arrTempList count];
+    for (int i = 0; i < intRowCount; i++) {
+        objMCSS = [MCSS new];
+        objMCSS.intMCSSid = [[[arrTempList objectAtIndex:i] objectForKey:@"mcss_id"] intValue];
+        objMCSS.strQuestionText = [[arrTempList objectAtIndex:i] objectForKey:@"question_text"];
+        if (objMCSS.strQuestionText == (id)[NSNull null] || objMCSS.strQuestionText.length == 0 )
+            objMCSS.strQuestionText = @"";
+        objMCSS.arrOptions = [[[arrTempList objectAtIndex:i] objectForKey:@"options"] componentsSeparatedByString:@"#$#"];
+        //objMCSS.arrAnswer = [[arrTempList objectAtIndex:i] objectForKey:@"answers"];
+        objMCSS.arrAnswer = [[[arrTempList objectAtIndex:i] objectForKey:@"answers"] componentsSeparatedByString:@"#$#"];
+        objMCSS.strImageName = [[arrTempList objectAtIndex:i] objectForKey:@"question_image"];
+        
+        objMCSS.strInstruction = [[arrTempList objectAtIndex:i] objectForKey:@"instruction"];
+        
+        NSString *strfeedback = [[arrTempList objectAtIndex:i] objectForKey:@"feedback"];
+        
+        if (strfeedback == (id)[NSNull null] || strfeedback.length == 0 || [strfeedback isEqualToString:@" "]) {
+            
+        }
+        else {
+            
+            //if (categoryNumber != 3) {
+            
+            NSArray *feedback = [[[arrTempList objectAtIndex:i] objectForKey:@"feedback"] componentsSeparatedByString:@"#$#"];
+            
+            Feedback *objFeedback;
+            
+            objMCSS.arrFeedback = [[NSMutableArray alloc] init];
+            
+            for (int x = 0; x < feedback.count; x++) {
+                NSArray *arrTemp = [[feedback objectAtIndex:x] componentsSeparatedByString:@"$"];
+                objFeedback = [[Feedback alloc] init];
+                objFeedback.strOption = [arrTemp objectAtIndex:0];
+                objFeedback.strType = [arrTemp objectAtIndex:1];
+                objFeedback.strFeedback = [arrTemp objectAtIndex:2];
+                [objMCSS.arrFeedback addObject:objFeedback];
+                //}
+                
+            }
+        }
+        
+    }
+    return objMCSS;
+}
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+//Match terms
+//--------------------------------------------------------------
+-(MATCHTERMS *)fnGetCasestudyMatchTerms:(NSString *)question_id
+{
+    MATCHTERMS *objMatch;
+    strQuery = [NSString stringWithFormat:@"select mc_id, question_text, option_1, option_2, answers, feedback, instruction from matching_cs where question_id = '%@'",question_id];
+    
+    arrTempList = [dbOperation getRowsForQuery:strQuery];
+    intRowCount = [arrTempList count];
+    for (int i = 0; i < intRowCount; i++) {
+        objMatch = [MATCHTERMS new];
+        objMatch.intMatchid = [[[arrTempList objectAtIndex:i] objectForKey:@"mc_id"] intValue];
+        objMatch.strQuestionText = [[arrTempList objectAtIndex:i] objectForKey:@"question_text"];
+        if (objMatch.strQuestionText == (id)[NSNull null] || objMatch.strQuestionText.length == 0 )
+            objMatch.strQuestionText = @"";
+        objMatch.arrOptions1 = [[[arrTempList objectAtIndex:i] objectForKey:@"option_1"] componentsSeparatedByString:@"#$#"];
+        objMatch.arrOptions2 = [[[arrTempList objectAtIndex:i] objectForKey:@"option_2"] componentsSeparatedByString:@"#$#"];
+        objMatch.arrAnswer = [[[arrTempList objectAtIndex:i] objectForKey:@"answers"] componentsSeparatedByString:@"#$#"];
+        //objMatch.strImageName = [[arrTempList objectAtIndex:i] objectForKey:@"question_image"];
+        
+        objMatch.strInstruction = [[arrTempList objectAtIndex:i] objectForKey:@"instruction"];
+        
+        NSString *strfeedback = [[arrTempList objectAtIndex:i] objectForKey:@"feedback"];
+        
+        if (strfeedback == (id)[NSNull null] || strfeedback.length == 0 || [strfeedback isEqualToString:@" "]) {
+            
+        }
+        else {
+            
+            //if (categoryNumber != 3) {
+            
+            NSArray *feedback = [[[arrTempList objectAtIndex:i] objectForKey:@"feedback"] componentsSeparatedByString:@"#$#"];
+            
+            Feedback *objFeedback;
+            
+            objMatch.arrFeedback = [[NSMutableArray alloc] init];
+            
+            for (int x = 0; x < feedback.count; x++) {
+                NSArray *arrTemp = [[feedback objectAtIndex:x] componentsSeparatedByString:@"$"];
+                objFeedback = [[Feedback alloc] init];
+                objFeedback.strOption = [arrTemp objectAtIndex:0];
+                objFeedback.strType = [arrTemp objectAtIndex:1];
+                objFeedback.strFeedback = [arrTemp objectAtIndex:2];
+                [objMatch.arrFeedback addObject:objFeedback];
+            }
+            
+            //}
+            
+        }
+    }
+    return objMatch;
+}
+//--------------------------------------------------------------
+
+//DRAG DROP
+//--------------------------------------------------------------
+-(DRAGDROP *)fnGetCasestudyDRAGDROP:(NSString *)question_id
+{
+    DRAGDROP *objDRAGDROP;
+    strQuery = [NSString stringWithFormat:@"select mcms_id, question_text, options, options_text, answers, question_image, feedback, instruction, ipad_normal_points, ipad_size from mcms_cs where question_id = '%@'",question_id];
+    arrTempList = [dbOperation getRowsForQuery:strQuery];
+    intRowCount = [arrTempList count];
+    for (int i = 0; i < intRowCount; i++) {
+        objDRAGDROP = [DRAGDROP new];
+        objDRAGDROP.intDRAGDROPid = [[[arrTempList objectAtIndex:i] objectForKey:@"mcms_id"] intValue];
+        objDRAGDROP.strQuestionText = [[arrTempList objectAtIndex:i] objectForKey:@"question_text"];
+        if (objDRAGDROP.strQuestionText == (id)[NSNull null] || objDRAGDROP.strQuestionText.length == 0 )
+            objDRAGDROP.strQuestionText = @"";
+        objDRAGDROP.arrOptions = [[[arrTempList objectAtIndex:i] objectForKey:@"options"] componentsSeparatedByString:@"#$#"];
+        objDRAGDROP.arrOptionsText = [[[arrTempList objectAtIndex:i] objectForKey:@"options_text"] componentsSeparatedByString:@"#$#"];
+        objDRAGDROP.arrAnswer = [[[arrTempList objectAtIndex:i] objectForKey:@"answers"] componentsSeparatedByString:@"#$#"];
+        objDRAGDROP.strImageName = [[arrTempList objectAtIndex:i] objectForKey:@"question_image"];
+        //objDRAGDROP.strFeedback = [[arrTempList objectAtIndex:i] objectForKey:@"feedback"];
+        objDRAGDROP.strInstruction = [[arrTempList objectAtIndex:i] objectForKey:@"instruction"];
+        
+        objDRAGDROP.arrXYpoints = [[[arrTempList objectAtIndex:i] objectForKey:@"ipad_normal_points"] componentsSeparatedByString:@"#$#"];
+        
+        NSArray *widthhight = [[[arrTempList objectAtIndex:i] objectForKey:@"ipad_size"] componentsSeparatedByString:@","];
+        if (widthhight.count > 0) {
+            objDRAGDROP.fWidth = [[widthhight objectAtIndex:0] floatValue]/2;
+            objDRAGDROP.fHeight = [[widthhight objectAtIndex:1] floatValue]/2;
+        }
+        
+        
+        NSString *strfeedback = [[arrTempList objectAtIndex:i] objectForKey:@"feedback"];
+        
+        if (strfeedback == (id)[NSNull null] || strfeedback.length == 0 || [strfeedback isEqualToString:@" "]) {
+            
+        }
+        else {
+            NSArray *feedback = [[[arrTempList objectAtIndex:i] objectForKey:@"feedback"] componentsSeparatedByString:@"#$#"];
+            
+            Feedback *objFeedback;
+            
+            objDRAGDROP.arrFeedback = [[NSMutableArray alloc] init];
+            
+            for (int x = 0; x < feedback.count; x++) {
+                NSArray *arrTemp = [[feedback objectAtIndex:x] componentsSeparatedByString:@"$"];
+                objFeedback = [[Feedback alloc] init];
+                objFeedback.strOption = [arrTemp objectAtIndex:0];
+                objFeedback.strType = [arrTemp objectAtIndex:1];
+                objFeedback.strFeedback = [arrTemp objectAtIndex:2];
+                [objDRAGDROP.arrFeedback addObject:objFeedback];
+            }
+        }
+    }
+    return objDRAGDROP;
+}
+//--------------------------------------------------------------
 //--------------------------------------------------------------
 
 

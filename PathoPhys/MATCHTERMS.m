@@ -17,4 +17,5 @@
 @synthesize strImageName;
 @synthesize arrFeedback;
 @synthesize strInstruction;
+@synthesize strCasestudyText;
 @end

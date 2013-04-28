@@ -18,5 +18,5 @@
 @property (nonatomic, retain) NSString *strImageName;
 @property (nonatomic, retain) NSMutableArray *arrFeedback;
 @property (nonatomic, retain) NSString *strInstruction;
-
+@property (nonatomic, retain) NSString *strCasestudyText;
 @end

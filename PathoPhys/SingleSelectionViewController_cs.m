@@ -140,7 +140,7 @@
 //--------------------------------
 -(void) fn_LoadDbData:(NSString *)question_id 
 {
-    objMCSS = [db fnGetTestyourselfMCSS:question_id];
+    objMCSS = [db fnGetCasestudyMCSS:question_id];
 }
 -(void) fn_CheckAnswersBeforeSubmit
 {

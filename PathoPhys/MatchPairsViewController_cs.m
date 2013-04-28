@@ -275,7 +275,7 @@
 //--------------------------------
 -(void) fn_LoadDbData:(NSString *)question_id
 {
-    objMatch = [db fnGetTestyourselfMatchTerms:question_id];
+    objMatch = [db fnGetCasestudyMatchTerms:question_id];
 }
 -(void) fn_CheckAnswersBeforeSubmit
 {

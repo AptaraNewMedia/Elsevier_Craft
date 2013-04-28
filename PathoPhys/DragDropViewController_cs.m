@@ -259,7 +259,7 @@
 //--------------------------------
 -(void) fn_LoadDbData:(NSString *)question_id
 {
-   objDRAGDROP = [db fnGetTestyourselfDRAGDROP:question_id];
+   objDRAGDROP = [db fnGetCasestudyDRAGDROP:question_id];
 }
 -(void) fn_CheckAnswersBeforeSubmit
 {

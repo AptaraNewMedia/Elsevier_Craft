@@ -21,4 +21,5 @@
 @synthesize arrXYpoints;
 @synthesize fHeight;
 @synthesize fWidth;
+@synthesize strCasestudyText;
 @end
