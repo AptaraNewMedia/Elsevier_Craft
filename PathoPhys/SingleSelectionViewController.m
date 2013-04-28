@@ -317,32 +317,29 @@
     return strTemp;
 }
 
+
 -(IBAction)onFeedbackTapped:(id)sender{
     UIButton *bn = sender;
     MCSSCell_iPad *cell = [cellArray objectAtIndex:bn.tag];
-    
     float x_point = bn.frame.origin.x - 201;
     //float x_point = bn.frame.origin.x;
     float y_point = bn.frame.origin.y + bn.superview.frame.origin.y + (cell.tag * 56);
     
-    if(currentOrientaion==0 || currentOrientaion==1) // Portrait
-    {
-        x_feedback_p = x_point - 20;
-        y_feedback_p = y_point + 90;
-
-    }
-    else{
-        x_feedback_l = x_point - 22;
-        y_feedback_l = y_point + 20;
-    }
+    NSLog(@" y_point: %f",y_point);
     
-    NSLog(@"Current Orientation: %d",currentOrientaion);
+    x_feedback_p=x_point-13;
     
-    if(currentOrientaion==1 || currentOrientaion==2) // Portrait
+    y_feedback_p=y_point+93;
+    
+    x_feedback_l=x_point-13;
+    
+    y_feedback_l=y_point+20;
+    
+    if(currentOrientaion==1 || currentOrientaion==2)
     {
         [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:cell.strFeedback];
     }
-    else // Landscape
+    else
     {
         [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:cell.strFeedback];
     }

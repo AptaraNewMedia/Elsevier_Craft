@@ -484,6 +484,7 @@
              break;
     }
     
+    [resultView shouldAutorotateToInterfaceOrientation:currentOrientaion];
     
 }
 
@@ -519,7 +520,7 @@
             
     }
     
-    
+    [resultView shouldAutorotateToInterfaceOrientation:currentOrientaion];
 }
 
 
