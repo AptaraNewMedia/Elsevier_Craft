@@ -15,8 +15,10 @@
     IBOutlet UIImageView *imgBG;
     IBOutlet UIButton *btnClose;
     
+    IBOutlet UILabel *lblCnameHolder;
     IBOutlet UILabel *lblChapterName;
     IBOutlet UILabel *lblThematicName;
+    
 
     IBOutlet UILabel *ChapterName;
     IBOutlet UILabel *ThematicName;
@@ -178,6 +180,7 @@
     [txtNote setFrame:CGRectMake(106, 320 ,582 ,390)];
     [btnSave setFrame:CGRectMake( 560,770,100,33)];
     [btnClear setFrame:CGRectMake( 430,770,100,33)];
+    [lblCnameHolder setFrame:CGRectMake(140, 208, 50, 21)];
 }
 -(void)Fn_rotateLandscape
 {
@@ -185,12 +188,14 @@
     [imgBG setFrame:CGRectMake(0, 0, 1024, 768)];
     [lblTitle setFrame:CGRectMake(186,104,683,36)];
     [btnClose setFrame:CGRectMake(833,114,41,36)];
-    [lblChapterName setFrame:CGRectMake(169,160,691,38)];
+    [lblChapterName setFrame:CGRectMake(223,160,637,38)];
     //[ChapterName setFrame:CGRectMake(150,170,156,21)];
     //[lblInstruction setFrame:CGRectMake(200,296,188,21)];
     [txtNote setFrame:CGRectMake(171, 245 ,682 ,282)];
     [btnSave setFrame:CGRectMake(760,564,100,33)];
     [btnClear setFrame:CGRectMake(638,564,100,33)];
+    
+    [lblCnameHolder setFrame:CGRectMake(171, 168, 50, 21)];
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView{    
