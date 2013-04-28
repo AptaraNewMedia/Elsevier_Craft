@@ -25,10 +25,11 @@
     UIView *feedbackView;
     UIButton *btnInvisible;
     NSInteger currentOrientaion;
-    
-    float y_feedback_p;
-    float y_feedback_l;
+ 
     float x_feedback_p;
+    float y_feedback_p;
+    
+    float y_feedback_l;
     float x_feedback_l;    
 
     NSMutableArray *selectedCells;
@@ -324,7 +325,27 @@
     //float x_point = bn.frame.origin.x;
     float y_point = bn.frame.origin.y + bn.superview.frame.origin.y + (cell.tag * 56);
     
-    [self Fn_AddFeedbackPopup:x_point andy:y_point andText:cell.strFeedback];
+    if(currentOrientaion==0 || currentOrientaion==1) // Portrait
+    {
+        x_feedback_p = x_point - 20;
+        y_feedback_p = y_point + 90;
+
+    }
+    else{
+        x_feedback_l = x_point - 22;
+        y_feedback_l = y_point + 20;
+    }
+    
+    NSLog(@"Current Orientation: %d",currentOrientaion);
+    
+    if(currentOrientaion==1 || currentOrientaion==2) // Portrait
+    {
+        [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:cell.strFeedback];
+    }
+    else // Landscape
+    {
+        [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:cell.strFeedback];
+    }
 }
 - (void) Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue {
 
