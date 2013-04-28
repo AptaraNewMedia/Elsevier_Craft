@@ -36,12 +36,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [webView loadHTMLString:strCaseStudyText baseURL:nil];
 }
 
 
 -(IBAction)onClose:(id)sender
 {
-    [self.view removeFromSuperview];
+    [md Fn_SubCaseStudyText];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{

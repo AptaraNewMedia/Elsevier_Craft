@@ -24,6 +24,7 @@
 #import "NotesPopViewController.h"
 #import "InfoPopViewController.h"
 #import "Notes.h"
+#import "CasestudyTextPopup.h"
 
 #import "GAI.h"
 
@@ -40,6 +41,7 @@ UITextView *txt_feedback;
     NotesListViewController *notesListView;
     NotesPopViewController *NotePopupView;
     InfoPopViewController *InfoPopupView;
+    CasestudyTextPopup *casestudyTextView;
 }
 
 @end
@@ -276,6 +278,18 @@ UITextView *txt_feedback;
     }
 }
 
+// Casestudy Text
+-(void) Fn_AddCaseStudyText {
+ //   CasestudyTextPopup
+    casestudyTextView =[[CasestudyTextPopup alloc] initWithNibName:@"CasestudyTextPopup_iPad" bundle:nil];
+    [self.window.rootViewController.view addSubview:casestudyTextView.view];
+    [casestudyTextView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
+}
+
+-(void) Fn_SubCaseStudyText {
+    [casestudyTextView.view removeFromSuperview];
+}
+
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
@@ -291,6 +305,7 @@ UITextView *txt_feedback;
     [addNotesView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
     [notesListView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
     [scoreCardView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
+    [casestudyTextView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
 }
 
 @end

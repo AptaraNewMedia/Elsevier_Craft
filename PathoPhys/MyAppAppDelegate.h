@@ -42,6 +42,8 @@
 -(void) Fn_AddScoreCard;
 -(void) Fn_SubScoreCard;
 
+-(void) Fn_AddCaseStudyText;
+-(void) Fn_SubCaseStudyText;
 
 -(void) Fn_ShowNoteViewPopup;
 -(void) Fn_removeNoteViewPopup;

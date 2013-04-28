@@ -192,7 +192,7 @@
 
 - (IBAction)onCasestudyTextTapped:(id)sender
 {
-    
+    [md Fn_AddCaseStudyText];
 }
 
 - (BOOL) checkForAnswer{

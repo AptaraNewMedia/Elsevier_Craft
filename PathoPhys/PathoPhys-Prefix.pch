@@ -100,5 +100,7 @@ int viewAllFlashCards;
 
 int int_currentScore;
 
+NSString *strCaseStudyText;
+
 
 
