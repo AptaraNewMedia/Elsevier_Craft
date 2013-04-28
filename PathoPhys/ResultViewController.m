@@ -12,8 +12,8 @@
 @interface ResultViewController ()
 {
     IBOutlet UIImageView *imgPatch;
-    IBOutlet UIImageView *imgPopupBG;
-    IBOutlet UIImageView *imgBG;
+//    IBOutlet UIImageView *imgPopupBG;
+//    IBOutlet UIImageView *imgBG;
     IBOutlet UIButton *btnClose;
     NSString *testscore;
     NSString *thematicAreaName;
@@ -37,7 +37,7 @@
 @synthesize facebook;
 @synthesize lblChapterName;
 @synthesize lblChapterName_Title;
-@synthesize lblResult;
+//@synthesize lblResult;
 @synthesize lblScore;
 @synthesize lblScore_Title;
 @synthesize lblShare_Title;
@@ -56,24 +56,8 @@
     facebook = [[Facebook alloc] initWithAppId:@"532908203419529" andDelegate:self];
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    [self fnsetFontColor];
-    //Code for Exclusive Touch Enabling.
-    for (UIView *myview in [self.view subviews]){
-        if([myview isKindOfClass:[UIButton class]]){
-            myview.exclusiveTouch = YES;
-        }
-    }
 }
 
--(void) fnsetFontColor {
-    
-    lblResult.font = FONT_20;
-    lblResult.textColor = COLOR_WHITE;
-    
-    
-    
-}
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -256,43 +240,41 @@
 
 -(void)Fn_rotatePortrait
 {
-    [imgPatch setImage:[UIImage imageNamed:@"P_Black_patch.png"]];
+    [imgPatch setImage:[UIImage imageNamed:@"Portrait_Result_BG_01.png"]];
     [imgPatch  setFrame:CGRectMake(0,0,768,1024)];
     
     
-    [imgBG setImage:[UIImage imageNamed:@"Ipad_Portrait_TableBG.png"]];
-    [imgBG setFrame:CGRectMake(30,67,709,710)];
+//    [imgBG setImage:[UIImage imageNamed:@"Ipad_Portrait_TableBG.png"]];
+//    [imgBG setFrame:CGRectMake(30,67,709,710)];
     //[imgBG setImage:[UIImage imageNamed:@"P_Img_Result.png"]];
     //[imgBG  setFrame:CGRectMake(0,0,768,1024)];
     
-    [btnClose setFrame:CGRectMake(626,141,33,29)];
-    [lblChapterName  setFrame:CGRectMake(352,255,500,33)];
-    [lblThematicArea setFrame:CGRectMake(352,250,500,193)];
+    [btnClose setFrame:CGRectMake(653,191,33,29)];
     
-    [lblScore setFrame:CGRectMake(352,413,500,24)];
+    [lblChapterName_Title setFrame:CGRectMake(216,268,128,24)];
+    [lblChapterName  setFrame:CGRectMake(352,265,500,33)];
     
-    [btnFB setFrame:CGRectMake(352,472,36,29)];
+    [lblThematicArea setFrame:CGRectMake(352,275,500,193)];
+    [lblThematicArea_Title setFrame:CGRectMake(218,361,130,19)];
     
-    [btnMail setFrame:CGRectMake(414,472,36,29)];
+    [lblScore_Title setFrame:CGRectMake(282,460,58,24)];
+    [lblScore setFrame:CGRectMake(352,460,500,24)];
     
-    [lblChapterName_Title setFrame:CGRectMake(16,258,128,24)];
-    [lblThematicArea_Title setFrame:CGRectMake(218,336,130,19)];
-    [lblScore_Title setFrame:CGRectMake(282,410,58,24)];
-    [lblShare_Title setFrame:CGRectMake(282,476,55,21)];
+    [lblShare_Title setFrame:CGRectMake(282,696,55,21)];
+    [btnFB setFrame:CGRectMake(352,692,36,29)];
+    [btnMail setFrame:CGRectMake(414,692,36,29)];
+    
     //[lblResult setFrame:CGRectMake(140,141,137,34)];
     
-    [lblResult setFrame:CGRectMake(170,87,386,38)];
-    [btnClose setFrame:CGRectMake(653,89,41,36)];
-
-    
+//    [btnClose setFrame:CGRectMake(653,89,41,36)];
 }
 -(void)Fn_rotateLandscape
 {
-    [imgPatch setImage:[UIImage imageNamed:@"L_Black_patch.png"]];
+    [imgPatch setImage:[UIImage imageNamed:@"landscape_Result_box_01.png"]];
     [imgPatch  setFrame:CGRectMake(0,0,1024,768)];
     
-    [imgBG setImage:[UIImage imageNamed:@"BGImg_ScoreCard_with_Header.png"]];
-    [imgBG setFrame:CGRectMake(134,67,755,615)];
+//    [imgBG setImage:[UIImage imageNamed:@"BGImg_ScoreCard_with_Header.png"]];
+//    [imgBG setFrame:CGRectMake(134,67,755,615)];
     
     //[imgBG setImage:[UIImage imageNamed:@"L_Img_Result.png"]];
     //[imgBG  setFrame:CGRectMake(0,0,1024,768)];
@@ -300,30 +282,22 @@
 
     
     //[btnClose setFrame:CGRectMake(798,115,33,29)];
-    [lblChapterName  setFrame:CGRectMake(352,255,500,33)];
-    [lblThematicArea setFrame:CGRectMake(352,250,500,193)];
+    [lblChapterName  setFrame:CGRectMake(452,171,500,33)];
+    [lblChapterName_Title setFrame:CGRectMake(316,173,128,24)];
     
-    [lblScore setFrame:CGRectMake(352,413,500,24)];
+    [lblThematicArea setFrame:CGRectMake(452,160,500,193)];
+    [lblThematicArea_Title setFrame:CGRectMake(318,246,130,19)];
     
-    [btnFB setFrame:CGRectMake(352,472,36,29)];
+    [lblShare_Title setFrame:CGRectMake(382,502,55,21)];
+    [btnFB setFrame:CGRectMake(452,502,36,29)];
+    [btnMail setFrame:CGRectMake(514,502,36,29)];
+     
+    [lblScore_Title setFrame:CGRectMake(382,320,58,24)];
+    [lblScore setFrame:CGRectMake(452,320,500,24)];
     
-    [btnMail setFrame:CGRectMake(414,472,36,29)];
-    
-    [lblChapterName_Title setFrame:CGRectMake(16,258,128,24)];
-    [lblThematicArea_Title setFrame:CGRectMake(218,336,130,19)];
-    [lblScore_Title setFrame:CGRectMake(282,410,58,24)];
-    [ lblShare_Title setFrame:CGRectMake(282,476,55,21)];
     //[lblResult setFrame:CGRectMake(170,114,137,34)];
-    
-    [lblResult setFrame:CGRectMake(288,84,386,38)];
-    [btnClose setFrame:CGRectMake(818,83,41,36)];
+
+    [btnClose setFrame:CGRectMake(800,110,41,36)];
 }
-
-
-
-
-
-
-
 
 @end

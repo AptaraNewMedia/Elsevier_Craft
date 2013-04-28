@@ -25,8 +25,7 @@
     IBOutlet UILabel *lblThematicArea_Title;
     IBOutlet UILabel *lblScore_Title;
     IBOutlet UILabel *lblShare_Title;
-    IBOutlet UILabel *lblResult;
-    
+//    IBOutlet UILabel *lblResult;    
 }
 @property (nonatomic, retain) Facebook *facebook;
 

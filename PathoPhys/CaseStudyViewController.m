@@ -10,13 +10,9 @@
 #import "ChapterQuestionSet.h"
 
 //
-#import "MatchPairsViewController.h"
-#import "SingleSelectionViewController.h"
-#import "MultipleSelectionViewController.h"
-#import "FillInTheBlanksViewController.h"
-#import "TrueFalseViewController.h"
-#import "RadioGroupViewController.h"
-#import "DragDropViewController.h"
+#import "MatchPairsViewController_cs.h"
+#import "SingleSelectionViewController_cs.h"
+#import "DragDropViewController_cs.h"
 #import "CustomRightBarItem.h"
 #import "CustomLeftBarItem.h"
 
@@ -33,13 +29,9 @@
     ChapterQuestionSet *objQue;
     
     UIView *viewMain;
-    MatchPairsViewController *matchPairsView;
-    SingleSelectionViewController *singleSelectionView;
-    MultipleSelectionViewController *multipleSelectionView;
-    FillInTheBlanksViewController *fillInTheBlanksView;
-    TrueFalseViewController *trueFalseView;
-    DragDropViewController *dragDropView;
-    RadioGroupViewController *radioGroupView;
+    MatchPairsViewController_cs *matchPairsView;
+    SingleSelectionViewController_cs *singleSelectionView;
+    DragDropViewController_cs *dragDropView;
     
     QuizTrack *objQuizTrack;
     ResultViewController *resultView;
@@ -138,47 +130,16 @@
     switch (objQue.intType) {
         case QUESTION_TYPE_MCMS:
         {
-            //            multipleSelectionView = [[MultipleSelectionViewController alloc] initWithNibName:@"MultipleSelectionViewController_iPad" bundle:nil];
-            //            [multipleSelectionView fn_LoadDbData:objQue.strQuestionId];
-            //            [viewMain addSubview:multipleSelectionView.view];
-            //            multipleSelectionView.lblQuestionNo.text = [NSString stringWithFormat:@"%d/%d", objQue.intSequence, intTotalQuestions];
-            dragDropView = [[DragDropViewController alloc] initWithNibName:@"DragDropViewController_iPad" bundle:nil];
+            dragDropView = [[DragDropViewController_cs alloc] initWithNibName:@"DragDropViewController_cs_iPad" bundle:nil];
             [dragDropView fn_LoadDbData:objQue.strQuestionId];
             [viewMain addSubview:dragDropView.view];
             dragDropView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
             dragDropView.parentObject = self;
         }
             break;
-        case QUESTION_TYPE_FILLINBLANKS: {
-            
-            fillInTheBlanksView = [[FillInTheBlanksViewController alloc] initWithNibName:@"FillInTheBlanksViewController_iPad" bundle:nil];
-            [fillInTheBlanksView fn_LoadDbData:objQue.strQuestionId];
-            [viewMain addSubview:fillInTheBlanksView.view];
-            fillInTheBlanksView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
-            
-        }
-            break;
-        case QUESTION_TYPE_RADIOBUTTONS: {
-            
-            radioGroupView = [[RadioGroupViewController alloc] initWithNibName:@"RadioGroupViewController_iPad" bundle:nil];
-            [radioGroupView fn_LoadDbData:objQue.strQuestionId];
-            [viewMain addSubview:radioGroupView.view];
-            radioGroupView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
-            
-        }
-            break;
-        case QUESTION_TYPE_TRUEFLASE: {
-            
-            trueFalseView = [[TrueFalseViewController alloc] initWithNibName:@"TrueFalseViewController_iPad" bundle:nil];
-            [trueFalseView fn_LoadDbData:objQue.strQuestionId];
-            [viewMain addSubview:trueFalseView.view];
-            trueFalseView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
-            
-        }
-            break;
         case QUESTION_TYPE_MATCHTERMS: {
             
-            matchPairsView = [[MatchPairsViewController alloc] initWithNibName:@"MatchPairsViewController_iPad" bundle:nil];
+            matchPairsView = [[MatchPairsViewController_cs alloc] initWithNibName:@"MatchPairsViewController_cs_iPad" bundle:nil];
             [matchPairsView fn_LoadDbData:objQue.strQuestionId];
             [viewMain addSubview:matchPairsView.view];
             matchPairsView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
@@ -187,20 +148,11 @@
             break;
         case QUESTION_TYPE_MCSS: {
             
-            singleSelectionView = [[SingleSelectionViewController alloc] initWithNibName:@"SingleSelectionViewController_iPad" bundle:nil];
+            singleSelectionView = [[SingleSelectionViewController_cs alloc] initWithNibName:@"SingleSelectionViewController_cs_iPad" bundle:nil];
             [singleSelectionView fn_LoadDbData:objQue.strQuestionId];
             [viewMain addSubview:singleSelectionView.view];
             singleSelectionView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
             singleSelectionView.parentObject = self;
-        }
-            break;
-        case QUESTION_TYPE_DRAGDROP:
-        {
-            dragDropView = [[DragDropViewController alloc] initWithNibName:@"DragDropViewController_iPad" bundle:nil];
-            [dragDropView fn_LoadDbData:objQue.strQuestionId];
-            [viewMain addSubview:dragDropView.view];
-            dragDropView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
-            dragDropView.parentObject = self;
         }
             break;
     }
@@ -240,26 +192,13 @@
 {
     switch (objQue.intType) {
         case QUESTION_TYPE_MCMS:
-            //[multipleSelectionView.view removeFromSuperview];
             [dragDropView.view removeFromSuperview];
-            break;
-        case QUESTION_TYPE_FILLINBLANKS:
-            [fillInTheBlanksView.view removeFromSuperview];
-            break;
-        case QUESTION_TYPE_RADIOBUTTONS:
-            [radioGroupView.view removeFromSuperview];
-            break;
-        case QUESTION_TYPE_TRUEFLASE:
-            [trueFalseView.view removeFromSuperview];
             break;
         case QUESTION_TYPE_MATCHTERMS:
             [matchPairsView.view removeFromSuperview];
             break;
         case QUESTION_TYPE_MCSS:
             [singleSelectionView.view removeFromSuperview];
-            break;
-        case QUESTION_TYPE_DRAGDROP:
-            [dragDropView.view removeFromSuperview];
             break;
     }
 }
@@ -314,23 +253,6 @@
             [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:dragDropView.intVisited]];
             [dragDropView fn_OnSubmitTapped];
             break;
-        case QUESTION_TYPE_FILLINBLANKS:
-            [fillInTheBlanksView fn_CheckAnswersBeforeSubmit];
-            if (fillInTheBlanksView.strVisitedAnswer.length > 0)
-                [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:fillInTheBlanksView.strVisitedAnswer];
-            [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:fillInTheBlanksView.intVisited]];
-            [fillInTheBlanksView fn_OnSubmitTapped];
-            break;
-        case QUESTION_TYPE_RADIOBUTTONS:
-            [radioGroupView fn_CheckAnswersBeforeSubmit];
-            if (radioGroupView.strVisitedAnswer.length > 0)
-                [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:radioGroupView.strVisitedAnswer];
-            [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:radioGroupView.intVisited]];
-            [radioGroupView fn_OnSubmitTapped];
-            break;
-        case QUESTION_TYPE_TRUEFLASE:
-            [trueFalseView fn_OnSubmitTapped];
-            break;
         case QUESTION_TYPE_MATCHTERMS:
             [matchPairsView fn_CheckAnswersBeforeSubmit];
             if (matchPairsView.strVisitedAnswer.length > 0)
@@ -344,9 +266,6 @@
                 [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:singleSelectionView.strVisitedAnswer];
             [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:singleSelectionView.intVisited]];
             [singleSelectionView fn_OnSubmitTapped];
-            break;
-        case QUESTION_TYPE_DRAGDROP:
-            
             break;
     }
     
@@ -401,23 +320,11 @@
             //[multipleSelectionView.view removeFromSuperview];
             [dragDropView shouldAutorotateToInterfaceOrientation:currentOrientaion];
             break;
-        case QUESTION_TYPE_FILLINBLANKS:
-            [fillInTheBlanksView shouldAutorotateToInterfaceOrientation:currentOrientaion];
-            break;
-        case QUESTION_TYPE_RADIOBUTTONS:
-            [radioGroupView shouldAutorotateToInterfaceOrientation:currentOrientaion];
-            break;
-        case QUESTION_TYPE_TRUEFLASE:
-            [trueFalseView shouldAutorotateToInterfaceOrientation:currentOrientaion];
-            break;
         case QUESTION_TYPE_MATCHTERMS:
             [matchPairsView shouldAutorotateToInterfaceOrientation:currentOrientaion];
             break;
         case QUESTION_TYPE_MCSS:
             [singleSelectionView shouldAutorotateToInterfaceOrientation:currentOrientaion];
-            break;
-        case QUESTION_TYPE_DRAGDROP:
-            [dragDropView shouldAutorotateToInterfaceOrientation:currentOrientaion];
             break;
     }
     
@@ -431,15 +338,6 @@
         case QUESTION_TYPE_MCMS:
             //[multipleSelectionView.view removeFromSuperview];
             [dragDropView supportedInterfaceOrientations];
-            break;
-        case QUESTION_TYPE_FILLINBLANKS:
-            [fillInTheBlanksView supportedInterfaceOrientations];
-            break;
-        case QUESTION_TYPE_RADIOBUTTONS:
-            [radioGroupView supportedInterfaceOrientations];
-            break;
-        case QUESTION_TYPE_TRUEFLASE:
-            [trueFalseView supportedInterfaceOrientations];
             break;
         case QUESTION_TYPE_MATCHTERMS:
             [matchPairsView supportedInterfaceOrientations];

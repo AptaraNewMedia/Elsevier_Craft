@@ -536,6 +536,8 @@
 		870E9EB8172C057300DD52A8 /* P_Question_redio_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 870E9EA0172C057300DD52A8 /* P_Question_redio_btn@2x.png */; };
 		870E9EB9172C057300DD52A8 /* P_Question_redio_btn_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 870E9EA1172C057300DD52A8 /* P_Question_redio_btn_select.png */; };
 		870E9EBA172C057300DD52A8 /* P_Question_redio_btn_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 870E9EA2172C057300DD52A8 /* P_Question_redio_btn_select@2x.png */; };
+		870E9EBF172C0FAF00DD52A8 /* SingleSelectionViewController_cs_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 870E9EBC172C0FAF00DD52A8 /* SingleSelectionViewController_cs_iPad.xib */; };
+		870E9EC0172C0FAF00DD52A8 /* SingleSelectionViewController_cs.m in Sources */ = {isa = PBXBuildFile; fileRef = 870E9EBE172C0FAF00DD52A8 /* SingleSelectionViewController_cs.m */; };
 		870EB1791727B07E000BFE0C /* L_Note_BG_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 870EB1711727B07E000BFE0C /* L_Note_BG_01.png */; };
 		870EB17A1727B07E000BFE0C /* L_Note_BG_01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 870EB1721727B07E000BFE0C /* L_Note_BG_01@2x.png */; };
 		870EB17B1727B07E000BFE0C /* P_note_BG_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 870EB1731727B07E000BFE0C /* P_note_BG_01.png */; };
@@ -611,6 +613,17 @@
 		87ED0A88172AC93D002F5B6E /* P_Black_patch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87ED0A84172AC93D002F5B6E /* P_Black_patch@2x.png */; };
 		87ED0A8D172ACB26002F5B6E /* NotesCellP.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87ED0A8B172ACB26002F5B6E /* NotesCellP.xib */; };
 		87ED0A8F172AD27A002F5B6E /* ScoreCardCellP.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87ED0A8E172AD27A002F5B6E /* ScoreCardCellP.xib */; };
+		87ED6DED172CFDAE002F8472 /* add_note_box_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 87ED6DE4172CFDAE002F8472 /* add_note_box_01.png */; };
+		87ED6DEE172CFDAE002F8472 /* fb-icons.png in Resources */ = {isa = PBXBuildFile; fileRef = 87ED6DE5172CFDAE002F8472 /* fb-icons.png */; };
+		87ED6DEF172CFDAE002F8472 /* landscape_Note_box_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 87ED6DE6172CFDAE002F8472 /* landscape_Note_box_01.png */; };
+		87ED6DF0172CFDAE002F8472 /* landscape_Note_box_01_white_patch.png in Resources */ = {isa = PBXBuildFile; fileRef = 87ED6DE7172CFDAE002F8472 /* landscape_Note_box_01_white_patch.png */; };
+		87ED6DF1172CFDAE002F8472 /* landscape_Result_box_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 87ED6DE8172CFDAE002F8472 /* landscape_Result_box_01.png */; };
+		87ED6DF2172CFDAE002F8472 /* mail-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 87ED6DE9172CFDAE002F8472 /* mail-icon.png */; };
+		87ED6DF3172CFDAE002F8472 /* Portrait_Note_BG_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 87ED6DEA172CFDAE002F8472 /* Portrait_Note_BG_01.png */; };
+		87ED6DF4172CFDAE002F8472 /* Portrait_Note_BG_01_white_patch.png in Resources */ = {isa = PBXBuildFile; fileRef = 87ED6DEB172CFDAE002F8472 /* Portrait_Note_BG_01_white_patch.png */; };
+		87ED6DF5172CFDAE002F8472 /* Portrait_Result_BG_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 87ED6DEC172CFDAE002F8472 /* Portrait_Result_BG_01.png */; };
+		87ED6DFF172D0101002F8472 /* CasestudyTextPopup_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87ED6DFC172D0100002F8472 /* CasestudyTextPopup_iPad.xib */; };
+		87ED6E00172D0101002F8472 /* CasestudyTextPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ED6DFE172D0101002F8472 /* CasestudyTextPopup.m */; };
 		87EF501A1714476E00B5D435 /* FlashCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87EF50161714476B00B5D435 /* FlashCardsViewController.m */; };
 		87EF501B1714476E00B5D435 /* FlashCardsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87EF50171714476C00B5D435 /* FlashCardsViewController_iPad.xib */; };
 		87EF501C1714476E00B5D435 /* FlashCardsViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87EF50181714476C00B5D435 /* FlashCardsViewController_iPhone5.xib */; };
@@ -683,6 +696,10 @@
 		87FD9B7017265F450004B68D /* RadioView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FD9B6F17265F450004B68D /* RadioView.m */; };
 		87FD9B74172683030004B68D /* table_radio_Btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 87FD9B72172683030004B68D /* table_radio_Btn.png */; };
 		87FD9B75172683030004B68D /* table_radio_Btn_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 87FD9B73172683030004B68D /* table_radio_Btn_select.png */; };
+		87FF8454172C3B9500F34B16 /* MatchPairsViewController_cs_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FF8451172C3B9500F34B16 /* MatchPairsViewController_cs_iPad.xib */; };
+		87FF8455172C3B9500F34B16 /* MatchPairsViewController_cs.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FF8453172C3B9500F34B16 /* MatchPairsViewController_cs.m */; };
+		87FF845A172C3D1500F34B16 /* DragDropViewController_cs_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FF8457172C3D1500F34B16 /* DragDropViewController_cs_iPad.xib */; };
+		87FF845B172C3D1500F34B16 /* DragDropViewController_cs.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FF8459172C3D1500F34B16 /* DragDropViewController_cs.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1313,6 +1330,9 @@
 		870E9EA0172C057300DD52A8 /* P_Question_redio_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "P_Question_redio_btn@2x.png"; sourceTree = "<group>"; };
 		870E9EA1172C057300DD52A8 /* P_Question_redio_btn_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = P_Question_redio_btn_select.png; sourceTree = "<group>"; };
 		870E9EA2172C057300DD52A8 /* P_Question_redio_btn_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "P_Question_redio_btn_select@2x.png"; sourceTree = "<group>"; };
+		870E9EBC172C0FAF00DD52A8 /* SingleSelectionViewController_cs_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleSelectionViewController_cs_iPad.xib; sourceTree = "<group>"; };
+		870E9EBD172C0FAF00DD52A8 /* SingleSelectionViewController_cs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleSelectionViewController_cs.h; sourceTree = "<group>"; };
+		870E9EBE172C0FAF00DD52A8 /* SingleSelectionViewController_cs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleSelectionViewController_cs.m; sourceTree = "<group>"; };
 		870EB1711727B07E000BFE0C /* L_Note_BG_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L_Note_BG_01.png; sourceTree = "<group>"; };
 		870EB1721727B07E000BFE0C /* L_Note_BG_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "L_Note_BG_01@2x.png"; sourceTree = "<group>"; };
 		870EB1731727B07E000BFE0C /* P_note_BG_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = P_note_BG_01.png; sourceTree = "<group>"; };
@@ -1400,6 +1420,18 @@
 		87ED0A84172AC93D002F5B6E /* P_Black_patch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "P_Black_patch@2x.png"; sourceTree = "<group>"; };
 		87ED0A8B172ACB26002F5B6E /* NotesCellP.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotesCellP.xib; sourceTree = "<group>"; };
 		87ED0A8E172AD27A002F5B6E /* ScoreCardCellP.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreCardCellP.xib; sourceTree = "<group>"; };
+		87ED6DE4172CFDAE002F8472 /* add_note_box_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_note_box_01.png; sourceTree = "<group>"; };
+		87ED6DE5172CFDAE002F8472 /* fb-icons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fb-icons.png"; sourceTree = "<group>"; };
+		87ED6DE6172CFDAE002F8472 /* landscape_Note_box_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landscape_Note_box_01.png; sourceTree = "<group>"; };
+		87ED6DE7172CFDAE002F8472 /* landscape_Note_box_01_white_patch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landscape_Note_box_01_white_patch.png; sourceTree = "<group>"; };
+		87ED6DE8172CFDAE002F8472 /* landscape_Result_box_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landscape_Result_box_01.png; sourceTree = "<group>"; };
+		87ED6DE9172CFDAE002F8472 /* mail-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mail-icon.png"; sourceTree = "<group>"; };
+		87ED6DEA172CFDAE002F8472 /* Portrait_Note_BG_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Portrait_Note_BG_01.png; sourceTree = "<group>"; };
+		87ED6DEB172CFDAE002F8472 /* Portrait_Note_BG_01_white_patch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Portrait_Note_BG_01_white_patch.png; sourceTree = "<group>"; };
+		87ED6DEC172CFDAE002F8472 /* Portrait_Result_BG_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Portrait_Result_BG_01.png; sourceTree = "<group>"; };
+		87ED6DFC172D0100002F8472 /* CasestudyTextPopup_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CasestudyTextPopup_iPad.xib; sourceTree = "<group>"; };
+		87ED6DFD172D0101002F8472 /* CasestudyTextPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CasestudyTextPopup.h; sourceTree = "<group>"; };
+		87ED6DFE172D0101002F8472 /* CasestudyTextPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CasestudyTextPopup.m; sourceTree = "<group>"; };
 		87EF50151714476B00B5D435 /* FlashCardsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashCardsViewController.h; sourceTree = "<group>"; };
 		87EF50161714476B00B5D435 /* FlashCardsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashCardsViewController.m; sourceTree = "<group>"; };
 		87EF50171714476C00B5D435 /* FlashCardsViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlashCardsViewController_iPad.xib; sourceTree = "<group>"; };
@@ -1513,6 +1545,12 @@
 		87FD9B6F17265F450004B68D /* RadioView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioView.m; sourceTree = "<group>"; };
 		87FD9B72172683030004B68D /* table_radio_Btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table_radio_Btn.png; sourceTree = "<group>"; };
 		87FD9B73172683030004B68D /* table_radio_Btn_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table_radio_Btn_select.png; sourceTree = "<group>"; };
+		87FF8451172C3B9500F34B16 /* MatchPairsViewController_cs_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchPairsViewController_cs_iPad.xib; sourceTree = "<group>"; };
+		87FF8452172C3B9500F34B16 /* MatchPairsViewController_cs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchPairsViewController_cs.h; sourceTree = "<group>"; };
+		87FF8453172C3B9500F34B16 /* MatchPairsViewController_cs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchPairsViewController_cs.m; sourceTree = "<group>"; };
+		87FF8457172C3D1500F34B16 /* DragDropViewController_cs_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DragDropViewController_cs_iPad.xib; sourceTree = "<group>"; };
+		87FF8458172C3D1500F34B16 /* DragDropViewController_cs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragDropViewController_cs.h; sourceTree = "<group>"; };
+		87FF8459172C3D1500F34B16 /* DragDropViewController_cs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragDropViewController_cs.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1880,6 +1918,7 @@
 		8702433E171D42FD0002D145 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				87ED6DE3172CFDAE002F8472 /* NotesResult */,
 				8703997717240A3C007EF1BE /* AboutUs */,
 				8703990E1723C873007EF1BE /* Flashcard */,
 				8702433F171D42FE0002D145 /* Chapterlist */,
@@ -2618,6 +2657,25 @@
 			path = SingleSelect;
 			sourceTree = "<group>";
 		};
+		870E9EBB172C0EE000DD52A8 /* CS_Questions */ = {
+			isa = PBXGroup;
+			children = (
+				870E9EBC172C0FAF00DD52A8 /* SingleSelectionViewController_cs_iPad.xib */,
+				870E9EBD172C0FAF00DD52A8 /* SingleSelectionViewController_cs.h */,
+				870E9EBE172C0FAF00DD52A8 /* SingleSelectionViewController_cs.m */,
+				87FF8451172C3B9500F34B16 /* MatchPairsViewController_cs_iPad.xib */,
+				87FF8452172C3B9500F34B16 /* MatchPairsViewController_cs.h */,
+				87FF8453172C3B9500F34B16 /* MatchPairsViewController_cs.m */,
+				87FF8457172C3D1500F34B16 /* DragDropViewController_cs_iPad.xib */,
+				87FF8458172C3D1500F34B16 /* DragDropViewController_cs.h */,
+				87FF8459172C3D1500F34B16 /* DragDropViewController_cs.m */,
+				87ED6DFC172D0100002F8472 /* CasestudyTextPopup_iPad.xib */,
+				87ED6DFD172D0101002F8472 /* CasestudyTextPopup.h */,
+				87ED6DFE172D0101002F8472 /* CasestudyTextPopup.m */,
+			);
+			name = CS_Questions;
+			sourceTree = "<group>";
+		};
 		870EB1971727D9C3000BFE0C /* Portrait */ = {
 			isa = PBXGroup;
 			children = (
@@ -2674,9 +2732,26 @@
 			path = Notelist;
 			sourceTree = "<group>";
 		};
+		87ED6DE3172CFDAE002F8472 /* NotesResult */ = {
+			isa = PBXGroup;
+			children = (
+				87ED6DE4172CFDAE002F8472 /* add_note_box_01.png */,
+				87ED6DE5172CFDAE002F8472 /* fb-icons.png */,
+				87ED6DE6172CFDAE002F8472 /* landscape_Note_box_01.png */,
+				87ED6DE7172CFDAE002F8472 /* landscape_Note_box_01_white_patch.png */,
+				87ED6DE8172CFDAE002F8472 /* landscape_Result_box_01.png */,
+				87ED6DE9172CFDAE002F8472 /* mail-icon.png */,
+				87ED6DEA172CFDAE002F8472 /* Portrait_Note_BG_01.png */,
+				87ED6DEB172CFDAE002F8472 /* Portrait_Note_BG_01_white_patch.png */,
+				87ED6DEC172CFDAE002F8472 /* Portrait_Result_BG_01.png */,
+			);
+			path = NotesResult;
+			sourceTree = "<group>";
+		};
 		87F67E671711B1B00082C5CF /* Views&Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				870E9EBB172C0EE000DD52A8 /* CS_Questions */,
 				870A605A171C401100D721D8 /* About */,
 				87F9DB521712C27C005E57EF /* Component */,
 				87F67E951711B2390082C5CF /* Questions */,
@@ -3521,6 +3596,19 @@
 				870E9EB8172C057300DD52A8 /* P_Question_redio_btn@2x.png in Resources */,
 				870E9EB9172C057300DD52A8 /* P_Question_redio_btn_select.png in Resources */,
 				870E9EBA172C057300DD52A8 /* P_Question_redio_btn_select@2x.png in Resources */,
+				870E9EBF172C0FAF00DD52A8 /* SingleSelectionViewController_cs_iPad.xib in Resources */,
+				87FF8454172C3B9500F34B16 /* MatchPairsViewController_cs_iPad.xib in Resources */,
+				87FF845A172C3D1500F34B16 /* DragDropViewController_cs_iPad.xib in Resources */,
+				87ED6DED172CFDAE002F8472 /* add_note_box_01.png in Resources */,
+				87ED6DEE172CFDAE002F8472 /* fb-icons.png in Resources */,
+				87ED6DEF172CFDAE002F8472 /* landscape_Note_box_01.png in Resources */,
+				87ED6DF0172CFDAE002F8472 /* landscape_Note_box_01_white_patch.png in Resources */,
+				87ED6DF1172CFDAE002F8472 /* landscape_Result_box_01.png in Resources */,
+				87ED6DF2172CFDAE002F8472 /* mail-icon.png in Resources */,
+				87ED6DF3172CFDAE002F8472 /* Portrait_Note_BG_01.png in Resources */,
+				87ED6DF4172CFDAE002F8472 /* Portrait_Note_BG_01_white_patch.png in Resources */,
+				87ED6DF5172CFDAE002F8472 /* Portrait_Result_BG_01.png in Resources */,
+				87ED6DFF172D0101002F8472 /* CasestudyTextPopup_iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3649,6 +3737,10 @@
 				39F0ECD81726A32800AA09A1 /* NSError+FBError.m in Sources */,
 				870B136217291FFD00B34A58 /* FlipViewButton.m in Sources */,
 				399D2DCB172BAB3A0073B760 /* SingleSelectionImageViewController.m in Sources */,
+				870E9EC0172C0FAF00DD52A8 /* SingleSelectionViewController_cs.m in Sources */,
+				87FF8455172C3B9500F34B16 /* MatchPairsViewController_cs.m in Sources */,
+				87FF845B172C3D1500F34B16 /* DragDropViewController_cs.m in Sources */,
+				87ED6E00172D0101002F8472 /* CasestudyTextPopup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

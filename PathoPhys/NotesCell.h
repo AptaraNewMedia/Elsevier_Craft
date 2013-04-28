@@ -14,7 +14,7 @@
 
 @property (nonatomic, retain) IBOutlet UILabel *lbl_serionNo;
 @property (nonatomic, retain) IBOutlet UILabel *lbl_name;
-
+@property (nonatomic, retain) IBOutlet UILabel *lbl_desc;
 @property (nonatomic, retain) IBOutlet UILabel *lbl_date;
 
 

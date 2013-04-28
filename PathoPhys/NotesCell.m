@@ -13,6 +13,7 @@
 @synthesize lbl_serionNo;
 @synthesize lbl_name;
 @synthesize lbl_date;
+@synthesize lbl_desc;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

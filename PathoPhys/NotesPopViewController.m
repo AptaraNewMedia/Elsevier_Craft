@@ -38,19 +38,12 @@
 
     [Bn_Addnote setTitleColor:COLOR_BottomGrayButton forState:UIControlStateNormal];
     [Bn_Addnote setTitleColor:COLOR_BottomBlueButton forState:UIControlStateHighlighted];
-    Bn_Addnote.titleLabel.font=FONT_12;
+    Bn_Addnote.titleLabel.font=FONT_14;
 
     
     [Bn_ViewNote setTitleColor:COLOR_BottomGrayButton forState:UIControlStateNormal];
     [Bn_ViewNote setTitleColor:COLOR_BottomBlueButton forState:UIControlStateHighlighted];
-    Bn_ViewNote.titleLabel.font=FONT_12;
-    
-    //Code for Exclusive Touch Enabling.
-    for (UIView *myview in [self.view subviews]){
-        if([myview isKindOfClass:[UIButton class]]){
-            myview.exclusiveTouch = YES;
-        }
-    }
+    Bn_ViewNote.titleLabel.font=FONT_14;
 }
 
 -(IBAction)Bn_BGButton_Tapped:(id)sender
@@ -101,7 +94,7 @@
 
     self.view.frame=CGRectMake(00, 44, 1024, 680);
     [Bn_BGButton setFrame:CGRectMake(0, 0, 1024, 680)] ;
-    [viewPopup setFrame:CGRectMake(812, -2, 169, 120)];
+    [viewPopup setFrame:CGRectMake(761, -15, 230, 140)];
 }
 
 -(void)Fn_rotatePortrait
@@ -114,7 +107,7 @@
 
     self.view.frame=CGRectMake(00, 44, 768, 936);
     [Bn_BGButton setFrame:CGRectMake(0, 0, 768, 936)];    
-    [viewPopup setFrame:CGRectMake(552, -2, 169, 120)];
+    [viewPopup setFrame:CGRectMake(501, -15, 230, 140)];
 }
 
 - (void)didReceiveMemoryWarning

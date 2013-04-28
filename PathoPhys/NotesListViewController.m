@@ -13,13 +13,14 @@
 @interface NotesListViewController ()
 {
     IBOutlet UIImageView *imgPatch;
-    IBOutlet UIImageView *imgBG;
-    IBOutlet UILabel *lblTitle;
+//    IBOutlet UIImageView *imgBG;
+//    IBOutlet UILabel *lblTitle;
     IBOutlet UIButton *btnClose;
     IBOutlet UITableView *tbl;
     
     IBOutlet UILabel *lblTitleSerialNo;
     IBOutlet UILabel *lblTitleName;
+    IBOutlet UILabel *lblTitleDescription;
     IBOutlet UILabel *lblTitleDate;
     
     IBOutlet UITextField *txtSearch;
@@ -33,7 +34,6 @@
     
     // 1- Landscape
     // 2- Portrait
-    
 }
 @end
 
@@ -60,14 +60,9 @@
     txtSearch.font = FONT_17;
     txtSearch.textColor = COLOR_BLACK;
     
-    lblTitle.font = FONT_20;
-    lblTitle.textColor = COLOR_WHITE;
-    //Code for Exclusive Touch Enabling.
-    for (UIView *myview in [self.view subviews]){
-        if([myview isKindOfClass:[UIButton class]]){
-            myview.exclusiveTouch = YES;
-        }
-    }
+//    lblTitle.font = FONT_20;
+//    lblTitle.textColor = COLOR_WHITE;
+
 }
 -(IBAction)onClose:(id)sender{
     [md Fn_SubNotesList];
@@ -93,16 +88,17 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    
 
     cell.lbl_serionNo.font = FONT_17;
     cell.lbl_name.font = FONT_17;
     cell.lbl_date.font = FONT_17;
-
+    cell.lbl_desc.font = FONT_17;
     
     cell.lbl_serionNo.textColor = COLOR_BLACK;
     cell.lbl_name.textColor = COLOR_BLACK;
     cell.lbl_date.textColor = COLOR_BLACK;
+    cell.lbl_desc.textColor = COLOR_BLACK;
+    
     
     
     cell.lbl_name.numberOfLines = 3;
@@ -112,6 +108,7 @@
     cell.lbl_serionNo.text = [NSString stringWithFormat:@"%d",objNotes.intNotesId];
     cell.lbl_name.text = [NSString stringWithFormat:@"%@",objNotes.strNoteTitle];
     cell.lbl_date.text = [NSString stringWithFormat:@"%@", objNotes.strCreatedDate];
+    cell.lbl_desc.text = [NSString stringWithFormat:@"%@", objNotes.strNoteDesc];
 //    if(currentOrientation == 2){
 //        NSLog(@"protrait");
 //        cell.imgview_cellpatch.image = [UIImage imageNamed:@"white_patch_with_line.png"];
@@ -202,41 +199,41 @@
 }
 - (void)Fn_rotatePortrait{
     
-    [imgPatch setImage:[UIImage imageNamed:@"P_Black_patch.png"]];
+    [imgPatch setImage:[UIImage imageNamed:@"Portrait_Note_BG_01.png"]];
     [imgPatch  setFrame:CGRectMake(0,0,768,1024)];
 
     
-    [imgBG setImage:[UIImage imageNamed:@"P_Img _viewNote.png"]];
-    [imgBG setFrame:CGRectMake(40, 83, 697, 723)];
+//    [imgBG setImage:[UIImage imageNamed:@"P_Img _viewNote.png"]];
+//    [imgBG setFrame:CGRectMake(40, 83, 697, 723)];
     
-    [lblTitle setFrame:CGRectMake(58, 109, 683, 36)];
-    [btnClose setFrame:CGRectMake(662,110,41,36)];
-    [tbl setFrame:CGRectMake(40,246,682,433)];
-    [lblTitleSerialNo setFrame:CGRectMake(70, 208, 61, 38)];
-    [lblTitleName setFrame:CGRectMake(239, 208, 61, 38)];
-    [lblTitleDate setFrame:CGRectMake(555,208,104,38)];
-    [txtSearch setFrame:CGRectMake(122,164,575,29)];
+//    [lblTitle setFrame:CGRectMake(88,109, 683, 36)];
+    [btnClose setFrame:CGRectMake(644,118,41,36)];
+    [tbl setFrame:CGRectMake(35,246,682,433)];
+    [lblTitleSerialNo setFrame:CGRectMake(55, 208, 61, 38)];
+    [lblTitleName setFrame:CGRectMake(279, 208, 61, 38)];
+    [lblTitleDescription setFrame:CGRectMake(495,208,104,38)];
+    [lblTitleDate setFrame:CGRectMake(605,208,104,38)];
+    [txtSearch setFrame:CGRectMake(110,171,583,30)];
     
     [tbl reloadData];
     //white_patch_with_line.png
-    
-    
 }
 - (void)Fn_rotateLandscape{
     
-    [imgPatch setImage:[UIImage imageNamed:@"L_Black_patch.png"]];
+    [imgPatch setImage:[UIImage imageNamed:@"landscape_Note_box_01.png"]];
     [imgPatch  setFrame:CGRectMake(0,0,1024,768)];
     
-    [imgBG setImage:[UIImage imageNamed:@"img_notelist_bg.png"]];
-    [imgBG setFrame:CGRectMake(90, 58, 843, 633)];
+//    [imgBG setImage:[UIImage imageNamed:@"img_notelist_bg.png"]];
+//    [imgBG setFrame:CGRectMake(90, 58, 843, 633)];
     
-    [lblTitle setFrame:CGRectMake(170, 75, 683, 36)];
-    [btnClose setFrame:CGRectMake(861,77,41,36)];
-    [tbl setFrame:CGRectMake(90,214,822,433)];
-    [lblTitleSerialNo setFrame:CGRectMake(129, 172, 61, 38)];
-    [lblTitleName setFrame:CGRectMake(242, 172, 61, 38)];
-    [lblTitleDate setFrame:CGRectMake(755,176,104,38)];
-    [txtSearch setFrame:CGRectMake( 160,129,732,30)];
+//    [lblTitle setFrame:CGRectMake(170, 75, 683, 36)];
+    [btnClose setFrame:CGRectMake(855,103,41,36)];
+    [tbl setFrame:CGRectMake(87,238,822,433)];
+    [lblTitleSerialNo setFrame:CGRectMake(106, 200, 61, 38)];
+    [lblTitleName setFrame:CGRectMake(370, 200, 61, 38)];
+    [lblTitleDescription setFrame:CGRectMake(650,200,104,38)];
+    [lblTitleDate setFrame:CGRectMake(785,200,104,38)];
+    [txtSearch setFrame:CGRectMake( 157,159,732,30)];
     [tbl reloadData];
 }
 @end

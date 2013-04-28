@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1536</int>
-		<string key="IBDocument.SystemVersion">11E53</string>
+		<string key="IBDocument.SystemVersion">11G63</string>
 		<string key="IBDocument.InterfaceBuilderVersion">2840</string>
-		<string key="IBDocument.AppKitVersion">1138.47</string>
+		<string key="IBDocument.AppKitVersion">1138.51</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -42,7 +42,6 @@
 						<string key="NSFrame">{{475, 352}, {73, 44}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="744234732">
 							<int key="NSColorSpace">3</int>
@@ -81,7 +80,7 @@
 							<object class="IBUIImageView" id="754989102">
 								<reference key="NSNextResponder" ref="1027092667"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrameSize">{169, 120}</string>
+								<string key="NSFrameSize">{210, 140}</string>
 								<reference key="NSSuperview" ref="1027092667"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="119554865"/>
@@ -90,13 +89,13 @@
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">add_note_box.png</string>
+									<string key="NSResourceName">add_note_box_01.png</string>
 								</object>
 							</object>
 							<object class="IBUIImageView" id="348630312">
 								<reference key="NSNextResponder" ref="1027092667"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{37, 59}, {95, 3}}</string>
+								<string key="NSFrame">{{58, 75}, {95, 3}}</string>
 								<reference key="NSSuperview" ref="1027092667"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="779430738"/>
@@ -111,7 +110,7 @@
 							<object class="IBUIButton" id="119554865">
 								<reference key="NSNextResponder" ref="1027092667"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{18, 22}, {132, 31}}</string>
+								<string key="NSFrame">{{39, 38}, {132, 31}}</string>
 								<reference key="NSSuperview" ref="1027092667"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="348630312"/>
@@ -133,7 +132,7 @@
 							<object class="IBUIButton" id="779430738">
 								<reference key="NSNextResponder" ref="1027092667"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{18, 67}, {132, 31}}</string>
+								<string key="NSFrame">{{39, 83}, {132, 31}}</string>
 								<reference key="NSSuperview" ref="1027092667"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="677093222"/>
@@ -153,7 +152,7 @@
 								<reference key="IBUIFont" ref="968452683"/>
 							</object>
 						</array>
-						<string key="NSFrame">{{812, 44}, {169, 120}}</string>
+						<string key="NSFrame">{{812, 44}, {230, 140}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="754989102"/>
@@ -302,10 +301,10 @@
 						<int key="objectID">128</int>
 						<reference key="object" ref="1027092667"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="779430738"/>
-							<reference ref="119554865"/>
-							<reference ref="348630312"/>
 							<reference ref="754989102"/>
+							<reference ref="348630312"/>
+							<reference ref="119554865"/>
+							<reference ref="779430738"/>
 						</array>
 						<reference key="parent" ref="766721923"/>
 						<string key="objectName">viewPopup</string>
@@ -427,7 +426,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="abut_Sep_Line_03.png">{95, 3}</string>
-			<string key="add_note_box.png">{169, 120}</string>
+			<string key="add_note_box_01.png">{210, 140}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1926</string>
 	</data>

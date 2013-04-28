@@ -34,24 +34,17 @@
     
     [Bn_AboutAuthor setTitleColor:COLOR_BottomGrayButton forState:UIControlStateNormal];
     [Bn_AboutAuthor setTitleColor:COLOR_BottomBlueButton forState:UIControlStateHighlighted];
-    Bn_AboutAuthor.titleLabel.font=FONT_12;
+    Bn_AboutAuthor.titleLabel.font=FONT_14;
     
     
     [Bn_AboutApp setTitleColor:COLOR_BottomGrayButton forState:UIControlStateNormal];
     [Bn_AboutApp setTitleColor:COLOR_BottomBlueButton forState:UIControlStateHighlighted];
-    Bn_AboutApp.titleLabel.font=FONT_12;
+    Bn_AboutApp.titleLabel.font=FONT_14;
     
     
     [Bn_ElsevierAustralia setTitleColor:COLOR_BottomGrayButton forState:UIControlStateNormal];
     [Bn_ElsevierAustralia setTitleColor:COLOR_BottomBlueButton forState:UIControlStateHighlighted];
-    Bn_ElsevierAustralia.titleLabel.font=FONT_12;
-    
-    //Code for Exclusive Touch Enabling.
-    for (UIView *myview in [self.view subviews]){
-        if([myview isKindOfClass:[UIButton class]]){
-            myview.exclusiveTouch = YES;
-        }
-    }
+    Bn_ElsevierAustralia.titleLabel.font=FONT_14;
 }
 
 -(IBAction)Bn_BGButton_Tapped:(id)sender
@@ -108,7 +101,7 @@
 
     self.view.frame=CGRectMake(00, 44, 1024, 680);
     [Bn_BGButton setFrame:CGRectMake(0, 0, 1024, 680)];
-    [viewPopup setFrame:CGRectMake(852, -2, 169, 120)];
+    [viewPopup setFrame:CGRectMake(810, -13, 230, 140)];
 }
 
 -(void)Fn_rotatePortrait
@@ -124,7 +117,7 @@
     
     self.view.frame=CGRectMake(00, 44, 768, 936);
     [Bn_BGButton setFrame:CGRectMake(0, 0, 768, 936)];    
-    [viewPopup setFrame:CGRectMake(592, -2, 169, 120)];
+    [viewPopup setFrame:CGRectMake(550, -13, 230, 140)];
     
 }
 
