@@ -110,6 +110,10 @@
     [self Fn_LoadQuestionData];
     
     bnPrev.enabled = NO;
+    if(intTotalQuestions == 1){
+        bnNext.enabled = NO;
+    }
+    
     
     //Code for Exclusive Touch Enabling.
     for (UIView *myview in [self.view subviews]){
@@ -422,7 +426,7 @@
     resultView.lblScore.text = [NSString stringWithFormat:@"%d out of %d questions answered correctly.", total_score, intTotalQuestions];
     resultView.view.hidden = NO;
     
-    int_currentScore =total_score;
+    int_currentScore =(total_score / intTotalQuestions) * 100;
     
     //bnShowScore.enabled = NO;
     
