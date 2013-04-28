@@ -78,7 +78,7 @@
     
     [self fn_SetFontColor];
     
-    [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Tap the item on the left, and then tap the corresponding item on the right. Once you have matched all items, tap <b>Submit.</b></body></html>" baseURL:nil];
+    [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Drag the options on the left and drop them on the correct drop areas. Once you are done, click <b>Submit.</b></body></html>" baseURL:nil];
     
     UIImage *imgName = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", objDRAGDROP.strImageName]];
     imgViewQue.image = imgName;
