@@ -17,7 +17,7 @@
     MCSS *objMCSS;
     Feedback *objFeedback;
     BOOL flagForAnyOptionSelect;
-    BOOL flagForCheckAnswer;
+    NSInteger flagForCheckAnswer;
     BOOL MultipleSelect;
     BOOL isImage;
     BOOL isSubmit;
@@ -93,7 +93,8 @@
         
     }
     
-    if(objMCSS.strImageName == (id)[NSNull null]){
+    //if(objMCSS.strImageName == (id)[NSNull null]){
+    if (objMCSS.strImageName == (id)[NSNull null] || objMCSS.strImageName.length == 0 || [objMCSS.strImageName isEqualToString:@" "]) {    
         isImage = NO;
         [ImgOption setImage:nil];
     }
@@ -158,7 +159,7 @@
     else  {
         flagForCheckAnswer = [self checkForAnswer];
         
-        if (flagForCheckAnswer == YES) {
+        if (flagForCheckAnswer == 1) {
             intVisited = 1;
         }
         else {
@@ -177,19 +178,22 @@
         [alert setMessage:[NSString stringWithFormat:@"Please select options"]];
     }
     else {
-        if (flagForCheckAnswer == YES) {
+        if (flagForCheckAnswer == 1) {
             [alert setTag:2];
             [alert addButtonWithTitle:@"Ok"];
             [alert setMessage:[NSString stringWithFormat:@"That's Correct!"]];
+        }
+        else if (flagForCheckAnswer == 3) {
+            [alert setTag:3];
+            [alert addButtonWithTitle:@"Ok"];
+            [alert addButtonWithTitle:@"Try Again"];
+            [alert setMessage:[NSString stringWithFormat:@"One of the correct options. Please try other options as well."]];
         }
         else {
             [alert setTag:3];
             [alert addButtonWithTitle:@"Ok"];
             [alert addButtonWithTitle:@"Try Again"];
             [alert setMessage:[NSString stringWithFormat:@"That's Incorrect!"]];
-            
-            //[alert setMessage:[NSString stringWithFormat:@"One of the correct options. Please try other options as well."]];
-            
             // Please match all the items.
             
         }
@@ -204,9 +208,7 @@
     [md Fn_AddCaseStudyText];
 }
 
-- (BOOL) checkForAnswer{
-    
-    BOOL flag_answer = NO;
+- (int) checkForAnswer{
     
     NSMutableString *strAns = [[NSMutableString alloc] init];
     
@@ -215,7 +217,13 @@
     int answer_count = [objMCSS.arrAnswer count];
     int selected_count = [selectedCells_temp count];
     
-    if (selected_count == answer_count) {
+    NSMutableArray *selected_answer_check = [[NSMutableArray alloc] init];
+    for (int i = 0; i < selected_count; i++) {
+        [selected_answer_check addObject:[NSNumber numberWithInt:2]];
+    }
+    
+    
+    //if (selected_count == answer_count) {
         for (int i = 0; i < selected_count; i++) {
 
             NSIndexPath *indexPath = [selectedCells_temp objectAtIndex:i];
@@ -226,7 +234,7 @@
             for (int j = 0; j < answer_count; j++) {
                 NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
                 if ([[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
-                    flag_answer = YES;
+                    [selected_answer_check replaceObjectAtIndex:i withObject:[NSNumber numberWithInt:1]];
                     break;
                 }
                 
@@ -238,9 +246,28 @@
                 [strAns appendFormat:@"%@#", ss];
             
         }
+
+    BOOL flag_answer = 3;
+    
+    int incorrectcount = 0;
+    int correctcount = 0;
+    
+    for (int x =0; x < [selected_answer_check count]; x++) {
+        if ([[selected_answer_check objectAtIndex:x] intValue] == 1) {
+            correctcount++;
+        }
+        else if ([[selected_answer_check objectAtIndex:x] intValue] == 2) {
+            incorrectcount++;
+        }
     }
-    else
-        flag_answer = NO;
+
+    if (incorrectcount > 0) {
+        flag_answer = 2;
+    }
+    else if (correctcount == [objMCSS.arrAnswer count]) {
+        flag_answer = 1;
+    }
+    
     return flag_answer;
 }
 
@@ -251,6 +278,7 @@
 }
 
 - (void) handleRevealScore{
+    
     NSArray *selectedCells_temp = [tblOptions indexPathsForSelectedRows];
     
     int answer_count = [objMCSS.arrAnswer count];
@@ -302,7 +330,7 @@
 {    
     [btnInvisible removeFromSuperview];
     btnInvisible = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btnInvisible setFrame:CGRectMake(0, 0, self.view.frame.size.width - 70, self.view.frame.size.height)];
+    [btnInvisible setFrame:CGRectMake(tblOptions.frame.origin.x, tblOptions.frame.origin.y, tblOptions.frame.size.width - 50, tblOptions.frame.size.height)];
     btnInvisible.backgroundColor = [UIColor clearColor];
     [btnInvisible addTarget:self action:@selector(onInvisible:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btnInvisible];    
@@ -336,12 +364,11 @@
 -(IBAction)onFeedbackTapped:(id)sender{
     UIButton *bn = sender;
     MCSSCell_iPad *cell = [cellArray objectAtIndex:bn.tag];
-
     float x_point = bn.frame.origin.x - 201;
     //float x_point = bn.frame.origin.x;
     float y_point = bn.frame.origin.y + bn.superview.frame.origin.y + (cell.tag * 56);
     
-    NSLog(@" y_point: %f",y_point);
+    //NSLog(@" y_point: %f",y_point);
     
     x_feedback_p=x_point-13;
     

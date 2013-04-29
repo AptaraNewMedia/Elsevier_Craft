@@ -248,23 +248,29 @@
     switch (objQue.intType) {
         case QUESTION_TYPE_MCMS:
             [dragDropView fn_CheckAnswersBeforeSubmit];
-            if (dragDropView.strVisitedAnswer.length > 0)
-                [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:dragDropView.strVisitedAnswer];
-            [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:dragDropView.intVisited]];
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
+                if (dragDropView.strVisitedAnswer.length > 0)
+                    [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:dragDropView.strVisitedAnswer];
+                [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:dragDropView.intVisited]];
+            }
             [dragDropView fn_OnSubmitTapped];
             break;
         case QUESTION_TYPE_MATCHTERMS:
             [matchPairsView fn_CheckAnswersBeforeSubmit];
-            if (matchPairsView.strVisitedAnswer.length > 0)
-                [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:matchPairsView.strVisitedAnswer];
-            [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:matchPairsView.intVisited]];
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
+                if (matchPairsView.strVisitedAnswer.length > 0)
+                    [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:matchPairsView.strVisitedAnswer];
+                [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:matchPairsView.intVisited]];
+            }
             [matchPairsView fn_OnSubmitTapped];
             break;
         case QUESTION_TYPE_MCSS:
             [singleSelectionView fn_CheckAnswersBeforeSubmit];
-            if (singleSelectionView.strVisitedAnswer.length > 0)
-                [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:singleSelectionView.strVisitedAnswer];
-            [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:singleSelectionView.intVisited]];
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
+                if (singleSelectionView.strVisitedAnswer.length > 0)
+                    [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:singleSelectionView.strVisitedAnswer];
+                [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:singleSelectionView.intVisited]];
+            }
             [singleSelectionView fn_OnSubmitTapped];
             break;
     }
@@ -307,7 +313,10 @@
 
 -(void)onTryAgain
 {
-    
+    TryAgainFlag = 1;
+    [self fn_RemoveQuestionView];
+    [md Fn_SubAddNote];
+    [self Fn_LoadQuestionData];
 }
 
 -(void) Fn_DisableSubmit {

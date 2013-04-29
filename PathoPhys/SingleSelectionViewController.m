@@ -287,7 +287,7 @@
 {    
     [btnInvisible removeFromSuperview];
     btnInvisible = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btnInvisible setFrame:CGRectMake(0, 0, self.view.frame.size.width - 70, self.view.frame.size.height)];
+    [btnInvisible setFrame:CGRectMake(tblOptions.frame.origin.x, tblOptions.frame.origin.y, tblOptions.frame.size.width - 50, tblOptions.frame.size.height)];
     btnInvisible.backgroundColor = [UIColor clearColor];
     [btnInvisible addTarget:self action:@selector(onInvisible:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btnInvisible];    

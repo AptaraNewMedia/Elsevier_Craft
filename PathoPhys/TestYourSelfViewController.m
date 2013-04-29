@@ -336,7 +336,7 @@
     switch (objQue.intType) {
         case QUESTION_TYPE_MCMS:
             [dragDropView fn_CheckAnswersBeforeSubmit];
-            if (TryAgainFlag != 1) {
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
                 if (dragDropView.strVisitedAnswer.length > 0)
                     [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:dragDropView.strVisitedAnswer];
                 [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:dragDropView.intVisited]];
@@ -345,7 +345,7 @@
             break;
         case QUESTION_TYPE_FILLINBLANKS:
             [fillInTheBlanksView fn_CheckAnswersBeforeSubmit];
-            if (TryAgainFlag != 1) {
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
                 if (fillInTheBlanksView.strVisitedAnswer.length > 0)
                     [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:fillInTheBlanksView.strVisitedAnswer];
                 [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:fillInTheBlanksView.intVisited]];
@@ -354,7 +354,7 @@
             break;
         case QUESTION_TYPE_RADIOBUTTONS:
             [radioGroupView fn_CheckAnswersBeforeSubmit];
-            if (TryAgainFlag != 1) {
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
                 if (radioGroupView.strVisitedAnswer.length > 0)
                     [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:radioGroupView.strVisitedAnswer];
                 [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:radioGroupView.intVisited]];
@@ -363,7 +363,7 @@
             break;
         case QUESTION_TYPE_TRUEFLASE:
             [trueFalseView fn_CheckAnswersBeforeSubmit];
-            if (TryAgainFlag != 1) {
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
                 if (trueFalseView.strVisitedAnswer.length > 0)
                     [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:trueFalseView.strVisitedAnswer];
                 [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:trueFalseView.intVisited]];
@@ -372,7 +372,7 @@
             break;
         case QUESTION_TYPE_MATCHTERMS:
             [matchPairsView fn_CheckAnswersBeforeSubmit];
-            if (TryAgainFlag != 1) {
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
                 if (matchPairsView.strVisitedAnswer.length > 0)
                     [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:matchPairsView.strVisitedAnswer];
                 [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:matchPairsView.intVisited]];
@@ -381,7 +381,7 @@
             break;
         case QUESTION_TYPE_MCSS:
             [singleSelectionView fn_CheckAnswersBeforeSubmit];
-            if (TryAgainFlag != 1) {
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
                 if (singleSelectionView.strVisitedAnswer.length > 0)
                     [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:singleSelectionView.strVisitedAnswer];
                 [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:singleSelectionView.intVisited]];
@@ -394,7 +394,7 @@
             
         case QUESTION_TYPE_DRAGDROPRADIOBUTTONS:
             [dragDropRadioView fn_CheckAnswersBeforeSubmit];
-            if (TryAgainFlag != 1) {
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
                 if (dragDropRadioView.strVisitedAnswer.length > 0)
                     [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:dragDropRadioView.strVisitedAnswer];
                 [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:dragDropRadioView.intVisited]];
