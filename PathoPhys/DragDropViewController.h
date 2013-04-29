@@ -37,4 +37,7 @@
 -(void) fn_CheckAnswersBeforeSubmit;
 -(void) fn_OnSubmitTapped;
 
+- (void) rotateScrollViewButtonsForLandscape;
+- (void) rotateScrollViewButtonsForPortrait;
+
 @end

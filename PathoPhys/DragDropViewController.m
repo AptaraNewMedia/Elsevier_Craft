@@ -99,7 +99,9 @@
             myview.exclusiveTouch = YES;
         }
     }
+    
 }
+
 
 
 - (void) Fn_disableAllDraggableSubjects{
@@ -122,37 +124,76 @@
 
 - (void) draggblePoints
 {
-    int y = 10;
-    for (int i = 0; i < [objDRAGDROP.arrOptions count]; i++){
-        
-        CustomDragButton *bnDrag = [CustomDragButton buttonWithType:UIButtonTypeCustom];
-        bnDrag.frame = CGRectMake(20, y, objDRAGDROP.fWidth, objDRAGDROP.fHeight);
-        bnDrag.exclusiveTouch = YES;
-        bnDrag.tag = i+1;
-        [bnDrag setTitle:[objDRAGDROP.arrOptions objectAtIndex:i] forState:UIControlStateNormal];
-        [bnDrag setTitleColor:COLOR_WHITE forState:UIControlStateNormal];
-        [bnDrag setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
-        bnDrag.titleLabel.font = FONT_14;
-        bnDrag.titleLabel.numberOfLines = 3;
-        bnDrag.userInteractionEnabled=YES;
-        
-        [bnDrag.ansImage setFrame:CGRectMake(objDRAGDROP.fWidth-40, -10, 22, 22)];
-        
-        [bnDrag.feedbackBt setTag:i];
-        bnDrag.feedbackBt.frame = CGRectMake(bnDrag.ansImage.frame.origin.x+bnDrag.ansImage.frame.size.width+1, -15, 22, 22);
-        [bnDrag.feedbackBt setTag:i];
-        [bnDrag.feedbackBt setImage:[UIImage imageNamed:@"Btn_feed.png"] forState:UIControlStateNormal];
-        bnDrag.feedbackBt.hidden = YES;
-        [bnDrag.feedbackBt addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [scrollViewDrag addSubview:bnDrag];
-        y=y+objDRAGDROP.fHeight+10;
-        
-        [draggableSubjects addObject:bnDrag];
-        
-    }
-    [scrollViewDrag setContentSize:CGSizeMake(objDRAGDROP.fWidth, y)];
+ 
+        int y = 10;
+        for (int i = 0; i < [objDRAGDROP.arrOptions count]; i++){
+            
+            CustomDragButton *bnDrag = [CustomDragButton buttonWithType:UIButtonTypeCustom];
+            bnDrag.frame = CGRectMake(20, y, objDRAGDROP.fWidth, objDRAGDROP.fHeight);
+            bnDrag.exclusiveTouch = YES;
+            bnDrag.tag = i+1;
+            [bnDrag setTitle:[objDRAGDROP.arrOptions objectAtIndex:i] forState:UIControlStateNormal];
+            [bnDrag setTitleColor:COLOR_WHITE forState:UIControlStateNormal];
+            [bnDrag setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
+            bnDrag.titleLabel.font = FONT_14;
+            bnDrag.titleLabel.numberOfLines = 3;
+            bnDrag.userInteractionEnabled=YES;
+            
+            [bnDrag.ansImage setFrame:CGRectMake(objDRAGDROP.fWidth-40, -10, 22, 22)];
+            
+            [bnDrag.feedbackBt setTag:i];
+            bnDrag.feedbackBt.frame = CGRectMake(bnDrag.ansImage.frame.origin.x+bnDrag.ansImage.frame.size.width+1, -15, 22, 22);
+            [bnDrag.feedbackBt setTag:i];
+            [bnDrag.feedbackBt setImage:[UIImage imageNamed:@"Btn_feed.png"] forState:UIControlStateNormal];
+            bnDrag.feedbackBt.hidden = YES;
+            [bnDrag.feedbackBt addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [scrollViewDrag addSubview:bnDrag];
+            y=y+objDRAGDROP.fHeight+10;
+            
+            [draggableSubjects addObject:bnDrag];
+            
+        }
+        [scrollViewDrag setContentSize:CGSizeMake(objDRAGDROP.fWidth, y)];    
 }
+
+- (void) rotateScrollViewButtonsForLandscape{
+    int counter= 0;
+    int y = 10;
+    for(UIView *myView in [scrollViewDrag subviews]){
+        if([myView isKindOfClass:[CustomDragButton class]]){
+            counter++;
+            [myView removeFromSuperview];
+            myView.frame = CGRectMake(20, y, myView.frame.size.width, myView.frame.size.height);
+            [scrollViewDrag addSubview:myView];
+            y = y + myView.frame.size.height + 10   ;
+        }
+    }
+}
+
+- (void) rotateScrollViewButtonsForPortrait{
+    int counter= 0;
+    int y = 10, x= 20;
+
+    for(UIView *myView in [scrollViewDrag subviews]){
+        if([myView isKindOfClass:[CustomDragButton class]]){
+            counter++;
+            [myView removeFromSuperview];
+            myView.frame = CGRectMake(x, y, myView.frame.size.width, myView.frame.size.height);
+            [scrollViewDrag addSubview:myView];
+            y = y + myView.frame.size.height + 10;
+            if(counter == 4){
+                y = 10;
+                x = x + myView.frame.size.width + 10;
+                counter = 0;
+            }
+        }
+    }
+}
+
+
+
+
 
 - (void) droppablePoints
 {
@@ -495,7 +536,7 @@
     [imgScroller setFrame:CGRectMake(20, 370, 730, 360)];
     imgScroller.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, imgScroller.bounds.size.width - 730);
     [scrollViewDrag setFrame:CGRectMake(20, 220, 730, 150)];
-    
+    [self rotateScrollViewButtonsForPortrait];
     
 }
 -(void)Fn_rotateLandscape
@@ -528,5 +569,8 @@
     [imgScroller setFrame:CGRectMake(258, 153, 727, 427)];
     imgScroller.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, imgScroller.bounds.size.width - 727);
     [scrollViewDrag setFrame:CGRectMake(20, 153, 237, 427)];
+    
+    [self rotateScrollViewButtonsForLandscape];
+    
 }
 @end
