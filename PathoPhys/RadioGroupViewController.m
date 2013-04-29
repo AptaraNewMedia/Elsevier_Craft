@@ -130,12 +130,17 @@
     
    
     lblOptionHiding.text = [objRH.arrHeadingText objectAtIndex:0];
-    lblOptionHiding.frame=CGRectMake(30, 0, option_hiding_width, 30);
+    lblOptionHiding.frame=CGRectMake(30, 0, option_hiding_width, 40);
     lblOptionHiding.backgroundColor = COLOR_CUSTOMBUTTON_BLUE;
     lblOptionHiding.textAlignment=UITextAlignmentCenter;
     lblOptionHiding.font = FONT_17;
     lblOptionHiding.textColor = COLOR_WHITE;
     [lblOptionHiding.layer setCornerRadius:9];
+    
+    lblOption1.numberOfLines = 2;
+    lblOption2.numberOfLines = 2;
+    lblOption3.numberOfLines = 2;
+    
     
     // Option 1
     CGSize sizeOption1 = [self getSize:[objRH.arrHeadingText objectAtIndex:1]];
@@ -156,6 +161,9 @@
     // Get Max width
     float max_width = MAX(sizeOption1.width, sizeOption2.width);
     
+    if ([objRH.strQuestionId isEqualToString:@"5_4_3_2"]) {
+        max_width = 100;
+    }
     // Option 3
     CGSize sizeOption3;
     lblOption3.hidden = YES;
@@ -177,21 +185,21 @@
     int_x = int_x + lblOptionHiding.frame.origin.x+option_hiding_width + 40;
     
     // Set Options frame
-    lblOption1.frame=CGRectMake(int_x, 0, max_width, 32);
+    lblOption1.frame=CGRectMake(int_x, 0, max_width, 40);
     lblOption1.backgroundColor=COLOR_CUSTOMBUTTON_BLUE;
     lblOption1.textAlignment=UITextAlignmentCenter;
     
     //
     int_x = int_x + max_width + 40;
     
-    lblOption2.frame=CGRectMake(int_x, 0, max_width, 32);
+    lblOption2.frame=CGRectMake(int_x, 0, max_width, 40);
     lblOption2.backgroundColor=COLOR_CUSTOMBUTTON_BLUE;
     lblOption2.textAlignment=UITextAlignmentCenter;
 
     //
     if (arrcount > 3) {
         int_x = int_x + max_width + 40;
-        lblOption3.frame=CGRectMake(int_x, 0, max_width, 32);
+        lblOption3.frame=CGRectMake(int_x, 0, max_width, 40);
         lblOption3.backgroundColor=COLOR_CUSTOMBUTTON_BLUE;
         lblOption3.textAlignment=UITextAlignmentCenter;
     }
@@ -228,10 +236,10 @@
         
         [radioView.btnOption1 setFrame:CGRectMake(radioView.lblQuestion.frame.size.width + 40 , 0, max_width, 32)];
         [radioView.btnOption2 setFrame:CGRectMake(radioView.btnOption1.frame.origin.x+radioView.btnOption1.frame.size.width + 40, 0, max_width, 32)];
-        float width_ans = radioView.btnOption2.frame.origin.x + radioView.btnOption2.frame.size.width + 30 ;
+        float width_ans = radioView.btnOption2.frame.origin.x + radioView.btnOption2.frame.size.width + 10 ;
         if (arrcount > 3) {
             [radioView.btnOption3 setFrame:CGRectMake(radioView.btnOption2.frame.origin.x + radioView.btnOption2.frame.size.width + 40, 0, max_width, 32)];
-            width_ans = radioView.btnOption3.frame.origin.x + radioView.btnOption3.frame.size.width + 30;
+            width_ans = radioView.btnOption3.frame.origin.x + radioView.btnOption3.frame.size.width + 10;
         }
         
         [radioView.ansImage setImage:nil];
