@@ -130,7 +130,7 @@
         bnDrag.frame = CGRectMake(20, y, objDRAGDROP.fWidth, objDRAGDROP.fHeight);
         bnDrag.exclusiveTouch = YES;
         bnDrag.tag = i+1;
-        [bnDrag setTitle:[objDRAGDROP.arrOptions objectAtIndex:i] forState:UIControlStateNormal];
+        [bnDrag setTitle:[objDRAGDROP.arrOptionsText objectAtIndex:i] forState:UIControlStateNormal];
         [bnDrag setTitleColor:COLOR_WHITE forState:UIControlStateNormal];
         [bnDrag setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
         bnDrag.titleLabel.font = FONT_14;
@@ -351,6 +351,10 @@
         NSArray *arrSubviews = [dropArea subviews];
         if (arrSubviews.count > 0) {
             CustomDragButton *bn = [arrSubviews objectAtIndex:0];
+            
+            //NSLog(@"Selected===========  %@", bn.titleLabel.text);
+            //NSLog(@"Answer ==========  %@ ", [objDRAGDROP.arrAnswer objectAtIndex:i]);
+            
             NSString *ss = [bn.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
             NSString *sa = [[objDRAGDROP.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
             if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
