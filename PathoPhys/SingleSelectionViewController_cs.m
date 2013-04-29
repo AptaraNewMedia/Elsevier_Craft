@@ -69,6 +69,9 @@
     
     //webQuestionText.text = objMCSS.strQuestionText ;
     
+    webQuestionText.scrollView.showsHorizontalScrollIndicator = NO;
+    btnCasestudyText.hidden = YES;
+    
     NSString *question = [NSString stringWithFormat:@"<html><body style=\"font-size:15px;color:black;font-family:helvetica;\">%@</body></html>", objMCSS.strQuestionText];
     
     [webQuestionText loadHTMLString:question baseURL:nil];

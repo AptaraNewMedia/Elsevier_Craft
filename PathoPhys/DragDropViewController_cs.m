@@ -79,6 +79,9 @@
     
     [webQuestionText loadHTMLString:question baseURL:nil];
     
+    webQuestionText.scrollView.showsHorizontalScrollIndicator = NO;
+    btnCasestudyText.hidden = YES;
+    
     [self fn_SetFontColor];
     
     [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Tap the item on the left, and then tap the corresponding item on the right. Once you have matched all items, tap <b>Submit.</b></body></html>" baseURL:nil];
@@ -247,7 +250,7 @@
         
         trimmedType = [trimmedType lowercaseString];
         
-        if (intfeed == char_index-1) {
+        if (intfeed == char_index) {
             if ([trimmedType isEqualToString:correctincorrect]) {
                 strTemp = [NSString stringWithFormat:@"%@", objFeedback.strFeedback];
             }
@@ -396,8 +399,8 @@
         if (arrSubviews.count > 0) {
             CustomDragButton *bn = [arrSubviews objectAtIndex:0];
             
-            //NSLog(@"Selected===========  %@", bn.titleLabel.text);
-            //NSLog(@"Answer ==========  %@ ", [objDRAGDROP.arrAnswer objectAtIndex:i]);
+            NSLog(@"Selected===========  %@", bn.titleLabel.text);
+            NSLog(@"Answer ==========  %@ ", [objDRAGDROP.arrAnswer objectAtIndex:i]);
             
             NSString *ss = [bn.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
             NSString *sa = [[objDRAGDROP.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];

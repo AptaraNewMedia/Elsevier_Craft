@@ -401,7 +401,7 @@
     x_feedback_p = x_point + 110;
     x_feedback_l = x_point + 235;
     
-    if(currentOrientaion==0 || currentOrientaion==1) // Portrait
+    if(currentOrientaion==1 || currentOrientaion==2) // Portrait
     {
 
         [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:btTemp.strFeedback];

@@ -86,7 +86,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    
+    webQuestionText.scrollView.showsHorizontalScrollIndicator = NO;
+    btnCasestudyText.hidden = YES;
     
     NSString *question = [NSString stringWithFormat:@"<html><body style=\"font-size:15px;color:black;font-family:helvetica;\">%@</body></html>", objMatch.strQuestionText];
     
@@ -401,7 +402,7 @@
     x_feedback_p = x_point + 110;
     x_feedback_l = x_point + 235;
     
-    if(currentOrientaion==0 || currentOrientaion==1) // Portrait
+    if(currentOrientaion== 1 || currentOrientaion==2) // Portrait
     {
 
         [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:btTemp.strFeedback];
