@@ -637,7 +637,7 @@
     [webQuestionText setFrame:CGRectMake(125, 30, 615, 100)];    
    
     // Casestudy_text
-    [btnCasestudyText setFrame:CGRectMake(680, 138, 60, 44)];
+    [btnCasestudyText setFrame:CGRectMake(705, 140, 35, 35)];
     
     //Table
     if (isImage) {
@@ -673,7 +673,7 @@
     [webQuestionText setFrame:CGRectMake(118, 19, 867, 72)];    
 
     // Casestudy_text
-    [btnCasestudyText setFrame:CGRectMake(922, 91, 60, 44)];
+    [btnCasestudyText setFrame:CGRectMake(947, 93, 35, 35)];
     
     // Table
     if (isImage) {
