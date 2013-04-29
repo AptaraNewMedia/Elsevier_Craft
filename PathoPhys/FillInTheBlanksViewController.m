@@ -196,7 +196,7 @@
         
         trimmedType = [trimmedType lowercaseString];
         
-        if (intfeed == char_index-1) {
+        if (intfeed == char_index) {
             if ([trimmedType isEqualToString:correctincorrect]) {
                 strTemp = [NSString stringWithFormat:@"%@", objFeedback.strFeedback];
             }
@@ -209,11 +209,26 @@
 -(IBAction)onFeedbackTapped:(id)sender
 {
     CustomDragButton *bn = sender;
-    float x_point = bn.frame.origin.x + bn.superview.frame.origin.x + objFillBlanks.fWidth + 5;
-    float y_point = bn.superview.frame.origin.y + 20;
-    y_point = y_point - visibleRect.origin.y;    
-    [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
+    float x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objFillBlanks.fWidth - 10);
+    float y_point = bn.superview.frame.origin.y + 15;
+    y_point = y_point - visibleRect.origin.y;
+    
+    x_feedback_l=x_point;
+    y_feedback_l=y_point;
+    
+    x_feedback_p=x_point-238;
+    y_feedback_p=y_point+217;
+    
+    if(currentOrientaion==1 || currentOrientaion==2) // Portrait
+    {
+        [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:bn.strFeedback];
+    }
+    else //Lanscape
+    {
+        [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:bn.strFeedback];
+    }
 }
+
 
 //Get db data from question_id
 //--------------------------------

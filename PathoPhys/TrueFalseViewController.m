@@ -186,12 +186,12 @@
     
     x_feedback_l = x_point + 20;
     y_feedback_l = y_point; //OK
-
+    
     x_feedback_p = x_point - 110;
     y_feedback_p = y_point + 80;
     
     
-    if(currentOrientaion==0 || currentOrientaion==1) // Portrait
+    if(currentOrientaion==1 || currentOrientaion==2) // Portrait
     {
         [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:strFeedback];
     }
@@ -199,10 +199,8 @@
     {
         [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:strFeedback];
     }
-    
-
-
 }
+
 //Get db data from question_id
 //--------------------------------
 -(void) fn_LoadDbData:(NSString *)question_id

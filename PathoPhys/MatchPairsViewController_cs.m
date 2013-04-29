@@ -394,7 +394,7 @@
     
     float x_point = bn.frame.origin.x;
     float y_point = bn.superview.frame.origin.y + 15;
-    y_point = y_point - visibleRect.origin.y;        
+    y_point = y_point - visibleRect.origin.y;
     
     y_feedback_p=y_point +65;
     y_feedback_l=y_point;
@@ -402,9 +402,9 @@
     x_feedback_p = x_point + 110;
     x_feedback_l = x_point + 235;
     
-    if(currentOrientaion== 1 || currentOrientaion==2) // Portrait
+    if(currentOrientaion==1 || currentOrientaion==2) // Portrait
     {
-
+        
         [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:btTemp.strFeedback];
     }
     else // Landscape

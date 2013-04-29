@@ -643,6 +643,8 @@
     //[tblOptions setBackgroundColor:COLOR_BottomBlueButton];
     cellArray = [[NSMutableArray alloc] init];
     [tblOptions reloadData];
+    
+    [feedbackView setFrame:CGRectMake(503, y_feedback_p, 261, 131)];    
 }
 -(void)Fn_rotateLandscape
 {
@@ -684,5 +686,6 @@
     //[tblOptions setBackgroundColor:COLOR_BottomBlueButton];
     cellArray = [[NSMutableArray alloc] init];    
     [tblOptions reloadData];
+    [feedbackView setFrame:CGRectMake(739, y_feedback_l, 261, 131)];    
 }
 @end
