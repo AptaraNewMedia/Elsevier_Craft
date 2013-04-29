@@ -187,6 +187,11 @@
             [alert addButtonWithTitle:@"Ok"];
             [alert addButtonWithTitle:@"Try Again"];
             [alert setMessage:[NSString stringWithFormat:@"That's Incorrect!"]];
+            
+            //[alert setMessage:[NSString stringWithFormat:@"One of the correct options. Please try other options as well."]];
+            
+            // Please match all the items.
+            
         }
     }
 	[alert show];
