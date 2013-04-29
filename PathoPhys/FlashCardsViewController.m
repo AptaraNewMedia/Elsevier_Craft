@@ -359,6 +359,9 @@
 }
 -(void) fnSetPreviousImage {
     if (prevFlipViewIndex != -1) {
+        
+        if(arrThumbsLarge.count > 1) {
+        
         FlipViewButton *newflipViewButton = [arrThumbsLarge objectAtIndex:prevFlipViewIndex];
         
         objFlashcardSet = (FlashcardsSet *)[arrFlashcards objectAtIndex:newflipViewButton.tag];
@@ -369,6 +372,7 @@
         newflipViewButton.textLabel.text = objFlashcardSet.strKey;
         newflipViewButton.selectedButton = 0;
         [newflipViewButton setBackgroundImage:[UIImage imageNamed:@"img_flashcard_front.png"] forState:UIControlStateNormal];
+        }
     }
 }
 
@@ -644,7 +648,12 @@
             cell.textLabel.text = [NSString stringWithFormat:@"%d. %@",indexPath.row + 1,objChap.strChapterTitle];
             UIImageView *selectionImage = [[UIImageView alloc] init];
             selectionImage.image = [UIImage imageNamed:@"img_chaplist_popup_row.png"];
-            cell.selectedBackgroundView = selectionImage;            
+            cell.selectedBackgroundView = selectionImage;
+            
+            if (indexPath.row == intCurrentFlashcard_ChapterId-1) {             
+                [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+            }
+
         }
     return cell;
 }
