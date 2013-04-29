@@ -187,7 +187,7 @@
             [alert setTag:3];
             [alert addButtonWithTitle:@"Ok"];
             [alert addButtonWithTitle:@"Try Again"];
-            [alert setMessage:[NSString stringWithFormat:@"One of the correct options. Please try other options as well."]];
+            [alert setMessage:[NSString stringWithFormat:@"Partially Correct. Please try other options as well."]];
         }
         else {
             [alert setTag:3];

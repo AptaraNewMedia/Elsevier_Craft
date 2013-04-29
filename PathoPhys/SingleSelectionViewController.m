@@ -17,7 +17,7 @@
     MCSS *objMCSS;
     Feedback *objFeedback;
     BOOL flagForAnyOptionSelect;
-    BOOL flagForCheckAnswer;
+    NSInteger flagForCheckAnswer;
     BOOL MultipleSelect;
     BOOL isImage;
     BOOL isSubmit;
@@ -87,7 +87,7 @@
         
     }
     
-    if(objMCSS.strImageName == (id)[NSNull null]){
+    if (objMCSS.strImageName == (id)[NSNull null] || objMCSS.strImageName.length == 0 || [objMCSS.strImageName isEqualToString:@" "]) {    
         isImage = NO;
         [ImgOption setImage:nil];
     }
@@ -152,7 +152,7 @@
     else  {
         flagForCheckAnswer = [self checkForAnswer];
         
-        if (flagForCheckAnswer == YES) {
+        if (flagForCheckAnswer == 1) {
             intVisited = 1;
         }
         else {
@@ -171,16 +171,24 @@
         [alert setMessage:[NSString stringWithFormat:@"Please select options"]];
     }
     else {
-        if (flagForCheckAnswer == YES) {
+        if (flagForCheckAnswer == 1) {
             [alert setTag:2];
             [alert addButtonWithTitle:@"Ok"];
             [alert setMessage:[NSString stringWithFormat:@"That's Correct!"]];
+        }
+        else if (flagForCheckAnswer == 3) {
+            [alert setTag:3];
+            [alert addButtonWithTitle:@"Ok"];
+            [alert addButtonWithTitle:@"Try Again"];
+            [alert setMessage:[NSString stringWithFormat:@"Partially Correct. Please try other options as well."]];
         }
         else {
             [alert setTag:3];
             [alert addButtonWithTitle:@"Ok"];
             [alert addButtonWithTitle:@"Try Again"];
             [alert setMessage:[NSString stringWithFormat:@"That's Incorrect!"]];
+            // Please match all the items.
+            
         }
     }
 	[alert show];
@@ -188,9 +196,7 @@
 //--------------------------------
 
 
-- (BOOL) checkForAnswer{
-    
-    BOOL flag_answer = NO;
+- (int) checkForAnswer{
     
     NSMutableString *strAns = [[NSMutableString alloc] init];
     
@@ -199,32 +205,59 @@
     int answer_count = [objMCSS.arrAnswer count];
     int selected_count = [selectedCells_temp count];
     
-    if (selected_count == answer_count) {
-        for (int i = 0; i < selected_count; i++) {
-
-            NSIndexPath *indexPath = [selectedCells_temp objectAtIndex:i];
-            
-            NSString *ss = [objMCSS.arrOptions objectAtIndex:indexPath.row];
-            ss = [ss stringByReplacingOccurrencesOfString:@" " withString:@""];            
-            
-            for (int j = 0; j < answer_count; j++) {
-                NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
-                if ([[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
-                    flag_answer = YES;
-                    break;
-                }
-                
+    NSMutableArray *selected_answer_check = [[NSMutableArray alloc] init];
+    for (int i = 0; i < selected_count; i++) {
+        [selected_answer_check addObject:[NSNumber numberWithInt:2]];
+    }
+    
+    
+    //if (selected_count == answer_count) {
+    for (int i = 0; i < selected_count; i++) {
+        
+        NSIndexPath *indexPath = [selectedCells_temp objectAtIndex:i];
+        
+        NSString *ss = [objMCSS.arrOptions objectAtIndex:indexPath.row];
+        ss = [ss stringByReplacingOccurrencesOfString:@" " withString:@""];
+        ss = [ss lowercaseString];
+        
+        for (int j = 0; j < answer_count; j++) {
+            NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
+            sa = [sa lowercaseString];
+            if ([ss isEqualToString:sa]) {
+                [selected_answer_check replaceObjectAtIndex:i withObject:[NSNumber numberWithInt:1]];
+                break;
             }
             
-            if (i == selected_count - 1)
-                [strAns appendFormat:@"%@", ss];
-            else
-                [strAns appendFormat:@"%@#", ss];
-            
+        }
+        
+        if (i == selected_count - 1)
+            [strAns appendFormat:@"%@", ss];
+        else
+            [strAns appendFormat:@"%@#", ss];
+        
+    }
+    
+    BOOL flag_answer = 3;
+    
+    int incorrectcount = 0;
+    int correctcount = 0;
+    
+    for (int x =0; x < [selected_answer_check count]; x++) {
+        if ([[selected_answer_check objectAtIndex:x] intValue] == 1) {
+            correctcount++;
+        }
+        else if ([[selected_answer_check objectAtIndex:x] intValue] == 2) {
+            incorrectcount++;
         }
     }
-    else
-        flag_answer = NO;
+    
+    if (incorrectcount > 0) {
+        flag_answer = 2;
+    }
+    else if (correctcount == [objMCSS.arrAnswer count]) {
+        flag_answer = 1;
+    }
+    
     return flag_answer;
 }
 

@@ -15,7 +15,7 @@
     IBOutlet UIImageView *ImgQuestionSeperator;
     
     IBOutlet UILabel *lblQuestionNo;
-    IBOutlet UILabel *lblQuestionText;
+    IBOutlet UITextView *lblQuestionText;
     IBOutlet UIWebView *webviewInstructions;
     IBOutlet UIScrollView *scrollViewDrag;
     IBOutlet UIImageView *imgViewQue;
@@ -24,7 +24,7 @@
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *lblQuestionNo;
-@property (nonatomic, retain) IBOutlet UILabel *lblQuestionText;
+@property (nonatomic, retain) IBOutlet UITextView *lblQuestionText;
 @property (nonatomic, retain) IBOutlet UILabel *lblInstructions;
 @property (nonatomic, retain) IBOutlet UIWebView *webviewInstructions;
 

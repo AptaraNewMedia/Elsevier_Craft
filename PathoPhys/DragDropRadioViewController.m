@@ -274,11 +274,6 @@
             [objRadioView.ansImage1 setImage:nil];
             [objRadioView.ansImage1 setFrame:CGRectMake(objRadioView.btnOption1.frame.origin.x + width + 10, yy - 16, width, height)];
             
-//            [objRadioView.btnFeedback1 setFrame:CGRectMake(objRadioView.ansImage1.frame.origin.x + width + 10, yy - 10, feedWidth, feedHeight)];
-//            [objRadioView.btnFeedback1 setTag:k];
-//            [objRadioView.btnFeedback1 addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
-//            objRadioView.btnFeedback1.hidden = YES;
-//            objRadioView.btnOption1.enabled = YES;
             xx = xx + spacingWidth/2;
             
             
@@ -299,10 +294,7 @@
             [objRadioView.ansImage2 setImage:nil];
             [objRadioView.ansImage2 setFrame:CGRectMake(objRadioView.btnOption2.frame.origin.x + width + 10, yy - 16, width, height)];
             
-//            [objRadioView.btnFeedback2 setFrame:CGRectMake(objRadioView.ansImage2.frame.origin.x + width + 10, yy -10, feedWidth, feedHeight)];
-//            [objRadioView.btnFeedback2 setTag:k];
-//            [objRadioView.btnFeedback2 addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
-//            objRadioView.btnFeedback2.hidden = YES;
+
             xx = xx + spacingWidth;
             
 
