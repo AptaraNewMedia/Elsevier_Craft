@@ -325,7 +325,7 @@
     //float x_point = bn.frame.origin.x;
     float y_point = bn.frame.origin.y + bn.superview.frame.origin.y + (cell.tag * 56);
     
-    NSLog(@" y_point: %f",y_point);
+    //NSLog(@" y_point: %f",y_point);
     
     x_feedback_p=x_point-13;
     
