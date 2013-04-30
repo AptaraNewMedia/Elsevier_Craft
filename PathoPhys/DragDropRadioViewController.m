@@ -579,6 +579,7 @@
     [self.view addSubview:feedbackView];
 }
 - (void) Fn_Feedback_Tapped:(id)sender {
+    UIButton *bn = sender;
     
 }
 
@@ -946,7 +947,7 @@
     
     
     // ScrollView
-    [imgScroller setFrame:CGRectMake(20, 370, 730, 360)];
+    [imgScroller setFrame:CGRectMake(20, 370, 750, 360)];
     imgScroller.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, imgScroller.bounds.size.width - 730);
     [scrollViewDrag setFrame:CGRectMake(20, 220, 730, 150)];
     [self rotateScrollViewButtonsForPortrait];

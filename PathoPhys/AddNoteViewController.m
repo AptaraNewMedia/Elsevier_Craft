@@ -116,6 +116,7 @@
         if (objNotes.intMode == 1) {
             objNotes.strCreatedDate = md.strCurrentDate;
             objNotes.strModifiedDate = md.strCurrentDate;
+            objNotes.intMode = 2;
             [db fnSetNote:objNotes];
         }
         else {
