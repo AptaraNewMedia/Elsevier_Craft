@@ -106,6 +106,7 @@
 
 -(void)Fn_rotatePortrait
 {
+    [self.view setFrame:CGRectMake(0, 0, 768, 1024)];
     
     [imgBG setImage:[UIImage imageNamed:@"img_aboutus_bg_p.png"]];
     [imgBG setFrame:CGRectMake(0,45,768,1004)];
@@ -117,6 +118,7 @@
 }
 -(void)Fn_rotateLandscape
 {
+    [self.view setFrame:CGRectMake(0, 0, 1024, 768)];
     
     [imgBG setImage:[UIImage imageNamed:@"img_aboutus_bg.png"]];
     [imgBG setFrame:CGRectMake(0,45,1024,722)];

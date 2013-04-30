@@ -373,28 +373,13 @@
 -(IBAction)onFeedbackTapped:(id)sender{
     UIButton *bn = sender;
     MCSSCell_iPad *cell = [cellArray objectAtIndex:bn.tag];
-    float x_point = bn.frame.origin.x - 201;
-    //float x_point = bn.frame.origin.x;
-    float y_point = bn.frame.origin.y + bn.superview.frame.origin.y + (cell.tag * 56);
+    float x_point = bn.frame.origin.x - (221);
+    float y_point = tblOptions.frame.origin.y + cell.frame.origin.y + bn.frame.origin.y  - (128);
     
-    //NSLog(@" y_point: %f",y_point);
+    x_feedback_l = 270;
+    y_feedback_l = cell.frame.origin.y + bn.frame.origin.y  - (131);
     
-    x_feedback_p=x_point-13;
-    
-    y_feedback_p=y_point+93;
-    
-    x_feedback_l=x_point-13;
-    
-    y_feedback_l=y_point+20;
-    
-    if(currentOrientaion==1 || currentOrientaion==2)
-    {
-        [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:cell.strFeedback];
-    }
-    else
-    {
-        [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:cell.strFeedback];
-    }
+    [self Fn_AddFeedbackPopup:x_point andy:y_point andText:cell.strFeedback];
 }
 
 - (void) Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue {
@@ -693,6 +678,9 @@
     //[tblOptions setBackgroundColor:COLOR_BottomBlueButton];
     cellArray = [[NSMutableArray alloc] init];
     [tblOptions reloadData];
+    
+    // Feedback
+    [feedbackView setFrame:CGRectMake(767-x_feedback_l, y_feedback_l+tblOptions.frame.origin.y, feedbackView.frame.size.width, feedbackView.frame.size.height)];
 }
 -(void)Fn_rotateLandscape
 {
@@ -729,5 +717,9 @@
     //[tblOptions setBackgroundColor:COLOR_BottomBlueButton];
     cellArray = [[NSMutableArray alloc] init];    
     [tblOptions reloadData];
+    
+    // Feedback
+    [feedbackView setFrame:CGRectMake(1005-x_feedback_l, y_feedback_l+tblOptions.frame.origin.y, feedbackView.frame.size.width, feedbackView.frame.size.height)];
+    
 }
 @end

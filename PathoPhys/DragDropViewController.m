@@ -544,7 +544,7 @@
     [lblQuestionNo setFrame:CGRectMake(17, 20, 93, 75)];
     
     // Question text
-    [lblQuestionText setFrame:CGRectMake(125, 20, 867, 72)];
+    [lblQuestionText setFrame:CGRectMake(125, 20, 570, 72)];
     
     
     // ScrollView

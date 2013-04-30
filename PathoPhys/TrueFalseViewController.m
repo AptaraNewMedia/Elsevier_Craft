@@ -571,7 +571,7 @@
     [bnTrue setFrame:CGRectMake(136, 318, 237, 297)];
     [bnFalse setFrame:CGRectMake(391, 318, 237, 297)];
     [bnFeedback setFrame:CGRectMake(690, 414, 73, 44) ];
-    [imgViewCorrect setFrame:CGRectMake(650, 423, 36, 25)];
+    [imgViewCorrect setFrame:CGRectMake(650, 423, 36, 35)];
 }
 -(void)Fn_rotateLandscape
 {
@@ -599,7 +599,7 @@
     [bnTrue setFrame:CGRectMake(256, 218, 237, 297)];
     [bnFalse setFrame:CGRectMake(511, 218, 237, 297)];
     [bnFeedback setFrame:CGRectMake(820, 324, 73, 44) ];
-    [imgViewCorrect setFrame:CGRectMake(766, 333, 36, 25)];
+    [imgViewCorrect setFrame:CGRectMake(766, 333, 36, 35)];
     
 }
 @end

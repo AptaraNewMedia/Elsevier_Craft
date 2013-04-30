@@ -240,10 +240,10 @@
     }
     
     if (int_MoveNextPre == 1) {
-        [self Fn_AnimateViewFromLeftToRightToView:animateView];
+        //[self Fn_AnimateViewFromLeftToRightToView:animateView];
     }
     else if(int_MoveNextPre == 2) {
-        [self Fn_AnimateViewFromRightToLeftToView:animateView];
+        //[self Fn_AnimateViewFromRightToLeftToView:animateView];
     }
     
     [self Fn_CheckNote];    
@@ -542,14 +542,14 @@
 // Animation
 
 -(void) Fn_AnimateViewFromLeftToRightToView:(UIView*)view{
-    
+
     // set up an animation for the transition between the views
-    CATransition *animation = [CATransition animation];
-    [animation setDuration:0.45];
-    [animation setType:kCATransitionPush];
-    [animation setSubtype:kCATransitionFromLeft];
-    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    [[view layer] addAnimation:animation forKey:@"myAnimation"];
+//    CATransition *animation = [CATransition animation];
+//    [animation setDuration:0.45];
+//    [animation setType:kCATransitionPush];
+//    [animation setSubtype:kCATransitionFromLeft];
+//    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+//    [[view layer] addAnimation:animation forKey:@"myAnimation"];
     
 }
 - (void) Fn_AnimateViewFromRightToLeftToView:(UIView*)view{

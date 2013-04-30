@@ -37,6 +37,8 @@
     int RadioOptions;
     NSInteger currentOrientaion;
     
+    CGRect visibleRect;
+    
     float y_feedback_p;
     float y_feedback_l;
     float x_feedback_p;
@@ -138,7 +140,15 @@
         bnDrag.userInteractionEnabled=YES;
         bnDrag.titleLabel.numberOfLines = 10;
 
-        [bnDrag.ansImage setFrame:CGRectMake(objDRAGDROP.fWidth-25, -10, 22, 22)];
+        [bnDrag.ansImage setFrame:CGRectMake(objDRAGDROP.fWidth-40, -15, 22, 22)];
+        
+        [bnDrag.feedbackBt setTag:i];
+        bnDrag.feedbackBt.frame = CGRectMake(bnDrag.ansImage.frame.origin.x+bnDrag.ansImage.frame.size.width+1, -15, 22, 22);
+        [bnDrag.feedbackBt setTag:i];
+        [bnDrag.feedbackBt setImage:[UIImage imageNamed:@"Btn_feed.png"] forState:UIControlStateNormal];
+        bnDrag.feedbackBt.hidden = YES;
+        //[bnDrag.feedbackBt addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
+        
         [scrollViewDrag addSubview:bnDrag];
         y=y+objDRAGDROP.fHeight+10;
         [draggableSubjects addObject:bnDrag];
@@ -174,8 +184,8 @@
     arr_radioButtons = [[NSMutableArray alloc] init];
     
     
-    int feedWidth = 36;
-    int feedHeight = 39;
+    //int feedWidth = 36;
+    //int feedHeight = 39;
     
     float x, y;
     float xx, yy;
@@ -218,7 +228,7 @@
         y = 32;        
     }
     else if (objDRAGDROP.intDRAGDROPRADIOid == 9) {
-        spacingWidth = 150;
+        spacingWidth = 160;
         spacingHeight = 20;
         x = objDRAGDROP.fWidth + 10;
         y = 32;
@@ -579,7 +589,17 @@
     [self.view addSubview:feedbackView];
 }
 - (void) Fn_Feedback_Tapped:(id)sender {
-    UIButton *bn = sender;
+    
+    objRadioView = [arr_radioButtons objectAtIndex:[sender tag]];
+    
+    UIButton *bn = (UIButton *)sender;
+    float x_point =  imgScroller.frame.origin.x + bn.frame.origin.x + bn.superview.frame.origin.x - (225);
+    float y_point =  imgScroller.frame.origin.y + bn.frame.origin.y + bn.superview.frame.origin.y - (131);
+    y_point = y_point - visibleRect.origin.y;
+    
+    x_feedback_l = bn.frame.origin.x + bn.superview.frame.origin.x - (225) ;
+    y_feedback_l = bn.frame.origin.y + bn.superview.frame.origin.y - (131);
+    [self Fn_AddFeedbackPopup:x_point andy:y_point andText:objRadioView.feedback];
     
 }
 
@@ -665,12 +685,12 @@
     UIAlertView *alert = [[UIAlertView alloc] init];
     [alert setTitle:@"Message"];
     [alert setDelegate:self];
-    if (flagForAnyOptionSelect) {
-        [alert setTag:1];
-        [alert addButtonWithTitle:@"Ok"];
-        [alert setMessage:[NSString stringWithFormat:@"Please drag and drop the items."]];
-    }
-    else {
+//    if (flagForAnyOptionSelect) {
+//        [alert setTag:1];
+//        [alert addButtonWithTitle:@"Ok"];
+//        [alert setMessage:[NSString stringWithFormat:@"Please drag and drop and also select the category."]];
+//    }
+//    else {
         if (flagForCheckAnswer == YES) {
             [alert setTag:2];
             [alert addButtonWithTitle:@"Ok"];
@@ -682,7 +702,7 @@
             [alert addButtonWithTitle:@"Try Again"];
             [alert setMessage:[NSString stringWithFormat:@"Incorrect"]];
         }
-    }
+//    }
 	[alert show];
 }
 
@@ -787,7 +807,7 @@
             }
         }
         
-        if(objDRAGDROP.intDRAGDROPRADIOid == 18 || objDRAGDROP.intDRAGDROPRADIOid == 9){
+        if(objDRAGDROP.intDRAGDROPRADIOid == 18 || objDRAGDROP.intDRAGDROPRADIOid == 9 || objDRAGDROP.intDRAGDROPRADIOid == 14 || objDRAGDROP.intDRAGDROPRADIOid == 15){
             bnFeedback.hidden = YES;
         }
     
@@ -819,6 +839,10 @@
                     
                 }
             }
+            
+            //if(objDRAGDROP.intDRAGDROPRADIOid == 25 || objDRAGDROP.intDRAGDROPRADIOid == 26){
+                bn.feedbackBt.hidden = YES;
+            //}
         }
         i++;
     }
@@ -866,6 +890,14 @@
     }
 }
 
+
+# pragma mark - scrollview delegate
+//---------------------Delegate-------
+- (void)scrollViewDidScroll:(UIScrollView *)aScrollView
+{
+    feedbackView.hidden=YES;
+    visibleRect.origin = aScrollView.contentOffset;
+}
 
 #pragma Orientation
 //------------------------------
@@ -934,7 +966,7 @@
     [ImgQuestionBg setFrame:CGRectMake(0, 0, 767, 803)];
     
     // Instruction
-    [webviewInstructions setFrame:CGRectMake(19, 130, 660, 70)];
+    [webviewInstructions setFrame:CGRectMake(19, 130, 725, 70)];
     
     // Feedback
     [feedbackView setFrame:CGRectMake(x_feedback_p, y_feedback_p, 261, 131)];
