@@ -461,6 +461,8 @@
     [objRadioView.btnOption1 setImage:imgRadio forState:UIControlStateNormal];
     [objRadioView.btnOption2 setImage:imgRadio forState:UIControlStateNormal];
     [objRadioView.btnOption3 setImage:imgRadio forState:UIControlStateNormal];
+    [objRadioView.btnOption4 setImage:imgRadio forState:UIControlStateNormal];
+    [objRadioView.btnOption5 setImage:imgRadio forState:UIControlStateNormal];
     
     [sender setImage:imgRadioSelected forState:UIControlStateNormal];
     

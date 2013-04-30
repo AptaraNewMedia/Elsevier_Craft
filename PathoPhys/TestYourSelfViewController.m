@@ -243,7 +243,7 @@
         [self Fn_AnimateViewFromLeftToRightToView:animateView];
     }
     else if(int_MoveNextPre == 2) {
-        [self Fn_AnimateViewFromLeftToRightToView:animateView];
+        [self Fn_AnimateViewFromRightToLeftToView:animateView];
     }
     
     [self Fn_CheckNote];    
@@ -459,6 +459,7 @@
 -(void)onTryAgain
 {
     TryAgainFlag = 1;
+    int_MoveNextPre = 0;
     [self fn_RemoveQuestionView];
     [md Fn_SubAddNote];
     [self Fn_LoadQuestionData];
@@ -544,7 +545,7 @@
     
     // set up an animation for the transition between the views
     CATransition *animation = [CATransition animation];
-    [animation setDuration:0.3];
+    [animation setDuration:0.45];
     [animation setType:kCATransitionPush];
     [animation setSubtype:kCATransitionFromLeft];
     [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
@@ -555,7 +556,7 @@
     
     // set up an animation for the transition between the views
     CATransition *animation = [CATransition animation];
-    [animation setDuration:0.3];
+    [animation setDuration:0.45];
     [animation setType:kCATransitionPush];
     [animation setSubtype:kCATransitionFromRight];
     [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];

@@ -360,28 +360,14 @@
 -(IBAction)onFeedbackTapped:(id)sender{
     UIButton *bn = sender;
     MCSSCell_iPad *cell = [cellArray objectAtIndex:bn.tag];
-    float x_point = bn.frame.origin.x - 201;
-    //float x_point = bn.frame.origin.x;
-    float y_point = bn.frame.origin.y + bn.superview.frame.origin.y + (cell.tag * 56);
+    float x_point = bn.frame.origin.x - (221);
+    float y_point = tblOptions.frame.origin.y + cell.frame.origin.y + bn.frame.origin.y  - (131);
     
-    //NSLog(@" y_point: %f",y_point);
+    x_feedback_l = 270;
+    y_feedback_l = cell.frame.origin.y + bn.frame.origin.y  - (131);
     
-    x_feedback_p=x_point-13;
-    
-    y_feedback_p=y_point+93;
-    
-    x_feedback_l=x_point-13;
-    
-    y_feedback_l=y_point+20;
-    
-    if(currentOrientaion==1 || currentOrientaion==2)
-    {
-        [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:cell.strFeedback];
-    }
-    else
-    {
-        [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:cell.strFeedback];
-    }
+    [self Fn_AddFeedbackPopup:x_point andy:y_point andText:cell.strFeedback];
+
 }
 - (void) Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue {
 
@@ -528,8 +514,7 @@
     if (selectedCells) {
         
         if ([selectedCells containsObject:[NSNumber numberWithInt:indexPath.row]]) {
-          [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone          ];
-
+          [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone          ];  
         }        
     }
     
@@ -655,10 +640,8 @@
     [ImgQuestionBg setFrame:CGRectMake(0, 0, 767, 803)];
     
     // Instruction
-    [webviewInstructions setFrame:CGRectMake(19, 130, 725, 70)];
-    
-    // Feedback
-    [feedbackView setFrame:CGRectMake(x_feedback_p, y_feedback_p, 261, 131)];
+    [webviewInstructions setFrame:CGRectMake(19, 130, 725, 70)];    
+
     
     // Question No
     [lblQuestionNo setFrame:CGRectMake(17, 20, 93, 75)];
@@ -683,7 +666,8 @@
     cellArray = [[NSMutableArray alloc] init];
     [tblOptions reloadData];
     
-    [feedbackView setFrame:CGRectMake(503, y_feedback_p, 261, 131)];    
+    // Feedback
+    [feedbackView setFrame:CGRectMake(767-x_feedback_l, y_feedback_l+tblOptions.frame.origin.y, feedbackView.frame.size.width, feedbackView.frame.size.height)];
 }
 -(void)Fn_rotateLandscape
 {
@@ -696,9 +680,6 @@
     
     // Instruction
     [webviewInstructions setFrame:CGRectMake(17, 93, 968, 45)];
-    
-    // Feedback
-    [feedbackView setFrame:CGRectMake(x_feedback_l, y_feedback_l, 261, 131)];
     
     
     // Question No
@@ -725,6 +706,8 @@
     //[tblOptions setBackgroundColor:COLOR_BottomBlueButton];
     cellArray = [[NSMutableArray alloc] init];    
     [tblOptions reloadData];
-    [feedbackView setFrame:CGRectMake(739, y_feedback_l, 261, 131)];    
+    
+    // Feedback
+    [feedbackView setFrame:CGRectMake(1005-x_feedback_l, y_feedback_l+tblOptions.frame.origin.y, feedbackView.frame.size.width, feedbackView.frame.size.height)];
 }
 @end

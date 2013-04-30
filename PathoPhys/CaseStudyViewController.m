@@ -42,6 +42,8 @@
     NSInteger currentOrientaion;
     
     NSInteger TryAgainFlag;
+    
+    int int_MoveNextPre;
 }
 @end
 
@@ -87,7 +89,7 @@
     }
     intCurrentQuestionIndex = 0;
     TryAgainFlag = 0;
-    
+    int_MoveNextPre = 0;
     //
     if (intTotalQuestions > 0) {
         [self Fn_LoadQuestionData];
@@ -309,6 +311,7 @@
 -(void)onTryAgain
 {
     TryAgainFlag = 1;
+    int_MoveNextPre = 0;
     [self fn_RemoveQuestionView];
     [md Fn_SubAddNote];
     [self Fn_LoadQuestionData];
