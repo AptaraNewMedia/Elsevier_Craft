@@ -51,6 +51,10 @@
 -(void) Fn_ShowInfoViewPopup;
 -(void) Fn_removeInfoViewPopup;
 
+
+-(void) Fn_AddResult:(NSString *)chaptername AndThematicNAme:(NSString *)thematicName AndScore:(NSString *)score;
+-(void) Fn_SubResult;
+
 - (int) charToScore:(char) character;
 
 -(void) Fn_CallPopupOrientaion;

@@ -216,9 +216,12 @@
 						<string key="IBUIText">Thematic Area:</string>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
+						<int key="IBUINumberOfLines">2</int>
+						<int key="IBUILineBreakMode">0</int>
 						<reference key="IBUIFontDescription" ref="642872368"/>
 						<reference key="IBUIFont" ref="695562708"/>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
+						<double key="preferredMaxLayoutWidth">500</double>
 					</object>
 					<object class="IBUILabel" id="256725844">
 						<reference key="NSNextResponder" ref="766721923"/>

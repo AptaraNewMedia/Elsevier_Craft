@@ -77,7 +77,7 @@
     [self fn_hideAnsFeedbackImages];
     select = YES;
     
-    objTrueFalse.strAnswer = [objTrueFalse.strAnswer uppercaseString];
+    objTrueFalse.strAnswer = [objTrueFalse.strAnswer uppercaseString];    
     
     if ([objTrueFalse.strAnswer isEqualToString:@"FALSE"]) {
         answer = 2;
@@ -93,6 +93,51 @@
             myview.exclusiveTouch = YES;
         }
     }
+    
+   if (objTrueFalse.intTrueid == 1 || objTrueFalse.intTrueid == 2 || objTrueFalse.intTrueid == 3 || objTrueFalse.intTrueid == 4) {
+       
+       UIImage *imgTrue;
+       UIImage *imgFalse;
+       
+        switch (objTrueFalse.intTrueid) {
+            case 1:
+            {
+                imgTrue = [UIImage imageNamed:@"140001_h.png"];
+                imgFalse = [UIImage imageNamed:@"140001_l.png"];
+                 
+            }
+                break;
+                
+            case 2:
+            {
+                imgTrue = [UIImage imageNamed:@"140002_h.png"];
+                imgFalse = [UIImage imageNamed:@"140002_l.png"];
+
+                
+            }
+                break;
+                
+            case 3:
+            {
+                imgTrue = [UIImage imageNamed:@"140003_h.png"];
+                imgFalse = [UIImage imageNamed:@"140003_l.png"];
+                
+            }
+                break;
+            case 4:
+            {
+                imgTrue = [UIImage imageNamed:@"140004_h.png"];
+                imgFalse = [UIImage imageNamed:@"140004_l.png"];
+                
+            }
+                break;
+        }
+       
+        [bnTrue setImage:imgTrue forState:UIControlStateNormal];
+        [bnFalse setImage:imgFalse forState:UIControlStateNormal];
+        [bnTrue setFrame:CGRectMake(bnTrue.frame.origin.x, bnTrue.frame.origin.y, imgTrue.size.width, imgTrue.size.height)];
+        [bnFalse setFrame:CGRectMake(bnFalse.frame.origin.x, bnFalse.frame.origin.y, imgFalse.size.width, imgFalse.size.height)];
+   }
 }
 
 - (void)viewDidUnload
@@ -294,17 +339,66 @@
 {
     select = NO;
     userAnswer = [sender tag];
-    if ([sender tag] == 1) {
-        UIImage *imgTrueH = [UIImage imageNamed:@"btn_true_highlight.png"];
-        [bnTrue setImage:imgTrueH forState:UIControlStateNormal];
-        UIImage *imgFalseA = [UIImage imageNamed:@"btn_false_active.png"];
-        [bnFalse setImage:imgFalseA forState:UIControlStateNormal];
+    if (objTrueFalse.intTrueid == 1 || objTrueFalse.intTrueid == 2 || objTrueFalse.intTrueid == 3 || objTrueFalse.intTrueid == 4) {
+        
+        UIImage *imgTrue;
+        UIImage *imgFalse;
+        UIImage *imgHighlight = [UIImage imageNamed:@"truefalse_image_selection.png"];
+        
+            switch (objTrueFalse.intTrueid) {
+                case 1:
+                {
+                    imgTrue = [UIImage imageNamed:@"140001_h.png"];
+                    imgFalse = [UIImage imageNamed:@"140001_l.png"];
+                }
+                    break;
+                    
+                case 2:
+                {
+                    imgTrue = [UIImage imageNamed:@"140002_h.png"];
+                    imgFalse = [UIImage imageNamed:@"140002_l.png"];
+                    
+                }
+                    break;
+                    
+                case 3:
+                {
+                    imgTrue = [UIImage imageNamed:@"140003_h.png"];
+                    imgFalse = [UIImage imageNamed:@"140003_l.png"];
+                    
+                }
+                    break;
+                case 4:
+                {
+                    imgTrue = [UIImage imageNamed:@"140004_h.png"];
+                    imgFalse = [UIImage imageNamed:@"140004_l.png"];
+                    
+                }
+                    break;
+            }
+     
+        if ([sender tag] == 1) {
+            [bnTrue setBackgroundImage:imgHighlight forState:UIControlStateNormal];
+            [bnFalse setBackgroundImage:nil forState:UIControlStateNormal];
+        }
+        else if ([sender tag] == 2) {
+            [bnTrue setBackgroundImage:nil forState:UIControlStateNormal];
+            [bnFalse setBackgroundImage:imgHighlight forState:UIControlStateNormal];
+        }
     }
-    else if ([sender tag] == 2) {        
-        UIImage *imgTrueA = [UIImage imageNamed:@"btn_true_active.png"];
-        [bnTrue setImage:imgTrueA forState:UIControlStateNormal];
-        UIImage *imgFalseH = [UIImage imageNamed:@"btn_false_highlight.png"];
-        [bnFalse setImage:imgFalseH forState:UIControlStateNormal];
+    else {
+        if ([sender tag] == 1) {
+            UIImage *imgTrueH = [UIImage imageNamed:@"btn_true_highlight.png"];
+            [bnTrue setImage:imgTrueH forState:UIControlStateNormal];
+            UIImage *imgFalseA = [UIImage imageNamed:@"btn_false_active.png"];
+            [bnFalse setImage:imgFalseA forState:UIControlStateNormal];
+        }
+        else if ([sender tag] == 2) {        
+            UIImage *imgTrueA = [UIImage imageNamed:@"btn_true_active.png"];
+            [bnTrue setImage:imgTrueA forState:UIControlStateNormal];
+            UIImage *imgFalseH = [UIImage imageNamed:@"btn_false_highlight.png"];
+            [bnFalse setImage:imgFalseH forState:UIControlStateNormal];
+        }
     }
 }
 -(IBAction)onFeedback:(id)sender {

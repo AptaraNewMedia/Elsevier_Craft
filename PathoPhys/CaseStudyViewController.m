@@ -20,7 +20,7 @@
 #import "QuizTrack.h"
 #import "Chapters.h"
 #import "ThematicArea.h"
-#import "ResultViewController.h"
+//#import "ResultViewController.h"
 
 //
 #import "Notes.h"
@@ -34,7 +34,7 @@
     DragDropViewController_cs *dragDropView;
     
     QuizTrack *objQuizTrack;
-    ResultViewController *resultView;
+    //ResultViewController *resultView;
     CustomRightBarItem *customRightBar;
     CustomLeftBarItem *customLeftBar;
     
@@ -87,11 +87,6 @@
     }
     intCurrentQuestionIndex = 0;
     TryAgainFlag = 0;
-    
-    // Result
-    resultView =[[ResultViewController alloc] initWithNibName:@"ResultViewController" bundle:nil];
-    [self.view addSubview:resultView.view];
-    resultView.view.hidden = YES;
     
     //
     if (intTotalQuestions > 0) {
@@ -297,14 +292,9 @@
         }
     }
     
-    // Disaply chapter name and thematic area
-    resultView.lblChapterName.text = strCurrentChapterName;
-    resultView.lblThematicArea.text = strCurrentThematicName;
-    resultView.lblScore.text = [NSString stringWithFormat:@"%d out of %d questions answered correctly.", total_score, intTotalQuestions];
-    resultView.view.hidden = NO;
-    
-    //bnShowScore.enabled = NO;
-    
+    NSString *score = [NSString stringWithFormat:@"%d out of %d questions answered correctly.", total_score, intTotalQuestions];
+   
+    [md Fn_AddResult:strCurrentChapterName AndThematicNAme:strCurrentThematicName AndScore:score];
     
     objQuizTrack.intCorrectQuestion = total_score;
     objQuizTrack.intMissedQuestion = (intTotalQuestions - total_score);
@@ -342,7 +332,7 @@
             break;
     }
     
-    [resultView shouldAutorotateToInterfaceOrientation:currentOrientaion];
+    //[resultView shouldAutorotateToInterfaceOrientation:currentOrientaion];
 
     
 }
@@ -366,7 +356,7 @@
             break;
     }
     
-    [resultView shouldAutorotateToInterfaceOrientation:currentOrientaion];
+    //[resultView shouldAutorotateToInterfaceOrientation:currentOrientaion];
 
     
 }

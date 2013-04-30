@@ -9,6 +9,8 @@
 #import "TestYourSelfViewController.h"
 #import "ChapterQuestionSet.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 //
 #import "MatchPairsViewController.h"
 #import "SingleSelectionViewController.h"
@@ -26,10 +28,11 @@
 #import "QuizTrack.h"
 #import "Chapters.h"
 #import "ThematicArea.h"
-#import "ResultViewController.h"
+//#import "ResultViewController.h"
 
 //
 #import "Notes.h"
+
 
 @interface TestYourSelfViewController (){
     ChapterQuestionSet *objQue;
@@ -47,7 +50,7 @@
     
     
     QuizTrack *objQuizTrack;
-    ResultViewController *resultView;
+    //ResultViewController *resultView;
     CustomRightBarItem *customRightBar;
     CustomLeftBarItem *customLeftBar;
     
@@ -55,6 +58,8 @@
     NSInteger currentOrientaion;
     
     NSInteger TryAgainFlag;
+    int int_MoveNextPre;    
+    
 }
 @end
 
@@ -100,11 +105,7 @@
     }
     intCurrentQuestionIndex = 0;
     TryAgainFlag = 0;
-    
-    // Result
-    resultView =[[ResultViewController alloc] initWithNibName:@"ResultViewController" bundle:nil];
-    [self.view addSubview:resultView.view];
-    resultView.view.hidden = YES;
+    int_MoveNextPre = 0;
     
     //
     [self Fn_LoadQuestionData];
@@ -152,18 +153,17 @@
     objQue = (ChapterQuestionSet *)[arrTestYourSelf objectAtIndex:intCurrentQuestionIndex];
     lblQuestionNo.text = [NSString stringWithFormat:@"%d/%d", objQue.intSequence, intTotalQuestions];
     
+    UIView *animateView;
+    
     switch (objQue.intType) {
         case QUESTION_TYPE_MCMS:
         {
-            //            multipleSelectionView = [[MultipleSelectionViewController alloc] initWithNibName:@"MultipleSelectionViewController_iPad" bundle:nil];
-            //            [multipleSelectionView fn_LoadDbData:objQue.strQuestionId];
-            //            [viewMain addSubview:multipleSelectionView.view];
-            //            multipleSelectionView.lblQuestionNo.text = [NSString stringWithFormat:@"%d/%d", objQue.intSequence, intTotalQuestions];
             dragDropView = [[DragDropViewController alloc] initWithNibName:@"DragDropViewController_iPad" bundle:nil];
             [dragDropView fn_LoadDbData:objQue.strQuestionId];
             [viewMain addSubview:dragDropView.view];
             dragDropView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
             dragDropView.parentObject = self;
+            animateView = dragDropView.view;
         }
             break;
         case QUESTION_TYPE_FILLINBLANKS: {
@@ -173,7 +173,7 @@
             [viewMain addSubview:fillInTheBlanksView.view];
             fillInTheBlanksView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
             fillInTheBlanksView.parentObject = self;
-            
+            animateView = fillInTheBlanksView.view;
         }
             break;
         case QUESTION_TYPE_RADIOBUTTONS: {
@@ -183,6 +183,7 @@
             [viewMain addSubview:radioGroupView.view];
             radioGroupView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
             radioGroupView.parentObject = self;
+            animateView = radioGroupView.view;
         }
             break;
         case QUESTION_TYPE_TRUEFLASE: {
@@ -192,6 +193,7 @@
             [viewMain addSubview:trueFalseView.view];
             trueFalseView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
             trueFalseView.parentObject = self;
+            animateView = trueFalseView.view;            
         }
             break;
         case QUESTION_TYPE_MATCHTERMS: {
@@ -201,6 +203,7 @@
             [viewMain addSubview:matchPairsView.view];
             matchPairsView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
             matchPairsView.parentObject = self;
+            animateView = matchPairsView.view;
         }
             break;
         case QUESTION_TYPE_MCSS: {
@@ -210,7 +213,7 @@
             [viewMain addSubview:singleSelectionView.view];
             singleSelectionView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
             singleSelectionView.parentObject = self;
-            
+            animateView = singleSelectionView.view;
         }
             break;
         case QUESTION_TYPE_DRAGDROP:
@@ -220,6 +223,7 @@
             [viewMain addSubview:dragDropView.view];
             dragDropView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
             dragDropView.parentObject = self;
+            animateView = dragDropView.view;            
         }
             break;
         case QUESTION_TYPE_DRAGDROPRADIOBUTTONS:
@@ -228,9 +232,18 @@
             [dragDropRadioView fn_LoadDbData:objQue.strQuestionId];
             [viewMain addSubview:dragDropRadioView.view];
             dragDropRadioView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
-            dragDropView.parentObject = self;
+            dragDropRadioView.parentObject = self;
+            animateView = dragDropRadioView.view;
+            
         }
             break;
+    }
+    
+    if (int_MoveNextPre == 1) {
+        [self Fn_AnimateViewFromLeftToRightToView:animateView];
+    }
+    else if(int_MoveNextPre == 2) {
+        [self Fn_AnimateViewFromLeftToRightToView:animateView];
     }
     
     [self Fn_CheckNote];    
@@ -305,6 +318,7 @@
     }
     bnSubmit.enabled = YES;
     TryAgainFlag = 0;
+    int_MoveNextPre = 2;
     [self fn_RemoveQuestionView];
     intCurrentQuestionIndex++;
     [self Fn_LoadQuestionData];
@@ -321,6 +335,7 @@
     }
     bnSubmit.enabled = YES;
     TryAgainFlag = 0;
+    int_MoveNextPre = 1;    
     [self fn_RemoveQuestionView];
     intCurrentQuestionIndex--;
     [self Fn_LoadQuestionData];
@@ -420,11 +435,10 @@
         }
     }
     
-    // Disaply chapter name and thematic area
-    resultView.lblChapterName.text = strCurrentChapterName;
-    resultView.lblThematicArea.text = strCurrentThematicName;
-    resultView.lblScore.text = [NSString stringWithFormat:@"%d out of %d questions answered correctly.", total_score, intTotalQuestions];
-    resultView.view.hidden = NO;
+    NSString *score = [NSString stringWithFormat:@"%d out of %d questions answered correctly.", total_score, intTotalQuestions];
+    
+    [md Fn_AddResult:strCurrentChapterName AndThematicNAme:strCurrentThematicName AndScore:score];
+
     
     int_currentScore =(total_score / intTotalQuestions) * 100;
     
@@ -484,7 +498,7 @@
              break;
     }
     
-    [resultView shouldAutorotateToInterfaceOrientation:currentOrientaion];
+    //[resultView shouldAutorotateToInterfaceOrientation:currentOrientaion];
     
 }
 
@@ -520,8 +534,35 @@
             
     }
     
-    [resultView shouldAutorotateToInterfaceOrientation:currentOrientaion];
+    //[resultView shouldAutorotateToInterfaceOrientation:currentOrientaion];
 }
+
+
+// Animation
+
+-(void) Fn_AnimateViewFromLeftToRightToView:(UIView*)view{
+    
+    // set up an animation for the transition between the views
+    CATransition *animation = [CATransition animation];
+    [animation setDuration:0.3];
+    [animation setType:kCATransitionPush];
+    [animation setSubtype:kCATransitionFromLeft];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    [[view layer] addAnimation:animation forKey:@"myAnimation"];
+    
+}
+- (void) Fn_AnimateViewFromRightToLeftToView:(UIView*)view{
+    
+    // set up an animation for the transition between the views
+    CATransition *animation = [CATransition animation];
+    [animation setDuration:0.3];
+    [animation setType:kCATransitionPush];
+    [animation setSubtype:kCATransitionFromRight];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    [[view layer] addAnimation:animation forKey:@"myAnimation"];
+}
+
+
 
 
 #pragma Orientation
@@ -537,7 +578,7 @@
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     currentOrientaion = interfaceOrientation;
     [self Fn_CallOrientaion_ios6];
-    [resultView supportedInterfaceOrientations];
+    //[resultView supportedInterfaceOrientations];
     if(interfaceOrientation==UIInterfaceOrientationLandscapeLeft){
         [self Fn_rotateLandscape];
         

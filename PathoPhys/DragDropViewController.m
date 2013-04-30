@@ -129,7 +129,7 @@
         for (int i = 0; i < [objDRAGDROP.arrOptions count]; i++){
             
             CustomDragButton *bnDrag = [CustomDragButton buttonWithType:UIButtonTypeCustom];
-            bnDrag.frame = CGRectMake(20, y, objDRAGDROP.fWidth, objDRAGDROP.fHeight);
+            bnDrag.frame = CGRectMake(0, y, objDRAGDROP.fWidth, objDRAGDROP.fHeight);
             bnDrag.exclusiveTouch = YES;
             bnDrag.tag = i+1;
             [bnDrag setTitle:[objDRAGDROP.arrOptions objectAtIndex:i] forState:UIControlStateNormal];
@@ -581,9 +581,9 @@
     //scrollViewOptions.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, scrollViewOptions.bounds.size.width - 830);
     
     // ScrollView
-    [imgScroller setFrame:CGRectMake(258, 153, 727, 427)];
+    [imgScroller setFrame:CGRectMake(280, 153, 727, 427)];
     imgScroller.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, imgScroller.bounds.size.width - 727);
-    [scrollViewDrag setFrame:CGRectMake(20, 153, 237, 427)];
+    [scrollViewDrag setFrame:CGRectMake(5, 153, 270, 427)];
     
     [self rotateScrollViewButtonsForLandscape];
     

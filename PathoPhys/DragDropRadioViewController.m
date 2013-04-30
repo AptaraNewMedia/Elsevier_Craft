@@ -217,6 +217,12 @@
         x = objDRAGDROP.fWidth + 10;
         y = 32;        
     }
+    else if (objDRAGDROP.intDRAGDROPRADIOid == 9) {
+        spacingWidth = 150;
+        spacingHeight = 20;
+        x = objDRAGDROP.fWidth + 10;
+        y = 32;
+    }
     else if (objDRAGDROP.intDRAGDROPRADIOid == 14) {
         RadioOptions = 2;
         spacingWidth = 160;
@@ -402,7 +408,7 @@
         objRadioView.btnFeedback5.hidden = YES;
         
             
-        if(objDRAGDROP.intDRAGDROPRADIOid == 18){
+        if(objDRAGDROP.intDRAGDROPRADIOid == 18 || objDRAGDROP.intDRAGDROPRADIOid == 9){
            
             UILabel *lbl1 =[[UILabel alloc] initWithFrame:CGRectMake(objRadioView.btnOption1.frame.origin.x+width, objRadioView.btnOption1.frame.origin.y, 90, height)];
             [lbl1 setText:[objDRAGDROP.arrRadioOptions objectAtIndex:0]];
@@ -425,7 +431,6 @@
             [objRadioView addSubview:lbl2];
 
         }
-        
         
         if (RadioOptions == 2) {
             objRadioView.btnOption3.hidden = YES;
@@ -779,7 +784,7 @@
             }
         }
         
-        if(objDRAGDROP.intDRAGDROPRADIOid == 18){
+        if(objDRAGDROP.intDRAGDROPRADIOid == 18 || objDRAGDROP.intDRAGDROPRADIOid == 9){
             bnFeedback.hidden = YES;
         }
     
@@ -798,7 +803,7 @@
                 if (feeback.length > 0) {
                     bn.feedbackBt.hidden = NO;
                     bn.strFeedback = feeback;
-                    [bn addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
+                    [bn addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
                     
                 }
             }else {
@@ -807,7 +812,7 @@
                 if (feeback.length > 0) {
                     bn.feedbackBt.hidden = NO;
                     bn.strFeedback = feeback;
-                    [bn addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
+                    [bn addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
                     
                 }
             }

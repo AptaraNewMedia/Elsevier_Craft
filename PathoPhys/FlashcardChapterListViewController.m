@@ -52,6 +52,8 @@
     lbl_title.font = FONT_25;
     lbl_title.textColor = COLOR_WHITE;
     
+    btnViewAll.hidden = YES;
+    
     [self fnAddNavigationItems];
     //Code for Exclusive Touch Enabling.
     for (UIView *myview in [self.view subviews]){

@@ -25,6 +25,7 @@
 #import "InfoPopViewController.h"
 #import "Notes.h"
 #import "CasestudyTextPopup.h"
+#import "ResultViewController.h"
 
 #import "GAI.h"
 
@@ -42,6 +43,7 @@ UITextView *txt_feedback;
     NotesPopViewController *NotePopupView;
     InfoPopViewController *InfoPopupView;
     CasestudyTextPopup *casestudyTextView;
+    ResultViewController *resultView;
 }
 
 @end
@@ -285,9 +287,28 @@ UITextView *txt_feedback;
     [self.window.rootViewController.view addSubview:casestudyTextView.view];
     [casestudyTextView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
 }
-
 -(void) Fn_SubCaseStudyText {
     [casestudyTextView.view removeFromSuperview];
+}
+
+
+// Result
+
+-(void) Fn_AddResult:(NSString *)chaptername AndThematicNAme:(NSString *)thematicName AndScore:(NSString *)score  {
+
+    [resultView.view removeFromSuperview];
+    
+    resultView =[[ResultViewController alloc] initWithNibName:@"ResultViewController" bundle:nil];
+    [self.window.rootViewController.view addSubview:resultView.view];
+    [resultView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
+    
+    resultView.lblChapterName.text = chaptername;
+    resultView.lblThematicArea.text = thematicName;
+    resultView.lblScore.text = score;   
+    
+}
+-(void) Fn_SubResult {
+    [resultView.view removeFromSuperview];
 }
 
 
@@ -306,6 +327,7 @@ UITextView *txt_feedback;
     [notesListView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
     [scoreCardView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
     [casestudyTextView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
+    [resultView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
 }
 
 @end
