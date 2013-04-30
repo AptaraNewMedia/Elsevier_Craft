@@ -87,7 +87,7 @@
     
     webviewInstructions.scrollView.showsHorizontalScrollIndicator = NO;
     webviewInstructions.scrollView.bounces = NO;
-    [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Tap the item on the left, and then tap the corresponding item on the right. Once you have matched all items, tap <b>Submit.</b></body></html>" baseURL:nil];
+    [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Drag the options and drop them on the correct drop areas. Once you are done, tap <b>Submit.</b></body></html>" baseURL:nil];
     
     UIImage *imgName = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", objDRAGDROP.strImageName]];
     imgViewQue.image = imgName;
@@ -364,7 +364,7 @@
     if (flagForAnyOptionSelect) {
         [alert setTag:1];
         [alert addButtonWithTitle:@"Ok"];
-        [alert setMessage:[NSString stringWithFormat:@"Please select options"]];
+        [alert setMessage:[NSString stringWithFormat:@"Please drag and drop the items."]];
     }
     else {
         if (flagForCheckAnswer == YES) {

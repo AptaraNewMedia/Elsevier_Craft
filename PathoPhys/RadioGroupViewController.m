@@ -75,7 +75,7 @@
     
     [self fn_SetFontColor];    
     
-    [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Select the correct category for items on the left. Once you have mathced all items, tap <b>Submit.</b></body></html>" baseURL:nil];
+    [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Select the correct category for items on the left. Once you have selected all items, tap <b>Submit.</b></body></html>" baseURL:nil];
     
     imgRadio = [UIImage imageNamed:@"btn_radio.png"];
     imgRadioSelected = [UIImage imageNamed:@"btn_radio_select.png"];
@@ -481,7 +481,7 @@
     if (flagForAnyOptionSelect) {
         [alert setTag:1];
         [alert addButtonWithTitle:@"Ok"];
-        [alert setMessage:[NSString stringWithFormat:@"Please select options"]];
+        [alert setMessage:[NSString stringWithFormat:@"Please select options."]];
     }
     else {
         if (flagForCheckAnswer == YES) {
@@ -653,7 +653,7 @@
     [ImgQuestionBg setFrame:CGRectMake(0, 0, 767, 803)];
     
     // Instruction
-     [webviewInstructions setFrame:CGRectMake(19, 130, 725, 70)];
+    [webviewInstructions setFrame:CGRectMake(19, 130, 615, 70)];
     
     // Feedback
     [feedbackView setFrame:CGRectMake(feedbackView.frame.origin.x, y_feedback_p, 261, 131)];
@@ -662,7 +662,7 @@
     [lblQuestionNo setFrame:CGRectMake(17, 20, 93, 75)];
     
     // Question text
-    [lblQuestionText setFrame:CGRectMake(125, 20, 867, 72)];
+    [lblQuestionText setFrame:CGRectMake(125, 20, 570, 72)];
     
     // ScrollView
     [scrollRadioOption setFrame:CGRectMake(0, 260, 954, 500)];

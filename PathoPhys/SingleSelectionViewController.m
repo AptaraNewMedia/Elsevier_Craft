@@ -168,7 +168,13 @@
     if (flagForAnyOptionSelect) {
         [alert setTag:1];
         [alert addButtonWithTitle:@"Ok"];
-        [alert setMessage:[NSString stringWithFormat:@"Please select options"]];
+
+        if (MultipleSelect) {
+            [alert setMessage:[NSString stringWithFormat:@"Please select options."]];
+        }
+        else {
+            [alert setMessage:[NSString stringWithFormat:@"Please select an option."]];            
+        }
     }
     else {
         if (flagForCheckAnswer == 1) {

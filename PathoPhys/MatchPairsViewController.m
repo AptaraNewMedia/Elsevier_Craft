@@ -309,7 +309,7 @@
     if (flagForAnyOptionSelect) {
         [alert setTag:1];
         [alert addButtonWithTitle:@"Ok"];
-        [alert setMessage:[NSString stringWithFormat:@"Please select options"]];
+        [alert setMessage:[NSString stringWithFormat:@"Please match the items."]];
     }
     else {
         if (flagForCheckAnswer == YES) {
@@ -777,7 +777,7 @@
     [ImgQuestionBg setFrame:CGRectMake(0, 0, 767, 803)];
     
     // Instruction
-     [webviewInstructions setFrame:CGRectMake(19, 130, 725, 70)];
+    [webviewInstructions setFrame:CGRectMake(19, 130, 725, 70)];
     
     // Feedback
     [feedbackView setFrame:CGRectMake(x_feedback_p, y_feedback_p, 261, 131)];
@@ -786,7 +786,7 @@
     [lblQuestionNo setFrame:CGRectMake(17, 20, 93, 75)];
     
     // Question text
-    [lblQuestionText setFrame:CGRectMake(125, 20, 867, 72)];
+    [lblQuestionText setFrame:CGRectMake(125, 20, 570, 72)];
     
     // ScrollView
     [scrollViewOptions setFrame:CGRectMake(21, 210, 954, 560)];

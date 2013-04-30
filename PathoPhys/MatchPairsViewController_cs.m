@@ -313,7 +313,7 @@
     if (flagForAnyOptionSelect) {
         [alert setTag:1];
         [alert addButtonWithTitle:@"Ok"];
-        [alert setMessage:[NSString stringWithFormat:@"Please select options"]];
+        [alert setMessage:[NSString stringWithFormat:@"Please match the items."]];
     }
     else {
         if (flagForCheckAnswer == YES) {

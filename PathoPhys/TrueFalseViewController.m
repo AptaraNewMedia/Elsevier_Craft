@@ -271,7 +271,7 @@
     if (select) {
         [alert setTag:1];
         [alert addButtonWithTitle:@"Ok"];
-        [alert setMessage:[NSString stringWithFormat:@"Please select options"]];
+        [alert setMessage:[NSString stringWithFormat:@"Please select the correct image."]];
     }
     else {
         if (answer == userAnswer) {

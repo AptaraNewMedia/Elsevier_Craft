@@ -96,7 +96,12 @@
     //
     if (intTotalQuestions > 0) {
         [self Fn_LoadQuestionData];
-    }    
+    }
+    
+    bnPrev.enabled = NO;
+    if(intTotalQuestions == 1){
+        bnNext.enabled = NO;
+    }
 }
 
 -(void) fnAddNavigationItems

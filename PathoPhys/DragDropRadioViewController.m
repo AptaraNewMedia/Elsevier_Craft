@@ -80,7 +80,7 @@
     // Do any additional setup after loading the view from its nib.
     lblQuestionText.text = objDRAGDROP.strQuestionText ;
     [self fn_SetFontColor];
-    [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:arial;\">Tap the item on the left, and then tap the corresponding item on the right. Once you have matched all items, tap <b>Submit.</b></body></html>" baseURL:nil];
+    [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:arial;\">Drag the options and drop them on the correct drop areas. Select the correct category that it belongs to and tap <b>Submit.</b></body></html>" baseURL:nil];
     
     UIImage *imgName = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", objDRAGDROP.strImageName]];
     imgViewQue.image = imgName;
@@ -660,7 +660,7 @@
     if (flagForAnyOptionSelect) {
         [alert setTag:1];
         [alert addButtonWithTitle:@"Ok"];
-        [alert setMessage:[NSString stringWithFormat:@"Please select options"]];
+        [alert setMessage:[NSString stringWithFormat:@"Please drag and drop the items."]];
     }
     else {
         if (flagForCheckAnswer == YES) {
@@ -926,7 +926,7 @@
     [ImgQuestionBg setFrame:CGRectMake(0, 0, 767, 803)];
     
     // Instruction
-    [webviewInstructions setFrame:CGRectMake(19, 130, 725, 70)];
+    [webviewInstructions setFrame:CGRectMake(19, 130, 660, 70)];
     
     // Feedback
     [feedbackView setFrame:CGRectMake(x_feedback_p, y_feedback_p, 261, 131)];

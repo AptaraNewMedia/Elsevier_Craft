@@ -152,21 +152,18 @@
 {
     
     [self.view setFrame:CGRectMake(0,0,768,1024)];
-//    [imgBG setImage:[UIImage imageNamed:@"P_Img_Result.png"]];
-//    [imgBG  setFrame:CGRectMake(0,0,768,1024)];
     
     [imgPatch setImage:[UIImage imageNamed:@"P_Black_patch.png"]];
     [imgPatch  setFrame:CGRectMake(0,0,768,1024)];
-
     
     [imgBG setImage:[UIImage imageNamed:@"Ipad_Portrait_TableBG.png"]];
     [imgBG setFrame:CGRectMake(30,67,709,710)];
     
     [img_Cell setImage:[UIImage imageNamed:@"Ipad_Portrait_Table01.png"]];
-    [img_Cell setFrame:CGRectMake(58, 140, 655, 58)];
+    [img_Cell setFrame:CGRectMake(57, 136, 655, 58)];    
     [lblTitle setFrame:CGRectMake(170,87,386,38)];
     [btnClose setFrame:CGRectMake(653,89,41,36)];
-    [tbl setFrame:CGRectMake(58,201,655,430)];
+    [tbl setFrame:CGRectMake(57,195,655,430)];
     [lblTitleSerialNo setFrame:CGRectMake(72,143,61,38)];
     [lblTitleName setFrame:CGRectMake(130,143,386,38)];
     [lblTitleDate setFrame:CGRectMake(490,143,104,38)];
@@ -184,15 +181,11 @@
     [imgBG setImage:[UIImage imageNamed:@"BGImg_ScoreCard_with_Header.png"]];
     [imgBG setFrame:CGRectMake(134,67,755,615)];
     
-    //[imgBG setImage:[UIImage imageNamed:@"L_Img_Result.png"]];
-    //[imgBG  setFrame:CGRectMake(0,0,1024,768)];
-
-    
     [img_Cell setImage:[UIImage imageNamed:@"Img_CellPatch.png"]];
     [img_Cell setFrame:CGRectMake(107, 127, 794, 57)];
     [lblTitle setFrame:CGRectMake(288,84,386,38)];
     [btnClose setFrame:CGRectMake(818,83,41,36)];
-    [tbl setFrame:CGRectMake(146,182,722,336)];
+    [tbl setFrame:CGRectMake(145,182,722,336)];
     [lblTitleSerialNo setFrame:CGRectMake(156,135,61,38)];
     [lblTitleName setFrame:CGRectMake(242,135,386,38)];
     [lblTitleDate setFrame:CGRectMake(644,135,104,38)];

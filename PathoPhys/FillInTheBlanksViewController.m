@@ -56,7 +56,7 @@
     lblQuestionText.text = objFillBlanks.strQuestionText ;
     
     [self fn_SetFontColor];
-    [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Tap the blanks to view available menu items and select the appropriate key term to complete the sentences. You may wish to refer to the image given here. Once you have filled in all the blanks, tap <b>Submit.</b></body></html>" baseURL:nil];
+    [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Drag the options and drop them on the correct blank areas. Once you are done, tap <b>Submit.</b> </body></html>" baseURL:nil];
     
     UIImage *imgName = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", objFillBlanks.strImageName]];
     imgViewQue.image = imgName;
@@ -268,7 +268,7 @@
     if (flagForAnyOptionSelect) {
         [alert setTag:1];
         [alert addButtonWithTitle:@"Ok"];
-        [alert setMessage:[NSString stringWithFormat:@"Please select options"]];
+        [alert setMessage:[NSString stringWithFormat:@"Please fill in the blanks."]];
     }
     else {
         if (flagForCheckAnswer == YES) {
