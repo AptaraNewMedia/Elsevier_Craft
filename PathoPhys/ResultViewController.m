@@ -56,6 +56,34 @@
     facebook = [[Facebook alloc] initWithAppId:@"532908203419529" andDelegate:self];
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
+    [self Fn_SetFontColor];
+}
+
+-(void) Fn_SetFontColor {
+    lblChapterName_Title.font = FONT_17;
+    lblChapterName.font = FONT_17;
+
+    lblScore_Title.font = FONT_17;
+    lblScore.font = FONT_17;
+
+    lblShare_Title.font = FONT_17;
+
+    lblThematicArea_Title.font = FONT_17;
+    lblThematicArea.font = FONT_17;
+    
+
+    lblChapterName_Title.textColor = COLOR_BLACK;
+    lblChapterName.textColor = COLOR_BLACK;
+    
+    lblScore_Title.textColor = COLOR_BLACK;
+    lblScore.textColor = COLOR_BLACK;
+    
+    lblShare_Title.textColor = COLOR_BLACK;
+    
+    lblThematicArea_Title.textColor = COLOR_BLACK;
+    lblThematicArea.textColor = COLOR_BLACK;
+
 }
 
 - (void)didReceiveMemoryWarning{
@@ -238,63 +266,47 @@
     [imgPatch setImage:[UIImage imageNamed:@"Portrait_Result_BG_01.png"]];
     [imgPatch  setFrame:CGRectMake(0,0,768,1024)];
     
+    [btnClose setFrame:CGRectMake(663,191,33,29)];
     
-//    [imgBG setImage:[UIImage imageNamed:@"Ipad_Portrait_TableBG.png"]];
-//    [imgBG setFrame:CGRectMake(30,67,709,710)];
-    //[imgBG setImage:[UIImage imageNamed:@"P_Img_Result.png"]];
-    //[imgBG  setFrame:CGRectMake(0,0,768,1024)];
+    [lblChapterName_Title setFrame:CGRectMake(116,258,128,24)];
+    [lblChapterName  setFrame:CGRectMake(252,252,500,50)];
     
-    [btnClose setFrame:CGRectMake(653,191,33,29)];
+    [lblThematicArea setFrame:CGRectMake(252,275,500,193)];
+    [lblThematicArea_Title setFrame:CGRectMake(118,361,130,19)];
     
-    [lblChapterName_Title setFrame:CGRectMake(216,268,128,24)];
-    [lblChapterName  setFrame:CGRectMake(352,265,500,33)];
+    [lblScore_Title setFrame:CGRectMake(185,460,58,24)];
+    [lblScore setFrame:CGRectMake(252,460,500,24)];
     
-    [lblThematicArea setFrame:CGRectMake(352,275,500,193)];
-    [lblThematicArea_Title setFrame:CGRectMake(218,361,130,19)];
+    [lblShare_Title setFrame:CGRectMake(186,696,55,21)];
+    [btnFB setFrame:CGRectMake(252,692,36,29)];
+    [btnMail setFrame:CGRectMake(314,692,36,29)];
+
     
-    [lblScore_Title setFrame:CGRectMake(282,460,58,24)];
-    [lblScore setFrame:CGRectMake(352,460,500,24)];
-    
-    [lblShare_Title setFrame:CGRectMake(282,696,55,21)];
-    [btnFB setFrame:CGRectMake(352,692,36,29)];
-    [btnMail setFrame:CGRectMake(414,692,36,29)];
-    
-    //[lblResult setFrame:CGRectMake(140,141,137,34)];
-    
-//    [btnClose setFrame:CGRectMake(653,89,41,36)];
+
 }
 -(void)Fn_rotateLandscape
 {
     [self.view setFrame:CGRectMake(0,0,1024,768)];
     
+   
     [imgPatch setImage:[UIImage imageNamed:@"landscape_Result_box_01.png"]];
     [imgPatch  setFrame:CGRectMake(0,0,1024,768)];
     
-//    [imgBG setImage:[UIImage imageNamed:@"BGImg_ScoreCard_with_Header.png"]];
-//    [imgBG setFrame:CGRectMake(134,67,755,615)];
+    [lblChapterName  setFrame:CGRectMake(332,158,500,50)];
+    [lblChapterName_Title setFrame:CGRectMake(196,163,128,24)];
     
-    //[imgBG setImage:[UIImage imageNamed:@"L_Img_Result.png"]];
-    //[imgBG  setFrame:CGRectMake(0,0,1024,768)];
+    [lblThematicArea setFrame:CGRectMake(332,160,500,193)];
+    [lblThematicArea_Title setFrame:CGRectMake(196,246,130,19)];
     
-
+    [lblShare_Title setFrame:CGRectMake(262,502,55,21)];
+    [btnFB setFrame:CGRectMake(332,502,36,29)];
+    [btnMail setFrame:CGRectMake(396,502,36,29)];
     
-    //[btnClose setFrame:CGRectMake(798,115,33,29)];
-    [lblChapterName  setFrame:CGRectMake(452,171,500,33)];
-    [lblChapterName_Title setFrame:CGRectMake(316,173,128,24)];
+    [lblScore_Title setFrame:CGRectMake(262,320,58,24)];
+    [lblScore setFrame:CGRectMake(332,320,500,24)];
     
-    [lblThematicArea setFrame:CGRectMake(452,160,500,193)];
-    [lblThematicArea_Title setFrame:CGRectMake(318,246,130,19)];
-    
-    [lblShare_Title setFrame:CGRectMake(382,502,55,21)];
-    [btnFB setFrame:CGRectMake(452,502,36,29)];
-    [btnMail setFrame:CGRectMake(514,502,36,29)];
-     
-    [lblScore_Title setFrame:CGRectMake(382,320,58,24)];
-    [lblScore setFrame:CGRectMake(452,320,500,24)];
-    
-    //[lblResult setFrame:CGRectMake(170,114,137,34)];
-
     [btnClose setFrame:CGRectMake(800,110,41,36)];
+    
 }
 
 @end

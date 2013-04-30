@@ -75,15 +75,18 @@
 {
     [super viewDidLoad];       
     
-    NSString *question = [NSString stringWithFormat:@"<html><body style=\"font-size:15px;color:black;font-family:helvetica;\">%@</body></html>", objDRAGDROP.strQuestionText];
+    NSString *question = [NSString stringWithFormat:@"<html><body style=\"font-size:16px;color:white;font-family:helvetica;background-color:#0c64b1;\">%@</body></html>", objDRAGDROP.strQuestionText];
     
     [webQuestionText loadHTMLString:question baseURL:nil];
     
     webQuestionText.scrollView.showsHorizontalScrollIndicator = NO;
+    webQuestionText.scrollView.bounces = NO;
     btnCasestudyText.hidden = YES;
     
     [self fn_SetFontColor];
     
+    webviewInstructions.scrollView.showsHorizontalScrollIndicator = NO;
+    webviewInstructions.scrollView.bounces = NO;
     [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Tap the item on the left, and then tap the corresponding item on the right. Once you have matched all items, tap <b>Submit.</b></body></html>" baseURL:nil];
     
     UIImage *imgName = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", objDRAGDROP.strImageName]];

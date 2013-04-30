@@ -70,15 +70,19 @@
     //webQuestionText.text = objMCSS.strQuestionText ;
     
     webQuestionText.scrollView.showsHorizontalScrollIndicator = NO;
+    webQuestionText.scrollView.bounces = NO;
     btnCasestudyText.hidden = YES;
     
-    NSString *question = [NSString stringWithFormat:@"<html><body style=\"font-size:15px;color:black;font-family:helvetica;\">%@</body></html>", objMCSS.strQuestionText];
+    NSString *question = [NSString stringWithFormat:@"<html><body style=\"font-size:16px;color:white;font-family:helvetica;background-color:#0c64b1;\">%@</body></html>", objMCSS.strQuestionText];
     
     [webQuestionText loadHTMLString:question baseURL:nil];
     
     [self fn_SetFontColor];
     
     cellArray = [[NSMutableArray alloc] init];
+    
+    webviewInstructions.scrollView.showsHorizontalScrollIndicator = NO;
+    webviewInstructions.scrollView.bounces = NO;
     
     if ([objMCSS.arrAnswer count] > 1) {
         tblOptions.allowsMultipleSelection = YES;

@@ -139,6 +139,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{860, 613}, {139, 43}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -147,10 +148,6 @@
 						<reference key="IBUIHighlightedTitleColor" ref="740480283"/>
 						<reference key="IBUINormalTitleColor" ref="740480283"/>
 						<reference key="IBUINormalTitleShadowColor" ref="495702334"/>
-						<object class="NSCustomResource" key="IBUIHighlightedBackgroundImage" id="395478509">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">btn_submit.png</string>
-						</object>
 						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">btn_submit_highlight.png</string>
@@ -172,7 +169,6 @@
 						<reference key="IBUIHighlightedTitleColor" ref="740480283"/>
 						<reference key="IBUINormalTitleColor" ref="740480283"/>
 						<reference key="IBUINormalTitleShadowColor" ref="495702334"/>
-						<reference key="IBUIHighlightedBackgroundImage" ref="395478509"/>
 						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">btn_showscore_highlight.png</string>
@@ -417,12 +413,12 @@
 				<string key="214.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="1" key="214.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="262.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="0.0" key="262.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="1" key="262.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="265.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="266.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="267.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="273.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="0.0" key="273.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="1" key="273.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
@@ -441,7 +437,6 @@
 			<string key="btn_prev.png">{71, 62}</string>
 			<string key="btn_prev_highlight.png">{71, 62}</string>
 			<string key="btn_showscore_highlight.png">{139, 43}</string>
-			<string key="btn_submit.png">{16, 16}</string>
 			<string key="btn_submit_highlight.png">{139, 43}</string>
 			<string key="img_bg.png">{1024, 699}</string>
 			<string key="img_bg_shadow.png">{1024, 437}</string>

@@ -87,12 +87,15 @@
     // Do any additional setup after loading the view from its nib.
     
     webQuestionText.scrollView.showsHorizontalScrollIndicator = NO;
+    webQuestionText.scrollView.bounces = NO;    
     btnCasestudyText.hidden = YES;
     
-    NSString *question = [NSString stringWithFormat:@"<html><body style=\"font-size:15px;color:black;font-family:helvetica;\">%@</body></html>", objMatch.strQuestionText];
+    NSString *question = [NSString stringWithFormat:@"<html><body style=\"font-size:16px;color:white;font-family:helvetica;background-color:#0c64b1;\">%@</body></html>", objMatch.strQuestionText];
     
     [webQuestionText loadHTMLString:question baseURL:nil];
     
+    webviewInstructions.scrollView.showsHorizontalScrollIndicator = NO;
+    webviewInstructions.scrollView.bounces = NO;
 	[webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Tap the item on the left, and then tap the corresponding item on the right. Once you have matched all items, tap <b>Submit.</b></body></html>" baseURL:nil];
     
     // Get Sizes for all labels
@@ -788,7 +791,7 @@
     [lblQuestionNo setFrame:CGRectMake(17, 20, 93, 75)];
     
     // Question text
-    [webQuestionText setFrame:CGRectMake(125, 30, 615, 100)];  
+    [webQuestionText setFrame:CGRectMake(125, 30, 615, 100)]; 
   
     
     // Casestudy_text
