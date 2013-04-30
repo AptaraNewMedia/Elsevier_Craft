@@ -175,14 +175,6 @@
     int counter= 0;
     int y = 10, x= 20;
 
-    
-    
-//    NSLog(@"width: %f  height: %f", objDRAGDROP.fWidth, objDRAGDROP.fHeight);
-//    NSLog(@"width: %f  height: %f", scrollViewDrag.frame.size.width, objDRAGDROP.fHeight);
-
-    
-    
-    
     for(UIView *myView in [scrollViewDrag subviews]){
         if([myView isKindOfClass:[CustomDragButton class]]){
             counter++;
@@ -190,7 +182,7 @@
             myView.frame = CGRectMake(x, y, myView.frame.size.width, myView.frame.size.height);
             [scrollViewDrag addSubview:myView];
             y = y + myView.frame.size.height + 10;
-            if(counter == 4){
+            if(counter == 3){ /// 3 --> Number of rows
                 y = 10;
                 x = x + myView.frame.size.width + 10;
                 counter = 0;

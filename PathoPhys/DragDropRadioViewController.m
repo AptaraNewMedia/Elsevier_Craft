@@ -575,7 +575,7 @@
             myView.frame = CGRectMake(x, y, myView.frame.size.width, myView.frame.size.height);
             [scrollViewDrag addSubview:myView];
             y = y + myView.frame.size.height + 10;
-            if(counter == 4){
+            if(counter == 3){  /// 3 --> Number of rows
                 y = 10;
                 x = x + myView.frame.size.width + 10;
                 counter = 0;
