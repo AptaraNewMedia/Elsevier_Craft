@@ -462,7 +462,7 @@
     if (sender == objRadioView.btnOption1) {
         objRadioView.selected = [objDRAGDROP.arrRadioOptions objectAtIndex:0];
         if (objDRAGDROP.intDRAGDROPRADIOid == 14 || objDRAGDROP.intDRAGDROPRADIOid == 15) {
-            NSArray *temp = [[objDRAGDROP.arrRadioOptions objectAtIndex:0] componentsSeparatedByString:@","];
+            NSArray *temp = [[objDRAGDROP.arrRadioOptions objectAtIndex:[sender tag]] componentsSeparatedByString:@","];
             objRadioView.selected = [temp objectAtIndex:0];
         }
         objRadioView.selectedIndex = 1;
@@ -470,7 +470,7 @@
     else if (sender == objRadioView.btnOption2) {
         objRadioView.selected = [objDRAGDROP.arrRadioOptions objectAtIndex:1];
         if (objDRAGDROP.intDRAGDROPRADIOid == 14 || objDRAGDROP.intDRAGDROPRADIOid == 15) {
-            NSArray *temp = [[objDRAGDROP.arrRadioOptions objectAtIndex:0] componentsSeparatedByString:@","];
+            NSArray *temp = [[objDRAGDROP.arrRadioOptions objectAtIndex:[sender tag]] componentsSeparatedByString:@","];
             objRadioView.selected = [temp objectAtIndex:1];
         }
         objRadioView.selectedIndex = 2;
