@@ -125,7 +125,7 @@
     for (int i = 0; i < [objDRAGDROP.arrOptions count]; i++){
         
         CustomDragButton *bnDrag = [CustomDragButton buttonWithType:UIButtonTypeCustom];
-        bnDrag.frame = CGRectMake(20, y, objDRAGDROP.fWidth, objDRAGDROP.fHeight);
+        bnDrag.frame = CGRectMake(0, y, objDRAGDROP.fWidth, objDRAGDROP.fHeight);
         bnDrag.exclusiveTouch = YES;
         bnDrag.tag = i+1;
         bnDrag.x = bnDrag.frame.origin.x;
@@ -210,6 +210,12 @@
         spacingHeight = objDRAGDROP.fHeight;
         x = objDRAGDROP.fWidth + 10;
         y = 32;
+    }
+    else if (objDRAGDROP.intDRAGDROPRADIOid == 18) {
+        spacingWidth = 130;
+        spacingHeight = objDRAGDROP.fHeight;
+        x = objDRAGDROP.fWidth + 10;
+        y = 32;        
     }
     else if (objDRAGDROP.intDRAGDROPRADIOid == 14) {
         RadioOptions = 2;
@@ -395,6 +401,30 @@
         [objRadioView.btnFeedback5 addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
         objRadioView.btnFeedback5.hidden = YES;
         
+            
+        if(objDRAGDROP.intDRAGDROPRADIOid == 18){
+           
+            UILabel *lbl1 =[[UILabel alloc] initWithFrame:CGRectMake(objRadioView.btnOption1.frame.origin.x+width, objRadioView.btnOption1.frame.origin.y, 90, height)];
+            [lbl1 setText:[objDRAGDROP.arrRadioOptions objectAtIndex:0]];
+            [lbl1 setTextColor:COLOR_BLUE];
+            lbl1.backgroundColor  = COLOR_CLEAR;
+            lbl1.font = FONT_14;
+            [objRadioView addSubview:lbl1];
+            
+            
+            [objRadioView.ansImage1 setFrame:CGRectMake(objRadioView.ansImage1.frame.origin.x, objRadioView.ansImage1.frame.origin.y - 10, objRadioView.ansImage1.frame.size.width, objRadioView.ansImage1.frame.size.height)];
+
+            [objRadioView.ansImage2 setFrame:CGRectMake(objRadioView.ansImage2.frame.origin.x, objRadioView.ansImage2.frame.origin.y - 10, objRadioView.ansImage2.frame.size.width, objRadioView.ansImage2.frame.size.height)];
+
+            
+            UILabel *lbl2 =[[UILabel alloc] initWithFrame:CGRectMake(objRadioView.btnOption2.frame.origin.x+width, objRadioView.btnOption2.frame.origin.y, 90, height)];
+            [lbl2 setText:[objDRAGDROP.arrRadioOptions objectAtIndex:1]];
+            [lbl2 setTextColor:COLOR_BLUE];
+            lbl2.backgroundColor  = COLOR_CLEAR;
+            lbl2.font = FONT_14;
+            [objRadioView addSubview:lbl2];
+
+        }
         
         
         if (RadioOptions == 2) {
@@ -498,7 +528,7 @@
         
         trimmedType = [trimmedType lowercaseString];
         
-        if (intfeed == char_index-1) {
+        if (intfeed == char_index) {
             if ([trimmedType isEqualToString:correctincorrect]) {
                 strTemp = [NSString stringWithFormat:@"%@", objFeedback.strFeedback];
             }
@@ -694,6 +724,8 @@
     
 }
 - (void) handleRevealScore{
+    
+    
     for (int i =0; i <[arr_radioButtons count]; i++) {
         objRadioView = [arr_radioButtons objectAtIndex:i];
         NSString *answer = [objDRAGDROP.arrRadioAnswers objectAtIndex:i];
@@ -746,6 +778,11 @@
                 objRadioView.feedback = feeback;
             }
         }
+        
+        if(objDRAGDROP.intDRAGDROPRADIOid == 18){
+            bnFeedback.hidden = YES;
+        }
+    
     }
     
     int i = 0;
@@ -934,7 +971,7 @@
     // ScrollView
     [imgScroller setFrame:CGRectMake(258, 153, 800, 427)];
     imgScroller.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, imgScroller.bounds.size.width - 727);
-    [scrollViewDrag setFrame:CGRectMake(20, 153, 237, 427)];
+    [scrollViewDrag setFrame:CGRectMake(0, 153, 237, 427)];
     
     [self rotateScrollViewButtonsForLandscape];
 }

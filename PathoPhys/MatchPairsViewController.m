@@ -381,6 +381,12 @@
                 strTemp = [NSString stringWithFormat:@"%@", objFeedback.strFeedback];
             }
         }
+        else if(objMatch.intMatchid == 46 || objMatch.intMatchid == 47)
+        {
+            if ([trimmedType isEqualToString:correctincorrect]) {
+                strTemp = [NSString stringWithFormat:@"%@", objFeedback.strFeedback];
+            }
+        }
         
     }
     

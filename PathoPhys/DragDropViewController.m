@@ -243,7 +243,7 @@
         
         trimmedType = [trimmedType lowercaseString];
         
-        if (intfeed == char_index-1) {
+        if (intfeed == char_index) {
             if ([trimmedType isEqualToString:correctincorrect]) {
                 strTemp = [NSString stringWithFormat:@"%@", objFeedback.strFeedback];
             }
