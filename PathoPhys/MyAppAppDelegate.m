@@ -209,10 +209,17 @@ UITextView *txt_feedback;
 
 // Score Card
 -(void) Fn_AddScoreCard{
-    scoreCardView =[[ScoreCardViewController alloc] initWithNibName:@"ScoreCardViewController_iPad" bundle:nil];
-    [self.window.rootViewController.view addSubview:scoreCardView.view];   
-    [scoreCardView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        scoreCardView =[[ScoreCardViewController alloc] initWithNibName:@"ScoreCardViewController_iPhone" bundle:nil];
+    }
+    else{
+        scoreCardView =[[ScoreCardViewController alloc] initWithNibName:@"ScoreCardViewController_iPad" bundle:nil];
+        [scoreCardView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
+    }
+    
+        [self.window.rootViewController.view addSubview:scoreCardView.view];
 }
+
 -(void) Fn_SubScoreCard{
     [scoreCardView.view removeFromSuperview];
 }

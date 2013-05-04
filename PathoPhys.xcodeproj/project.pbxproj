@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		396E1B511734EC3A00076AEF /* ScoreCardViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 396E1B501734EC3A00076AEF /* ScoreCardViewController_iPhone.xib */; };
+		396E1B531734F25F00076AEF /* ScoreCardViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 396E1B521734F25F00076AEF /* ScoreCardViewController_iPhone5.xib */; };
 		39885C801734D81C007DC01C /* MenuViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39885C7F1734D81C007DC01C /* MenuViewController_iPhone5.xib */; };
 		39885C821734D9C1007DC01C /* AboutUsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39885C811734D9C1007DC01C /* AboutUsViewController_iPhone.xib */; };
 		39885C841734DE2A007DC01C /* AboutUsViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39885C831734DE2A007DC01C /* AboutUsViewController_iPhone5.xib */; };
@@ -764,6 +766,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		396E1B501734EC3A00076AEF /* ScoreCardViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreCardViewController_iPhone.xib; sourceTree = "<group>"; };
+		396E1B521734F25F00076AEF /* ScoreCardViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreCardViewController_iPhone5.xib; sourceTree = "<group>"; };
 		39885C7F1734D81C007DC01C /* MenuViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController_iPhone5.xib; sourceTree = "<group>"; };
 		39885C811734D9C1007DC01C /* AboutUsViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutUsViewController_iPhone.xib; sourceTree = "<group>"; };
 		39885C831734DE2A007DC01C /* AboutUsViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutUsViewController_iPhone5.xib; sourceTree = "<group>"; };
@@ -2841,6 +2845,8 @@
 				870B8BA4171AA5510085F49B /* ScoreCardViewController.h */,
 				870B8BA5171AA5510085F49B /* ScoreCardViewController.m */,
 				870B8BA6171AA5510085F49B /* ScoreCardViewController_iPad.xib */,
+				396E1B501734EC3A00076AEF /* ScoreCardViewController_iPhone.xib */,
+				396E1B521734F25F00076AEF /* ScoreCardViewController_iPhone5.xib */,
 				870B8B86171A7E270085F49B /* ResultViewController.h */,
 				870B8B87171A7E270085F49B /* ResultViewController.m */,
 				870B8B88171A7E270085F49B /* ResultViewController.xib */,
@@ -3869,6 +3875,8 @@
 				39885C801734D81C007DC01C /* MenuViewController_iPhone5.xib in Resources */,
 				39885C821734D9C1007DC01C /* AboutUsViewController_iPhone.xib in Resources */,
 				39885C841734DE2A007DC01C /* AboutUsViewController_iPhone5.xib in Resources */,
+				396E1B511734EC3A00076AEF /* ScoreCardViewController_iPhone.xib in Resources */,
+				396E1B531734F25F00076AEF /* ScoreCardViewController_iPhone5.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
