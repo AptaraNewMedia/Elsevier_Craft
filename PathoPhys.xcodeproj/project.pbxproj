@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39885C801734D81C007DC01C /* MenuViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39885C7F1734D81C007DC01C /* MenuViewController_iPhone5.xib */; };
+		39885C821734D9C1007DC01C /* AboutUsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39885C811734D9C1007DC01C /* AboutUsViewController_iPhone.xib */; };
+		39885C841734DE2A007DC01C /* AboutUsViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39885C831734DE2A007DC01C /* AboutUsViewController_iPhone5.xib */; };
 		39970581170EEE23008933DD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39970580170EEE23008933DD /* UIKit.framework */; };
 		39970583170EEE23008933DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39970582170EEE23008933DD /* Foundation.framework */; };
 		39970585170EEE23008933DD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39970584170EEE23008933DD /* CoreGraphics.framework */; };
@@ -761,6 +764,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		39885C7F1734D81C007DC01C /* MenuViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController_iPhone5.xib; sourceTree = "<group>"; };
+		39885C811734D9C1007DC01C /* AboutUsViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutUsViewController_iPhone.xib; sourceTree = "<group>"; };
+		39885C831734DE2A007DC01C /* AboutUsViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutUsViewController_iPhone5.xib; sourceTree = "<group>"; };
 		3997057D170EEE23008933DD /* PathoPhys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PathoPhys.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39970580170EEE23008933DD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		39970582170EEE23008933DD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1814,6 +1820,7 @@
 				39970620170EF26D008933DD /* MenuViewController.m */,
 				39970621170EF26D008933DD /* MenuViewController_iPad.xib */,
 				39970624170EF284008933DD /* MenuViewController_iPhone.xib */,
+				39885C7F1734D81C007DC01C /* MenuViewController_iPhone5.xib */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -2688,6 +2695,8 @@
 				870399701724013C007EF1BE /* AboutUsViewController.h */,
 				870399711724013C007EF1BE /* AboutUsViewController.m */,
 				870399751724015E007EF1BE /* AboutUsViewController_iPad.xib */,
+				39885C811734D9C1007DC01C /* AboutUsViewController_iPhone.xib */,
+				39885C831734DE2A007DC01C /* AboutUsViewController_iPhone5.xib */,
 			);
 			name = About;
 			sourceTree = "<group>";
@@ -3857,6 +3866,9 @@
 				87015350172FE64E00122579 /* 140004_l.png in Resources */,
 				87015351172FE64E00122579 /* truefalse_image_selection.png in Resources */,
 				87015352172FE64E00122579 /* truefalse_image_selection@2x.png in Resources */,
+				39885C801734D81C007DC01C /* MenuViewController_iPhone5.xib in Resources */,
+				39885C821734D9C1007DC01C /* AboutUsViewController_iPhone.xib in Resources */,
+				39885C841734DE2A007DC01C /* AboutUsViewController_iPhone5.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
