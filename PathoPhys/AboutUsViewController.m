@@ -35,7 +35,14 @@
     
     lblTitle.font = FONT_20;
     lblTitle.textColor = COLOR_WHITE;
-    webView.scrollView.scrollEnabled = NO;
+    
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        webView.scrollView.scrollEnabled = YES;
+    }
+    else{
+        webView.scrollView.scrollEnabled = NO;
+    }
     
     //Code for Exclusive Touch Enabling.
     for (UIView *myview in [self.view subviews]){

@@ -46,7 +46,7 @@
     [super viewDidLoad];
     [self fnAddNavigationItems];
     
-    self.trackedViewName = @"Menu Screen";
+    //self.trackedViewName = @"Menu Screen";
     
     lblFlashcard.font = FONT_18;
     lblTestyorself.font = FONT_18;
@@ -85,9 +85,11 @@
 
 - (void) fnAddNavigationItems
 {
-    customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(890, 0, 130, 44)];
-    [self.view addSubview:customRightBar];    
+   // customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(890, 0, 130, 44)];
+    customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(0, 0, 130, 44)];
+    [self.view addSubview:customRightBar];
     NOTES_MODE = 0;
+    
 }
 
 - (IBAction)Bn_FC_Tapped:(id)sender{

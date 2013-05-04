@@ -29,7 +29,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        UIButton *btnScore = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIButton *btnScore = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         btnScore.backgroundColor = COLOR_CLEAR;
         btnScore.frame = CGRectMake(0.0, 7.0, 30, 30);
         [btnScore setImage:[UIImage imageNamed:@"img_topicon_score.png"] forState:UIControlStateNormal];
@@ -53,6 +53,8 @@
         [btnInfo addTarget:self action:@selector(onInfo:) forControlEvents:UIControlEventTouchUpInside];
         btnInfo.exclusiveTouch = YES;
         [self addSubview:btnInfo];
+        
+        NSLog(@"Icons added");
           
     }
     return self;

@@ -94,6 +94,8 @@ UITextView *txt_feedback;
     DEVICE_VERSION = [[[UIDevice currentDevice] systemVersion] floatValue];
     
     
+    NSLog(@"Type: %@",DEVICE_TYPE);
+    
     md = (MyAppAppDelegate *)[[UIApplication sharedApplication] delegate];
 
     [self Fn_AddMenu];
@@ -157,9 +159,17 @@ UITextView *txt_feedback;
 
 // About
 -(void) Fn_AddAbout:(int)index{
-    aboutUsView = [[AboutUsViewController alloc] initWithNibName:@"AboutUsViewController_iPad" bundle:nil];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        aboutUsView = [[AboutUsViewController alloc] initWithNibName:@"AboutUsViewController_iPhone" bundle:nil];
+        NSLog(@"iPhone");
+    }
+    else{
+        aboutUsView = [[AboutUsViewController alloc] initWithNibName:@"AboutUsViewController_iPad" bundle:nil];
+        [aboutUsView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
+        NSLog(@"iPad");
+    }
     [self.window.rootViewController.view addSubview:aboutUsView.view];
-    [aboutUsView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
+    
     [aboutUsView Fn_LoadAboutData:index];
     
 }
