@@ -126,11 +126,21 @@
     static NSString *MyIdentifier = @"tblCellView";
     ChapterlistCell_iPad *cell = (ChapterlistCell_iPad *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     if(cell == nil) {
-        NSArray *cellArray = [[NSBundle mainBundle] loadNibNamed:@"ChapterlistCell_iPad" owner:self options:nil];
-        cell = [cellArray lastObject];
+        
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            NSArray *cellArray = [[NSBundle mainBundle] loadNibNamed:@"ChapterlistCell_iPhone" owner:self options:nil];
+            cell = [cellArray lastObject];
+            cell.lblChapterName.font = FONT_12;
+            
+        }
+        else {
+            NSArray *cellArray = [[NSBundle mainBundle] loadNibNamed:@"ChapterlistCell_iPad" owner:self options:nil];
+            cell = [cellArray lastObject];
+            cell.lblChapterName.font = FONT_17;
+            
+        }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    cell.lblChapterName.font = FONT_17;
     cell.lblChapterName.textColor = COLOR_BLACK;
     
     
@@ -138,14 +148,22 @@
     Chapters *objChap = (Chapters *) [arr_chaptersTestAndFlashcard objectAtIndex:indexPath.row];
     cell.lblChapterName.text = [NSString stringWithFormat:@"%d. %@",indexPath.row + 1,objChap.strChapterTitle];    
     
-    if (currentOrientaion==UIInterfaceOrientationLandscapeRight||currentOrientaion==UIInterfaceOrientationLandscapeLeft) {
-       cell.imgTableCellBG.image=[UIImage imageNamed:@"chapter_tbl_row_center.png"];
-        [cell.imgDisclosure setFrame:CGRectMake(720, 14, 27, 27)];
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
         
     }
     else {
-       cell.imgTableCellBG.image=[UIImage imageNamed:@"chapter_tbl_row_center_p.png"];
-        [cell.imgDisclosure setFrame:CGRectMake(570, 14, 27, 27)];
+    
+        
+        if (currentOrientaion==UIInterfaceOrientationLandscapeRight||currentOrientaion==UIInterfaceOrientationLandscapeLeft) {
+           cell.imgTableCellBG.image=[UIImage imageNamed:@"chapter_tbl_row_center.png"];
+            [cell.imgDisclosure setFrame:CGRectMake(720, 14, 27, 27)];
+            
+        }
+        else {
+           cell.imgTableCellBG.image=[UIImage imageNamed:@"chapter_tbl_row_center_p.png"];
+            [cell.imgDisclosure setFrame:CGRectMake(570, 14, 27, 27)];
+        }
+        
     }
     
     return cell;
@@ -160,11 +178,15 @@
     
     ChapterlistCell_iPad *cell1 = (ChapterlistCell_iPad *)[tableView cellForRowAtIndexPath:indexPath];
     
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        
+    }
+    else {
     if (currentOrientaion==UIInterfaceOrientationLandscapeRight||currentOrientaion==UIInterfaceOrientationLandscapeLeft)
          cell1.imgTableCellBG.image=[UIImage imageNamed:@"Selected_chapter_tbl_row_center.png"];
     else
          cell1.imgTableCellBG.image=[UIImage imageNamed:@"Selected_chapter_tbl_row_center_p.png"];
-    
+    }
     
     flashCardsViewController = [[FlashCardsViewController alloc] initWithNibName:@"FlashCardsViewController_iPad" bundle:nil];
     
@@ -172,10 +194,16 @@
 }
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
     ChapterlistCell_iPad *cell1 = (ChapterlistCell_iPad *)[tableView cellForRowAtIndexPath:indexPath];
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+       
+    }
+    else {
     if (currentOrientaion==UIInterfaceOrientationLandscapeRight||currentOrientaion==UIInterfaceOrientationLandscapeLeft)
         cell1.imgTableCellBG.image=[UIImage imageNamed:@"chapter_tbl_row_center.png"];
     else
         cell1.imgTableCellBG.image=[UIImage imageNamed:@"chapter_tbl_row_center_p.png"];
+    }
 }
 //=======================================================================================
 
