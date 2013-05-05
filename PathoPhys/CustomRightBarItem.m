@@ -23,13 +23,16 @@
 
 @implementation CustomRightBarItem
 @synthesize Bn_Addnote;
+@synthesize btnScore;
+@synthesize btnInfo;
+@synthesize btnNote;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        UIButton *btnScore = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        btnScore = [UIButton buttonWithType:UIButtonTypeCustom];
         btnScore.backgroundColor = COLOR_CLEAR;
         btnScore.frame = CGRectMake(0.0, 7.0, 30, 30);
         [btnScore setImage:[UIImage imageNamed:@"img_topicon_score.png"] forState:UIControlStateNormal];
@@ -37,7 +40,7 @@
         btnScore.exclusiveTouch = YES;
         [self addSubview:btnScore];
         
-        UIButton *btnNote = [UIButton buttonWithType:UIButtonTypeCustom];
+        btnNote = [UIButton buttonWithType:UIButtonTypeCustom];
         btnNote.backgroundColor = COLOR_CLEAR;
         btnNote.frame = CGRectMake(40.0, 7.0, 30, 30);
         [btnNote setImage:[UIImage imageNamed:@"img_topicon_note.png"] forState:UIControlStateNormal];
@@ -46,7 +49,7 @@
         [self addSubview:btnNote];
         
         
-        UIButton *btnInfo = [UIButton buttonWithType:UIButtonTypeCustom];
+        btnInfo = [UIButton buttonWithType:UIButtonTypeCustom];
         btnInfo.backgroundColor = COLOR_CLEAR;
         btnInfo.frame = CGRectMake(80.0, 7.0, 30, 30);
         [btnInfo setImage:[UIImage imageNamed:@"img_topicon_info.png"] forState:UIControlStateNormal];

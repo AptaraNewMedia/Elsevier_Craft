@@ -386,7 +386,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{635, 573}, {247, 74}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<int key="IBUITag">2</int>
@@ -748,16 +747,19 @@
 						<int key="objectID">127</int>
 						<reference key="object" ref="111301698"/>
 						<reference key="parent" ref="766721923"/>
+						<string key="objectName">Bn_AbtAuthor</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">128</int>
 						<reference key="object" ref="764271100"/>
 						<reference key="parent" ref="766721923"/>
+						<string key="objectName">Bn_AbtApp</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">129</int>
 						<reference key="object" ref="633138065"/>
 						<reference key="parent" ref="766721923"/>
+						<string key="objectName">Bn_AbtElsevier</string>
 					</object>
 				</array>
 			</object>
@@ -783,7 +785,7 @@
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="82.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="83.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="1" key="83.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="0.0" key="83.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="86.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="87.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="90.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>

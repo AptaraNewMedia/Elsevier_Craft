@@ -12,4 +12,8 @@
 
 @property (nonatomic, retain) UIButton *Bn_Addnote;
 
+@property (nonatomic, retain) UIButton *btnScore;
+@property (nonatomic, retain) UIButton *btnNote;
+@property (nonatomic, retain) UIButton *btnInfo;
+
 @end

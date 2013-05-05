@@ -92,9 +92,20 @@
 
 - (void) fnAddNavigationItems
 {
-   // customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(890, 0, 130, 44)];
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(220, 0, 100, 44)];
+        
+        customRightBar.btnScore.frame = CGRectMake(0.0, 7.0, 30, 30);
+        customRightBar.btnNote.frame = CGRectMake(35.0, 7.0, 30, 30);
+        customRightBar.btnInfo.frame = CGRectMake(70.0, 7.0, 30, 30);
+        
+    }
+    else {
+    
     customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(0, 0, 130, 44)];
+    }
     [self.view addSubview:customRightBar];
+        
     NOTES_MODE = 0;
     
 }
