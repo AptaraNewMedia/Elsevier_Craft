@@ -48,11 +48,18 @@
     
     //self.trackedViewName = @"Menu Screen";
     
-    lblFlashcard.font = FONT_18;
-    lblTestyorself.font = FONT_18;
-    lblCasestudy.font = FONT_18;
-    lbl_Title.font = BOLD_FONT_20;
-    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        lblFlashcard.font = FONT_12;
+        lblTestyorself.font = FONT_12;
+        lblCasestudy.font = FONT_12;
+        lbl_Title.font = BOLD_FONT_20;
+    }
+    else {
+        lblFlashcard.font = FONT_18;
+        lblTestyorself.font = FONT_18;
+        lblCasestudy.font = FONT_18;
+        lbl_Title.font = BOLD_FONT_20;
+    }
     
     lblFlashcard.textColor = COLOR_FlashcardHeadingText;
     lblTestyorself.textColor = COLOR_FlashcardHeadingText;
@@ -127,6 +134,10 @@
 }
 -(NSUInteger)supportedInterfaceOrientations
 {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
+    
     NSUInteger mask= UIInterfaceOrientationMaskPortrait;
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     currentOrientaion = interfaceOrientation;
@@ -156,6 +167,11 @@
     return UIInterfaceOrientationMaskAll;
 }
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
+    
     currentOrientaion = interfaceOrientation;
     DEVICE_ORIENTATION = interfaceOrientation;    
     [md Fn_CallPopupOrientaion];    

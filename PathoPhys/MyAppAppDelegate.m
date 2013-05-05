@@ -131,9 +131,14 @@ UITextView *txt_feedback;
 - (void) Fn_addTabBar{
     UIViewController *viewController1, *viewController2, *viewController3;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        //viewController1 = [[MyAppFirstViewController alloc] initWithNibName:@"MyAppFirstViewController_iPhone" bundle:nil];
-        //viewController2 = [[MyAppSecondViewController alloc] initWithNibName:@"MyAppSecondViewController_iPhone" bundle:nil];
-        //viewController3 = [[MyAppThirdViewController alloc] initWithNibName:@"MyAppThirdViewController_iPhone" bundle:nil];
+        viewController1 = [[FlashcardChapterListViewController alloc] initWithNibName:@"FlashcardChapterListViewController_iPhone" bundle:nil];
+        navController1 = [[UINavigationController alloc] initWithRootViewController:viewController1];
+        
+        viewController2 = [[TestyourselfChapterListViewController alloc] initWithNibName:@"TestyourselfChapterListViewController_iPhone" bundle:nil];
+        navController2 = [[UINavigationController alloc] initWithRootViewController:viewController2];
+        
+        viewController3 = [[CasestudyChapterListViewController alloc] initWithNibName:@"CasestudyChapterListViewController_iPhone" bundle:nil];
+        navController3 = [[UINavigationController alloc] initWithRootViewController:viewController3];
     } else {
         viewController1 = [[FlashcardChapterListViewController alloc] initWithNibName:@"FlashcardChapterListViewController_iPad" bundle:nil];        
         navController1 = [[UINavigationController alloc] initWithRootViewController:viewController1];
