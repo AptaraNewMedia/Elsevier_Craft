@@ -12,4 +12,5 @@
 
 @property (nonatomic, retain) IBOutlet UIButton *headerBtn;
 @property (nonatomic, retain) IBOutlet UIImageView *imgArrow;
+@property (nonatomic, retain) IBOutlet UIImageView *imgViewBg;
 @end

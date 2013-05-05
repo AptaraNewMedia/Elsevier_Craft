@@ -11,6 +11,7 @@
 @implementation CustomChapterHeaderView
 @synthesize headerBtn;
 @synthesize imgArrow;
+@synthesize imgViewBg;
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -21,7 +22,7 @@
         //UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, img.size.width, img.size.height)];
         self.backgroundColor = COLOR_CLEAR;
         
-        UIImageView *imgViewBg = [[UIImageView alloc] initWithFrame:(CGRectMake(0, 0, img.size.width, img.size.height))];
+        imgViewBg = [[UIImageView alloc] initWithFrame:(CGRectMake(0, 0, img.size.width, img.size.height))];
         [imgViewBg setImage:img];
         [self addSubview:imgViewBg];
         

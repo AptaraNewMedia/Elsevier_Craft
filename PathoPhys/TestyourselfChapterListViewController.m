@@ -74,7 +74,21 @@
     for (int i = 0; i < [arr_chaptersTestAndFlashcard count]; i++) {
         Chapters *objChp = (Chapters *)[arr_chaptersTestAndFlashcard objectAtIndex:i];        
         
-        customView = [[CustomChapterHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, 816, 55)];
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            customView = [[CustomChapterHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, 275, 32)];
+            UIImage *img = [UIImage imageNamed:@"Tab_white_patch1.png"];
+            customView.imgViewBg = [[UIImageView alloc] initWithFrame:(CGRectMake(0, 0, img.size.width, img.size.height))];
+            [customView.imgViewBg setImage:img];
+            [customView.headerBtn setFrame:CGRectMake(15, 0, 231, 31)];
+            [customView.headerBtn setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
+            [customView.imgArrow setFrame:CGRectMake(243, 3, 27, 27)];
+            [customView.headerBtn.titleLabel setFont:FONT_12];
+            
+        }
+        else {
+            customView = [[CustomChapterHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, 816, 55)];
+        }
+        
         [customView.headerBtn setTitle:[NSString stringWithFormat:@"%d. %@", i+1, objChp.strChapterTitle] forState:UIControlStateNormal];
         customView.headerBtn.tag=i;
         [customView.headerBtn addTarget:self action:@selector(sectionTouched:) forControlEvents:UIControlEventTouchUpInside];
@@ -167,11 +181,21 @@
     static NSString *MyIdentifier = @"tblCellView";
     ChapterlistSubCell_iPad *cell = (ChapterlistSubCell_iPad *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     if(cell == nil) {
-        NSArray *cellArray = [[NSBundle mainBundle] loadNibNamed:@"ChapterlistSubCell_iPad" owner:self options:nil];
-        cell = [cellArray lastObject];
+        
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {            
+            NSArray *cellArray = [[NSBundle mainBundle] loadNibNamed:@"ChapterlistSubCell_iPhone" owner:self options:nil];
+            cell = [cellArray lastObject];
+            cell.lblThematicName.font = FONT_10;
+            
+        }
+        else {
+            NSArray *cellArray = [[NSBundle mainBundle] loadNibNamed:@"ChapterlistSubCell_iPad" owner:self options:nil];
+            cell = [cellArray lastObject];
+            cell.lblThematicName.font = FONT_17;
+            
+        }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    cell.lblThematicName.font = FONT_17;
     cell.lblThematicName.textColor = COLOR_BLACK;
     
     Chapters *objChap = (Chapters *) [arr_chaptersTestAndFlashcard objectAtIndex:indexPath.section];
@@ -179,47 +203,61 @@
         ThematicArea *objThematic = (ThematicArea *)[objChap.thematicData objectAtIndex:indexPath.row];
         cell.lblThematicName.text = objThematic.strThematicTitle;        
         
-        if (currentOrientaion==UIInterfaceOrientationLandscapeRight||currentOrientaion==UIInterfaceOrientationLandscapeLeft)
-        {
-            if(indexPath.row==0)
-            {
-                
-                cell.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch1"];
-            }
-            else if(indexPath.row==[objChap.thematicData count]-1)
-            {
-                cell.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch3"];
-            }
-            else
-            {
-                cell.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch2"];
-            }
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            
         }
-        else
-        {
+        else {
             
             
-            if(indexPath.row==0)
+            if (currentOrientaion==UIInterfaceOrientationLandscapeRight||currentOrientaion==UIInterfaceOrientationLandscapeLeft)
             {
-                
-                cell.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch1_p"];
-            }
-            else if(indexPath.row==[objChap.thematicData count]-1)
-            {
-                cell.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch3_p"];
+                if(indexPath.row==0)
+                {
+                    
+                    cell.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch1"];
+                }
+                else if(indexPath.row==[objChap.thematicData count]-1)
+                {
+                    cell.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch3"];
+                }
+                else
+                {
+                    cell.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch2"];
+                }
             }
             else
             {
-                cell.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch2_p"];
+                
+                
+                if(indexPath.row==0)
+                {
+                    
+                    cell.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch1_p"];
+                }
+                else if(indexPath.row==[objChap.thematicData count]-1)
+                {
+                    cell.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch3_p"];
+                }
+                else
+                {
+                    cell.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch2_p"];
+                }
+                
             }
-            
         }
         
     }
         
     return cell;
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return 25.0;
+    }else {
+        return 37.0;
+    }
+    return 0;
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //md.str_Title = [arr_chapterList objectAtIndex:indexPath.row];   
 
@@ -238,34 +276,41 @@
             
             ChapterlistSubCell_iPad *cell1 = (ChapterlistSubCell_iPad *)[tableView cellForRowAtIndexPath:indexPath];
             
-            if (currentOrientaion==UIInterfaceOrientationLandscapeRight||currentOrientaion==UIInterfaceOrientationLandscapeLeft)
-            {
-                if(indexPath.row==0){
-                    
-                    cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_Blue_patch1"];
-                }
-                else if(indexPath.row==[objChap.thematicData count]-1)
-                {
-                    cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_Blue_patch3"];
-                }
-                else
-                {
-                    cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_Blue_patch2"];
-                }
+            
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                
             }
-            else
-            {
-                if(indexPath.row==0){
-                    
-                    cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_Blue_patch1_p"];
-                }
-                else if(indexPath.row==[objChap.thematicData count]-1)
+            else {
+                
+                if (currentOrientaion==UIInterfaceOrientationLandscapeRight||currentOrientaion==UIInterfaceOrientationLandscapeLeft)
                 {
-                    cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_Blue_patch3_p"];
+                    if(indexPath.row==0){
+                        
+                        cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_Blue_patch1"];
+                    }
+                    else if(indexPath.row==[objChap.thematicData count]-1)
+                    {
+                        cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_Blue_patch3"];
+                    }
+                    else
+                    {
+                        cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_Blue_patch2"];
+                    }
                 }
                 else
                 {
-                    cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_Blue_patch2_p"];
+                    if(indexPath.row==0){
+                        
+                        cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_Blue_patch1_p"];
+                    }
+                    else if(indexPath.row==[objChap.thematicData count]-1)
+                    {
+                        cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_Blue_patch3_p"];
+                    }
+                    else
+                    {
+                        cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_Blue_patch2_p"];
+                    }
                 }
             }
         }
@@ -285,38 +330,44 @@
     
         ChapterlistSubCell_iPad *cell1 = (ChapterlistSubCell_iPad *)[tableView cellForRowAtIndexPath:indexPath];
         
-        if (currentOrientaion==UIInterfaceOrientationLandscapeRight||currentOrientaion==UIInterfaceOrientationLandscapeLeft)
-        {
-            if(indexPath.row==0)
-            {
-                
-                cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch1"];
-            }
-            else if(indexPath.row==[objChap.thematicData count]-1)
-            {
-                cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch3"];
-            }
-            else
-            {
-                cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch2"];
-            }
-        }
-        else
-        {
-            if(indexPath.row==0)
-            {
-                
-                cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch1_p"];
-            }
-            else if(indexPath.row==[objChap.thematicData count]-1)
-            {
-                cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch3_p"];
-            }
-            else
-            {
-                cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch2_p"];
-            }
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
             
+        }
+        else {
+        
+            if (currentOrientaion==UIInterfaceOrientationLandscapeRight||currentOrientaion==UIInterfaceOrientationLandscapeLeft)
+            {
+                if(indexPath.row==0)
+                {
+                    
+                    cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch1"];
+                }
+                else if(indexPath.row==[objChap.thematicData count]-1)
+                {
+                    cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch3"];
+                }
+                else
+                {
+                    cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch2"];
+                }
+            }
+            else
+            {
+                if(indexPath.row==0)
+                {
+                    
+                    cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch1_p"];
+                }
+                else if(indexPath.row==[objChap.thematicData count]-1)
+                {
+                    cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch3_p"];
+                }
+                else
+                {
+                    cell1.imgTableCellBG.image=[UIImage imageNamed:@"SubTab_white_patch2_p"];
+                }
+                
+            }
         }
     }
 
@@ -324,17 +375,28 @@
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section{
     customView = [arrHeaderSection objectAtIndex:section];
     
-    if (currentOrientaion==UIInterfaceOrientationLandscapeRight||currentOrientaion==UIInterfaceOrientationLandscapeLeft) {
-        [customView.imgArrow setFrame:CGRectMake(720, 14, 27, 27)];
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        
     }
     else {
-         [customView.imgArrow setFrame:CGRectMake(570, 14, 27, 27)];
-    }
     
+        if (currentOrientaion==UIInterfaceOrientationLandscapeRight||currentOrientaion==UIInterfaceOrientationLandscapeLeft) {
+            [customView.imgArrow setFrame:CGRectMake(720, 14, 27, 27)];
+        }
+        else {
+             [customView.imgArrow setFrame:CGRectMake(570, 14, 27, 27)];
+        }
+    }
     return customView;
 }
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 55;
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return 32;
+    }
+    else {
+        return 55;
+    }
+    return 0.0;
 }
 - (void)sectionTouched:(UIButton*)sender{
     Chapters *objChap = (Chapters *)[arr_chaptersTestAndFlashcard objectAtIndex:[sender tag]];

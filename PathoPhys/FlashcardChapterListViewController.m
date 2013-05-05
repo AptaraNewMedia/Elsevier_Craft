@@ -168,6 +168,15 @@
     
     return cell;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return 32.0;
+    }else {
+        return 55.0;
+    }
+    return 0;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //md.str_Title = [arr_chapterList objectAtIndex:indexPath.row];
     //[md Fn_SubChapterList];
