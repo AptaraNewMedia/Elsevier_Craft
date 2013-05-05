@@ -121,7 +121,18 @@
     [customLeftBar.btnBack addTarget:self action:@selector(onBack:) forControlEvents:UIControlEventTouchUpInside];
     customLeftBar.btnBack.hidden = YES;
     
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(220, 0, 100, 44)];
+        
+        customRightBar.btnScore.frame = CGRectMake(0.0, 7.0, 30, 30);
+        customRightBar.btnNote.frame = CGRectMake(35.0, 7.0, 30, 30);
+        customRightBar.btnInfo.frame = CGRectMake(70.0, 7.0, 30, 30);
+        
+    }
+    else {
     customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(0, 0, 130, 44)];
+    }
+    
     UIBarButtonItem *btnBar = [[UIBarButtonItem alloc] initWithCustomView:customRightBar];
     self.navigationItem.rightBarButtonItem = btnBar;
     NOTES_MODE = 0;   
@@ -370,6 +381,10 @@
 }
 -(NSUInteger)supportedInterfaceOrientations
 {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
+    
     NSUInteger mask= UIInterfaceOrientationMaskPortrait;
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     currentOrientaion = interfaceOrientation;
@@ -397,6 +412,10 @@
     return UIInterfaceOrientationMaskAll;
 }
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
+    
     currentOrientaion = interfaceOrientation;
     if(interfaceOrientation==UIInterfaceOrientationLandscapeLeft){
         [self Fn_rotateLandscape];
