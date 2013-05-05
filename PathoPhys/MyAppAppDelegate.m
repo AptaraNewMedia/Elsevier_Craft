@@ -166,12 +166,10 @@ UITextView *txt_feedback;
 -(void) Fn_AddAbout:(int)index{
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         aboutUsView = [[AboutUsViewController alloc] initWithNibName:@"AboutUsViewController_iPhone" bundle:nil];
-        NSLog(@"iPhone");
     }
     else{
         aboutUsView = [[AboutUsViewController alloc] initWithNibName:@"AboutUsViewController_iPad" bundle:nil];
         [aboutUsView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
-        NSLog(@"iPad");
     }
     [self.window.rootViewController.view addSubview:aboutUsView.view];
     
@@ -358,6 +356,10 @@ UITextView *txt_feedback;
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
+    
     // You do not need this method if you are not supporting earlier iOS Versions
     DEVICE_ORIENTATION = interfaceOrientation;
     return [self.selectedViewController shouldAutorotateToInterfaceOrientation:interfaceOrientation];
@@ -365,6 +367,10 @@ UITextView *txt_feedback;
 
 -(NSUInteger)supportedInterfaceOrientations
 {
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
+
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     DEVICE_ORIENTATION = interfaceOrientation;    
     return [self.selectedViewController supportedInterfaceOrientations];
@@ -382,6 +388,9 @@ UITextView *txt_feedback;
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
     // You do not need this method if you are not supporting earlier iOS Versions
     DEVICE_ORIENTATION = interfaceOrientation;
     [md Fn_CallPopupOrientaion];
@@ -390,7 +399,11 @@ UITextView *txt_feedback;
 
 -(NSUInteger)supportedInterfaceOrientations
 {
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
 
+    
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     DEVICE_ORIENTATION = interfaceOrientation;
     //NSLog(@"Navigation Orientation   %d", DEVICE_ORIENTATION);

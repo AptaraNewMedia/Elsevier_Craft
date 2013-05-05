@@ -616,6 +616,11 @@
 		87C9EBBE17361C7600888E20 /* iph_test_icon_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C9EBB217361C7600888E20 /* iph_test_icon_small@2x.png */; };
 		87C9EBC11736262400888E20 /* plan_common_big_box.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C9EBBF1736262400888E20 /* plan_common_big_box.png */; };
 		87C9EBC21736262400888E20 /* plan_common_big_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C9EBC01736262400888E20 /* plan_common_big_box@2x.png */; };
+		87C9EBC4173632A100888E20 /* FlashcardChapterListViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87C9EBC3173632A100888E20 /* FlashcardChapterListViewController_iPhone.xib */; };
+		87C9EBC8173633BC00888E20 /* iph_img_chapter_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C9EBC6173633BC00888E20 /* iph_img_chapter_bg.png */; };
+		87C9EBC9173633BC00888E20 /* iph_img_chapter_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C9EBC7173633BC00888E20 /* iph_img_chapter_bg@2x.png */; };
+		87C9EBCB1736356800888E20 /* CasestudyChapterListViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87C9EBCA1736356800888E20 /* CasestudyChapterListViewController_iPhone.xib */; };
+		87C9EBCD1736357500888E20 /* TestyourselfChapterListViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87C9EBCC1736357500888E20 /* TestyourselfChapterListViewController_iPhone.xib */; };
 		87D285B5171EA26B0077E832 /* Feedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D285B4171EA26B0077E832 /* Feedback.m */; };
 		87E594C4171682FE004B3B4A /* CustomRightBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 87E594C3171682FE004B3B4A /* CustomRightBarItem.m */; };
 		87E594D01716CE29004B3B4A /* QuizTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 87E594CF1716CE29004B3B4A /* QuizTrack.m */; };
@@ -1497,6 +1502,11 @@
 		87C9EBB217361C7600888E20 /* iph_test_icon_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iph_test_icon_small@2x.png"; sourceTree = "<group>"; };
 		87C9EBBF1736262400888E20 /* plan_common_big_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plan_common_big_box.png; sourceTree = "<group>"; };
 		87C9EBC01736262400888E20 /* plan_common_big_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plan_common_big_box@2x.png"; sourceTree = "<group>"; };
+		87C9EBC3173632A100888E20 /* FlashcardChapterListViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlashcardChapterListViewController_iPhone.xib; sourceTree = "<group>"; };
+		87C9EBC6173633BC00888E20 /* iph_img_chapter_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iph_img_chapter_bg.png; sourceTree = "<group>"; };
+		87C9EBC7173633BC00888E20 /* iph_img_chapter_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iph_img_chapter_bg@2x.png"; sourceTree = "<group>"; };
+		87C9EBCA1736356800888E20 /* CasestudyChapterListViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CasestudyChapterListViewController_iPhone.xib; sourceTree = "<group>"; };
+		87C9EBCC1736357500888E20 /* TestyourselfChapterListViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestyourselfChapterListViewController_iPhone.xib; sourceTree = "<group>"; };
 		87D285B3171EA26B0077E832 /* Feedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feedback.h; sourceTree = "<group>"; };
 		87D285B4171EA26B0077E832 /* Feedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feedback.m; sourceTree = "<group>"; };
 		87E594C2171682FE004B3B4A /* CustomRightBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRightBarItem.h; sourceTree = "<group>"; };
@@ -1817,6 +1827,7 @@
 			isa = PBXGroup;
 			children = (
 				87F9DBAB1712CFB7005E57EF /* FlashcardChapterListViewController_iPad.xib */,
+				87C9EBC3173632A100888E20 /* FlashcardChapterListViewController_iPhone.xib */,
 				87F9DBAC1712CFB7005E57EF /* FlashcardChapterListViewController.h */,
 				87F9DBAD1712CFB7005E57EF /* FlashcardChapterListViewController.m */,
 				87EF50151714476B00B5D435 /* FlashCardsViewController.h */,
@@ -1836,6 +1847,7 @@
 			isa = PBXGroup;
 			children = (
 				87F9DB9C1712CE26005E57EF /* TestyourselfChapterListViewController_iPad.xib */,
+				87C9EBCC1736357500888E20 /* TestyourselfChapterListViewController_iPhone.xib */,
 				87F9DB9D1712CE26005E57EF /* TestyourselfChapterListViewController.h */,
 				87F9DB9E1712CE26005E57EF /* TestyourselfChapterListViewController.m */,
 				87F9DB9F1712CE26005E57EF /* TestYourSelfViewController_iPad.xib */,
@@ -1861,6 +1873,7 @@
 			isa = PBXGroup;
 			children = (
 				87F9DBA61712CEF8005E57EF /* CasestudyChapterListViewController_iPad.xib */,
+				87C9EBCA1736356800888E20 /* CasestudyChapterListViewController_iPhone.xib */,
 				87F9DBA71712CEF8005E57EF /* CasestudyChapterListViewController.h */,
 				87F9DBA81712CEF8005E57EF /* CasestudyChapterListViewController.m */,
 				874A236617213D230052157E /* CaseStudyViewController_iPad.xib */,
@@ -2899,6 +2912,7 @@
 		87C9EB9A173619B700888E20 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				87C9EBC5173633BC00888E20 /* Chapterlist */,
 				87C9EBA517361C7600888E20 /* common */,
 				87C9EBAA17361C7600888E20 /* Menu */,
 			);
@@ -2931,6 +2945,15 @@
 				87C9EBB217361C7600888E20 /* iph_test_icon_small@2x.png */,
 			);
 			path = Menu;
+			sourceTree = "<group>";
+		};
+		87C9EBC5173633BC00888E20 /* Chapterlist */ = {
+			isa = PBXGroup;
+			children = (
+				87C9EBC6173633BC00888E20 /* iph_img_chapter_bg.png */,
+				87C9EBC7173633BC00888E20 /* iph_img_chapter_bg@2x.png */,
+			);
+			path = Chapterlist;
 			sourceTree = "<group>";
 		};
 		87ED0A70172ABC7C002F5B6E /* Notelist */ = {
@@ -3957,6 +3980,11 @@
 				87C9EBBE17361C7600888E20 /* iph_test_icon_small@2x.png in Resources */,
 				87C9EBC11736262400888E20 /* plan_common_big_box.png in Resources */,
 				87C9EBC21736262400888E20 /* plan_common_big_box@2x.png in Resources */,
+				87C9EBC4173632A100888E20 /* FlashcardChapterListViewController_iPhone.xib in Resources */,
+				87C9EBC8173633BC00888E20 /* iph_img_chapter_bg.png in Resources */,
+				87C9EBC9173633BC00888E20 /* iph_img_chapter_bg@2x.png in Resources */,
+				87C9EBCB1736356800888E20 /* CasestudyChapterListViewController_iPhone.xib in Resources */,
+				87C9EBCD1736357500888E20 /* TestyourselfChapterListViewController_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
