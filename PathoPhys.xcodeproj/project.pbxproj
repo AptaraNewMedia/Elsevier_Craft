@@ -854,6 +854,14 @@
 		87FA12381737A68100678A52 /* iph_flashcard_icon_big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87FA12321737A68100678A52 /* iph_flashcard_icon_big@2x.png */; };
 		87FA12391737A68100678A52 /* iph_test_icon_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 87FA12331737A68100678A52 /* iph_test_icon_big.png */; };
 		87FA123A1737A68100678A52 /* iph_test_icon_big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87FA12341737A68100678A52 /* iph_test_icon_big@2x.png */; };
+		87FA123D1737C08B00678A52 /* DragDropRadioViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FA123B1737C08B00678A52 /* DragDropRadioViewController_iPhone.xib */; };
+		87FA123E1737C08B00678A52 /* DragDropRadioViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FA123C1737C08B00678A52 /* DragDropRadioViewController_iPhone5.xib */; };
+		87FA12411737C0A800678A52 /* MatchPairsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FA123F1737C0A800678A52 /* MatchPairsViewController_iPhone.xib */; };
+		87FA12421737C0A800678A52 /* MatchPairsViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FA12401737C0A800678A52 /* MatchPairsViewController_iPhone5.xib */; };
+		87FA12451737C0FF00678A52 /* RadioGroupViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FA12431737C0FF00678A52 /* RadioGroupViewController_iPhone.xib */; };
+		87FA12461737C0FF00678A52 /* RadioGroupViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FA12441737C0FF00678A52 /* RadioGroupViewController_iPhone5.xib */; };
+		87FA124A1737C68C00678A52 /* Question_Box_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 87FA12481737C68C00678A52 /* Question_Box_bg.png */; };
+		87FA124B1737C68C00678A52 /* Question_Box_bg@x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87FA12491737C68C00678A52 /* Question_Box_bg@x.png */; };
 		87FA7EFD171CEB9B00558B8A /* MCSSCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FA7EFB171CEB9B00558B8A /* MCSSCell_iPad.m */; };
 		87FA7EFE171CEB9B00558B8A /* MCSSCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FA7EFC171CEB9B00558B8A /* MCSSCell_iPad.xib */; };
 		87FD9B661726554F0004B68D /* DragDropRadio.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FD9B651726554F0004B68D /* DragDropRadio.m */; };
@@ -1865,6 +1873,14 @@
 		87FA12321737A68100678A52 /* iph_flashcard_icon_big@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iph_flashcard_icon_big@2x.png"; sourceTree = "<group>"; };
 		87FA12331737A68100678A52 /* iph_test_icon_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iph_test_icon_big.png; sourceTree = "<group>"; };
 		87FA12341737A68100678A52 /* iph_test_icon_big@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iph_test_icon_big@2x.png"; sourceTree = "<group>"; };
+		87FA123B1737C08B00678A52 /* DragDropRadioViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DragDropRadioViewController_iPhone.xib; sourceTree = "<group>"; };
+		87FA123C1737C08B00678A52 /* DragDropRadioViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DragDropRadioViewController_iPhone5.xib; sourceTree = "<group>"; };
+		87FA123F1737C0A800678A52 /* MatchPairsViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchPairsViewController_iPhone.xib; sourceTree = "<group>"; };
+		87FA12401737C0A800678A52 /* MatchPairsViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchPairsViewController_iPhone5.xib; sourceTree = "<group>"; };
+		87FA12431737C0FF00678A52 /* RadioGroupViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RadioGroupViewController_iPhone.xib; sourceTree = "<group>"; };
+		87FA12441737C0FF00678A52 /* RadioGroupViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RadioGroupViewController_iPhone5.xib; sourceTree = "<group>"; };
+		87FA12481737C68C00678A52 /* Question_Box_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Question_Box_bg.png; sourceTree = "<group>"; };
+		87FA12491737C68C00678A52 /* Question_Box_bg@x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Question_Box_bg@x.png"; sourceTree = "<group>"; };
 		87FA7EFA171CEB9B00558B8A /* MCSSCell_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSSCell_iPad.h; sourceTree = "<group>"; };
 		87FA7EFB171CEB9B00558B8A /* MCSSCell_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSSCell_iPad.m; sourceTree = "<group>"; };
 		87FA7EFC171CEB9B00558B8A /* MCSSCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCSSCell_iPad.xib; sourceTree = "<group>"; };
@@ -3147,6 +3163,7 @@
 		87C9EB9A173619B700888E20 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				87FA12471737C68B00678A52 /* Questions */,
 				87C3CB5317367BC500EFE770 /* Flashcard */,
 				87C9EBC5173633BC00888E20 /* Chapterlist */,
 				87C9EBA517361C7600888E20 /* common */,
@@ -3403,6 +3420,8 @@
 				874972AA17192EA9001B90DA /* RadioGroupView.h */,
 				874972AB17192EA9001B90DA /* RadioGroupView.m */,
 				87F67EB01711B2B30082C5CF /* RadioGroupViewController_iPad.xib */,
+				87FA12431737C0FF00678A52 /* RadioGroupViewController_iPhone.xib */,
+				87FA12441737C0FF00678A52 /* RadioGroupViewController_iPhone5.xib */,
 			);
 			name = RadioGroup;
 			sourceTree = "<group>";
@@ -3472,6 +3491,8 @@
 				87F67ED41711B3080082C5CF /* MatchPairsViewController.h */,
 				87F67ED51711B3080082C5CF /* MatchPairsViewController.m */,
 				87F67ED61711B3080082C5CF /* MatchPairsViewController_iPad.xib */,
+				87FA123F1737C0A800678A52 /* MatchPairsViewController_iPhone.xib */,
+				87FA12401737C0A800678A52 /* MatchPairsViewController_iPhone5.xib */,
 				87F67ED71711B3080082C5CF /* LeftMatchView_IPad.h */,
 				87F67ED81711B3080082C5CF /* LeftMatchView_IPad.m */,
 				87F67ED91711B3080082C5CF /* RightMatchView_Ipad.h */,
@@ -3541,12 +3562,23 @@
 			name = Component;
 			sourceTree = "<group>";
 		};
+		87FA12471737C68B00678A52 /* Questions */ = {
+			isa = PBXGroup;
+			children = (
+				87FA12481737C68C00678A52 /* Question_Box_bg.png */,
+				87FA12491737C68C00678A52 /* Question_Box_bg@x.png */,
+			);
+			path = Questions;
+			sourceTree = "<group>";
+		};
 		87FD9B681726559B0004B68D /* DragDrop&RB */ = {
 			isa = PBXGroup;
 			children = (
 				87FD9B69172655A60004B68D /* DragDropRadioViewController.h */,
 				87FD9B6A172655A60004B68D /* DragDropRadioViewController.m */,
 				87FD9B6B172655A60004B68D /* DragDropRadioViewController_iPad.xib */,
+				87FA123B1737C08B00678A52 /* DragDropRadioViewController_iPhone.xib */,
+				87FA123C1737C08B00678A52 /* DragDropRadioViewController_iPhone5.xib */,
 				87FD9B6E17265F450004B68D /* RadioView.h */,
 				87FD9B6F17265F450004B68D /* RadioView.m */,
 			);
@@ -4337,6 +4369,14 @@
 				87FA12381737A68100678A52 /* iph_flashcard_icon_big@2x.png in Resources */,
 				87FA12391737A68100678A52 /* iph_test_icon_big.png in Resources */,
 				87FA123A1737A68100678A52 /* iph_test_icon_big@2x.png in Resources */,
+				87FA123D1737C08B00678A52 /* DragDropRadioViewController_iPhone.xib in Resources */,
+				87FA123E1737C08B00678A52 /* DragDropRadioViewController_iPhone5.xib in Resources */,
+				87FA12411737C0A800678A52 /* MatchPairsViewController_iPhone.xib in Resources */,
+				87FA12421737C0A800678A52 /* MatchPairsViewController_iPhone5.xib in Resources */,
+				87FA12451737C0FF00678A52 /* RadioGroupViewController_iPhone.xib in Resources */,
+				87FA12461737C0FF00678A52 /* RadioGroupViewController_iPhone5.xib in Resources */,
+				87FA124A1737C68C00678A52 /* Question_Box_bg.png in Resources */,
+				87FA124B1737C68C00678A52 /* Question_Box_bg@x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
