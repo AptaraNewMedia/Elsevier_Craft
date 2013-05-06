@@ -428,20 +428,33 @@
             
             flipViewButton.tag = objFlashcardSet.intIndex;
             flipViewButton.backgroundColor = COLOR_CLEAR;
+//            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+//                [flipViewButton setBackgroundImage:[UIImage imageNamed:@"Big_grey_flash_card.png"] forState:UIControlStateNormal];            }
+//            else {
+//                [flipViewButton setBackgroundImage:[UIImage imageNamed:@"img_flashcard_front.png"] forState:UIControlStateNormal];
+//            }
+            
             if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-                [flipViewButton setBackgroundImage:[UIImage imageNamed:@"Big_grey_flash_card.png"] forState:UIControlStateNormal];            }
-            else {
-                [flipViewButton setBackgroundImage:[UIImage imageNamed:@"img_flashcard_front.png"] forState:UIControlStateNormal];
+                
+                flipViewButton.frame = CGRectMake(xOrigin, 0, 172, 225);
+                flipViewButton.textLabel.frame = CGRectMake(5, 5, 160, 210);
+                flipViewButton.textLabel.font = FONT_12;
+                [flipViewButton setBackgroundImage:[UIImage imageNamed:@"Big_grey_flash_card.png"] forState:UIControlStateNormal];
+                xOrigin = xOrigin + 172;
             }
+            else {
+                xOrigin = xOrigin + 382;
+            }
+
+            
+            
             
             [flipViewButton addTarget:self action:@selector(onImageClick:) forControlEvents:UIControlEventTouchUpInside];
             flipViewButton.selectedButton = 0;
-            
             [scrollViewMiddle addSubview:flipViewButton];
-            
             [arrThumbsLarge addObject:flipViewButton];
             
-            xOrigin = xOrigin + 382;
+            //xOrigin = xOrigin + 382;
         }
         
     }
@@ -753,15 +766,20 @@
 // TableView Delegate Methods
 //=======================================================================================
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    int returnCount;
+    
         if (tableView==tblAlphabet)
         {
-            return 27;
+            returnCount =27;
         }
         else
         {
-            return [arr_chaptersTestAndFlashcard count]; 
+            returnCount =[arr_chaptersTestAndFlashcard count];
+            //return [arr_chaptersTestAndFlashcard count];
         }
-    return 0;
+    NSLog(@"Return Count %d",returnCount);
+    return returnCount;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -771,6 +789,9 @@
     if (tableView==tblAlphabet)
     {
 
+        NSLog(@"Counter: %d",indexPath.row);
+        
+        
              if (cell == nil)
              {
                  cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
@@ -787,7 +808,9 @@
                  char letter = (char) indexPath.row + 64;
                  cell.textLabel.text = [NSString stringWithFormat:@"%c", letter];                 
              }
-             
+        
+             NSLog(@"Text: %@",cell.textLabel.text);
+        
              cell.textLabel.textAlignment = UITextAlignmentCenter;             
              UIImageView *selectionImage = [[UIImageView alloc] init];
              if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {                 
@@ -860,6 +883,8 @@
         else
         {
             [self fnResetThumnails:indexPath.row];
+
+            
         }
     }
     else
