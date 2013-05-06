@@ -222,7 +222,7 @@
         case QUESTION_TYPE_MATCHTERMS: {
             
             if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-                matchPairsView = [[MatchPairsViewController alloc] initWithNibName:@"MatchPairsViewController_iphone" bundle:nil];                
+                matchPairsView = [[MatchPairsViewController alloc] initWithNibName:@"MatchPairsViewController_iPhone" bundle:nil];                
             }
             else {
                 matchPairsView = [[MatchPairsViewController alloc] initWithNibName:@"MatchPairsViewController_iPad" bundle:nil];
