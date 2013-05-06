@@ -230,16 +230,26 @@ UITextView *txt_feedback;
 // Note Popup
 -(void) Fn_ShowNoteViewPopup{
     [self Fn_removeNoteViewPopup];
-    NotePopupView =[[NotesPopViewController alloc] initWithNibName:@"NotesPopViewController" bundle:nil];
-    [self.window.rootViewController.view addSubview:NotePopupView.view];
-    [NotePopupView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        NotePopupView =[[NotesPopViewController alloc] initWithNibName:@"NotesPopViewController_iPhone" bundle:nil];
+        [self.window.rootViewController.view addSubview:NotePopupView.view];
+    }
+    else
+    {
+        NotePopupView =[[NotesPopViewController alloc] initWithNibName:@"NotesPopViewController" bundle:nil];
+        [self.window.rootViewController.view addSubview:NotePopupView.view];
+        [NotePopupView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
+    }
+    
+    //    [self.window.rootViewController.view addSubview:NotePopupView.view];
     if (NOTES_MODE == 1)
         [NotePopupView.Bn_Addnote setTitle:@"Add Note" forState:UIControlStateNormal];
     else if (NOTES_MODE == 2)
-        [NotePopupView.Bn_Addnote setTitle:@"Edit Note" forState:UIControlStateNormal];    
+        [NotePopupView.Bn_Addnote setTitle:@"Edit Note" forState:UIControlStateNormal];
     else
         NotePopupView.Bn_Addnote.hidden = YES;
-    
     
 }
 -(void) Fn_removeNoteViewPopup{
@@ -249,9 +259,18 @@ UITextView *txt_feedback;
 // Info Popup
 -(void) Fn_ShowInfoViewPopup{
     [self Fn_removeInfoViewPopup];
-    InfoPopupView=[[InfoPopViewController alloc] initWithNibName:@"InfoPopViewController" bundle:nil];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        InfoPopupView=[[InfoPopViewController alloc] initWithNibName:@"InfoPopViewController_iPhone" bundle:nil];
+    }
+    else
+    {
+        InfoPopupView=[[InfoPopViewController alloc] initWithNibName:@"InfoPopViewController" bundle:nil];
+        [InfoPopupView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
+    }
+    
     [self.window.rootViewController.view addSubview:InfoPopupView.view];
-    [InfoPopupView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
 }
 -(void) Fn_removeInfoViewPopup{
     [InfoPopupView.view removeFromSuperview];

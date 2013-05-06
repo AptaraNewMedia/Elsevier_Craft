@@ -77,9 +77,15 @@
     arrTestYourSelf = [db fnGetTestyourSelfQuestions:intCurrentTestYourSelf_ChapterId AndThematicId:intCurrentTestYourSelf_ThematicId];
     
     //
-    viewMain = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1005, 600)];
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        viewMain = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 300)];
+    }
+    else {
+        viewMain = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1005, 600)];
+    }
     viewMain.backgroundColor = COLOR_CLEAR;
     [self.view addSubview:viewMain];
+    //viewMain.hidden = YES;
     
     //
     bnShowScore.hidden = YES;

@@ -357,9 +357,9 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="L_Que-Box_redio_btn_half.png">{16, 16}</string>
-			<string key="L_Que-Box_redio_btn_select_half.png">{16, 16}</string>
-			<string key="btn_feedback.png">{16, 16}</string>
+			<string key="L_Que-Box_redio_btn_half.png">{516, 80}</string>
+			<string key="L_Que-Box_redio_btn_select_half.png">{516, 80}</string>
+			<string key="btn_feedback.png">{30, 38}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1926</string>
 	</data>

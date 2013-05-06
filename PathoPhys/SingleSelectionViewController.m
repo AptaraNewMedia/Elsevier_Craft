@@ -316,7 +316,12 @@
             NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
             sa = [sa lowercaseString];
             if (![ss isEqualToString:sa]) {
-                [cell.imgAns setImage:[UIImage imageNamed:@"img_false.png"]];
+                if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                    [cell.imgAns setImage:[UIImage imageNamed:@"false_Without_Border.png"]];                    
+                }
+                else {
+                    [cell.imgAns setImage:[UIImage imageNamed:@"img_false.png"]];
+                }
                 NSString *feeback = [self fn_getFeeback:indexPath.row];
                 if (feeback.length > 0) {
                     cell.btnFeedback.hidden = NO;
@@ -324,7 +329,12 @@
                 }
                 
             }else {
-                [cell.imgAns setImage:[UIImage imageNamed:@"img_true.png"]];
+                if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                    [cell.imgAns setImage:[UIImage imageNamed:@"True_Btn_Without_Border.png"]];
+                }
+                else {
+                    [cell.imgAns setImage:[UIImage imageNamed:@"img_true.png"]];
+                }
                 NSString *feeback = [self fn_getFeeback:indexPath.row];
                 if (feeback.length > 0) {
                     cell.btnFeedback.hidden = NO;
@@ -469,6 +479,13 @@
     MCSSCell_iPad *cell = (MCSSCell_iPad *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     if(cell == nil) {
         
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            NSArray *cellArray2 = [[NSBundle mainBundle] loadNibNamed:@"MCSSCell_iPhone" owner:self options:nil];
+            cell = [cellArray2 lastObject];
+        }
+        else {
+        
+        
         if (currentOrientaion==1||currentOrientaion==2) {
             NSArray *cellArray2 = [[NSBundle mainBundle] loadNibNamed:@"MCSSCell_iPad_P" owner:self options:nil];
             cell = [cellArray2 lastObject];            
@@ -484,6 +501,7 @@
                 cell = [cellArray2 lastObject];
             }
         }
+        }
         
         UIView *v = [[UIView alloc] init];
     	v.backgroundColor = [UIColor clearColor];
@@ -494,42 +512,55 @@
     cell.btnInvisible.backgroundColor = COLOR_CLEAR;
     // Set Images BG
     
-    if (currentOrientaion==1||currentOrientaion==2) {
-        
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
         if (MultipleSelect) {
-            cell.imgTableCellBG.image=[UIImage imageNamed:@"P_Question_multiple.png"];
-            cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"P_Question_multiple_select.png"];
+            cell.imgTableCellBG.image=[UIImage imageNamed:@"question_multiple_btn.png"];
+            cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"question_multiple_btn_select.png"];
         }
         else {
-            cell.imgTableCellBG.image=[UIImage imageNamed:@"P_Question_redio_btn.png"];
-            cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"P_Question_redio_btn_select.png"];
+            cell.imgTableCellBG.image=[UIImage imageNamed:@"question_redio_btn.png"];
+            cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"question_redio_btn_select.png"];
         }
     }
     else {
-        
-        if (isImage) {
+    
+        if (currentOrientaion==1||currentOrientaion==2) {
+            
             if (MultipleSelect) {
-                cell.imgTableCellBG.image=[UIImage imageNamed:@"L_Que-Box_Multiple_half.png"];
-                cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"L_Que-Box_Multiple_select_half.png"];
+                cell.imgTableCellBG.image=[UIImage imageNamed:@"P_Question_multiple.png"];
+                cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"P_Question_multiple_select.png"];
             }
             else {
-                cell.imgTableCellBG.image=[UIImage imageNamed:@"L_Que-Box_redio_btn_half.png"];
-                cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"L_Que-Box_redio_btn_select_half.png"];
+                cell.imgTableCellBG.image=[UIImage imageNamed:@"P_Question_redio_btn.png"];
+                cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"P_Question_redio_btn_select.png"];
             }
-            
         }
         else {
-            if (MultipleSelect) {
-                cell.imgTableCellBG.image=[UIImage imageNamed:@"L_Que-Box_Multiple.png"];
-                cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"L_Que-Box_Multiple_select.png"];
+            
+            if (isImage) {
+                if (MultipleSelect) {
+                    cell.imgTableCellBG.image=[UIImage imageNamed:@"L_Que-Box_Multiple_half.png"];
+                    cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"L_Que-Box_Multiple_select_half.png"];
+                }
+                else {
+                    cell.imgTableCellBG.image=[UIImage imageNamed:@"L_Que-Box_redio_btn_half.png"];
+                    cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"L_Que-Box_redio_btn_select_half.png"];
+                }
+                
             }
             else {
-                cell.imgTableCellBG.image=[UIImage imageNamed:@"L_Que-Box_redio_btn.png"];
-                cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"L_Que-Box_redio_btn_select.png"];
+                if (MultipleSelect) {
+                    cell.imgTableCellBG.image=[UIImage imageNamed:@"L_Que-Box_Multiple.png"];
+                    cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"L_Que-Box_Multiple_select.png"];
+                }
+                else {
+                    cell.imgTableCellBG.image=[UIImage imageNamed:@"L_Que-Box_redio_btn.png"];
+                    cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"L_Que-Box_redio_btn_select.png"];
+                }
             }
         }
-    }
     
+    }
     if (selectedCells) {
         
         if ([selectedCells containsObject:[NSNumber numberWithInt:indexPath.row]]) {
@@ -556,6 +587,11 @@
     cell.btnFeedback.tag = indexPath.row;
     [cell.btnFeedback addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
     
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        cell.lblOptionName.font = FONT_12;
+        cell.lblAlphabet.font = FONT_12;
+    }
+    
     [cellArray addObject:cell];
     
     if (indexPath.row == [objMCSS.arrOptions count] - 1) {
@@ -569,12 +605,17 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     float height = 55;
-    if (currentOrientaion == 1 || currentOrientaion == 2) {
-        height = 70;
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        height = 50;
     }
     else {
-        if (isImage) {
-            height = 80;
+        if (currentOrientaion == 1 || currentOrientaion == 2) {
+            height = 70;
+        }
+        else {
+            if (isImage) {
+                height = 80;
+            }
         }
     }
     return height;

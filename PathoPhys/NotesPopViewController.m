@@ -38,12 +38,23 @@
 
     [Bn_Addnote setTitleColor:COLOR_BottomGrayButton forState:UIControlStateNormal];
     [Bn_Addnote setTitleColor:COLOR_BottomBlueButton forState:UIControlStateHighlighted];
-    Bn_Addnote.titleLabel.font=FONT_14;
 
-    
     [Bn_ViewNote setTitleColor:COLOR_BottomGrayButton forState:UIControlStateNormal];
     [Bn_ViewNote setTitleColor:COLOR_BottomBlueButton forState:UIControlStateHighlighted];
-    Bn_ViewNote.titleLabel.font=FONT_14;
+
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        self.view.frame=CGRectMake(00, 44, 320, 392);        
+        Bn_Addnote.titleLabel.font=FONT_10;
+        Bn_ViewNote.titleLabel.font=FONT_10;
+    }
+    else
+    {
+        Bn_Addnote.titleLabel.font=FONT_14;
+        Bn_ViewNote.titleLabel.font=FONT_14;
+    }
+    
+
 }
 
 -(IBAction)Bn_BGButton_Tapped:(id)sender
@@ -68,6 +79,9 @@
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
     if(interfaceOrientation==UIInterfaceOrientationLandscapeLeft){
         [self Fn_rotateLandscape];
     }
