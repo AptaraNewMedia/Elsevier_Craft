@@ -49,16 +49,26 @@
     //self.trackedViewName = @"Menu Screen";
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        lblFlashcard.font = FONT_12;
-        lblTestyorself.font = FONT_12;
-        lblCasestudy.font = FONT_12;
-        lbl_Title.font = BOLD_FONT_20;
+        lblFlashcard.font = FONT_10;
+        lblTestyorself.font = FONT_10;
+        lblCasestudy.font = FONT_10;
+        lbl_Title.font = FONT_17;
+        
+        Bn_AbtAuthor.titleLabel.font = FONT_12;
+        Bn_AbtApp.titleLabel.font = FONT_12;
+        Bn_AbtElsevier.titleLabel.font = FONT_12;
+
     }
     else {
         lblFlashcard.font = FONT_18;
         lblTestyorself.font = FONT_18;
         lblCasestudy.font = FONT_18;
         lbl_Title.font = BOLD_FONT_20;
+        
+        Bn_AbtAuthor.titleLabel.font = FONT_17;
+        Bn_AbtApp.titleLabel.font = FONT_17;
+        Bn_AbtElsevier.titleLabel.font = FONT_17;
+        
     }
     
     lblFlashcard.textColor = COLOR_FlashcardHeadingText;
@@ -67,6 +77,9 @@
     lbl_Title.textColor = COLOR_WHITE;
     
     
+    Bn_AbtAuthor.titleLabel.textColor = COLOR_WHITE;
+    Bn_AbtApp.titleLabel.textColor = COLOR_WHITE;
+    Bn_AbtElsevier.titleLabel.textColor = COLOR_WHITE;
     
     /*
     NSDictionary *highlightedAttributes = [NSDictionary dictionaryWithObject:COLOR_BottomBlueButton forKey:UITextAttributeTextColor];
@@ -93,11 +106,11 @@
 - (void) fnAddNavigationItems
 {
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(220, 0, 100, 44)];
+        customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(230, 0, 90, 44)];
         
         customRightBar.btnScore.frame = CGRectMake(0.0, 7.0, 30, 30);
-        customRightBar.btnNote.frame = CGRectMake(35.0, 7.0, 30, 30);
-        customRightBar.btnInfo.frame = CGRectMake(70.0, 7.0, 30, 30);
+        customRightBar.btnNote.frame = CGRectMake(31.0, 7.0, 30, 30);
+        customRightBar.btnInfo.frame = CGRectMake(61.0, 7.0, 30, 30);
         
     }
     else {

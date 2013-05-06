@@ -132,11 +132,11 @@
     customLeftBar.btnBack.hidden = YES;
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(220, 0, 100, 44)];
+        customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(230, 0, 90, 44)];
         
         customRightBar.btnScore.frame = CGRectMake(0.0, 7.0, 30, 30);
-        customRightBar.btnNote.frame = CGRectMake(35.0, 7.0, 30, 30);
-        customRightBar.btnInfo.frame = CGRectMake(70.0, 7.0, 30, 30);
+        customRightBar.btnNote.frame = CGRectMake(31.0, 7.0, 30, 30);
+        customRightBar.btnInfo.frame = CGRectMake(61.0, 7.0, 30, 30);
         
     }
     else {

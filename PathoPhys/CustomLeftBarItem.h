@@ -11,5 +11,6 @@
 @interface CustomLeftBarItem : UIView
 
 @property (nonatomic, retain) UIButton *btnBack;
+@property (nonatomic, retain) UIButton *btnHome;
 
 @end

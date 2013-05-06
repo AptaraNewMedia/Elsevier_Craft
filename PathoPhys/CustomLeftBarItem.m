@@ -10,6 +10,7 @@
 
 @implementation CustomLeftBarItem
 @synthesize btnBack;
+@synthesize btnHome;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -18,7 +19,7 @@
         // Initialization code
         
         // Initialization code
-        UIButton *btnHome = [UIButton buttonWithType:UIButtonTypeCustom];
+        btnHome = [UIButton buttonWithType:UIButtonTypeCustom];
         btnHome.backgroundColor = COLOR_CLEAR;
         btnHome.frame = CGRectMake(10.0, 7.0, 39, 30);
         [btnHome setImage:[UIImage imageNamed:@"img_home_btn.png"] forState:UIControlStateNormal];

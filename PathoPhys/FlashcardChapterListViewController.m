@@ -93,11 +93,11 @@
     customLeftBar.btnBack.hidden = YES;
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(220, 0, 100, 44)];
+        customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(230, 0, 90, 44)];
         
         customRightBar.btnScore.frame = CGRectMake(0.0, 7.0, 30, 30);
-        customRightBar.btnNote.frame = CGRectMake(35.0, 7.0, 30, 30);
-        customRightBar.btnInfo.frame = CGRectMake(70.0, 7.0, 30, 30);
+        customRightBar.btnNote.frame = CGRectMake(31.0, 7.0, 30, 30);
+        customRightBar.btnInfo.frame = CGRectMake(61.0, 7.0, 30, 30);
         
     }
     else {
@@ -197,7 +197,14 @@
          cell1.imgTableCellBG.image=[UIImage imageNamed:@"Selected_chapter_tbl_row_center_p.png"];
     }
     
-    flashCardsViewController = [[FlashCardsViewController alloc] initWithNibName:@"FlashCardsViewController_iPad" bundle:nil];
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        flashCardsViewController = [[FlashCardsViewController alloc] initWithNibName:@"FlashCardsViewController_iPhone" bundle:nil];
+        
+    }
+    else {
+    
+        flashCardsViewController = [[FlashCardsViewController alloc] initWithNibName:@"FlashCardsViewController_iPad" bundle:nil];
+    }
     
     [self.navigationController pushViewController:flashCardsViewController animated:YES];
 }

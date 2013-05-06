@@ -60,10 +60,37 @@
     
     // Do any additional setup after loading the view from its nib.
     scrollGallery.showsHorizontalScrollIndicator = NO;
-    scrollGallery.showsVerticalScrollIndicator = NO;
+    scrollGallery.showsVerticalScrollIndicator = NO;    
+
     scrollGallery.bounces = NO;
-   
-    scrollViewMiddle.frame = CGRectMake(scrollViewMiddle.frame.origin.x, scrollViewMiddle.frame.origin.y, 382, 600);
+
+    Bn_Alphabet.titleLabel.textColor = COLOR_WHITE;
+    Bn_ByChapter.titleLabel.textColor = COLOR_WHITE;
+    Bn_Shuffle.titleLabel.textColor = COLOR_WHITE;
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        scrollViewMiddle.frame = CGRectMake(scrollViewMiddle.frame.origin.x, scrollViewMiddle.frame.origin.y, 172, 350);
+        
+        Bn_Alphabet.titleLabel.font = FONT_10;
+        Bn_ByChapter.titleLabel.font = FONT_10;
+        Bn_Shuffle.titleLabel.font = FONT_10;
+        
+        lblChapterList.font = FONT_12;
+        lblQuestionNo.font = FONT_10;
+        
+        
+    }
+    else {
+        scrollViewMiddle.frame = CGRectMake(scrollViewMiddle.frame.origin.x, scrollViewMiddle.frame.origin.y, 382, 600);
+        
+        Bn_Alphabet.titleLabel.font = FONT_17;
+        Bn_ByChapter.titleLabel.font = FONT_17;
+        Bn_Shuffle.titleLabel.font = FONT_17;
+        
+        lblChapterList.font = FONT_17;
+        lblQuestionNo.font = FONT_17;
+        
+    }
     
     [self fnAddNavigationItems];
     
@@ -80,7 +107,6 @@
     view_chapterTbl.hidden=YES;
     btn_popupRemove.hidden=YES;
 
-    lblQuestionNo.font = FONT_17;
     lblQuestionNo.textColor = COLOR_BLACK;
     
     [self fnGetFlashcardData];
@@ -130,12 +156,30 @@
     
     [self.navigationController.navigationBar setTintColor:COLOR_BLUE];
     
-    customLeftBar = [[CustomLeftBarItem alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        customLeftBar = [[CustomLeftBarItem alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+        customLeftBar.btnHome.frame = CGRectMake(0, 7, 39, 30);
+        customLeftBar.btnBack.frame = CGRectMake(40, 7, 53, 30);
+        
+    }
+    else {
+        customLeftBar = [[CustomLeftBarItem alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+    }
     UIBarButtonItem *btnBar1 = [[UIBarButtonItem alloc] initWithCustomView:customLeftBar];
     self.navigationItem.leftBarButtonItem = btnBar1;
     [customLeftBar.btnBack addTarget:self action:@selector(onBack:) forControlEvents:UIControlEventTouchUpInside];
     
-    customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(0, 0, 130, 44)];
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(230, 0, 90, 44)];
+        
+        customRightBar.btnScore.frame = CGRectMake(0.0, 7.0, 30, 30);
+        customRightBar.btnNote.frame = CGRectMake(31.0, 7.0, 30, 30);
+        customRightBar.btnInfo.frame = CGRectMake(61.0, 7.0, 30, 30);
+        
+    }
+    else {
+        customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(0, 0, 130, 44)];
+    }
     UIBarButtonItem *btnBar = [[UIBarButtonItem alloc] initWithCustomView:customRightBar];
     self.navigationItem.rightBarButtonItem = btnBar;
 }
@@ -151,13 +195,21 @@
     
     flipViewButton = [arrThumbsLarge objectAtIndex:thumbIndex];
     flipViewButton.tag = objFlashcardSet.intIndex;    
-    flipViewButton.textLabel.frame = CGRectMake(55, 15, 270, 370);
     flipViewButton.textLabel.backgroundColor = COLOR_CLEAR;
     flipViewButton.textLabel.text = objFlashcardSet.strDefinition;
     flipViewButton.textLabel.textColor = COLOR_WHITE;
-    flipViewButton.textLabel.font = FONT_17;
-    [flipViewButton setBackgroundImage:[UIImage imageNamed:@"img_flashcard_back.png"] forState:UIControlStateNormal];
-    flipViewButton.selectedButton = 1;    
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        flipViewButton.textLabel.frame = CGRectMake(5, 5, 160, 210);
+        flipViewButton.textLabel.font = FONT_10;
+        [flipViewButton setBackgroundImage:[UIImage imageNamed:@"Big_blue_flash_card.png"] forState:UIControlStateNormal];
+    }
+    else {
+        flipViewButton.textLabel.frame = CGRectMake(55, 15, 270, 370);
+        flipViewButton.textLabel.font = FONT_17;
+        [flipViewButton setBackgroundImage:[UIImage imageNamed:@"img_flashcard_back.png"] forState:UIControlStateNormal];
+    }
+    flipViewButton.selectedButton = 1;
     
     lblQuestionNo.text = [NSString stringWithFormat:@"%d of %d", intCurrentQuestionIndex+1, intTotalQuestions];
     
@@ -170,7 +222,12 @@
 -(void) fnSetThumnailsLarge{
     
     int length = [arrFlashcards count];
-    scrollViewMiddle.contentSize = CGSizeMake(382*length, 415);
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        scrollViewMiddle.contentSize = CGSizeMake(172*length, 225);
+    }
+    else {
+        scrollViewMiddle.contentSize = CGSizeMake(382*length, 415);
+    }
     CGFloat xOrigin = 0;
     arrThumbsLarge = [[NSMutableArray alloc] init];
     pageControlBeingUsed = NO;    
@@ -194,14 +251,31 @@
         
         [arrThumbsLarge addObject:flipViewButton];
         
-        xOrigin = xOrigin + 382;
+        
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            
+            flipViewButton.frame = CGRectMake(xOrigin, 0, 172, 225);
+            flipViewButton.textLabel.frame = CGRectMake(5, 5, 160, 210);
+            flipViewButton.textLabel.font = FONT_12;
+            [flipViewButton setBackgroundImage:[UIImage imageNamed:@"Big_grey_flash_card.png"] forState:UIControlStateNormal];
+            xOrigin = xOrigin + 172;
+        }
+        else {
+            xOrigin = xOrigin + 382;
+        }
+        
     }
 
 }
 
 -(void) fnSetThumnails{
     int length = [arrFlashcards count];
-    scrollGallery.contentSize = CGSizeMake(115*length, 180);
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        scrollGallery.contentSize = CGSizeMake(66*length, 98);
+    }
+    else {
+        scrollGallery.contentSize = CGSizeMake(115*length, 180);
+    }
     CGFloat xOrigin = 0;
     arrThumbs = [[NSMutableArray alloc] init];
     for (int i=0; i<length; i++) {
@@ -224,7 +298,21 @@
         [bnThumb addTarget:self action:@selector(onImageThumbTapped:) forControlEvents:UIControlEventTouchUpInside];
         [arrThumbs addObject:bnThumb];
         [scrollGallery addSubview:bnThumb];
-        xOrigin = xOrigin + 115;
+        
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            bnThumb.frame = CGRectMake(xOrigin, 0, 66, 98);
+            bnThumb.txtLabel.frame = CGRectMake(5, 5, 55, 90);
+            bnThumb.txtLabel.font = FONT_10;
+            [bnThumb setImage:[UIImage imageNamed:@"small_flash_card.png"] forState:UIControlStateNormal];
+            [bnThumb setImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateHighlighted];
+            
+            xOrigin = xOrigin + 66;
+            
+        }
+        else {
+            xOrigin = xOrigin + 115;            
+        }
+        
     }
     
     intTotalQuestions = [arrThumbs count];
@@ -242,7 +330,14 @@
     }
     
     FlashcardButton *bn = [arrThumbs objectAtIndex:prevThumbTapped];
-    [bn setImage:[UIImage imageNamed:@"img_flashcard_thumb_highlight.png"] forState:UIControlStateNormal];
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        [bn setImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateNormal];
+    }
+    else {
+        [bn setImage:[UIImage imageNamed:@"img_flashcard_thumb_highlight.png"] forState:UIControlStateNormal];        
+    }
+    
     [self fnSetLargeImage:intCurrentQuestionIndex ThumbIndex:intCurrentQuestionIndex];
 }
 -(void) fnResetThumnails:(int)charno{
@@ -279,7 +374,19 @@
             [bnThumb addTarget:self action:@selector(onImageThumbTapped:) forControlEvents:UIControlEventTouchUpInside];
             [arrThumbs addObject:bnThumb];
             [scrollGallery addSubview:bnThumb];
-            xOrigin = xOrigin + 115;
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                bnThumb.frame = CGRectMake(xOrigin, 0, 66, 98);
+                bnThumb.txtLabel.frame = CGRectMake(5, 5, 55, 90);
+                bnThumb.txtLabel.font = FONT_10;
+                [bnThumb setImage:[UIImage imageNamed:@"small_flash_card.png"] forState:UIControlStateNormal];
+                [bnThumb setImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateHighlighted];
+                
+                xOrigin = xOrigin + 66;
+                
+            }
+            else {
+                xOrigin = xOrigin + 115;
+            }
         }
         intTotalQuestions = [arrThumbs count];
         intCurrentQuestionIndex = 0;
@@ -296,7 +403,14 @@
             btnLargeNext.enabled = YES;
         }
         FlashcardButton *bn = [arrThumbs objectAtIndex:prevThumbTapped];
-        [bn setImage:[UIImage imageNamed:@"img_flashcard_thumb_highlight.png"] forState:UIControlStateNormal];
+        
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            [bn setImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateNormal];            
+        }
+        else {
+            [bn setImage:[UIImage imageNamed:@"img_flashcard_thumb_highlight.png"] forState:UIControlStateNormal];
+        }
+        
         lblQuestionNo.text = [NSString stringWithFormat:@"%d of %d", intCurrentQuestionIndex+1, intTotalQuestions];
         
         
@@ -314,7 +428,12 @@
             
             flipViewButton.tag = objFlashcardSet.intIndex;
             flipViewButton.backgroundColor = COLOR_CLEAR;
-            [flipViewButton setBackgroundImage:[UIImage imageNamed:@"img_flashcard_front.png"] forState:UIControlStateNormal];
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                [flipViewButton setBackgroundImage:[UIImage imageNamed:@"Big_grey_flash_card.png"] forState:UIControlStateNormal];            }
+            else {
+                [flipViewButton setBackgroundImage:[UIImage imageNamed:@"img_flashcard_front.png"] forState:UIControlStateNormal];
+            }
+            
             [flipViewButton addTarget:self action:@selector(onImageClick:) forControlEvents:UIControlEventTouchUpInside];
             flipViewButton.selectedButton = 0;
             
@@ -349,13 +468,21 @@
 }
 -(void) fnThumbScrollerMove {
 	
-    int index = (intCurrentQuestionIndex/6);
-    if (DEVICE_ORIENTATION == 1 || DEVICE_ORIENTATION == 2) {
-        index = (intCurrentQuestionIndex/4);
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        int index = (intCurrentQuestionIndex/4);
+        
+        [scrollGallery setContentOffset:CGPointMake(index * scrollGallery.frame.size.width, 0) animated:YES];
+        [scrollViewMiddle setContentOffset:CGPointMake(intCurrentQuestionIndex*172, 0) animated:YES];
     }
-
-	[scrollGallery setContentOffset:CGPointMake(index * scrollGallery.frame.size.width, 0) animated:YES];
-    [scrollViewMiddle setContentOffset:CGPointMake(intCurrentQuestionIndex*382, 0) animated:YES];
+    else {
+        int index = (intCurrentQuestionIndex/6);
+        if (DEVICE_ORIENTATION == 1 || DEVICE_ORIENTATION == 2) {
+            index = (intCurrentQuestionIndex/4);
+        }
+        
+        [scrollGallery setContentOffset:CGPointMake(index * scrollGallery.frame.size.width, 0) animated:YES];
+        [scrollViewMiddle setContentOffset:CGPointMake(intCurrentQuestionIndex*382, 0) animated:YES];        
+    }
 }
 -(void) fnSetPreviousImage {
     if (prevFlipViewIndex != -1) {
@@ -366,12 +493,20 @@
         
         objFlashcardSet = (FlashcardsSet *)[arrFlashcards objectAtIndex:newflipViewButton.tag];
 
-        
-        newflipViewButton.textLabel.frame = CGRectMake(55, 15, 270, 370);
-        newflipViewButton.textLabel.font = FONT_25;
-        newflipViewButton.textLabel.text = objFlashcardSet.strKey;
-        newflipViewButton.selectedButton = 0;
-        [newflipViewButton setBackgroundImage:[UIImage imageNamed:@"img_flashcard_front.png"] forState:UIControlStateNormal];
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                newflipViewButton.textLabel.frame = CGRectMake(5, 5, 160, 210);
+                newflipViewButton.textLabel.font = FONT_12;
+                [newflipViewButton setBackgroundImage:[UIImage imageNamed:@"Big_grey_flash_card.png"] forState:UIControlStateNormal];
+
+            }
+            else {
+                newflipViewButton.textLabel.frame = CGRectMake(55, 15, 270, 370);
+                newflipViewButton.textLabel.font = FONT_25;
+                [newflipViewButton setBackgroundImage:[UIImage imageNamed:@"img_flashcard_front.png"] forState:UIControlStateNormal];
+            }
+            newflipViewButton.textLabel.text = objFlashcardSet.strKey;
+            newflipViewButton.selectedButton = 0;
+            
         }
     }
 }
@@ -385,9 +520,17 @@
     
     
     FlashcardButton *bn1 = [arrThumbs objectAtIndex:prevThumbTapped];
-    [bn1 setImage:[UIImage imageNamed:@"img_flashcard_thumb.png"] forState:UIControlStateNormal];
     FlashcardButton *bn2 = [arrThumbs objectAtIndex:[sender selectedButton]];
-    [bn2 setImage:[UIImage imageNamed:@"img_flashcard_thumb_highlight.png"] forState:UIControlStateNormal];
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        [bn1 setImage:[UIImage imageNamed:@"small_flash_card.png"] forState:UIControlStateNormal];
+        [bn2 setImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateNormal];
+        
+    }
+    else {
+        [bn1 setImage:[UIImage imageNamed:@"img_flashcard_thumb.png"] forState:UIControlStateNormal];
+        [bn2 setImage:[UIImage imageNamed:@"img_flashcard_thumb_highlight.png"] forState:UIControlStateNormal];
+    }
     
     if (intTotalQuestions == 1) {
         btnPrev.enabled = NO;
@@ -487,11 +630,20 @@
 		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:sender cache:YES];
 		[UIView commitAnimations];		
         
-        flipViewButton.textLabel.frame = CGRectMake(55, 15, 270, 370);
-        flipViewButton.textLabel.font = FONT_25;
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            flipViewButton.textLabel.frame = CGRectMake(5, 5, 160, 210);
+            flipViewButton.textLabel.font = FONT_12;
+            [flipViewButton setBackgroundImage:[UIImage imageNamed:@"Big_grey_flash_card.png"] forState:UIControlStateNormal];
+            
+        }
+        else {
+            flipViewButton.textLabel.frame = CGRectMake(55, 15, 270, 370);
+            flipViewButton.textLabel.font = FONT_25;
+            [flipViewButton setBackgroundImage:[UIImage imageNamed:@"img_flashcard_front.png"] forState:UIControlStateNormal];
+        }
+        
         flipViewButton.textLabel.text = objFlashcardSet.strKey;
         flipViewButton.selectedButton = 0;
-        [flipViewButton setBackgroundImage:[UIImage imageNamed:@"img_flashcard_front.png"] forState:UIControlStateNormal];                
 	}
 	else
 	{
@@ -501,13 +653,20 @@
 		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:sender cache:YES];
 		[UIView commitAnimations];		
         
-        flipViewButton.textLabel.frame = CGRectMake(55, 15, 270, 370);
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            flipViewButton.textLabel.frame = CGRectMake(5, 5, 160, 210);
+            flipViewButton.textLabel.font = FONT_10;
+            [flipViewButton setBackgroundImage:[UIImage imageNamed:@"Big_blue_flash_card.png"] forState:UIControlStateNormal];
+        }
+        else {
+            flipViewButton.textLabel.frame = CGRectMake(55, 15, 270, 370);
+            flipViewButton.textLabel.font = FONT_12;
+            [flipViewButton setBackgroundImage:[UIImage imageNamed:@"img_flashcard_back.png"] forState:UIControlStateNormal];
+        }
         flipViewButton.textLabel.backgroundColor = COLOR_CLEAR;
         flipViewButton.textLabel.text = objFlashcardSet.strDefinition;
         flipViewButton.textLabel.textColor = COLOR_WHITE;
-        flipViewButton.textLabel.font = FONT_17;
-        [flipViewButton setBackgroundImage:[UIImage imageNamed:@"img_flashcard_back.png"] forState:UIControlStateNormal];
-        flipViewButton.selectedButton = 1;       
+        flipViewButton.selectedButton = 1;
         
 	}
 }
@@ -530,7 +689,12 @@
         view_chapterTbl.hidden=YES;
         btn_popupRemove.hidden=YES;
         
-        [Bn_Alphabet setBackgroundImage:[UIImage imageNamed:@"Flash_Card_blue_01.png"] forState:UIControlStateNormal];
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            [Bn_Alphabet setBackgroundImage:[UIImage imageNamed:@"flash_card_Segment_BG_01.png"] forState:UIControlStateNormal];
+        }
+        else {
+            [Bn_Alphabet setBackgroundImage:[UIImage imageNamed:@"Flash_Card_blue_01.png"] forState:UIControlStateNormal];
+        }
         
         arrFlashcards = [db fnGetSortedFlashcards:intCurrentFlashcard_ChapterId];        
         
@@ -545,7 +709,12 @@
         view_chapterTbl.hidden=YES;
         btn_popupRemove.hidden=YES;        
 
-        [Bn_Shuffle setBackgroundImage:[UIImage imageNamed:@"Flash_Card_blue_02.png"] forState:UIControlStateNormal];
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            [Bn_Shuffle setBackgroundImage:[UIImage imageNamed:@"flash_card_Segment_BG_02.png"] forState:UIControlStateNormal];            
+        }
+        else {
+            [Bn_Shuffle setBackgroundImage:[UIImage imageNamed:@"Flash_Card_blue_02.png"] forState:UIControlStateNormal];
+        }
         
         NSMutableArray *array = [NSMutableArray arrayWithCapacity:[arrFlashcards count]];		
 		NSMutableArray *copy = [arrFlashcards mutableCopy];
@@ -568,7 +737,12 @@
         view_chapterTbl.hidden=NO;
         btn_popupRemove.hidden=NO;
         
-        [Bn_ByChapter setBackgroundImage:[UIImage imageNamed:@"Flash_Card_blue_03.png"] forState:UIControlStateNormal];
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            [Bn_ByChapter setBackgroundImage:[UIImage imageNamed:@"flash_card_Segment_BG_03.png"] forState:UIControlStateNormal];            
+        }
+        else {
+            [Bn_ByChapter setBackgroundImage:[UIImage imageNamed:@"Flash_Card_blue_03.png"] forState:UIControlStateNormal];
+        }
         
     }
     
@@ -595,7 +769,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (tableView==tblAlphabet)
-         {
+    {
 
              if (cell == nil)
              {
@@ -611,12 +785,19 @@
              else
              {
                  char letter = (char) indexPath.row + 64;
-                 cell.textLabel.text = [NSString stringWithFormat:@"%c", letter];        
+                 cell.textLabel.text = [NSString stringWithFormat:@"%c", letter];                 
              }
              
              cell.textLabel.textAlignment = UITextAlignmentCenter;             
              UIImageView *selectionImage = [[UIImageView alloc] init];
-             selectionImage.image = [UIImage imageNamed:@"img_abcd_row.png"];
+             if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {                 
+                 cell.textLabel.font = FONT_10;
+                 selectionImage.image = [UIImage imageNamed:@"highlite_patch_abcd_bar.png"];
+             }
+             else {
+                 
+                 selectionImage.image = [UIImage imageNamed:@"img_abcd_row.png"];
+             }
              cell.selectedBackgroundView = selectionImage;
              
              NSString *let  =  [NSString stringWithFormat:@"%c", (char) indexPath.row + 64];
@@ -631,11 +812,10 @@
              }
              else{
                  cell.userInteractionEnabled = YES;
-             }
-
+             }             
          }
-        else
-        {
+    else
+    {
             if (cell == nil)
             {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
@@ -647,7 +827,15 @@
             objChap = (Chapters *) [arr_chaptersTestAndFlashcard objectAtIndex:indexPath.row];
             cell.textLabel.text = [NSString stringWithFormat:@"%d. %@",indexPath.row + 1,objChap.strChapterTitle];
             UIImageView *selectionImage = [[UIImageView alloc] init];
-            selectionImage.image = [UIImage imageNamed:@"img_chaplist_popup_row.png"];
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                selectionImage.image = [UIImage imageNamed:@"Chapter_list_box_Select.png"];                
+                cell.textLabel.font = FONT_10;
+            }
+            else {
+                selectionImage.image = [UIImage imageNamed:@"img_chaplist_popup_row.png"];
+                
+            }
+            
             cell.selectedBackgroundView = selectionImage;
             
             if (indexPath.row == intCurrentFlashcard_ChapterId-1) {             
@@ -702,6 +890,11 @@
     return YES;
 }
 - (NSUInteger)supportedInterfaceOrientations{
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }    
+    
     NSUInteger mask= UIInterfaceOrientationMaskPortrait;
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     currentOrientaion = interfaceOrientation;
@@ -729,6 +922,11 @@
     return UIInterfaceOrientationMaskAll;
 }
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
+    
     currentOrientaion = interfaceOrientation;
     if(interfaceOrientation==UIInterfaceOrientationLandscapeLeft){
         [self Fn_rotateLandscape];
@@ -831,10 +1029,20 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
 	
     if (scrollViewMiddle == scrollView) {
-        intCurrentQuestionIndex = (scrollView.contentOffset.x / 382);    
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            intCurrentQuestionIndex = (scrollView.contentOffset.x / 172);
+        }
+        else {
+            intCurrentQuestionIndex = (scrollView.contentOffset.x / 382);
+        }
     }
     else if (scrollGallery == scrollView) {
-        intCurrentQuestionIndex = (scrollView.contentOffset.x / 115);
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            intCurrentQuestionIndex = (scrollView.contentOffset.x / 115);
+        }
+        else {
+            intCurrentQuestionIndex = (scrollView.contentOffset.x / 66);
+        }
         
     }
     lblQuestionNo.text = [NSString stringWithFormat:@"%d of %d", intCurrentQuestionIndex+1, intTotalQuestions];
