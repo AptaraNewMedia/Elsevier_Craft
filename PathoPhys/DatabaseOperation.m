@@ -204,7 +204,7 @@ NSError *error;
 -(FILLINBLANKS *)fnGetTestyourselfFillInTheBlanks:(NSString *)question_id
 {
     FILLINBLANKS *objFillBlanks;
-    strQuery = [NSString stringWithFormat:@"select fib_id, question_text, options, answers, question_image, feedback, instruction, ipad_normal_points, ipad_size from fillinblanks where question_id = '%@'",question_id];
+    strQuery = [NSString stringWithFormat:@"select fib_id, question_text, options, answers, question_image, feedback, instruction, ipad_normal_points, ipad_size, iphone_normal_points, iphone_size  from fillinblanks where question_id = '%@'",question_id];
     arrTempList = [dbOperation getRowsForQuery:strQuery];
     intRowCount = [arrTempList count];
     for (int i = 0; i < intRowCount; i++) {
@@ -254,6 +254,8 @@ NSError *error;
                 objFillBlanks.fWidth = [[widthhight objectAtIndex:0] floatValue]/2;
                 objFillBlanks.fHeight = [[widthhight objectAtIndex:1] floatValue]/2;
             }
+            
+            objFillBlanks.strImageName = [NSString stringWithFormat:@"%@_iphone", objFillBlanks.strImageName];
 
         }
         
