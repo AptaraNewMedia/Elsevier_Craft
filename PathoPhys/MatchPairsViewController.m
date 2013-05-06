@@ -92,7 +92,18 @@
         lblQuestionText.text = objMatch.strQuestionText ;
     }    
     
-	[webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Tap the item on the left, and then tap the corresponding item on the right. Once you have matched all items, tap <b>Submit.</b></body></html>" baseURL:nil];
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:10px;color:AA3934;font-family:helvetica;\">Tap the item on the left, and then tap the corresponding item on the right. Once you have matched all items, tap <b>Submit.</b></body></html>" baseURL:nil];
+        // ScrollView
+        
+        self.view.frame = CGRectMake(0, 0, 320, 360);
+        
+        [scrollViewOptions setFrame:CGRectMake(5, 91, 315, 235)];
+        
+    }
+    else {
+        [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Tap the item on the left, and then tap the corresponding item on the right. Once you have matched all items, tap <b>Submit.</b></body></html>" baseURL:nil];
+    }
     
     // Get Sizes for all labels
     
@@ -132,10 +143,21 @@
         [bt.dotBt setBackgroundImage:[UIImage imageNamed:@"btn_dot.png"] forState:UIControlStateNormal];
         [bt.dotBt setBackgroundImage:[UIImage imageNamed:@"btn_dot.png"] forState:UIControlStateHighlighted];
         
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            [bt setFrame:CGRectMake(0, heightLeftScorll, 100, heightOfLabel)];
+            bt.customBt.titleLabel.font = FONT_10;
+            bt.customBt.frame = CGRectMake(0, 0, 80, heightOfLabel);
+            bt.dotBt.frame = CGRectMake(bt.customBt.frame.size.width+1, (heightOfLabel/2) - 5, 20, 20);
+            heightLeftScorll = heightLeftScorll + heightOfLabel + 5;
+            
+        }
+        else {
+            heightLeftScorll = heightLeftScorll + heightOfLabel + 30;
+            
+        }
         
 		[scrollViewOptions addSubview:bt];        
         
-        heightLeftScorll = heightLeftScorll + heightOfLabel + 30;
         
         [questionArray addObject:bt];
 		[userAnswerArray addObject:bt.customBt.titleLabel.text];
@@ -147,7 +169,7 @@
         
         float heightOfLabel = [[arrRightSize objectAtIndex:j] floatValue];
         
-        RightMatchView_Ipad * bt = [[RightMatchView_Ipad alloc]initWithFrame:CGRectMake(310, heightScorll, 420, heightOfLabel+15)];
+        RightMatchView_Ipad * bt = [[RightMatchView_Ipad alloc] initWithFrame:CGRectMake(310, heightScorll, 420, heightOfLabel+15)];
         
         [bt.dotBt addTarget:self action:@selector(handle_answers:) forControlEvents:UIControlEventTouchUpInside];
         bt.dotBt.frame = CGRectMake(0, (heightOfLabel/2) - 5, 25, 25);
@@ -174,11 +196,25 @@
         bt.feedbackBt.hidden = YES;
         [bt.feedbackBt addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
         
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            [bt setFrame:CGRectMake(120, heightScorll, 200, heightOfLabel)];
+            bt.dotBt.frame = CGRectMake(0, (heightOfLabel/2) - 5, 20, 20);
+            bt.customBt.titleLabel.font = FONT_10;            
+            bt.customBt.frame = CGRectMake(21, 0, 130, heightOfLabel);
+            bt.ansImage.frame = CGRectMake(bt.customBt.frame.origin.x+bt.customBt.frame.size.width, (heightOfLabel/2) - 10, 20, 20);
+            bt.feedbackBt.frame = CGRectMake(bt.ansImage.frame.origin.x+bt.ansImage.frame.size.width, (heightOfLabel/2) - 10, 20, 20);
+            heightScorll = heightScorll + heightOfLabel + 5;
+            
+        }
+        else  {
+            heightScorll = heightScorll + heightOfLabel + 30;
+            
+        }
+            
 		[scrollViewOptions addSubview:bt];
         
 		[answerArray addObject:bt];        
         
-        heightScorll = heightScorll + heightOfLabel + 30;
         
     }
     
@@ -216,11 +252,20 @@
 //--------------------------------
 -(void) fn_SetVariables
 {
-    LEFT_OPTION_WIDTH = 200;
-    LEFT_OPTION_MARGIN = 10;
-    RIGHT_OPTION_WIDTH = 400;
-    RIGHT_OPTION_MARGIN = 10;
-    CENTER_DISTANCE = 300;
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        LEFT_OPTION_WIDTH = 80;
+        LEFT_OPTION_MARGIN = 2;
+        RIGHT_OPTION_WIDTH = 150;
+        RIGHT_OPTION_MARGIN = 2;
+        CENTER_DISTANCE = 100;
+    }
+    else {
+        LEFT_OPTION_WIDTH = 200;
+        LEFT_OPTION_MARGIN = 10;
+        RIGHT_OPTION_WIDTH = 400;
+        RIGHT_OPTION_MARGIN = 10;
+        CENTER_DISTANCE = 300;        
+    }
     
     arrLeftSize = [[NSMutableArray alloc] init];
     arrRightSize = [[NSMutableArray alloc] init];
@@ -263,8 +308,14 @@
     lblQuestionNo.textColor = COLOR_WHITE;
     lblQuestionText.textColor = COLOR_WHITE;
     
-    lblQuestionNo.font = FONT_31;
-    lblQuestionText.font = FONT_17;
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        lblQuestionNo.font = FONT_20;
+        lblQuestionText.font = FONT_12;
+    }
+    else {
+        lblQuestionNo.font = FONT_31;
+        lblQuestionText.font = FONT_17;
+    }
     
 }
 
@@ -422,7 +473,11 @@
 -(float) fn_getLeftSize:(NSString *)data
 {
     CGSize constraint = CGSizeMake(LEFT_OPTION_WIDTH - (LEFT_OPTION_MARGIN * 2), 20000.0f);
-    CGSize size = [data sizeWithFont:FONT_15 constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+    UIFont *font = FONT_15;
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        font = FONT_12;
+    }
+    CGSize size = [data sizeWithFont:font constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     return size.height;
 }
 
@@ -430,7 +485,11 @@
 //--------------------------------
 {
     CGSize constraint = CGSizeMake(RIGHT_OPTION_WIDTH - (RIGHT_OPTION_MARGIN * 2), 40000.0f);
-    CGSize size = [data sizeWithFont:FONT_15 constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+    UIFont *font = FONT_15;
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        font = FONT_10;
+    }
+    CGSize size = [data sizeWithFont:font constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     return size.height;
 }
 
@@ -719,6 +778,9 @@
 }
 -(NSUInteger)supportedInterfaceOrientations
 {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
     NSUInteger mask= UIInterfaceOrientationMaskPortrait;
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     currentOrientaion = interfaceOrientation;
@@ -746,6 +808,9 @@
     return UIInterfaceOrientationMaskAll;
 }
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
     currentOrientaion = interfaceOrientation;
     if(interfaceOrientation==UIInterfaceOrientationLandscapeLeft){
         [self Fn_rotateLandscape];

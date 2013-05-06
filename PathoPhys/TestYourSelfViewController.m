@@ -165,7 +165,7 @@
         case QUESTION_TYPE_MCMS:
         {
             if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-                dragDropView = [[DragDropViewController alloc] initWithNibName:@"DragDropViewController_iphone" bundle:nil];                
+                dragDropView = [[DragDropViewController alloc] initWithNibName:@"DragDropViewController_iPhone" bundle:nil];                
             }
             else {
                 dragDropView = [[DragDropViewController alloc] initWithNibName:@"DragDropViewController_iPad" bundle:nil];
@@ -180,7 +180,7 @@
         case QUESTION_TYPE_FILLINBLANKS: {
             
             if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-            fillInTheBlanksView = [[FillInTheBlanksViewController alloc] initWithNibName:@"FillInTheBlanksViewController_iphone" bundle:nil];                
+            fillInTheBlanksView = [[FillInTheBlanksViewController alloc] initWithNibName:@"FillInTheBlanksViewController_iPhone" bundle:nil];                
             }
             else {
             fillInTheBlanksView = [[FillInTheBlanksViewController alloc] initWithNibName:@"FillInTheBlanksViewController_iPad" bundle:nil];
@@ -212,7 +212,7 @@
         case QUESTION_TYPE_TRUEFLASE: {
             
             if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-                trueFalseView = [[TrueFalseViewController alloc] initWithNibName:@"TrueFalseViewController_iphone" bundle:nil];
+                trueFalseView = [[TrueFalseViewController alloc] initWithNibName:@"TrueFalseViewController_iPhone" bundle:nil];
                 
             }
             else {

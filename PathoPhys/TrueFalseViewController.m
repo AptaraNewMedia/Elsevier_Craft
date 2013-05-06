@@ -72,7 +72,13 @@
     
     [self fn_SetFontColor];
     
-  	[webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Select the correct image and tap <b>Submit.</b>" baseURL:nil];
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:10px;color:AA3934;font-family:helvetica;\">Select the correct image and tap <b>Submit.</b>" baseURL:nil];
+        
+    }
+    else {
+        [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Select the correct image and tap <b>Submit.</b>" baseURL:nil];
+    }
     
     [self fn_hideAnsFeedbackImages];
     select = YES;
@@ -152,8 +158,14 @@
     lblQuestionNo.textColor = COLOR_WHITE;
     lblQuestionText.textColor = COLOR_WHITE;
     
-    lblQuestionNo.font = FONT_31;
-    lblQuestionText.font = FONT_17;
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        lblQuestionNo.font = FONT_20;
+        lblQuestionText.font = FONT_12;
+    }
+    else {
+        lblQuestionNo.font = FONT_31;
+        lblQuestionText.font = FONT_17;
+    }
     
 }
 
@@ -267,10 +279,20 @@
 - (void) handleRevealScore {
     
     if (answer == userAnswer) {
-        [imgViewCorrect setImage:[UIImage imageNamed:@"img_true.png"]];
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            [imgViewCorrect setImage:[UIImage imageNamed:@"True_Btn_Without_Border.png"]];
+        }
+        else {
+            [imgViewCorrect setImage:[UIImage imageNamed:@"img_true.png"]];
+        }
     }
     else {
-        [imgViewCorrect setImage:[UIImage imageNamed:@"img_false.png"]];
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            [imgViewCorrect setImage:[UIImage imageNamed:@"false_Without_Border.png"]];
+        }
+        else {
+            [imgViewCorrect setImage:[UIImage imageNamed:@"img_false.png"]];
+        }
     }
     
     strFeedback = nil;
@@ -454,6 +476,9 @@
 }
 -(NSUInteger)supportedInterfaceOrientations
 {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
     NSUInteger mask= UIInterfaceOrientationMaskPortrait;
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     currentOrientaion = interfaceOrientation;
@@ -481,6 +506,10 @@
     return UIInterfaceOrientationMaskAll;
 }
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
+    
     currentOrientaion = interfaceOrientation;
     if(interfaceOrientation==UIInterfaceOrientationLandscapeLeft){
         [self Fn_rotateLandscape];

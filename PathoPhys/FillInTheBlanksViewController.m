@@ -56,7 +56,17 @@
     lblQuestionText.text = objFillBlanks.strQuestionText ;
     
     [self fn_SetFontColor];
-    [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Drag the options and drop them on the correct blank areas. Once you are done, tap <b>Submit.</b> </body></html>" baseURL:nil];
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:10px;color:AA3934;font-family:helvetica;\">Drag the options and drop them on the correct blank areas. Once you are done, tap <b>Submit.</b> </body></html>" baseURL:nil];
+        self.view.frame = CGRectMake(0, 0, 320, 360);
+        
+        [scrollViewDrag setFrame:CGRectMake(0, 120, 320, 139)];
+        [imgScroller setFrame:CGRectMake(0, 260, 320, 180)];
+    }
+    else {
+        [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Drag the options and drop them on the correct blank areas. Once you are done, tap <b>Submit.</b> </body></html>" baseURL:nil];
+        
+        }
     
     UIImage *imgName = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", objFillBlanks.strImageName]];
     imgViewQue.image = imgName;
@@ -84,8 +94,14 @@
     lblQuestionNo.textColor = COLOR_WHITE;
     lblQuestionText.textColor = COLOR_WHITE;
     
-    lblQuestionNo.font = FONT_31;
-    lblQuestionText.font = FONT_17;
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        lblQuestionNo.font = FONT_20;
+        lblQuestionText.font = FONT_12;
+    }
+    else {
+        lblQuestionNo.font = FONT_31;
+        lblQuestionText.font = FONT_17;
+    }
     
 }
 
@@ -112,10 +128,21 @@
         [bnDrag.feedbackBt setImage:[UIImage imageNamed:@"Btn_feed.png"] forState:UIControlStateNormal];
         //[bnDrag.feedbackBt setImage:[UIImage imageNamed:@"btn_feedback_highlight.png"] forState:UIControlStateHighlighted];
         bnDrag.feedbackBt.hidden = YES;
-         
+        
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            bnDrag.titleLabel.font = FONT_10;
+            [bnDrag.ansImage setFrame:CGRectMake(objFillBlanks.fWidth-40, -15, 22, 22)];
+            
+            bnDrag.feedbackBt.frame = CGRectMake(bnDrag.ansImage.frame.origin.x+bnDrag.ansImage.frame.size.width+1, -15, 22, 22);
+            y=y+45+2;
+        }
+        else {
+            y=y+45+10;
+        }
+        
         [scrollViewDrag addSubview:bnDrag];
         [draggableSubjects addObject:bnDrag];
-        y=y+45+10;
+        
     }
 
     [scrollViewDrag setContentSize:CGSizeMake(objFillBlanks.fWidth, y)];
@@ -393,6 +420,9 @@
 }
 -(NSUInteger)supportedInterfaceOrientations
 {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
     NSUInteger mask= UIInterfaceOrientationMaskPortrait;
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     currentOrientaion = interfaceOrientation;
@@ -420,6 +450,9 @@
     return UIInterfaceOrientationMaskAll;
 }
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
     currentOrientaion = interfaceOrientation;
     if(interfaceOrientation==UIInterfaceOrientationLandscapeLeft){
         [self Fn_rotateLandscape];
