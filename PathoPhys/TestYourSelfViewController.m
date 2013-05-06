@@ -158,7 +158,12 @@
     switch (objQue.intType) {
         case QUESTION_TYPE_MCMS:
         {
-            dragDropView = [[DragDropViewController alloc] initWithNibName:@"DragDropViewController_iPad" bundle:nil];
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                dragDropView = [[DragDropViewController alloc] initWithNibName:@"DragDropViewController_iphone" bundle:nil];                
+            }
+            else {
+                dragDropView = [[DragDropViewController alloc] initWithNibName:@"DragDropViewController_iPad" bundle:nil];
+            }
             [dragDropView fn_LoadDbData:objQue.strQuestionId];
             [viewMain addSubview:dragDropView.view];
             dragDropView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
@@ -168,7 +173,12 @@
             break;
         case QUESTION_TYPE_FILLINBLANKS: {
             
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            fillInTheBlanksView = [[FillInTheBlanksViewController alloc] initWithNibName:@"FillInTheBlanksViewController_iphone" bundle:nil];                
+            }
+            else {
             fillInTheBlanksView = [[FillInTheBlanksViewController alloc] initWithNibName:@"FillInTheBlanksViewController_iPad" bundle:nil];
+            }
             [fillInTheBlanksView fn_LoadDbData:objQue.strQuestionId];
             [viewMain addSubview:fillInTheBlanksView.view];
             fillInTheBlanksView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
@@ -178,7 +188,14 @@
             break;
         case QUESTION_TYPE_RADIOBUTTONS: {
             
-            radioGroupView = [[RadioGroupViewController alloc] initWithNibName:@"RadioGroupViewController_iPad" bundle:nil];
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                
+                radioGroupView = [[RadioGroupViewController alloc] initWithNibName:@"RadioGroupViewController_iphone" bundle:nil];
+            }
+            else {
+                
+                radioGroupView = [[RadioGroupViewController alloc] initWithNibName:@"RadioGroupViewController_iPad" bundle:nil];
+            }
             [radioGroupView fn_LoadDbData:objQue.strQuestionId];
             [viewMain addSubview:radioGroupView.view];
             radioGroupView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
@@ -188,7 +205,13 @@
             break;
         case QUESTION_TYPE_TRUEFLASE: {
             
-            trueFalseView = [[TrueFalseViewController alloc] initWithNibName:@"TrueFalseViewController_iPad" bundle:nil];
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                trueFalseView = [[TrueFalseViewController alloc] initWithNibName:@"TrueFalseViewController_iphone" bundle:nil];
+                
+            }
+            else {
+                trueFalseView = [[TrueFalseViewController alloc] initWithNibName:@"TrueFalseViewController_iPad" bundle:nil];
+            }
             [trueFalseView fn_LoadDbData:objQue.strQuestionId];
             [viewMain addSubview:trueFalseView.view];
             trueFalseView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
@@ -198,7 +221,13 @@
             break;
         case QUESTION_TYPE_MATCHTERMS: {
             
-            matchPairsView = [[MatchPairsViewController alloc] initWithNibName:@"MatchPairsViewController_iPad" bundle:nil];
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                matchPairsView = [[MatchPairsViewController alloc] initWithNibName:@"MatchPairsViewController_iphone" bundle:nil];                
+            }
+            else {
+                matchPairsView = [[MatchPairsViewController alloc] initWithNibName:@"MatchPairsViewController_iPad" bundle:nil];
+            }
+
             [matchPairsView fn_LoadDbData:objQue.strQuestionId];
             [viewMain addSubview:matchPairsView.view];
             matchPairsView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
@@ -208,7 +237,14 @@
             break;
         case QUESTION_TYPE_MCSS: {
             
-            singleSelectionView = [[SingleSelectionViewController alloc] initWithNibName:@"SingleSelectionViewController_iPad" bundle:nil];
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                singleSelectionView = [[SingleSelectionViewController alloc] initWithNibName:@"SingleSelectionViewController_iphone" bundle:nil];
+                
+            }
+            else {
+                singleSelectionView = [[SingleSelectionViewController alloc] initWithNibName:@"SingleSelectionViewController_iPad" bundle:nil];
+                
+            }
             [singleSelectionView fn_LoadDbData:objQue.strQuestionId];
             [viewMain addSubview:singleSelectionView.view];
             singleSelectionView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
@@ -218,7 +254,12 @@
             break;
         case QUESTION_TYPE_DRAGDROP:
         {
-            dragDropView = [[DragDropViewController alloc] initWithNibName:@"DragDropViewController_iPad" bundle:nil];
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                dragDropView = [[DragDropViewController alloc] initWithNibName:@"DragDropViewController_iphone" bundle:nil];
+            }
+            else {
+                dragDropView = [[DragDropViewController alloc] initWithNibName:@"DragDropViewController_iPad" bundle:nil];
+            }
             [dragDropView fn_LoadDbData:objQue.strQuestionId];
             [viewMain addSubview:dragDropView.view];
             dragDropView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
@@ -228,7 +269,13 @@
             break;
         case QUESTION_TYPE_DRAGDROPRADIOBUTTONS:
         {
-            dragDropRadioView = [[DragDropRadioViewController alloc] initWithNibName:@"DragDropRadioViewController_iPad" bundle:nil];
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                dragDropRadioView = [[DragDropRadioViewController alloc] initWithNibName:@"DragDropRadioViewController_iphone" bundle:nil];
+            }
+            else {
+                dragDropRadioView = [[DragDropRadioViewController alloc] initWithNibName:@"DragDropRadioViewController_iPad" bundle:nil];
+            }
+
             [dragDropRadioView fn_LoadDbData:objQue.strQuestionId];
             [viewMain addSubview:dragDropRadioView.view];
             dragDropRadioView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
@@ -575,6 +622,9 @@
 }
 -(NSUInteger)supportedInterfaceOrientations
 {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
     NSUInteger mask= UIInterfaceOrientationMaskPortrait;
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     currentOrientaion = interfaceOrientation;
@@ -604,6 +654,9 @@
     return UIInterfaceOrientationMaskAll;
 }
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
     currentOrientaion = interfaceOrientation;
     [self Fn_CallOrientaion];
     if(interfaceOrientation==UIInterfaceOrientationLandscapeLeft){

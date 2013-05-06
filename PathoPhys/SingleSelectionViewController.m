@@ -77,14 +77,28 @@
     if ([objMCSS.arrAnswer count] > 1) {
         tblOptions.allowsMultipleSelection = YES;
         MultipleSelect = YES;
-        [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Select the correct options and tap <b>Submit.</b></body></html>" baseURL:nil];
+        
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:10px;color:AA3934;font-family:helvetica;\">Select the correct options and tap <b>Submit.</b></body></html>" baseURL:nil]; 
+        }
+        else {
+            [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Select the correct options and tap <b>Submit.</b></body></html>" baseURL:nil];
+        }
+        
+
         
     }
     else {
         MultipleSelect = NO;
         tblOptions.allowsMultipleSelection = NO;
-        [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Select the correct option and tap <b>Submit.</b></body></html>" baseURL:nil];
         
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:10px;color:AA3934;font-family:helvetica;\">Select the correct option and tap <b>Submit.</b></body></html>" baseURL:nil];
+        }
+        else {
+            [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Select the correct option and tap <b>Submit.</b></body></html>" baseURL:nil];
+        }
+    
     }
     
     if (objMCSS.strImageName == (id)[NSNull null] || objMCSS.strImageName.length == 0 || [objMCSS.strImageName isEqualToString:@" "]) {    
@@ -127,10 +141,15 @@
 {
     lblQuestionNo.textColor = COLOR_WHITE;
     lblQuestionText.textColor = COLOR_WHITE;
-    
-    lblQuestionNo.font = FONT_31;
-    lblQuestionText.font = FONT_17;
-    
+ 
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        lblQuestionNo.font = FONT_20;
+        lblQuestionText.font = FONT_12;
+    }
+    else {
+        lblQuestionNo.font = FONT_31;
+        lblQuestionText.font = FONT_17;
+    }
 }
 
 //Get db data from question_id
@@ -581,6 +600,9 @@
 }
 -(NSUInteger)supportedInterfaceOrientations
 {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
     NSUInteger mask= UIInterfaceOrientationMaskPortrait;
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     currentOrientaion = interfaceOrientation;
@@ -608,6 +630,9 @@
     return UIInterfaceOrientationMaskAll;
 }
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
     currentOrientaion = interfaceOrientation;
     if(interfaceOrientation==UIInterfaceOrientationLandscapeLeft){
         [self Fn_rotateLandscape];
