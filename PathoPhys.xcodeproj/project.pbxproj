@@ -862,6 +862,8 @@
 		87FA12461737C0FF00678A52 /* RadioGroupViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FA12441737C0FF00678A52 /* RadioGroupViewController_iPhone5.xib */; };
 		87FA124A1737C68C00678A52 /* Question_Box_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 87FA12481737C68C00678A52 /* Question_Box_bg.png */; };
 		87FA124B1737C68C00678A52 /* Question_Box_bg@x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87FA12491737C68C00678A52 /* Question_Box_bg@x.png */; };
+		87FA124E1737D11500678A52 /* TestYourSelfViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FA124C1737D11500678A52 /* TestYourSelfViewController_iPhone.xib */; };
+		87FA124F1737D11500678A52 /* TestYourSelfViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FA124D1737D11500678A52 /* TestYourSelfViewController_iPhone5.xib */; };
 		87FA7EFD171CEB9B00558B8A /* MCSSCell_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FA7EFB171CEB9B00558B8A /* MCSSCell_iPad.m */; };
 		87FA7EFE171CEB9B00558B8A /* MCSSCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FA7EFC171CEB9B00558B8A /* MCSSCell_iPad.xib */; };
 		87FD9B661726554F0004B68D /* DragDropRadio.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FD9B651726554F0004B68D /* DragDropRadio.m */; };
@@ -1881,6 +1883,8 @@
 		87FA12441737C0FF00678A52 /* RadioGroupViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RadioGroupViewController_iPhone5.xib; sourceTree = "<group>"; };
 		87FA12481737C68C00678A52 /* Question_Box_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Question_Box_bg.png; sourceTree = "<group>"; };
 		87FA12491737C68C00678A52 /* Question_Box_bg@x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Question_Box_bg@x.png"; sourceTree = "<group>"; };
+		87FA124C1737D11500678A52 /* TestYourSelfViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestYourSelfViewController_iPhone.xib; sourceTree = "<group>"; };
+		87FA124D1737D11500678A52 /* TestYourSelfViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestYourSelfViewController_iPhone5.xib; sourceTree = "<group>"; };
 		87FA7EFA171CEB9B00558B8A /* MCSSCell_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSSCell_iPad.h; sourceTree = "<group>"; };
 		87FA7EFB171CEB9B00558B8A /* MCSSCell_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSSCell_iPad.m; sourceTree = "<group>"; };
 		87FA7EFC171CEB9B00558B8A /* MCSSCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCSSCell_iPad.xib; sourceTree = "<group>"; };
@@ -2035,6 +2039,8 @@
 				87F9DB9D1712CE26005E57EF /* TestyourselfChapterListViewController.h */,
 				87F9DB9E1712CE26005E57EF /* TestyourselfChapterListViewController.m */,
 				87F9DB9F1712CE26005E57EF /* TestYourSelfViewController_iPad.xib */,
+				87FA124C1737D11500678A52 /* TestYourSelfViewController_iPhone.xib */,
+				87FA124D1737D11500678A52 /* TestYourSelfViewController_iPhone5.xib */,
 				87F9DBA01712CE26005E57EF /* TestYourSelfViewController.h */,
 				87F9DBA11712CE26005E57EF /* TestYourSelfViewController.m */,
 			);
@@ -4377,6 +4383,8 @@
 				87FA12461737C0FF00678A52 /* RadioGroupViewController_iPhone5.xib in Resources */,
 				87FA124A1737C68C00678A52 /* Question_Box_bg.png in Resources */,
 				87FA124B1737C68C00678A52 /* Question_Box_bg@x.png in Resources */,
+				87FA124E1737D11500678A52 /* TestYourSelfViewController_iPhone.xib in Resources */,
+				87FA124F1737D11500678A52 /* TestYourSelfViewController_iPhone5.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
