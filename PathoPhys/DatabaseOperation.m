@@ -235,6 +235,29 @@ NSError *error;
             objFillBlanks.fHeight = [[widthhight objectAtIndex:1] floatValue]/2;
         }
         
+        
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            
+            str_pt = [[arrTempList objectAtIndex:i] objectForKey:@"iphone_normal_points"];
+            
+            if (str_pt == (id)[NSNull null] || str_pt.length == 0 )
+                objFillBlanks.arrXYpoints = [[NSArray alloc] init];
+            else
+                objFillBlanks.arrXYpoints = [[[arrTempList objectAtIndex:i] objectForKey:@"iphone_normal_points"] componentsSeparatedByString:@"#$#"];
+                        
+            NSString *str_wh = [[arrTempList objectAtIndex:i] objectForKey:@"iphone_size"] ;
+            if (str_wh == (id)[NSNull null] || str_wh.length == 0 )
+                widthhight = [[NSArray alloc] init];
+            else
+                widthhight = [[[arrTempList objectAtIndex:i] objectForKey:@"iphone_size"] componentsSeparatedByString:@","];
+            if (widthhight.count > 0) {
+                objFillBlanks.fWidth = [[widthhight objectAtIndex:0] floatValue]/2;
+                objFillBlanks.fHeight = [[widthhight objectAtIndex:1] floatValue]/2;
+            }
+
+        }
+        
+        
         NSString *strfeedback = [[arrTempList objectAtIndex:i] objectForKey:@"feedback"];
         
         if (strfeedback == (id)[NSNull null] || strfeedback.length == 0 || [strfeedback isEqualToString:@" "]) {
@@ -493,6 +516,17 @@ NSError *error;
             objDRAGDROP.fHeight = [[widthhight objectAtIndex:1] floatValue]/2;
         }
         
+        
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            
+            objDRAGDROP.arrXYpoints = [[[arrTempList objectAtIndex:i] objectForKey:@"iphone_normal_points"] componentsSeparatedByString:@"#$#"];
+            
+            widthhight = [[[arrTempList objectAtIndex:i] objectForKey:@"iphone_size"] componentsSeparatedByString:@","];
+            if (widthhight.count > 0) {
+                objDRAGDROP.fWidth = [[widthhight objectAtIndex:0] floatValue]/2;
+                objDRAGDROP.fHeight = [[widthhight objectAtIndex:1] floatValue]/2;
+            }
+        }
         
         NSString *strfeedback = [[arrTempList objectAtIndex:i] objectForKey:@"feedback"];
         
