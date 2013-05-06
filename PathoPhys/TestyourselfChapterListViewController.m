@@ -314,7 +314,13 @@
                 }
             }
         }
-    testYourSelfViewController = [[TestYourSelfViewController alloc] initWithNibName:@"TestYourSelfViewController_iPad" bundle:nil];
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        testYourSelfViewController = [[TestYourSelfViewController alloc] initWithNibName:@"TestYourSelfViewController_iPhone" bundle:nil];
+    }
+    else {
+        testYourSelfViewController = [[TestYourSelfViewController alloc] initWithNibName:@"TestYourSelfViewController_iPad" bundle:nil];
+        
+    }
 
     [self.navigationController pushViewController:testYourSelfViewController animated:YES];
 
@@ -408,8 +414,14 @@
         strCurrentChapterName = [NSString stringWithFormat:@"%@", objChap.strChapterTitle];
         strCurrentThematicName = [NSString stringWithFormat:@""];
         
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            testYourSelfViewController = [[TestYourSelfViewController alloc] initWithNibName:@"TestYourSelfViewController_iPhone" bundle:nil];
+        }
+        else {
+            testYourSelfViewController = [[TestYourSelfViewController alloc] initWithNibName:@"TestYourSelfViewController_iPad" bundle:nil];
+            
+        }
         
-        testYourSelfViewController = [[TestYourSelfViewController alloc] initWithNibName:@"TestYourSelfViewController_iPad" bundle:nil]; 
         
         [self.navigationController pushViewController:testYourSelfViewController animated:YES];
         
