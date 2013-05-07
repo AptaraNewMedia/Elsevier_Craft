@@ -45,6 +45,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrameSize">{275, 32}</string>
 								<reference key="NSSuperview" ref="153855087"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="412770859"/>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -58,6 +59,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{15, 0}, {231, 32}}</string>
 								<reference key="NSSuperview" ref="153855087"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="772132713"/>
 								<object class="NSColor" key="IBUIBackgroundColor" id="731440381">
 									<int key="NSColorSpace">3</int>
@@ -92,19 +94,22 @@
 							<object class="IBUIImageView" id="772132713">
 								<reference key="NSNextResponder" ref="153855087"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{243, 2}, {27, 27}}</string>
+								<string key="NSFrame">{{243, 9}, {15, 14}}</string>
 								<reference key="NSSuperview" ref="153855087"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">arrow_right.png</string>
+									<string key="NSResourceName">arrow1.png</string>
 								</object>
 							</object>
 						</array>
 						<string key="NSFrameSize">{275, 31}</string>
 						<reference key="NSSuperview" ref="898523457"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="657956634"/>
 						<reference key="IBUIBackgroundColor" ref="731440381"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -116,6 +121,7 @@
 				</array>
 				<string key="NSFrameSize">{275, 32}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="153855087"/>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				<reference key="IBUIContentView" ref="153855087"/>
@@ -214,14 +220,44 @@
 			<nil key="sourceID"/>
 			<int key="maxID">33</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">ChapterlistCell_iPad</string>
+					<string key="superclassName">UITableViewCell</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="imgDisclosure">UIImageView</string>
+						<string key="imgTableCellBG">UIImageView</string>
+						<string key="lblChapterName">UILabel</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="imgDisclosure">
+							<string key="name">imgDisclosure</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="imgTableCellBG">
+							<string key="name">imgTableCellBG</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lblChapterName">
+							<string key="name">lblChapterName</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ChapterlistCell_iPad.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="Tab_white_patch1.png">{275, 32}</string>
-			<string key="arrow_right.png">{27, 27}</string>
+			<string key="arrow1.png">{15, 14}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1926</string>
 	</data>

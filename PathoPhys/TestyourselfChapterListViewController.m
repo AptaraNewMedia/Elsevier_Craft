@@ -88,8 +88,12 @@
             customView.imgViewBg.frame = CGRectMake(0, 0, img.size.width, img.size.height);
             [customView.imgViewBg setImage:img];
             [customView.headerBtn setFrame:CGRectMake(15, 0, 231, 31)];
+            customView.headerBtn.titleLabel.numberOfLines = 2;
             [customView.headerBtn setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
-            [customView.imgArrow setFrame:CGRectMake(243, 3, 27, 27)];
+            imgArrowRight = [UIImage imageNamed:@"arrow1.png"];
+            imgArrowDown = [UIImage imageNamed:@"arrow2.png"];
+            [customView.imgArrow setImage:imgArrowRight];
+            [customView.imgArrow setFrame:CGRectMake(243, 10, 15, 14)];
             [customView.headerBtn.titleLabel setFont:FONT_12];
             
         }
