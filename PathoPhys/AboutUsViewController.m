@@ -44,6 +44,8 @@
         webView.scrollView.scrollEnabled = NO;
     }
     
+    webView.scrollView.bounces = NO;
+    
     //Code for Exclusive Touch Enabling.
     for (UIView *myview in [self.view subviews]){
         if([myview isKindOfClass:[UIButton class]]){
