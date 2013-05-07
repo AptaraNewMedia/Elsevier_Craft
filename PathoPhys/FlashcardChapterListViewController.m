@@ -49,8 +49,12 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
    
-    lbl_title.font = FONT_25;
-    lbl_title.textColor = COLOR_WHITE;
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        lbl_title.font = FONT_17;
+    }
+    else {
+        lbl_title.font = FONT_25;
+    }
     
     btnViewAll.hidden = YES;
     
