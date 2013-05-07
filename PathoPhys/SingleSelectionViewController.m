@@ -311,6 +311,7 @@
         
         
         MCSSCell_iPad *cell = [cellArray objectAtIndex:indexPath.row];
+        cell.imgAns.hidden =NO;
         
         for (int j = 0; j < answer_count; j++) {
             NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -345,6 +346,8 @@
         }
         
     }
+    
+   
     //}
     
     [self Fn_createInvisibleBtn];
@@ -649,6 +652,9 @@
             [self handleRevealScore];
         }
     }
+    
+     cell.imgAns.hidden =YES;
+    
     return cell;
 }
 

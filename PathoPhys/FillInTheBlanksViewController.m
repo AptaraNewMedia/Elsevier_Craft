@@ -86,7 +86,9 @@
         }
     }
     
-     [self rotateScrollViewButtonsForiPhone];
+     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+         [self rotateScrollViewButtonsForiPhone];
+     }
 }
 
 -(void) fn_SetFontColor
@@ -172,12 +174,8 @@
         }
     }
     
-    [scrollViewDrag setBackgroundColor:[UIColor yellowColor]];
+    
     [scrollViewDrag setContentSize:CGSizeMake(20 + (numOfRows * bnwidth) + ((numOfRows-1) * 10), 93)];
-    
-    
-    NSLog(@"Width: %f",20 + (numOfRows * bnwidth) + ((numOfRows-1) * 10));
-    
 }
 
 

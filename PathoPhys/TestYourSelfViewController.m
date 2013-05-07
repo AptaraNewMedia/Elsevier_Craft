@@ -293,7 +293,7 @@
         case QUESTION_TYPE_DRAGDROPRADIOBUTTONS:
         {
             if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-                dragDropRadioView = [[DragDropRadioViewController alloc] initWithNibName:@"DragDropRadioViewController_iphone" bundle:nil];
+                dragDropRadioView = [[DragDropRadioViewController alloc] initWithNibName:@"DragDropRadioViewController_iPhone" bundle:nil];
             }
             else {
                 dragDropRadioView = [[DragDropRadioViewController alloc] initWithNibName:@"DragDropRadioViewController_iPad" bundle:nil];
