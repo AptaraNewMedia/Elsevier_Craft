@@ -403,7 +403,7 @@
 
 
 
-//Get db data from question_id
+//Get db data from questi˛on_id
 //--------------------------------
 -(void) fn_LoadDbData:(NSString *)question_id
 {

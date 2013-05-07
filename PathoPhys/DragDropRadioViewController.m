@@ -125,8 +125,14 @@
     lblQuestionNo.textColor = COLOR_WHITE;
     lblQuestionText.textColor = COLOR_WHITE;
     
-    lblQuestionNo.font = FONT_31;
-    lblQuestionText.font = FONT_17;
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        lblQuestionNo.font = FONT_20;
+        lblQuestionText.font = FONT_12;
+    }
+    else {
+        lblQuestionNo.font = FONT_31;
+        lblQuestionText.font = FONT_17;
+    }
     
 }
 
@@ -232,10 +238,19 @@
         
     }
     else if (objDRAGDROP.intDRAGDROPRADIOid == 26) {
-        spacingWidth = 100;
-        spacingHeight = objDRAGDROP.fHeight;
-        x = objDRAGDROP.fWidth + 10;
-        y = 32;
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            spacingWidth = 45;
+            spacingHeight = objDRAGDROP.fHeight;
+            x = objDRAGDROP.fWidth + 10;
+            y = 20;
+        }
+        else {
+            spacingWidth = 100;
+            spacingHeight = objDRAGDROP.fHeight;
+            x = objDRAGDROP.fWidth + 10;
+            y = 32;
+            
+        }
     }
     else if (objDRAGDROP.intDRAGDROPRADIOid == 18) {
         spacingWidth = 130;
