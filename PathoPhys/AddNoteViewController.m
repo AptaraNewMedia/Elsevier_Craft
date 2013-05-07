@@ -90,14 +90,25 @@
 -(void) Fn_SetFontColor
 {
     lblChapterName.textColor = COLOR_BottomBlueButton;
-    lblChapterName.font = FONT_17;
     
-    txtNote.font = FONT_17;
     txtNote.textColor = COLOR_BottomGrayButton;
     
-    lblTitle.font = FONT_20;
     lblTitle.textColor = COLOR_WHITE;
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        lblChapterName.font = FONT_10;
+        txtNote.font = FONT_10;
+        lblTitle.font = FONT_12;
+    }
+    else
+    {
+        lblChapterName.font = FONT_17;
+        txtNote.font = FONT_17;
+        lblTitle.font = FONT_20;
+    }
 }
+
 
 - (void) Fn_LoadNoteData:(Notes *)notes
 {
@@ -153,6 +164,11 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        return NO;
+    }
+    
     if(interfaceOrientation==UIInterfaceOrientationLandscapeLeft){
         [self Fn_rotateLandscape];
     }

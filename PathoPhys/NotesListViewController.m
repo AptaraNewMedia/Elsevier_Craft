@@ -54,10 +54,16 @@
     arrsearch = [[NSMutableArray alloc] init];
     arrsearch = arrNotes;
     
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        txtSearch.font = FONT_8;
+    }
+    else
+    {
+        txtSearch.font = FONT_17;
+    }
     
     txtSearch.delegate = self;
-
-    txtSearch.font = FONT_17;
     txtSearch.textColor = COLOR_BLACK;
     
 //    lblTitle.font = FONT_20;
@@ -77,50 +83,68 @@
     NotesCell *cell = (NotesCell *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     if(cell == nil) {
         
-        if (currentOrientation == 2) {
-            NSArray *cellArray = [[NSBundle mainBundle] loadNibNamed:@"NotesCellP" owner:self options:nil];
-            cell = [cellArray lastObject];
-            
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+        {
+            NSArray *cellArray_Phone = [[NSBundle mainBundle] loadNibNamed:@"NotesCell_iPhone" owner:self options:nil];
+            cell = [cellArray_Phone lastObject];
         }
-        else  {
-            NSArray *cellArray = [[NSBundle mainBundle] loadNibNamed:@"NotesCell" owner:self options:nil];
-            cell = [cellArray lastObject];
+        else
+        {
+            if (currentOrientation == 2) {
+                NSArray *cellArray = [[NSBundle mainBundle] loadNibNamed:@"NotesCellP" owner:self options:nil];
+                cell = [cellArray lastObject];
+                
+            }
+            else  {
+                NSArray *cellArray = [[NSBundle mainBundle] loadNibNamed:@"NotesCell" owner:self options:nil];
+                cell = [cellArray lastObject];
+            }
         }
+        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-
-    cell.lbl_serionNo.font = FONT_17;
-    cell.lbl_name.font = FONT_17;
-    cell.lbl_date.font = FONT_17;
-    cell.lbl_desc.font = FONT_17;
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        cell.lbl_serionNo.font = FONT_8;
+        cell.lbl_name.font = FONT_8;
+        cell.lbl_date.font = FONT_8;
+        cell.lbl_desc.font = FONT_8;
+    }
+    else
+    {
+        cell.lbl_serionNo.font = FONT_17;
+        cell.lbl_name.font = FONT_17;
+        cell.lbl_date.font = FONT_17;
+        cell.lbl_desc.font = FONT_17;
+    }
     
     cell.lbl_serionNo.textColor = COLOR_BLACK;
     cell.lbl_name.textColor = COLOR_BLACK;
     cell.lbl_date.textColor = COLOR_BLACK;
     cell.lbl_desc.textColor = COLOR_BLACK;
     
-    
-    
     cell.lbl_name.numberOfLines = 3;
-
+    
     
     objNotes = (Notes *)[arrNotes objectAtIndex:indexPath.row];
     cell.lbl_serionNo.text = [NSString stringWithFormat:@"%d",objNotes.intNotesId];
     cell.lbl_name.text = [NSString stringWithFormat:@"%@",objNotes.strNoteTitle];
     cell.lbl_date.text = [NSString stringWithFormat:@"%@", objNotes.strCreatedDate];
     cell.lbl_desc.text = [NSString stringWithFormat:@"%@", objNotes.strNoteDesc];
-//    if(currentOrientation == 2){
-//        NSLog(@"protrait");
-//        cell.imgview_cellpatch.image = [UIImage imageNamed:@"white_patch_with_line.png"];
-//    }
-//    else{
-//        NSLog(@"protrait");
-//        cell.imgview_cellpatch.image = [UIImage imageNamed:@"img_notelist_centerrow.png"];
-//    }
+    //    if(currentOrientation == 2){
+    //        NSLog(@"protrait");
+    //        cell.imgview_cellpatch.image = [UIImage imageNamed:@"white_patch_with_line.png"];
+    //    }
+    //    else{
+    //        NSLog(@"protrait");
+    //        cell.imgview_cellpatch.image = [UIImage imageNamed:@"img_notelist_centerrow.png"];
+    //    }
     
-
+    
     return cell;
 }
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     NSString *data = txtSearch.text;
     // [db Fn_GetSearchList:data];
@@ -171,6 +195,14 @@
     }
 }
 
+#pragma mark - TextField Delegates
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
 
 - (void)viewDidUnload{
     [super viewDidUnload];
@@ -178,6 +210,12 @@
     // e.g. self.myOutlet = nil;
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        return NO;
+    }
+    
     if(interfaceOrientation==UIInterfaceOrientationLandscapeLeft){
         [self Fn_rotateLandscape];
         currentOrientation =1;
@@ -198,6 +236,7 @@
 	return YES;
 }
 - (void)Fn_rotatePortrait{
+    
     
     [self.view setFrame:CGRectMake(0,0,768,1024)];
     

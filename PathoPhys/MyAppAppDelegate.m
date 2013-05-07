@@ -164,7 +164,8 @@ UITextView *txt_feedback;
 
 // About
 -(void) Fn_AddAbout:(int)index{
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
         aboutUsView = [[AboutUsViewController alloc] initWithNibName:@"AboutUsViewController_iPhone" bundle:nil];
     }
     else{
@@ -181,9 +182,18 @@ UITextView *txt_feedback;
 }
 
 // Add note
--(void) Fn_AddNote:(Notes *)notes{    
+-(void) Fn_AddNote:(Notes *)notes{
     [self Fn_SubAddNote];
-    addNotesView = [[AddNoteViewController alloc] initWithNibName:@"AddNoteViewController_iPad" bundle:nil];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        addNotesView = [[AddNoteViewController alloc] initWithNibName:@"AddNoteViewController_iPhone" bundle:nil];
+    }
+    else
+    {
+        addNotesView = [[AddNoteViewController alloc] initWithNibName:@"AddNoteViewController_iPad" bundle:nil];
+    }
+    
     [addNotesView Fn_LoadNoteData:notes];
     
 }
@@ -198,11 +208,15 @@ UITextView *txt_feedback;
 // Note List
 -(void) Fn_AddNotesList{
     [self Fn_SubNotesList];
-    notesListView = [[NotesListViewController alloc] initWithNibName:@"NotesListViewController_iPad" bundle:nil];
     
-//    UINavigationController *nav = (UINavigationController*)tabBarController.selectedViewController;
-//    [nav pushViewController:notesListView animated:YES];
-
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        notesListView = [[NotesListViewController alloc] initWithNibName:@"NotesListViewController_iPhone" bundle:nil];
+    }
+    else
+    {
+        notesListView = [[NotesListViewController alloc] initWithNibName:@"NotesListViewController_iPad" bundle:nil];
+    }
     [self.window.rootViewController.view addSubview:notesListView.view];
     [notesListView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
 }
@@ -220,9 +234,8 @@ UITextView *txt_feedback;
         [scoreCardView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
     }
     
-        [self.window.rootViewController.view addSubview:scoreCardView.view];
+    [self.window.rootViewController.view addSubview:scoreCardView.view];
 }
-
 -(void) Fn_SubScoreCard{
     [scoreCardView.view removeFromSuperview];
 }
@@ -334,16 +347,24 @@ UITextView *txt_feedback;
 // Result
 
 -(void) Fn_AddResult:(NSString *)chaptername AndThematicNAme:(NSString *)thematicName AndScore:(NSString *)score  {
-
+    
     [resultView.view removeFromSuperview];
     
-    resultView =[[ResultViewController alloc] initWithNibName:@"ResultViewController" bundle:nil];
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        resultView =[[ResultViewController alloc] initWithNibName:@"ResultViewController_iPhone" bundle:nil];
+    }
+    else
+    {
+        resultView =[[ResultViewController alloc] initWithNibName:@"ResultViewController" bundle:nil];
+    }
+    
     [self.window.rootViewController.view addSubview:resultView.view];
     [resultView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
     
     resultView.lblChapterName.text = chaptername;
     resultView.lblThematicArea.text = thematicName;
-    resultView.lblScore.text = score;   
+    resultView.lblScore.text = score;
     
 }
 -(void) Fn_SubResult {

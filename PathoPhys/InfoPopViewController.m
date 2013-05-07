@@ -43,6 +43,8 @@
 
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
         self.view.frame=CGRectMake(00, 44, 320, 392);
+        [viewPopup setFrame:CGRectMake(186, -12, 141, 83)];
+        Bn_BGButton.frame=CGRectMake(00, 00, 320, 392);
         
         Bn_AboutAuthor.titleLabel.font=FONT_10;
         Bn_AboutApp.titleLabel.font=FONT_10;

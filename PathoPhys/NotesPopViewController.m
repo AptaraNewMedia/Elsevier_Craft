@@ -44,7 +44,10 @@
 
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.view.frame=CGRectMake(00, 44, 320, 392);        
+        self.view.frame=CGRectMake(00, 44, 320, 392);
+        [viewPopup setFrame:CGRectMake(201, -12, 86, 65)];
+        Bn_BGButton.frame=CGRectMake(00, 00, 320, 392);
+        
         Bn_Addnote.titleLabel.font=FONT_10;
         Bn_ViewNote.titleLabel.font=FONT_10;
     }

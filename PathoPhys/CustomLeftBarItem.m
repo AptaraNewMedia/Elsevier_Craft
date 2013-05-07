@@ -30,7 +30,7 @@
         btnBack = [UIButton buttonWithType:UIButtonTypeCustom];
         btnBack.backgroundColor = COLOR_CLEAR;
         btnBack.frame = CGRectMake(60.0, 7.0, 53, 30);
-        [btnBack setBackgroundImage:[UIImage imageNamed:@"img_back_btn.png"] forState:UIControlStateNormal];
+        [btnBack setImage:[UIImage imageNamed:@"img_back_btn.png"] forState:UIControlStateNormal];
         //[btnBack addTarget:self action:@selector(onBack:) forControlEvents:UIControlEventTouchUpInside];
         btnBack.exclusiveTouch = YES;
         [self addSubview:btnBack];
