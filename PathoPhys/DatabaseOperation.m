@@ -491,7 +491,7 @@ NSError *error;
 -(DRAGDROP *)fnGetTestyourselfDRAGDROP:(NSString *)question_id
 {
     DRAGDROP *objDRAGDROP;
-    strQuery = [NSString stringWithFormat:@"select mcms_id, question_text, options, options_text, answers, question_image, feedback, instruction, ipad_normal_points, ipad_size from mcms where question_id = '%@'",question_id];
+    strQuery = [NSString stringWithFormat:@"select mcms_id, question_text, options, options_text, answers, question_image, feedback, instruction, ipad_normal_points, ipad_size, iphone_normal_points, iphone_size from mcms where question_id = '%@'",question_id];
     if (categoryNumber == 3) {
         strQuery = [NSString stringWithFormat:@"select mcms_id, question_text, options, options_text, answers, question_image, feedback, instruction, ipad_normal_points, ipad_size from mcms_cs where question_id = '%@'",question_id];
     }
