@@ -227,6 +227,10 @@
 }
 -(NSUInteger)supportedInterfaceOrientations
 {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        return NO;
+    }
     NSUInteger mask= UIInterfaceOrientationMaskPortrait;
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     currentOrientaion = interfaceOrientation;
