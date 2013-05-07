@@ -557,36 +557,72 @@
 }
 
 
-- (void) Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue{
-    
+- (void) Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue
+{
     [feedbackView removeFromSuperview];
     
-    feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 261, 131)];
-    feedbackView.backgroundColor = [UIColor clearColor];
-    
-    UIView *bg = [[UIView alloc] init];
-    bg.backgroundColor = [UIColor whiteColor];
-    [bg setFrame:CGRectMake(13, 13, 235, 104)];
-    [feedbackView addSubview:bg];
-    
-    
-    UIImageView *img_feedback = [[UIImageView alloc] init];
-    img_feedback.backgroundColor = [UIColor clearColor];
-    [img_feedback setImage:[UIImage imageNamed:@"img_feedback_down_box.png"]];
-    [img_feedback setFrame:CGRectMake(0, 0, 261, 131)];
-    [feedbackView addSubview:img_feedback];
-    
-    
-    UITextView *txt_feedback = [[UITextView alloc] init];
-    //txt_feedback.text = textValue;
-    txt_feedback.text = [NSString stringWithFormat:@"%@",textValue];
-    txt_feedback.textColor = [UIColor whiteColor];
-    txt_feedback.backgroundColor = [UIColor clearColor];
-    txt_feedback.font = BOLD_FONT_14;
-    txt_feedback.editable = NO;
-    [txt_feedback setFrame:CGRectMake(13, 13, 235, 104)];
-    [feedbackView addSubview:txt_feedback];
-    [self.view addSubview:feedbackView];
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 150, 90)];
+        feedbackView.backgroundColor = [UIColor clearColor];
+        
+        UIView *bg = [[UIView alloc] init];
+        bg.backgroundColor = [UIColor whiteColor];
+        [bg setFrame:CGRectMake(12, 12, 125, 65)];
+        [feedbackView addSubview:bg];
+        
+        
+        UIImageView *img_feedback = [[UIImageView alloc] init];
+        img_feedback.backgroundColor = [UIColor clearColor];
+        //        [img_feedback setImage:[UIImage imageNamed:@"img_feedback_down_box.png"]];
+        
+        [img_feedback setImage:[UIImage imageNamed:@"Small_Feedback_Box_004.png"]];
+        
+        [img_feedback setFrame:CGRectMake(0, 0, 150, 90)];
+        [feedbackView addSubview:img_feedback];
+        
+        
+        UITextView *txt_feedback = [[UITextView alloc] init];
+        txt_feedback.text = textValue;
+        txt_feedback.textColor = [UIColor whiteColor];
+        txt_feedback.backgroundColor = [UIColor clearColor];
+        txt_feedback.font = FONT_10;
+        txt_feedback.editable = NO;
+        [txt_feedback setFrame:CGRectMake(12, 12, 125, 65)];
+        [feedbackView addSubview:txt_feedback];
+        [self.view addSubview:feedbackView];
+    }
+    else
+    {
+        feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 261, 131)];
+        feedbackView.backgroundColor = [UIColor clearColor];
+        
+        UIView *bg = [[UIView alloc] init];
+        bg.backgroundColor = [UIColor whiteColor];
+        [bg setFrame:CGRectMake(13, 13, 235, 104)];
+        [feedbackView addSubview:bg];
+        
+        
+        UIImageView *img_feedback = [[UIImageView alloc] init];
+        img_feedback.backgroundColor = [UIColor clearColor];
+        [img_feedback setImage:[UIImage imageNamed:@"img_feedback_down_box.png"]];
+        
+        //    [img_feedback setImage:[UIImage imageNamed:@"Small_Feedback_Box_004.png"]];
+        
+        [img_feedback setFrame:CGRectMake(0, 0, 261, 131)];
+        [feedbackView addSubview:img_feedback];
+        
+        
+        UITextView *txt_feedback = [[UITextView alloc] init];
+        txt_feedback.text = textValue;
+        txt_feedback.textColor = [UIColor whiteColor];
+        txt_feedback.backgroundColor = [UIColor clearColor];
+        txt_feedback.font = FONT_14;
+        txt_feedback.editable = NO;
+        [txt_feedback setFrame:CGRectMake(13, 13, 235, 104)];
+        [feedbackView addSubview:txt_feedback];
+        [self.view addSubview:feedbackView];
+    }
 }
 - (void) Fn_Feedback_Tapped:(id)sender {
     

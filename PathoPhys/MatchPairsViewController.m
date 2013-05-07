@@ -378,37 +378,72 @@
 	[alert show];
 }
 //--------------------------------
-- (void) Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue{
-    
+- (void) Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue
+{
     [feedbackView removeFromSuperview];
     
-    feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 261, 131)];
-    feedbackView.backgroundColor = [UIColor clearColor];
-    
-    UIView *bg = [[UIView alloc] init];
-    bg.backgroundColor = [UIColor whiteColor];
-    [bg setFrame:CGRectMake(13, 13, 235, 104)];
-    [feedbackView addSubview:bg];
-    
-    
-    UIImageView *img_feedback = [[UIImageView alloc] init];
-    img_feedback.backgroundColor = [UIColor clearColor];
-    [img_feedback setImage:[UIImage imageNamed:@"img_feedback_down_box.png"]];
-    [img_feedback setFrame:CGRectMake(0, 0, 261, 131)];
-    [feedbackView addSubview:img_feedback];
-    
-    
-    UITextView *txt_feedback = [[UITextView alloc] init];
-    txt_feedback.text = [NSString stringWithFormat:@"%@",textValue];
-    txt_feedback.textColor = [UIColor whiteColor];
-    txt_feedback.backgroundColor = [UIColor clearColor];
-    txt_feedback.font = BOLD_FONT_14;
-    txt_feedback.editable = NO;
-    [txt_feedback setFrame:CGRectMake(13, 13, 235, 104)];
-    [feedbackView addSubview:txt_feedback];
-    [self.view addSubview:feedbackView];
-    
-    //btnInvisible.hidden = NO;
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 150, 90)];
+        feedbackView.backgroundColor = [UIColor clearColor];
+        
+        UIView *bg = [[UIView alloc] init];
+        bg.backgroundColor = [UIColor whiteColor];
+        [bg setFrame:CGRectMake(12, 12, 125, 65)];
+        [feedbackView addSubview:bg];
+        
+        
+        UIImageView *img_feedback = [[UIImageView alloc] init];
+        img_feedback.backgroundColor = [UIColor clearColor];
+        //        [img_feedback setImage:[UIImage imageNamed:@"img_feedback_down_box.png"]];
+        
+        [img_feedback setImage:[UIImage imageNamed:@"Small_Feedback_Box_004.png"]];
+        
+        [img_feedback setFrame:CGRectMake(0, 0, 150, 90)];
+        [feedbackView addSubview:img_feedback];
+        
+        
+        UITextView *txt_feedback = [[UITextView alloc] init];
+        txt_feedback.text = textValue;
+        txt_feedback.textColor = [UIColor whiteColor];
+        txt_feedback.backgroundColor = [UIColor clearColor];
+        txt_feedback.font = FONT_10;
+        txt_feedback.editable = NO;
+        [txt_feedback setFrame:CGRectMake(12, 12, 125, 65)];
+        [feedbackView addSubview:txt_feedback];
+        [self.view addSubview:feedbackView];
+    }
+    else
+    {
+        feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 261, 131)];
+        feedbackView.backgroundColor = [UIColor clearColor];
+        
+        UIView *bg = [[UIView alloc] init];
+        bg.backgroundColor = [UIColor whiteColor];
+        [bg setFrame:CGRectMake(13, 13, 235, 104)];
+        [feedbackView addSubview:bg];
+        
+        
+        UIImageView *img_feedback = [[UIImageView alloc] init];
+        img_feedback.backgroundColor = [UIColor clearColor];
+        [img_feedback setImage:[UIImage imageNamed:@"img_feedback_down_box.png"]];
+        
+        //    [img_feedback setImage:[UIImage imageNamed:@"Small_Feedback_Box_004.png"]];
+        
+        [img_feedback setFrame:CGRectMake(0, 0, 261, 131)];
+        [feedbackView addSubview:img_feedback];
+        
+        
+        UITextView *txt_feedback = [[UITextView alloc] init];
+        txt_feedback.text = textValue;
+        txt_feedback.textColor = [UIColor whiteColor];
+        txt_feedback.backgroundColor = [UIColor clearColor];
+        txt_feedback.font = FONT_14;
+        txt_feedback.editable = NO;
+        [txt_feedback setFrame:CGRectMake(13, 13, 235, 104)];
+        [feedbackView addSubview:txt_feedback];
+        [self.view addSubview:feedbackView];
+    }
 }
 
 - (NSString *) fn_getFeeback:(int)intfeed AndCorrect:(NSString *)correctincorrect
@@ -448,24 +483,37 @@
     UIButton *bn = sender;
     RightMatchView_Ipad *btTemp = [answerArray objectAtIndex:bn.tag];
     
-    float x_point = bn.frame.origin.x;
-    float y_point = bn.superview.frame.origin.y + bn.frame.origin.y + 10;
-    y_point = y_point - visibleRect.origin.y;
+    float x_point;
+    float y_point;
     
-    y_feedback_p=y_point +65;
-    y_feedback_l=y_point;
-    
-    x_feedback_p = x_point + 110;
-    x_feedback_l = x_point + 235;
-    
-    if(currentOrientaion==1 || currentOrientaion==2) // Portrait
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
+        x_point = bn.frame.origin.x+7;
+        y_point = bn.superview.frame.origin.y + bn.frame.origin.y;
+        y_point = y_point - visibleRect.origin.y;
         
-        [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:btTemp.strFeedback];
+        [self Fn_AddFeedbackPopup:x_point andy:y_point andText:btTemp.strFeedback];
     }
-    else // Landscape
+    else
     {
-        [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:btTemp.strFeedback];
+        x_point = bn.frame.origin.x;
+        y_point = bn.superview.frame.origin.y + bn.frame.origin.y + 10;
+        y_point = y_point - visibleRect.origin.y;
+        
+        y_feedback_p=y_point + 65;
+        y_feedback_l=y_point;
+        
+        x_feedback_p = x_point + 110;
+        x_feedback_l = x_point + 235;
+        
+        if(currentOrientaion==1 || currentOrientaion==2) // Portrait
+        {
+            [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:btTemp.strFeedback];
+        }
+        else // Landscape
+        {
+            [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:btTemp.strFeedback];
+        }
     }
 }
 // Get Size of text

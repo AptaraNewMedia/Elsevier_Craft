@@ -389,44 +389,94 @@
 -(IBAction)onFeedbackTapped:(id)sender{
     UIButton *bn = sender;
     MCSSCell_iPad *cell = [cellArray objectAtIndex:bn.tag];
-    float x_point = bn.frame.origin.x - (221);
-    float y_point = tblOptions.frame.origin.y + cell.frame.origin.y + bn.frame.origin.y  - (131);
     
-    x_feedback_l = 270;
-    y_feedback_l = cell.frame.origin.y + bn.frame.origin.y  - (131);
+    float x_point;
+    float y_point;
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        x_point = bn.frame.origin.x - (123);
+        y_point = tblOptions.frame.origin.y + cell.frame.origin.y + bn.frame.origin.y  - (90);
+    }
+    else
+    {
+        x_point = bn.frame.origin.x - (221);
+        y_point = tblOptions.frame.origin.y + cell.frame.origin.y + bn.frame.origin.y  - (131);
+        
+        x_feedback_l = 270;
+        y_feedback_l = cell.frame.origin.y + bn.frame.origin.y  - (131);
+    }
     
     [self Fn_AddFeedbackPopup:x_point andy:y_point andText:cell.strFeedback];
-
+    
 }
-- (void) Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue {
 
+- (void) Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue
+{
     [feedbackView removeFromSuperview];
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 150, 90)];
+        feedbackView.backgroundColor = [UIColor clearColor];
         
-    feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 261, 131)];
-    feedbackView.backgroundColor = [UIColor clearColor];
-    
-    UIView *bg = [[UIView alloc] init];
-    bg.backgroundColor = [UIColor whiteColor];
-    [bg setFrame:CGRectMake(13, 13, 235, 104)];
-    [feedbackView addSubview:bg];
-    
-    
-    UIImageView *img_feedback = [[UIImageView alloc] init];
-    img_feedback.backgroundColor = [UIColor clearColor];
-    [img_feedback setImage:[UIImage imageNamed:@"img_feedback_down_box.png"]];
-    [img_feedback setFrame:CGRectMake(0, 0, 261, 131)];
-    [feedbackView addSubview:img_feedback];
-    
-    
-    UITextView *txt_feedback = [[UITextView alloc] init];
-    txt_feedback.text = textValue;
-    txt_feedback.textColor = [UIColor whiteColor];
-    txt_feedback.backgroundColor = [UIColor clearColor];
-    txt_feedback.font = FONT_14;
-    txt_feedback.editable = NO;
-    [txt_feedback setFrame:CGRectMake(13, 13, 235, 104)];
-    [feedbackView addSubview:txt_feedback];
-    [self.view addSubview:feedbackView];    
+        UIView *bg = [[UIView alloc] init];
+        bg.backgroundColor = [UIColor whiteColor];
+        [bg setFrame:CGRectMake(12, 12, 125, 65)];
+        [feedbackView addSubview:bg];
+        
+        
+        UIImageView *img_feedback = [[UIImageView alloc] init];
+        img_feedback.backgroundColor = [UIColor clearColor];
+        //        [img_feedback setImage:[UIImage imageNamed:@"img_feedback_down_box.png"]];
+        
+        [img_feedback setImage:[UIImage imageNamed:@"Small_Feedback_Box_004.png"]];
+        
+        [img_feedback setFrame:CGRectMake(0, 0, 150, 90)];
+        [feedbackView addSubview:img_feedback];
+        
+        
+        UITextView *txt_feedback = [[UITextView alloc] init];
+        txt_feedback.text = textValue;
+        txt_feedback.textColor = [UIColor whiteColor];
+        txt_feedback.backgroundColor = [UIColor clearColor];
+        txt_feedback.font = FONT_10;
+        txt_feedback.editable = NO;
+        [txt_feedback setFrame:CGRectMake(12, 12, 125, 65)];
+        [feedbackView addSubview:txt_feedback];
+        [self.view addSubview:feedbackView];
+    }
+    else
+    {
+        feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 261, 131)];
+        feedbackView.backgroundColor = [UIColor clearColor];
+        
+        UIView *bg = [[UIView alloc] init];
+        bg.backgroundColor = [UIColor whiteColor];
+        [bg setFrame:CGRectMake(13, 13, 235, 104)];
+        [feedbackView addSubview:bg];
+        
+        
+        UIImageView *img_feedback = [[UIImageView alloc] init];
+        img_feedback.backgroundColor = [UIColor clearColor];
+        [img_feedback setImage:[UIImage imageNamed:@"img_feedback_down_box.png"]];
+        
+        //    [img_feedback setImage:[UIImage imageNamed:@"Small_Feedback_Box_004.png"]];
+        
+        [img_feedback setFrame:CGRectMake(0, 0, 261, 131)];
+        [feedbackView addSubview:img_feedback];
+        
+        
+        UITextView *txt_feedback = [[UITextView alloc] init];
+        txt_feedback.text = textValue;
+        txt_feedback.textColor = [UIColor whiteColor];
+        txt_feedback.backgroundColor = [UIColor clearColor];
+        txt_feedback.font = FONT_14;
+        txt_feedback.editable = NO;
+        [txt_feedback setFrame:CGRectMake(13, 13, 235, 104)];
+        [feedbackView addSubview:txt_feedback];
+        [self.view addSubview:feedbackView];
+    }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
