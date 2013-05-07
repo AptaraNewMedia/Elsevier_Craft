@@ -155,7 +155,12 @@
     UIFont *font = FONT_17;
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
         font = FONT_10;
-        option_hiding_width = 100;
+        if ([objRH.strQuestionId isEqualToString:@"5_4_3_2"]) {
+            option_hiding_width = 100;
+        }
+        else {
+            option_hiding_width = 150;
+        }
         option_hiding_height = 20;
         int_x = 5;
     }
@@ -207,18 +212,8 @@
         max_width = MAX(max_width, sizeOption3.width);
         lblOption3.hidden = NO;
     }
-    
     if ([objRH.strQuestionId isEqualToString:@"5_4_3_2"]) {
         max_width = 100;
-    }
-    
-    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        max_width = 40;
-        
-        lblOptionHiding.numberOfLines = 2;
-        lblOption1.numberOfLines = 2;
-        lblOption2.numberOfLines = 2;
-        lblOption3.numberOfLines = 2;
     }
     
     //max_width = 150;
@@ -246,6 +241,24 @@
         lblOption3.textAlignment=UITextAlignmentCenter;
     }
     
+
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        
+        max_width = 40;
+        
+        
+        lblOptionHiding.numberOfLines = 2;
+        lblOption1.numberOfLines = 2;
+        lblOption2.numberOfLines = 2;
+        lblOption3.numberOfLines = 2;
+        
+        lblOption1.frame=CGRectMake(lblOptionHiding.frame.size.width + 15, 0, max_width, option_hiding_height);
+        lblOption2.frame=CGRectMake(lblOption1.frame.origin.x+lblOption1.frame.size.width + 10, 0, max_width, option_hiding_height);
+        if (arrcount > 3) {
+            lblOption3.frame=CGRectMake(lblOption2.frame.origin.x+lblOption2.frame.size.width + 10, 0, max_width, option_hiding_height);
+        }
+    }
     
     //
     int_y = 0;
