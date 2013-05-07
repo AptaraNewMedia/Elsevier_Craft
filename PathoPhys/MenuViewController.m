@@ -71,6 +71,8 @@
         
     }
     
+    lbl_Title.text = @"Pathophysquiz";
+    
     lblFlashcard.textColor = COLOR_FlashcardHeadingText;
     lblTestyorself.textColor = COLOR_FlashcardHeadingText;
     lblCasestudy.textColor = COLOR_FlashcardHeadingText;
