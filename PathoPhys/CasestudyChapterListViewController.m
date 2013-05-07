@@ -80,7 +80,7 @@
             customView = [[CustomChapterHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, 275, 32)];
             
             UIImage *img = [UIImage imageNamed:@"Tab_white_patch1.png"];
-            customView.imgViewBg = [[UIImageView alloc] initWithFrame:(CGRectMake(0, 0, img.size.width, img.size.height))];
+            customView.imgViewBg.frame = CGRectMake(0, 0, img.size.width, img.size.height);
             [customView.imgViewBg setImage:img];
             [customView.headerBtn setFrame:CGRectMake(15, 0, 231, 32)];
             [customView.headerBtn setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
@@ -129,7 +129,16 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"img_topbar.png"] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setTintColor:COLOR_BLUE];
     
-    customLeftBar = [[CustomLeftBarItem alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        customLeftBar = [[CustomLeftBarItem alloc] initWithFrame:CGRectMake(0, 0, 80, 44)];
+        customLeftBar.btnHome.frame = CGRectMake(0, 7, 35, 30) ;
+        customLeftBar.btnBack.frame = CGRectMake(31, 7, 45, 30) ;
+        [customLeftBar.btnHome setImage:[UIImage imageNamed:@"home_btn.png"] forState:UIControlStateNormal];
+        [customLeftBar.btnBack setImage:[UIImage imageNamed:@"back_btn.png"] forState:UIControlStateNormal];
+    }
+    else {
+        customLeftBar = [[CustomLeftBarItem alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+    }
     UIBarButtonItem *btnBar1 = [[UIBarButtonItem alloc] initWithCustomView:customLeftBar];
     self.navigationItem.leftBarButtonItem = btnBar1;
     [customLeftBar.btnBack addTarget:self action:@selector(onBack:) forControlEvents:UIControlEventTouchUpInside];

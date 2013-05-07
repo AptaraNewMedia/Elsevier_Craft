@@ -112,12 +112,31 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"img_topbar.png"] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setTintColor:COLOR_BLUE];
     
-    customLeftBar = [[CustomLeftBarItem alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        customLeftBar = [[CustomLeftBarItem alloc] initWithFrame:CGRectMake(0, 0, 80, 44)];
+        customLeftBar.btnHome.frame = CGRectMake(0, 7, 35, 30) ;
+        customLeftBar.btnBack.frame = CGRectMake(31, 7, 45, 30) ;
+        [customLeftBar.btnHome setImage:[UIImage imageNamed:@"home_btn.png"] forState:UIControlStateNormal];
+        [customLeftBar.btnBack setImage:[UIImage imageNamed:@"back_btn.png"] forState:UIControlStateNormal];
+    }
+    else {
+        customLeftBar = [[CustomLeftBarItem alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+    }
     UIBarButtonItem *btnBar1 = [[UIBarButtonItem alloc] initWithCustomView:customLeftBar];
     self.navigationItem.leftBarButtonItem = btnBar1;
     [customLeftBar.btnBack addTarget:self action:@selector(onBack:) forControlEvents:UIControlEventTouchUpInside];
     
-    customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(0, 0, 130, 44)];
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(230, 0, 90, 44)];
+        
+        customRightBar.btnScore.frame = CGRectMake(0.0, 7.0, 30, 30);
+        customRightBar.btnNote.frame = CGRectMake(31.0, 7.0, 30, 30);
+        customRightBar.btnInfo.frame = CGRectMake(61.0, 7.0, 30, 30);
+        
+    }
+    else {
+        customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(0, 0, 130, 44)];
+    }
     UIBarButtonItem *btnBar = [[UIBarButtonItem alloc] initWithCustomView:customRightBar];
     self.navigationItem.rightBarButtonItem = btnBar;
 }

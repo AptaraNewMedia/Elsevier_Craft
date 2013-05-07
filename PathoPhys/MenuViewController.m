@@ -116,8 +116,7 @@
         
     }
     else {
-    
-    customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(0, 0, 130, 44)];
+        customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(0, 0, 130, 44)];
     }
     [self.view addSubview:customRightBar];
         

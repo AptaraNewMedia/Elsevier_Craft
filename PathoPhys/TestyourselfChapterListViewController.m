@@ -77,7 +77,7 @@
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
             customView = [[CustomChapterHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, 275, 32)];
             UIImage *img = [UIImage imageNamed:@"Tab_white_patch1.png"];
-            customView.imgViewBg = [[UIImageView alloc] initWithFrame:(CGRectMake(0, 0, img.size.width, img.size.height))];
+            customView.imgViewBg.frame = CGRectMake(0, 0, img.size.width, img.size.height);
             [customView.imgViewBg setImage:img];
             [customView.headerBtn setFrame:CGRectMake(15, 0, 231, 31)];
             [customView.headerBtn setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
