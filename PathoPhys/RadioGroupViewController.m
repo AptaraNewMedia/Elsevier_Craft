@@ -75,7 +75,13 @@
     
     [self fn_SetFontColor];    
     
-    [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Select the correct category for items on the left. Once you have selected all items, tap <b>Submit.</b></body></html>" baseURL:nil];
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:12px;color:AA3934;font-family:helvetica;\">Select the correct category for items on the left. Once you have selected all items, tap <b>Submit.</b></body></html>" baseURL:nil];
+    }
+    else {
+        [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Select the correct category for items on the left. Once you have selected all items, tap <b>Submit.</b></body></html>" baseURL:nil];            
+    }
     
     imgRadio = [UIImage imageNamed:@"btn_radio.png"];
     imgRadioSelected = [UIImage imageNamed:@"btn_radio_select.png"];
@@ -95,9 +101,14 @@
     lblQuestionNo.textColor = COLOR_WHITE;
     lblQuestionText.textColor = COLOR_WHITE;
     
-    lblQuestionNo.font = FONT_31;
-    lblQuestionText.font = FONT_17;
-    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        lblQuestionNo.font = FONT_20;
+        lblQuestionText.font = FONT_12;
+    }
+    else {
+        lblQuestionNo.font = FONT_31;
+        lblQuestionText.font = FONT_17;
+    }    
 }
 
 
@@ -548,6 +559,9 @@
 }
 -(NSUInteger)supportedInterfaceOrientations
 {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
     NSUInteger mask= UIInterfaceOrientationMaskPortrait;
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     currentOrientaion = interfaceOrientation;
@@ -575,6 +589,9 @@
     return UIInterfaceOrientationMaskAll;
 }
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
     currentOrientaion = interfaceOrientation;
     if(interfaceOrientation==UIInterfaceOrientationLandscapeLeft){
         [self Fn_rotateLandscape];

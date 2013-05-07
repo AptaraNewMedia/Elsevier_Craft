@@ -213,7 +213,7 @@
             
             if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
                 
-                radioGroupView = [[RadioGroupViewController alloc] initWithNibName:@"RadioGroupViewController_iphone" bundle:nil];
+                radioGroupView = [[RadioGroupViewController alloc] initWithNibName:@"RadioGroupViewController_iPhone" bundle:nil];
             }
             else {
                 
