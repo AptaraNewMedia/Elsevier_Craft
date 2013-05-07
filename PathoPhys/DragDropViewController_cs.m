@@ -74,8 +74,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];       
-    
-    NSString *question = [NSString stringWithFormat:@"<html><body style=\"font-size:16px;color:white;font-family:helvetica;background-color:#0c64b1;\">%@</body></html>", objDRAGDROP.strQuestionText];
+
+    int f_size = 16;    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        f_size = 12;
+    }
+        
+    NSString *question = [NSString stringWithFormat:@"<html><body style=\"font-size:%dpx;color:white;font-family:helvetica;background-color:#0c64b1;\">%@</body></html>", f_size, objDRAGDROP.strQuestionText];
     
     [webQuestionText loadHTMLString:question baseURL:nil];
     
@@ -87,7 +92,7 @@
     
     webviewInstructions.scrollView.showsHorizontalScrollIndicator = NO;
     webviewInstructions.scrollView.bounces = NO;
-    [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Drag the options and drop them on the correct drop areas. Once you are done, tap <b>Submit.</b></body></html>" baseURL:nil];
+    [webviewInstructions loadHTMLString:[NSString stringWithFormat:@"<html><body style=\"font-size:%dpx;color:AA3934;font-family:helvetica;\">Drag the options and drop them on the correct drop areas. Once you are done, tap <b>Submit.</b></body></html>", f_size] baseURL:nil];
     
     UIImage *imgName = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", objDRAGDROP.strImageName]];
     imgViewQue.image = imgName;
@@ -121,10 +126,13 @@
 -(void) fn_SetFontColor
 {
     lblQuestionNo.textColor = COLOR_WHITE;
-    //lblQuestionText.textColor = COLOR_WHITE;
     
-    lblQuestionNo.font = FONT_31;
-    //lblQuestionText.font = FONT_17;
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        lblQuestionNo.font = FONT_20;
+    }
+    else {
+        lblQuestionNo.font = FONT_31;
+    }
     
 }
 
@@ -494,6 +502,9 @@
 }
 -(NSUInteger)supportedInterfaceOrientations
 {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
     NSUInteger mask= UIInterfaceOrientationMaskPortrait;
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     currentOrientaion = interfaceOrientation;
@@ -521,6 +532,9 @@
     return UIInterfaceOrientationMaskAll;
 }
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
     currentOrientaion = interfaceOrientation;
     if(interfaceOrientation==UIInterfaceOrientationLandscapeLeft){
         [self Fn_rotateLandscape];

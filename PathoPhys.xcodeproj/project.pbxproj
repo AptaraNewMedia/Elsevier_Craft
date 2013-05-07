@@ -808,6 +808,10 @@
 		87F5788E1738D683009E995C /* 610007_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87F578591738D683009E995C /* 610007_iphone@2x.png */; };
 		87F5788F1738D683009E995C /* 610008_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87F5785A1738D683009E995C /* 610008_iphone@2x.png */; };
 		87F578901738D683009E995C /* 610009_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87F5785B1738D683009E995C /* 610009_iphone@2x.png */; };
+		87F578941738F5AF009E995C /* DragDropViewController_cs_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F578911738F5AF009E995C /* DragDropViewController_cs_iPhone.xib */; };
+		87F578951738F5AF009E995C /* MatchPairsViewController_cs_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F578921738F5AF009E995C /* MatchPairsViewController_cs_iPhone.xib */; };
+		87F578961738F5AF009E995C /* SingleSelectionViewController_cs_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F578931738F5AF009E995C /* SingleSelectionViewController_cs_iPhone.xib */; };
+		87F578981738F6E2009E995C /* CaseStudyViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F578971738F6E2009E995C /* CaseStudyViewController_iPhone.xib */; };
 		87F67E831711B21A0082C5CF /* FlashcardsSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F67E6C1711B21A0082C5CF /* FlashcardsSet.m */; };
 		87F67E841711B21A0082C5CF /* Chapters.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F67E6E1711B21A0082C5CF /* Chapters.m */; };
 		87F67E851711B21A0082C5CF /* ThematicArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F67E701711B21A0082C5CF /* ThematicArea.m */; };
@@ -1897,6 +1901,10 @@
 		87F578591738D683009E995C /* 610007_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "610007_iphone@2x.png"; sourceTree = "<group>"; };
 		87F5785A1738D683009E995C /* 610008_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "610008_iphone@2x.png"; sourceTree = "<group>"; };
 		87F5785B1738D683009E995C /* 610009_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "610009_iphone@2x.png"; sourceTree = "<group>"; };
+		87F578911738F5AF009E995C /* DragDropViewController_cs_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DragDropViewController_cs_iPhone.xib; sourceTree = "<group>"; };
+		87F578921738F5AF009E995C /* MatchPairsViewController_cs_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchPairsViewController_cs_iPhone.xib; sourceTree = "<group>"; };
+		87F578931738F5AF009E995C /* SingleSelectionViewController_cs_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleSelectionViewController_cs_iPhone.xib; sourceTree = "<group>"; };
+		87F578971738F6E2009E995C /* CaseStudyViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseStudyViewController_iPhone.xib; sourceTree = "<group>"; };
 		87F67E6A1711B21A0082C5CF /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		87F67E6B1711B21A0082C5CF /* FlashcardsSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashcardsSet.h; sourceTree = "<group>"; };
 		87F67E6C1711B21A0082C5CF /* FlashcardsSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashcardsSet.m; sourceTree = "<group>"; };
@@ -2267,6 +2275,7 @@
 				87F9DBA71712CEF8005E57EF /* CasestudyChapterListViewController.h */,
 				87F9DBA81712CEF8005E57EF /* CasestudyChapterListViewController.m */,
 				874A236617213D230052157E /* CaseStudyViewController_iPad.xib */,
+				87F578971738F6E2009E995C /* CaseStudyViewController_iPhone.xib */,
 				874A236717213D230052157E /* CaseStudyViewController.h */,
 				874A236817213D230052157E /* CaseStudyViewController.m */,
 			);
@@ -3159,11 +3168,14 @@
 			isa = PBXGroup;
 			children = (
 				870E9EBC172C0FAF00DD52A8 /* SingleSelectionViewController_cs_iPad.xib */,
+				87F578931738F5AF009E995C /* SingleSelectionViewController_cs_iPhone.xib */,
 				870E9EBD172C0FAF00DD52A8 /* SingleSelectionViewController_cs.h */,
 				870E9EBE172C0FAF00DD52A8 /* SingleSelectionViewController_cs.m */,
+				87F578921738F5AF009E995C /* MatchPairsViewController_cs_iPhone.xib */,
 				87FF8451172C3B9500F34B16 /* MatchPairsViewController_cs_iPad.xib */,
 				87FF8452172C3B9500F34B16 /* MatchPairsViewController_cs.h */,
 				87FF8453172C3B9500F34B16 /* MatchPairsViewController_cs.m */,
+				87F578911738F5AF009E995C /* DragDropViewController_cs_iPhone.xib */,
 				87FF8457172C3D1500F34B16 /* DragDropViewController_cs_iPad.xib */,
 				87FF8458172C3D1500F34B16 /* DragDropViewController_cs.h */,
 				87FF8459172C3D1500F34B16 /* DragDropViewController_cs.m */,
@@ -4825,6 +4837,10 @@
 				87F5788E1738D683009E995C /* 610007_iphone@2x.png in Resources */,
 				87F5788F1738D683009E995C /* 610008_iphone@2x.png in Resources */,
 				87F578901738D683009E995C /* 610009_iphone@2x.png in Resources */,
+				87F578941738F5AF009E995C /* DragDropViewController_cs_iPhone.xib in Resources */,
+				87F578951738F5AF009E995C /* MatchPairsViewController_cs_iPhone.xib in Resources */,
+				87F578961738F5AF009E995C /* SingleSelectionViewController_cs_iPhone.xib in Resources */,
+				87F578981738F6E2009E995C /* CaseStudyViewController_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

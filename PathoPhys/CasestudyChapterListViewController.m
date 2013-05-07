@@ -306,7 +306,14 @@
             
         }
     }
-    caseStudyViewController = [[CaseStudyViewController alloc] initWithNibName:@"CaseStudyViewController_iPad" bundle:nil];    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        caseStudyViewController = [[CaseStudyViewController alloc] initWithNibName:@"CaseStudyViewController_iPhone" bundle:nil];
+        
+    }
+    else {
+        caseStudyViewController = [[CaseStudyViewController alloc] initWithNibName:@"CaseStudyViewController_iPad" bundle:nil];
+    }
+   
     [self.navigationController pushViewController:caseStudyViewController animated:YES];
     
 }
@@ -399,8 +406,13 @@
         strCurrentChapterName = [NSString stringWithFormat:@"%@", objChap.strChapterTitle];
         strCurrentThematicName = [NSString stringWithFormat:@""];
         
-        
-        caseStudyViewController = [[CaseStudyViewController alloc] initWithNibName:@"CaseStudyViewController_iPad" bundle:nil];
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            caseStudyViewController = [[CaseStudyViewController alloc] initWithNibName:@"CaseStudyViewController_iPhone" bundle:nil];
+            
+        }
+        else {
+            caseStudyViewController = [[CaseStudyViewController alloc] initWithNibName:@"CaseStudyViewController_iPad" bundle:nil];
+        }
         
         [self.navigationController pushViewController:caseStudyViewController animated:YES];
         

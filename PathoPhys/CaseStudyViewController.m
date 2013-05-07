@@ -61,7 +61,12 @@
     arrCaseStudies = [db fnGetCaseStudyQuestions:intCurrentCaseStudy_ChapterId AndThematicId:intCurrentCaseStudy_ThematicId];
     
     //
-    viewMain = [[UIView alloc] initWithFrame:CGRectMake(10, 10, 1005, 600)];
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        viewMain = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 300)];
+    }
+    else {
+        viewMain = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1005, 600)];
+    }
     viewMain.backgroundColor = COLOR_CLEAR;
     [self.view addSubview:viewMain];
     
@@ -132,7 +137,12 @@
     switch (objQue.intType) {
         case QUESTION_TYPE_MCMS:
         {
-            dragDropView = [[DragDropViewController_cs alloc] initWithNibName:@"DragDropViewController_cs_iPad" bundle:nil];
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                dragDropView = [[DragDropViewController_cs alloc] initWithNibName:@"DragDropViewController_cs_iPhone" bundle:nil];                
+            }
+            else {
+                dragDropView = [[DragDropViewController_cs alloc] initWithNibName:@"DragDropViewController_cs_iPad" bundle:nil];
+            }
             [dragDropView fn_LoadDbData:objQue.strQuestionId];
             [viewMain addSubview:dragDropView.view];
             dragDropView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
@@ -141,7 +151,12 @@
             break;
         case QUESTION_TYPE_MATCHTERMS: {
             
-            matchPairsView = [[MatchPairsViewController_cs alloc] initWithNibName:@"MatchPairsViewController_cs_iPad" bundle:nil];
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                matchPairsView = [[MatchPairsViewController_cs alloc] initWithNibName:@"MatchPairsViewController_cs_iPhone" bundle:nil];
+            }
+            else {
+                matchPairsView = [[MatchPairsViewController_cs alloc] initWithNibName:@"MatchPairsViewController_cs_iPad" bundle:nil];
+            }
             [matchPairsView fn_LoadDbData:objQue.strQuestionId];
             [viewMain addSubview:matchPairsView.view];
             matchPairsView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
@@ -150,7 +165,12 @@
             break;
         case QUESTION_TYPE_MCSS: {
             
-            singleSelectionView = [[SingleSelectionViewController_cs alloc] initWithNibName:@"SingleSelectionViewController_cs_iPad" bundle:nil];
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                singleSelectionView = [[SingleSelectionViewController_cs alloc] initWithNibName:@"SingleSelectionViewController_cs_iPhone" bundle:nil];
+            }
+            else {
+                singleSelectionView = [[SingleSelectionViewController_cs alloc] initWithNibName:@"SingleSelectionViewController_cs_iPad" bundle:nil];
+            }
             [singleSelectionView fn_LoadDbData:objQue.strQuestionId];
             [viewMain addSubview:singleSelectionView.view];
             singleSelectionView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
@@ -374,6 +394,9 @@
 }
 -(NSUInteger)supportedInterfaceOrientations
 {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
     NSUInteger mask= UIInterfaceOrientationMaskPortrait;
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     currentOrientaion = interfaceOrientation;
@@ -402,6 +425,9 @@
     return UIInterfaceOrientationMaskAll;
 }
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
     currentOrientaion = interfaceOrientation;
     [self Fn_CallOrientaion];
     if(interfaceOrientation==UIInterfaceOrientationLandscapeLeft){

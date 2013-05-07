@@ -90,13 +90,18 @@
     webQuestionText.scrollView.bounces = NO;    
     btnCasestudyText.hidden = YES;
     
-    NSString *question = [NSString stringWithFormat:@"<html><body style=\"font-size:16px;color:white;font-family:helvetica;background-color:#0c64b1;\">%@</body></html>", objMatch.strQuestionText];
+    int f_size = 16;
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        f_size = 12;
+    }
+
+    NSString *question = [NSString stringWithFormat:@"<html><body style=\"font-size:%dpx;color:white;font-family:helvetica;background-color:#0c64b1;\">%@</body></html>", f_size, objMatch.strQuestionText];
     
     [webQuestionText loadHTMLString:question baseURL:nil];
     
     webviewInstructions.scrollView.showsHorizontalScrollIndicator = NO;
-    webviewInstructions.scrollView.bounces = NO;
-	[webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Tap the item on the left, and then tap the corresponding item on the right. Once you have matched all items, tap <b>Submit.</b></body></html>" baseURL:nil];
+    webviewInstructions.scrollView.bounces = NO;    
+	[webviewInstructions loadHTMLString:[NSString stringWithFormat:@"<html><body style=\"font-size:%dpx;color:AA3934;font-family:helvetica;\">Tap the item on the left, and then tap the corresponding item on the right. Once you have matched all items, tap <b>Submit.</b></body></html>", f_size] baseURL:nil];
     
     // Get Sizes for all labels
     
@@ -265,10 +270,13 @@
 -(void) fn_SetFontColor
 {
     lblQuestionNo.textColor = COLOR_WHITE;
-    //lblQuestionText.textColor = COLOR_WHITE;
     
-    lblQuestionNo.font = FONT_31;
-    //lblQuestionText.font = FONT_17;
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        lblQuestionNo.font = FONT_20;
+    }
+    else {
+        lblQuestionNo.font = FONT_31;
+    }
     
 }
 
@@ -724,6 +732,9 @@
 }
 -(NSUInteger)supportedInterfaceOrientations
 {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
     NSUInteger mask= UIInterfaceOrientationMaskPortrait;
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     currentOrientaion = interfaceOrientation;
@@ -751,6 +762,9 @@
     return UIInterfaceOrientationMaskAll;
 }
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return NO;
+    }
     currentOrientaion = interfaceOrientation;
     if(interfaceOrientation==UIInterfaceOrientationLandscapeLeft){
         [self Fn_rotateLandscape];
