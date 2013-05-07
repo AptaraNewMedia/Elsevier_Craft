@@ -86,27 +86,49 @@
     ScoreCardCell *cell = (ScoreCardCell *)[tbl dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
-        if (currentOrientation == 2) {
-            NSArray *cellArray = [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellP" owner:self options:nil];
-            cell = [cellArray lastObject];
-            
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+        {
+            NSArray *cellArray_Phone = [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCell_iPhone" owner:self options:nil];
+            cell = [cellArray_Phone lastObject];
         }
-        else {
-            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCell" owner:self options:nil];
-            cell = [nib lastObject];
+        else
+        {
+            if (currentOrientation == 2) {
+                NSArray *cellArray = [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellP" owner:self options:nil];
+                cell = [cellArray lastObject];
+                
+            }
+            else {
+                NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCell" owner:self options:nil];
+                cell = [nib lastObject];
+            }
         }
     }
     
-    cell.lbl_serionNo.font = FONT_17;
-    cell.lbl_name.font = FONT_17;
-    cell.lbl_date.font = FONT_17;
-    
-    
-    cell.lbl_serionNo.textColor = COLOR_BLACK;
-    cell.lbl_name.textColor = COLOR_BLACK;
-    cell.lbl_date.textColor = COLOR_BLACK;
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        cell.lbl_serionNo.font = FONT_8;
+        cell.lbl_name.font = FONT_8;
+        cell.lbl_date.font = FONT_8;
         
-    cell.lbl_name.numberOfLines = 3;
+        
+        cell.lbl_serionNo.textColor = COLOR_BLACK;
+        cell.lbl_name.textColor = COLOR_BLACK;
+        cell.lbl_date.textColor = COLOR_BLACK;
+        
+        cell.lbl_name.numberOfLines = 3;
+    }
+    else
+    {
+        cell.lbl_serionNo.font = FONT_17;
+        cell.lbl_name.font = FONT_17;
+        cell.lbl_date.font = FONT_17;
+        
+        
+        cell.lbl_serionNo.textColor = COLOR_BLACK;
+        cell.lbl_name.textColor = COLOR_BLACK;
+        cell.lbl_date.textColor = COLOR_BLACK;
+    }
     
     objScore = [scoreArray objectAtIndex:indexPath.row];
     cell.lbl_serionNo.text = [NSString stringWithFormat:@"%d",indexPath.row+1];

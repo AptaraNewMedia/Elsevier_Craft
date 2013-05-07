@@ -60,19 +60,8 @@
     [self Fn_SetFontColor];
 }
 
--(void) Fn_SetFontColor {
-    lblChapterName_Title.font = FONT_17;
-    lblChapterName.font = FONT_17;
-
-    lblScore_Title.font = FONT_17;
-    lblScore.font = FONT_17;
-
-    lblShare_Title.font = FONT_17;
-
-    lblThematicArea_Title.font = FONT_17;
-    lblThematicArea.font = FONT_17;
-    
-
+-(void) Fn_SetFontColor
+{
     lblChapterName_Title.textColor = COLOR_BLACK;
     lblChapterName.textColor = COLOR_BLACK;
     
@@ -83,8 +72,36 @@
     
     lblThematicArea_Title.textColor = COLOR_BLACK;
     lblThematicArea.textColor = COLOR_BLACK;
-
+    
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        lblChapterName_Title.font = FONT_10;
+        lblChapterName.font = FONT_10;
+        
+        lblScore_Title.font = FONT_10;
+        lblScore.font = FONT_10;
+        
+        lblShare_Title.font = FONT_10;
+        
+        lblThematicArea_Title.font = FONT_10;
+        lblThematicArea.font = FONT_10;
+    }
+    else
+    {
+        lblChapterName_Title.font = FONT_17;
+        lblChapterName.font = FONT_17;
+        
+        lblScore_Title.font = FONT_17;
+        lblScore.font = FONT_17;
+        
+        lblShare_Title.font = FONT_17;
+        
+        lblThematicArea_Title.font = FONT_17;
+        lblThematicArea.font = FONT_17;
+    }
 }
+
 
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
