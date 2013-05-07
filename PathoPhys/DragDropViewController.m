@@ -79,9 +79,7 @@
     [self fn_SetFontColor];
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:10px;color:AA3934;font-family:helvetica;\">Drag the options and drop them on the correct drop areas. Once you are done, tap <b>Submit.</b></body></html>" baseURL:nil];
-        
-        self.view.frame = CGRectMake(0, 0, 320, 360);
+        [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:10px;color:AA3934;font-family:helvetica;\">Drag the options and drop them on the correct drop areas. Once you are done, tap <b>Submit.</b></body></html>" baseURL:nil];       
 
     }
     else {
@@ -164,7 +162,18 @@
             [bnDrag.feedbackBt addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
             
             [scrollViewDrag addSubview:bnDrag];
-            y=y+objDRAGDROP.fHeight+10;
+            
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                bnDrag.titleLabel.font = FONT_10;
+                [bnDrag.ansImage setFrame:CGRectMake(objDRAGDROP.fWidth-40, -15, 22, 22)];
+                
+                bnDrag.feedbackBt.frame = CGRectMake(bnDrag.ansImage.frame.origin.x+bnDrag.ansImage.frame.size.width+1, -15, 22, 22);
+                y=y+objDRAGDROP.fHeight+2;
+            }
+            else {
+                y=y+objDRAGDROP.fHeight+10;
+            }
+
             
             [draggableSubjects addObject:bnDrag];
             

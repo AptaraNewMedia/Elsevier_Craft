@@ -528,6 +528,8 @@ NSError *error;
                 objDRAGDROP.fWidth = [[widthhight objectAtIndex:0] floatValue]/2;
                 objDRAGDROP.fHeight = [[widthhight objectAtIndex:1] floatValue]/2;
             }
+            
+            objDRAGDROP.strImageName = [NSString stringWithFormat:@"%@_iphone", objDRAGDROP.strImageName];            
         }
         
         NSString *strfeedback = [[arrTempList objectAtIndex:i] objectForKey:@"feedback"];
