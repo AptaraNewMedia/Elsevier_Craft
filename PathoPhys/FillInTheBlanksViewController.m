@@ -38,7 +38,7 @@
 }
 
 @property(nonatomic, retain) DragDropManager *dragDropManager;
-
+- (void) rotateScrollViewButtonsForiPhone;
 @end
 
 @implementation FillInTheBlanksViewController
@@ -58,6 +58,8 @@
     [self fn_SetFontColor];
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
         [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:10px;color:AA3934;font-family:helvetica;\">Drag the options and drop them on the correct blank areas. Once you are done, tap <b>Submit.</b> </body></html>" baseURL:nil];
+       
+        
     }
     else {
         [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Drag the options and drop them on the correct blank areas. Once you are done, tap <b>Submit.</b> </body></html>" baseURL:nil];
@@ -83,6 +85,8 @@
             myview.exclusiveTouch = YES;
         }
     }
+    
+     [self rotateScrollViewButtonsForiPhone];
 }
 
 -(void) fn_SetFontColor
@@ -128,7 +132,6 @@
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
             bnDrag.titleLabel.font = FONT_10;
             [bnDrag.ansImage setFrame:CGRectMake(objFillBlanks.fWidth-40, -15, 22, 22)];
-            
             bnDrag.feedbackBt.frame = CGRectMake(bnDrag.ansImage.frame.origin.x+bnDrag.ansImage.frame.size.width+1, -15, 22, 22);
             y=y+45+2;
         }
@@ -143,6 +146,42 @@
 
     [scrollViewDrag setContentSize:CGSizeMake(objFillBlanks.fWidth, y)];
 }
+
+
+- (void) rotateScrollViewButtonsForiPhone{
+    int counter= 0;
+    int y = 5, x= 20;
+    int numOfRows = 1;
+    float bnwidth = 0;
+    
+    for(UIView *myView in [scrollViewDrag subviews]){
+        if([myView isKindOfClass:[CustomDragButton class]]){
+            bnwidth = myView.frame.size.width;
+            counter++;
+           
+            [myView removeFromSuperview];
+            myView.frame = CGRectMake(x, y, myView.frame.size.width, myView.frame.size.height);
+            [scrollViewDrag addSubview:myView];
+            y = y + myView.frame.size.height + 10;
+            if(counter == 2){ /// 3 --> Number of rows
+                numOfRows++;
+                y = 5;
+                x = x + myView.frame.size.width + 10;
+                counter = 0;
+            }
+        }
+    }
+    
+    [scrollViewDrag setBackgroundColor:[UIColor yellowColor]];
+    [scrollViewDrag setContentSize:CGSizeMake(20 + (numOfRows * bnwidth) + ((numOfRows-1) * 10), 93)];
+    
+    
+    NSLog(@"Width: %f",20 + (numOfRows * bnwidth) + ((numOfRows-1) * 10));
+    
+}
+
+
+
 
 - (void) droppablePoints
 {
@@ -575,3 +614,8 @@
     [scrollViewDrag setFrame:CGRectMake(20, 153, 237, 427)];
 }
 @end
+
+
+
+
+

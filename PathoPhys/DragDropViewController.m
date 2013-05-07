@@ -36,6 +36,8 @@
     float x_feedback_l;
 }
 - (void) Fn_disableAllDraggableSubjects;
+- (void) rotateScrollViewButtonsForiPhone;
+
 
 @property(nonatomic, retain) DragDropManager *dragDropManager;
 
@@ -106,6 +108,8 @@
             myview.exclusiveTouch = YES;
         }
     }
+    
+    [self rotateScrollViewButtonsForiPhone];
     
 }
 
@@ -215,6 +219,37 @@
     }
 }
 
+- (void) rotateScrollViewButtonsForiPhone{
+    int counter= 0;
+    int y = 5, x= 20;
+    int numOfRows = 1;
+    float bnwidth = 0;
+    
+    for(UIView *myView in [scrollViewDrag subviews]){
+        if([myView isKindOfClass:[CustomDragButton class]]){
+            bnwidth = myView.frame.size.width;
+            counter++;
+            
+            [myView removeFromSuperview];
+            myView.frame = CGRectMake(x, y, myView.frame.size.width, myView.frame.size.height);
+            [scrollViewDrag addSubview:myView];
+            y = y + myView.frame.size.height + 10;
+            if(counter == 2){ /// 3 --> Number of rows
+                numOfRows++;
+                y = 5;
+                x = x + myView.frame.size.width + 10;
+                counter = 0;
+            }
+        }
+    }
+    
+    [scrollViewDrag setBackgroundColor:[UIColor yellowColor]];
+    [scrollViewDrag setContentSize:CGSizeMake(20 + (numOfRows * bnwidth) + ((numOfRows-1) * 10), 93)];
+    
+    
+    NSLog(@"Width: %f",20 + (numOfRows * bnwidth) + ((numOfRows-1) * 10));
+    
+}
 
 
 
