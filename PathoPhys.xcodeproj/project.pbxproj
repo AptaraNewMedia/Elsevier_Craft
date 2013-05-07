@@ -812,6 +812,10 @@
 		87F578951738F5AF009E995C /* MatchPairsViewController_cs_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F578921738F5AF009E995C /* MatchPairsViewController_cs_iPhone.xib */; };
 		87F578961738F5AF009E995C /* SingleSelectionViewController_cs_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F578931738F5AF009E995C /* SingleSelectionViewController_cs_iPhone.xib */; };
 		87F578981738F6E2009E995C /* CaseStudyViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87F578971738F6E2009E995C /* CaseStudyViewController_iPhone.xib */; };
+		87F5789E17390328009E995C /* back_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 87F5789A17390328009E995C /* back_btn.png */; };
+		87F5789F17390328009E995C /* back_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87F5789B17390328009E995C /* back_btn@2x.png */; };
+		87F578A017390328009E995C /* home_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 87F5789C17390328009E995C /* home_btn.png */; };
+		87F578A117390328009E995C /* home_btn@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 87F5789D17390328009E995C /* home_btn@2X.png */; };
 		87F67E831711B21A0082C5CF /* FlashcardsSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F67E6C1711B21A0082C5CF /* FlashcardsSet.m */; };
 		87F67E841711B21A0082C5CF /* Chapters.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F67E6E1711B21A0082C5CF /* Chapters.m */; };
 		87F67E851711B21A0082C5CF /* ThematicArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F67E701711B21A0082C5CF /* ThematicArea.m */; };
@@ -1905,6 +1909,10 @@
 		87F578921738F5AF009E995C /* MatchPairsViewController_cs_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchPairsViewController_cs_iPhone.xib; sourceTree = "<group>"; };
 		87F578931738F5AF009E995C /* SingleSelectionViewController_cs_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleSelectionViewController_cs_iPhone.xib; sourceTree = "<group>"; };
 		87F578971738F6E2009E995C /* CaseStudyViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseStudyViewController_iPhone.xib; sourceTree = "<group>"; };
+		87F5789A17390328009E995C /* back_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_btn.png; sourceTree = "<group>"; };
+		87F5789B17390328009E995C /* back_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_btn@2x.png"; sourceTree = "<group>"; };
+		87F5789C17390328009E995C /* home_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_btn.png; sourceTree = "<group>"; };
+		87F5789D17390328009E995C /* home_btn@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_btn@2X.png"; sourceTree = "<group>"; };
 		87F67E6A1711B21A0082C5CF /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		87F67E6B1711B21A0082C5CF /* FlashcardsSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashcardsSet.h; sourceTree = "<group>"; };
 		87F67E6C1711B21A0082C5CF /* FlashcardsSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashcardsSet.m; sourceTree = "<group>"; };
@@ -3299,6 +3307,7 @@
 		87C9EB9A173619B700888E20 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				87F5789917390328009E995C /* Buttons */,
 				87FA12741737ED6200678A52 /* NotesInfo */,
 				87FA12471737C68B00678A52 /* Questions */,
 				87C3CB5317367BC500EFE770 /* Flashcard */,
@@ -3585,6 +3594,17 @@
 				87F5785B1738D683009E995C /* 610009_iphone@2x.png */,
 			);
 			path = "@2x";
+			sourceTree = "<group>";
+		};
+		87F5789917390328009E995C /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				87F5789A17390328009E995C /* back_btn.png */,
+				87F5789B17390328009E995C /* back_btn@2x.png */,
+				87F5789C17390328009E995C /* home_btn.png */,
+				87F5789D17390328009E995C /* home_btn@2X.png */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 		87F67E671711B1B00082C5CF /* Views&Controllers */ = {
@@ -4841,6 +4861,10 @@
 				87F578951738F5AF009E995C /* MatchPairsViewController_cs_iPhone.xib in Resources */,
 				87F578961738F5AF009E995C /* SingleSelectionViewController_cs_iPhone.xib in Resources */,
 				87F578981738F6E2009E995C /* CaseStudyViewController_iPhone.xib in Resources */,
+				87F5789E17390328009E995C /* back_btn.png in Resources */,
+				87F5789F17390328009E995C /* back_btn@2x.png in Resources */,
+				87F578A017390328009E995C /* home_btn.png in Resources */,
+				87F578A117390328009E995C /* home_btn@2X.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
