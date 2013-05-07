@@ -209,13 +209,13 @@
     else
          cell1.imgTableCellBG.image=[UIImage imageNamed:@"Selected_chapter_tbl_row_center_p.png"];
     }
-    
-    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+    if([UIScreen mainScreen].bounds.size.height == 568.0){
+        flashCardsViewController = [[FlashCardsViewController alloc] initWithNibName:@"FlashCardsViewController_iPhone5" bundle:nil];
+    }
+    else if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
         flashCardsViewController = [[FlashCardsViewController alloc] initWithNibName:@"FlashCardsViewController_iPhone" bundle:nil];
-        
     }
     else {
-    
         flashCardsViewController = [[FlashCardsViewController alloc] initWithNibName:@"FlashCardsViewController_iPad" bundle:nil];
     }
     

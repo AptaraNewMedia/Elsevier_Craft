@@ -130,7 +130,18 @@ UITextView *txt_feedback;
 // Tab bar
 - (void) Fn_addTabBar{
     UIViewController *viewController1, *viewController2, *viewController3;
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    if([UIScreen mainScreen].bounds.size.height == 568.0){
+        viewController1 = [[FlashcardChapterListViewController alloc] initWithNibName:@"FlashcardChapterListViewController_iPhone5" bundle:nil];
+        navController1 = [[UINavigationController alloc] initWithRootViewController:viewController1];
+        
+        viewController2 = [[TestyourselfChapterListViewController alloc] initWithNibName:@"TestyourselfChapterListViewController_iPhone" bundle:nil];
+        navController2 = [[UINavigationController alloc] initWithRootViewController:viewController2];
+        
+        viewController3 = [[CasestudyChapterListViewController alloc] initWithNibName:@"CasestudyChapterListViewController_iPhone" bundle:nil];
+        navController3 = [[UINavigationController alloc] initWithRootViewController:viewController3];
+    }
+    
+    else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         viewController1 = [[FlashcardChapterListViewController alloc] initWithNibName:@"FlashcardChapterListViewController_iPhone" bundle:nil];
         navController1 = [[UINavigationController alloc] initWithRootViewController:viewController1];
         
