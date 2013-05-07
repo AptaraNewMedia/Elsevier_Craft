@@ -731,6 +731,12 @@
 		878848FF1739339D006296BC /* arrow1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 878848FB1739339D006296BC /* arrow1@2x.png */; };
 		878849001739339D006296BC /* arrow2.png in Resources */ = {isa = PBXBuildFile; fileRef = 878848FC1739339D006296BC /* arrow2.png */; };
 		878849011739339D006296BC /* arrow2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 878848FD1739339D006296BC /* arrow2@2x.png */; };
+		8788490917393A91006296BC /* RadioGroupViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8788490817393A91006296BC /* RadioGroupViewController_iPhone.xib */; };
+		8788490F173945A6006296BC /* radio_btn_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 8788490B173945A6006296BC /* radio_btn_blue.png */; };
+		87884910173945A6006296BC /* radio_btn_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8788490C173945A6006296BC /* radio_btn_blue@2x.png */; };
+		87884911173945A6006296BC /* radio_btn_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 8788490D173945A6006296BC /* radio_btn_grey.png */; };
+		87884912173945A6006296BC /* radio_btn_grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8788490E173945A6006296BC /* radio_btn_grey@2x.png */; };
+		8788491417396211006296BC /* DragDropRadioViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8788491317396211006296BC /* DragDropRadioViewController_iPhone.xib */; };
 		87C3CB7D17367BC500EFE770 /* abcd_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C3CB5517367BC500EFE770 /* abcd_bar@2x.png */; };
 		87C3CB7E17367BC500EFE770 /* back_disable2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C3CB5617367BC500EFE770 /* back_disable2@2x.png */; };
 		87C3CB7F17367BC500EFE770 /* back_disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87C3CB5717367BC500EFE770 /* back_disable@2x.png */; };
@@ -934,11 +940,9 @@
 		87FA12381737A68100678A52 /* iph_flashcard_icon_big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87FA12321737A68100678A52 /* iph_flashcard_icon_big@2x.png */; };
 		87FA12391737A68100678A52 /* iph_test_icon_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 87FA12331737A68100678A52 /* iph_test_icon_big.png */; };
 		87FA123A1737A68100678A52 /* iph_test_icon_big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87FA12341737A68100678A52 /* iph_test_icon_big@2x.png */; };
-		87FA123D1737C08B00678A52 /* DragDropRadioViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FA123B1737C08B00678A52 /* DragDropRadioViewController_iPhone.xib */; };
 		87FA123E1737C08B00678A52 /* DragDropRadioViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FA123C1737C08B00678A52 /* DragDropRadioViewController_iPhone5.xib */; };
 		87FA12411737C0A800678A52 /* MatchPairsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FA123F1737C0A800678A52 /* MatchPairsViewController_iPhone.xib */; };
 		87FA12421737C0A800678A52 /* MatchPairsViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FA12401737C0A800678A52 /* MatchPairsViewController_iPhone5.xib */; };
-		87FA12451737C0FF00678A52 /* RadioGroupViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FA12431737C0FF00678A52 /* RadioGroupViewController_iPhone.xib */; };
 		87FA12461737C0FF00678A52 /* RadioGroupViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87FA12441737C0FF00678A52 /* RadioGroupViewController_iPhone5.xib */; };
 		87FA124A1737C68C00678A52 /* Question_Box_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 87FA12481737C68C00678A52 /* Question_Box_bg.png */; };
 		87FA124B1737C68C00678A52 /* Question_Box_bg@x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87FA12491737C68C00678A52 /* Question_Box_bg@x.png */; };
@@ -1856,6 +1860,12 @@
 		878848FB1739339D006296BC /* arrow1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow1@2x.png"; sourceTree = "<group>"; };
 		878848FC1739339D006296BC /* arrow2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow2.png; sourceTree = "<group>"; };
 		878848FD1739339D006296BC /* arrow2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow2@2x.png"; sourceTree = "<group>"; };
+		8788490817393A91006296BC /* RadioGroupViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RadioGroupViewController_iPhone.xib; sourceTree = "<group>"; };
+		8788490B173945A6006296BC /* radio_btn_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radio_btn_blue.png; sourceTree = "<group>"; };
+		8788490C173945A6006296BC /* radio_btn_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radio_btn_blue@2x.png"; sourceTree = "<group>"; };
+		8788490D173945A6006296BC /* radio_btn_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radio_btn_grey.png; sourceTree = "<group>"; };
+		8788490E173945A6006296BC /* radio_btn_grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radio_btn_grey@2x.png"; sourceTree = "<group>"; };
+		8788491317396211006296BC /* DragDropRadioViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DragDropRadioViewController_iPhone.xib; sourceTree = "<group>"; };
 		87C3CB5517367BC500EFE770 /* abcd_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "abcd_bar@2x.png"; sourceTree = "<group>"; };
 		87C3CB5617367BC500EFE770 /* back_disable2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_disable2@2x.png"; sourceTree = "<group>"; };
 		87C3CB5717367BC500EFE770 /* back_disable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_disable@2x.png"; sourceTree = "<group>"; };
@@ -2100,11 +2110,9 @@
 		87FA12321737A68100678A52 /* iph_flashcard_icon_big@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iph_flashcard_icon_big@2x.png"; sourceTree = "<group>"; };
 		87FA12331737A68100678A52 /* iph_test_icon_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iph_test_icon_big.png; sourceTree = "<group>"; };
 		87FA12341737A68100678A52 /* iph_test_icon_big@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iph_test_icon_big@2x.png"; sourceTree = "<group>"; };
-		87FA123B1737C08B00678A52 /* DragDropRadioViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DragDropRadioViewController_iPhone.xib; sourceTree = "<group>"; };
 		87FA123C1737C08B00678A52 /* DragDropRadioViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DragDropRadioViewController_iPhone5.xib; sourceTree = "<group>"; };
 		87FA123F1737C0A800678A52 /* MatchPairsViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchPairsViewController_iPhone.xib; sourceTree = "<group>"; };
 		87FA12401737C0A800678A52 /* MatchPairsViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchPairsViewController_iPhone5.xib; sourceTree = "<group>"; };
-		87FA12431737C0FF00678A52 /* RadioGroupViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RadioGroupViewController_iPhone.xib; sourceTree = "<group>"; };
 		87FA12441737C0FF00678A52 /* RadioGroupViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RadioGroupViewController_iPhone5.xib; sourceTree = "<group>"; };
 		87FA12481737C68C00678A52 /* Question_Box_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Question_Box_bg.png; sourceTree = "<group>"; };
 		87FA12491737C68C00678A52 /* Question_Box_bg@x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Question_Box_bg@x.png"; sourceTree = "<group>"; };
@@ -3553,6 +3561,17 @@
 			name = Notes;
 			sourceTree = "<group>";
 		};
+		8788490A173945A6006296BC /* RadioGroup */ = {
+			isa = PBXGroup;
+			children = (
+				8788490B173945A6006296BC /* radio_btn_blue.png */,
+				8788490C173945A6006296BC /* radio_btn_blue@2x.png */,
+				8788490D173945A6006296BC /* radio_btn_grey.png */,
+				8788490E173945A6006296BC /* radio_btn_grey@2x.png */,
+			);
+			path = RadioGroup;
+			sourceTree = "<group>";
+		};
 		87C3CB5317367BC500EFE770 /* Flashcard */ = {
 			isa = PBXGroup;
 			children = (
@@ -3826,8 +3845,8 @@
 				87F67EAF1711B2B30082C5CF /* RadioGroupViewController.m */,
 				874972AA17192EA9001B90DA /* RadioGroupView.h */,
 				874972AB17192EA9001B90DA /* RadioGroupView.m */,
+				8788490817393A91006296BC /* RadioGroupViewController_iPhone.xib */,
 				87F67EB01711B2B30082C5CF /* RadioGroupViewController_iPad.xib */,
-				87FA12431737C0FF00678A52 /* RadioGroupViewController_iPhone.xib */,
 				87FA12441737C0FF00678A52 /* RadioGroupViewController_iPhone5.xib */,
 			);
 			name = RadioGroup;
@@ -3977,6 +3996,7 @@
 		87FA12471737C68B00678A52 /* Questions */ = {
 			isa = PBXGroup;
 			children = (
+				8788490A173945A6006296BC /* RadioGroup */,
 				87FA12C61737F18600678A52 /* Feedback */,
 				87FA129D1737EE2400678A52 /* SingleSelect */,
 				87FA12501737E50100678A52 /* blue_next_btn1.png */,
@@ -4083,7 +4103,7 @@
 				87FD9B69172655A60004B68D /* DragDropRadioViewController.h */,
 				87FD9B6A172655A60004B68D /* DragDropRadioViewController.m */,
 				87FD9B6B172655A60004B68D /* DragDropRadioViewController_iPad.xib */,
-				87FA123B1737C08B00678A52 /* DragDropRadioViewController_iPhone.xib */,
+				8788491317396211006296BC /* DragDropRadioViewController_iPhone.xib */,
 				87FA123C1737C08B00678A52 /* DragDropRadioViewController_iPhone5.xib */,
 				87FD9B6E17265F450004B68D /* RadioView.h */,
 				87FD9B6F17265F450004B68D /* RadioView.m */,
@@ -4308,11 +4328,9 @@
 				87FA12381737A68100678A52 /* iph_flashcard_icon_big@2x.png in Resources */,
 				87FA12391737A68100678A52 /* iph_test_icon_big.png in Resources */,
 				87FA123A1737A68100678A52 /* iph_test_icon_big@2x.png in Resources */,
-				87FA123D1737C08B00678A52 /* DragDropRadioViewController_iPhone.xib in Resources */,
 				87FA123E1737C08B00678A52 /* DragDropRadioViewController_iPhone5.xib in Resources */,
 				87FA12411737C0A800678A52 /* MatchPairsViewController_iPhone.xib in Resources */,
 				87FA12421737C0A800678A52 /* MatchPairsViewController_iPhone5.xib in Resources */,
-				87FA12451737C0FF00678A52 /* RadioGroupViewController_iPhone.xib in Resources */,
 				87FA12461737C0FF00678A52 /* RadioGroupViewController_iPhone5.xib in Resources */,
 				87FA124A1737C68C00678A52 /* Question_Box_bg.png in Resources */,
 				87FA124B1737C68C00678A52 /* Question_Box_bg@x.png in Resources */,
@@ -5021,6 +5039,12 @@
 				878848FF1739339D006296BC /* arrow1@2x.png in Resources */,
 				878849001739339D006296BC /* arrow2.png in Resources */,
 				878849011739339D006296BC /* arrow2@2x.png in Resources */,
+				8788490917393A91006296BC /* RadioGroupViewController_iPhone.xib in Resources */,
+				8788490F173945A6006296BC /* radio_btn_blue.png in Resources */,
+				87884910173945A6006296BC /* radio_btn_blue@2x.png in Resources */,
+				87884911173945A6006296BC /* radio_btn_grey.png in Resources */,
+				87884912173945A6006296BC /* radio_btn_grey@2x.png in Resources */,
+				8788491417396211006296BC /* DragDropRadioViewController_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
