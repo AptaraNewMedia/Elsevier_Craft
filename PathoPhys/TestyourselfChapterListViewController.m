@@ -333,7 +333,10 @@
                 }
             }
         }
-    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+    if([UIScreen mainScreen].bounds.size.height == 568.0){
+        testYourSelfViewController = [[TestYourSelfViewController alloc] initWithNibName:@"TestYourSelfViewController_iPhone5" bundle:nil];
+    }
+    else if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
         testYourSelfViewController = [[TestYourSelfViewController alloc] initWithNibName:@"TestYourSelfViewController_iPhone" bundle:nil];
     }
     else {
@@ -433,15 +436,15 @@
         strCurrentChapterName = [NSString stringWithFormat:@"%@", objChap.strChapterTitle];
         strCurrentThematicName = [NSString stringWithFormat:@""];
         
-        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        if([UIScreen mainScreen].bounds.size.height == 568.0){
+            testYourSelfViewController = [[TestYourSelfViewController alloc] initWithNibName:@"TestYourSelfViewController_iPhone5" bundle:nil];
+        }
+        else if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
             testYourSelfViewController = [[TestYourSelfViewController alloc] initWithNibName:@"TestYourSelfViewController_iPhone" bundle:nil];
         }
         else {
             testYourSelfViewController = [[TestYourSelfViewController alloc] initWithNibName:@"TestYourSelfViewController_iPad" bundle:nil];
-            
         }
-        
-        
         [self.navigationController pushViewController:testYourSelfViewController animated:YES];
         
     }

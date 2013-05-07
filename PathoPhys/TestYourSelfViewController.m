@@ -181,7 +181,11 @@
     switch (objQue.intType) {
         case QUESTION_TYPE_MCMS:
         {
-            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            NSLog(@"Drag Drop");
+            if([UIScreen mainScreen].bounds.size.height == 568.0){
+                dragDropView = [[DragDropViewController alloc] initWithNibName:@"DragDropViewController_iPhone5" bundle:nil]; 
+            }
+            else if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
                 dragDropView = [[DragDropViewController alloc] initWithNibName:@"DragDropViewController_iPhone" bundle:nil];                
             }
             else {
@@ -196,11 +200,15 @@
             break;
         case QUESTION_TYPE_FILLINBLANKS: {
             
-            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-            fillInTheBlanksView = [[FillInTheBlanksViewController alloc] initWithNibName:@"FillInTheBlanksViewController_iPhone" bundle:nil];                
+            NSLog(@"FIB");
+            if([UIScreen mainScreen].bounds.size.height == 568.0){
+                fillInTheBlanksView = [[FillInTheBlanksViewController alloc] initWithNibName:@"FillInTheBlanksViewController_iPhone5" bundle:nil];
+            }
+            else if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                fillInTheBlanksView = [[FillInTheBlanksViewController alloc] initWithNibName:@"FillInTheBlanksViewController_iPhone" bundle:nil];                
             }
             else {
-            fillInTheBlanksView = [[FillInTheBlanksViewController alloc] initWithNibName:@"FillInTheBlanksViewController_iPad" bundle:nil];
+                fillInTheBlanksView = [[FillInTheBlanksViewController alloc] initWithNibName:@"FillInTheBlanksViewController_iPad" bundle:nil];
             }
             [fillInTheBlanksView fn_LoadDbData:objQue.strQuestionId];
             [viewMain addSubview:fillInTheBlanksView.view];
@@ -210,15 +218,17 @@
         }
             break;
         case QUESTION_TYPE_RADIOBUTTONS: {
-            
-            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-                
+            NSLog(@"Radio Group");
+            if([UIScreen mainScreen].bounds.size.height == 568.0){
+                radioGroupView = [[RadioGroupViewController alloc] initWithNibName:@"RadioGroupViewController_iPhone5" bundle:nil];
+            }
+            else if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
                 radioGroupView = [[RadioGroupViewController alloc] initWithNibName:@"RadioGroupViewController_iPhone" bundle:nil];
             }
             else {
-                
                 radioGroupView = [[RadioGroupViewController alloc] initWithNibName:@"RadioGroupViewController_iPad" bundle:nil];
             }
+            
             [radioGroupView fn_LoadDbData:objQue.strQuestionId];
             [viewMain addSubview:radioGroupView.view];
             radioGroupView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
@@ -227,10 +237,12 @@
         }
             break;
         case QUESTION_TYPE_TRUEFLASE: {
-            
-            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            NSLog(@"True/False");
+            if([UIScreen mainScreen].bounds.size.height == 568.0){
+                trueFalseView = [[TrueFalseViewController alloc] initWithNibName:@"TrueFalseViewController_iPhone5" bundle:nil];
+            }
+            else if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
                 trueFalseView = [[TrueFalseViewController alloc] initWithNibName:@"TrueFalseViewController_iPhone" bundle:nil];
-                
             }
             else {
                 trueFalseView = [[TrueFalseViewController alloc] initWithNibName:@"TrueFalseViewController_iPad" bundle:nil];
@@ -243,8 +255,11 @@
         }
             break;
         case QUESTION_TYPE_MATCHTERMS: {
-            
-            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            NSLog(@"Match Pairs");
+            if([UIScreen mainScreen].bounds.size.height == 568.0){
+                matchPairsView = [[MatchPairsViewController alloc] initWithNibName:@"MatchPairsViewController_iPhone5" bundle:nil];                
+            }
+            else if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
                 matchPairsView = [[MatchPairsViewController alloc] initWithNibName:@"MatchPairsViewController_iPhone" bundle:nil];                
             }
             else {
@@ -259,14 +274,15 @@
         }
             break;
         case QUESTION_TYPE_MCSS: {
-            
-            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            NSLog(@"Single Selection");
+            if([UIScreen mainScreen].bounds.size.height == 568.0){
+                singleSelectionView = [[SingleSelectionViewController alloc] initWithNibName:@"SingleSelectionViewController_iphone5" bundle:nil];
+            }
+            else if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
                 singleSelectionView = [[SingleSelectionViewController alloc] initWithNibName:@"SingleSelectionViewController_iphone" bundle:nil];
-                
             }
             else {
                 singleSelectionView = [[SingleSelectionViewController alloc] initWithNibName:@"SingleSelectionViewController_iPad" bundle:nil];
-                
             }
             [singleSelectionView fn_LoadDbData:objQue.strQuestionId];
             [viewMain addSubview:singleSelectionView.view];
@@ -277,7 +293,11 @@
             break;
         case QUESTION_TYPE_DRAGDROP:
         {
-            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            NSLog(@"Drag Drop");
+            if([UIScreen mainScreen].bounds.size.height == 568.0){
+                dragDropView = [[DragDropViewController alloc] initWithNibName:@"DragDropViewController_iPhone5" bundle:nil];
+            }
+            else if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
                 dragDropView = [[DragDropViewController alloc] initWithNibName:@"DragDropViewController_iphone" bundle:nil];
             }
             else {
@@ -292,7 +312,11 @@
             break;
         case QUESTION_TYPE_DRAGDROPRADIOBUTTONS:
         {
-            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            NSLog(@"Drag Drop Radio");
+            if([UIScreen mainScreen].bounds.size.height == 568.0){
+                 dragDropRadioView = [[DragDropRadioViewController alloc] initWithNibName:@"DragDropRadioViewController_iPhone5" bundle:nil];
+            }
+            else if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
                 dragDropRadioView = [[DragDropRadioViewController alloc] initWithNibName:@"DragDropRadioViewController_iPhone" bundle:nil];
             }
             else {
