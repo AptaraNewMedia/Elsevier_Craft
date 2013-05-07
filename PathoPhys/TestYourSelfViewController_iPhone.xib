@@ -43,28 +43,13 @@
 						<string key="NSFrameSize">{320, 480}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="796936805"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">iph_img_bg.png</string>
-						</object>
-					</object>
-					<object class="IBUIImageView" id="796936805">
-						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{0, 270}, {320, 178}}</string>
-						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="505920163"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">iph_img_bg_shadow.png</string>
 						</object>
 					</object>
 					<object class="IBUIButton" id="505920163">
@@ -170,7 +155,6 @@
 						<string key="NSFrame">{{239, 357}, {79, 29}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -306,14 +290,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">imgShadow</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="796936805"/>
-					</object>
-					<int key="connectionID">32</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">lblQuestionNo</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="749033358"/>
@@ -374,7 +350,6 @@
 							<reference ref="505920163"/>
 							<reference ref="749033358"/>
 							<reference ref="684995811"/>
-							<reference ref="796936805"/>
 							<reference ref="551749452"/>
 						</array>
 						<reference key="parent" ref="0"/>
@@ -422,12 +397,6 @@
 						<string key="objectName">lblQuestionNo</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">9</int>
-						<reference key="object" ref="796936805"/>
-						<reference key="parent" ref="191373211"/>
-						<string key="objectName">table_shadow</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">10</int>
 						<reference key="object" ref="22541335"/>
 						<reference key="parent" ref="191373211"/>
@@ -451,7 +420,6 @@
 				<string key="7.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="1" key="7.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
@@ -546,7 +514,6 @@
 			<string key="grey_show_score_btn.png">{79, 29}</string>
 			<string key="grey_submit_btn.png">{79, 29}</string>
 			<string key="iph_img_bg.png">{320, 480}</string>
-			<string key="iph_img_bg_shadow.png">{320, 178}</string>
 			<string key="white_next_btn1.png">{32, 29}</string>
 			<string key="white_next_btn2.png">{32, 29}</string>
 		</dictionary>
