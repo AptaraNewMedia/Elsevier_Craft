@@ -60,8 +60,8 @@
         [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:10px;color:AA3934;font-family:helvetica;\">Drag the options and drop them on the correct blank areas. Once you are done, tap <b>Submit.</b> </body></html>" baseURL:nil];
         self.view.frame = CGRectMake(0, 0, 320, 360);
         
-        [scrollViewDrag setFrame:CGRectMake(0, 120, 320, 139)];
-        [imgScroller setFrame:CGRectMake(0, 260, 320, 180)];
+        [scrollViewDrag setFrame:CGRectMake(0, 89, 320, 133)];
+        [imgScroller setFrame:CGRectMake(0, 203, 320, 129)];
     }
     else {
         [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Drag the options and drop them on the correct blank areas. Once you are done, tap <b>Submit.</b> </body></html>" baseURL:nil];
