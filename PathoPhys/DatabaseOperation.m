@@ -238,12 +238,12 @@ NSError *error;
         
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
             
-            str_pt = [[arrTempList objectAtIndex:i] objectForKey:@"iphone_normal_points"];
+            str_pt = [[arrTempList objectAtIndex:i] objectForKey:@"iphone_normal_size"];
             
             if (str_pt == (id)[NSNull null] || str_pt.length == 0 )
                 objFillBlanks.arrXYpoints = [[NSArray alloc] init];
             else
-                objFillBlanks.arrXYpoints = [[[arrTempList objectAtIndex:i] objectForKey:@"iphone_normal_points"] componentsSeparatedByString:@"#$#"];
+                objFillBlanks.arrXYpoints = [[[arrTempList objectAtIndex:i] objectForKey:@"iphone_normal_size"] componentsSeparatedByString:@"#$#"];
                         
             NSString *str_wh = [[arrTempList objectAtIndex:i] objectForKey:@"iphone_size"] ;
             if (str_wh == (id)[NSNull null] || str_wh.length == 0 )
