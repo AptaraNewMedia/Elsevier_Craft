@@ -563,7 +563,7 @@ NSError *error;
 -(DragDropRadio *)fnGetTestyourselfDRAGDROPRadio:(NSString *)question_id
 {
     DragDropRadio *objDRAGDROP;
-    strQuery = [NSString stringWithFormat:@"select mcms_id, question_text, options, options_text, answers, question_image, feedback, instruction, ipad_normal_points, ipad_size, radio_options, radio_answers from dragdroprb where question_id = '%@'",question_id];
+    strQuery = [NSString stringWithFormat:@"select mcms_id, question_text, options, options_text, answers, question_image, feedback, instruction, ipad_normal_points, ipad_size, radio_options, radio_answers, iphone_normal_size, iphone_size  from dragdroprb where question_id = '%@'",question_id];
     arrTempList = [dbOperation getRowsForQuery:strQuery];
     intRowCount = [arrTempList count];
     for (int i = 0; i < intRowCount; i++) {
@@ -591,6 +591,19 @@ NSError *error;
             objDRAGDROP.fHeight = [[widthhight objectAtIndex:1] floatValue]/2;
         }
         
+        
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            
+            objDRAGDROP.arrXYpoints = [[[arrTempList objectAtIndex:i] objectForKey:@"iphone_normal_size"] componentsSeparatedByString:@"#$#"];
+            
+            widthhight = [[[arrTempList objectAtIndex:i] objectForKey:@"iphone_size"] componentsSeparatedByString:@","];
+            if (widthhight.count > 0) {
+                objDRAGDROP.fWidth = [[widthhight objectAtIndex:0] floatValue]/2;
+                objDRAGDROP.fHeight = [[widthhight objectAtIndex:1] floatValue]/2;
+            }
+            
+            objDRAGDROP.strImageName = [NSString stringWithFormat:@"%@_iphone", objDRAGDROP.strImageName];
+        }
         
         NSString *strfeedback = [[arrTempList objectAtIndex:i] objectForKey:@"feedback"];
         
