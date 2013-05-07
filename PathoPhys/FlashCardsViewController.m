@@ -44,6 +44,11 @@
     int prevFlipViewIndex;
     
 }
+
+-(IBAction)onNext:(id)sender;
+-(IBAction)onPrev:(id)sender;
+
+
 @end
 
 @implementation FlashCardsViewController
