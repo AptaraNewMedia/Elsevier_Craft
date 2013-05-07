@@ -83,8 +83,18 @@
         [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:15px;color:AA3934;font-family:helvetica;\">Select the correct category for items on the left. Once you have selected all items, tap <b>Submit.</b></body></html>" baseURL:nil];            
     }
     
-    imgRadio = [UIImage imageNamed:@"btn_radio.png"];
-    imgRadioSelected = [UIImage imageNamed:@"btn_radio_select.png"];
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            imgRadio = [UIImage imageNamed:@"radio_btn_grey.png"];
+            imgRadioSelected = [UIImage imageNamed:@"radio_btn_blue.png"];
+        }
+        else {
+            imgRadio = [UIImage imageNamed:@"btn_radio.png"];
+            imgRadioSelected = [UIImage imageNamed:@"btn_radio_select.png"];
+            
+        }
+    
+    
+    
     
     arrRadios = [[NSMutableArray alloc] init];   
     [self createRadios];
@@ -128,10 +138,11 @@
     arrcount = [objRH.arrHeadingText count];
     
     // Option Headers
-    int_x = 0;
+    int_x = 30;
     int_y = 140;
     
     float option_hiding_width = 0;
+    float option_hiding_height = 40;
     
     CGSize sizeOptionHiding = [self getSize:[objRH.arrHeadingText objectAtIndex:0]];
    
@@ -141,12 +152,19 @@
         option_hiding_width = 300;
     }
     
+    UIFont *font = FONT_17;
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        font = FONT_10;
+        option_hiding_width = 100;
+        option_hiding_height = 20;
+        int_x = 5;
+    }
    
     lblOptionHiding.text = [objRH.arrHeadingText objectAtIndex:0];
-    lblOptionHiding.frame=CGRectMake(30, 0, option_hiding_width, 40);
+    lblOptionHiding.frame=CGRectMake(int_x, 0, option_hiding_width, option_hiding_height);
     lblOptionHiding.backgroundColor = COLOR_CUSTOMBUTTON_BLUE;
     lblOptionHiding.textAlignment=UITextAlignmentCenter;
-    lblOptionHiding.font = FONT_17;
+    lblOptionHiding.font = font;
     lblOptionHiding.textColor = COLOR_WHITE;
     [lblOptionHiding.layer setCornerRadius:9];
     
@@ -158,7 +176,7 @@
     // Option 1
     CGSize sizeOption1 = [self getSize:[objRH.arrHeadingText objectAtIndex:1]];
     lblOption1.text = [objRH.arrHeadingText objectAtIndex:1];
-    lblOption1.font = FONT_17;
+    lblOption1.font = font;
     lblOption1.textColor = COLOR_WHITE;
     [lblOption1.layer setCornerRadius:9];
     
@@ -166,7 +184,7 @@
     // Option 2
     CGSize sizeOption2 = [self getSize:[objRH.arrHeadingText objectAtIndex:2]];
     lblOption2.text = [objRH.arrHeadingText objectAtIndex:2];
-    lblOption2.font = FONT_17;
+    lblOption2.font = font;
     lblOption2.textColor = COLOR_WHITE;
     [lblOption2.layer setCornerRadius:9];
 
@@ -174,16 +192,14 @@
     // Get Max width
     float max_width = MAX(sizeOption1.width, sizeOption2.width);
     
-    if ([objRH.strQuestionId isEqualToString:@"5_4_3_2"]) {
-        max_width = 100;
-    }
+
     // Option 3
     CGSize sizeOption3;
     lblOption3.hidden = YES;
     if (arrcount > 3) {
         sizeOption3 = [self getSize:[objRH.arrHeadingText objectAtIndex:3]];
         lblOption3.text = [objRH.arrHeadingText objectAtIndex:3];
-        lblOption3.font = FONT_17;
+        lblOption3.font = font;
         lblOption3.textColor = COLOR_WHITE;
         [lblOption3.layer setCornerRadius:9];
         
@@ -192,30 +208,44 @@
         lblOption3.hidden = NO;
     }
     
+    if ([objRH.strQuestionId isEqualToString:@"5_4_3_2"]) {
+        max_width = 100;
+    }
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        max_width = 40;
+        
+        lblOptionHiding.numberOfLines = 2;
+        lblOption1.numberOfLines = 2;
+        lblOption2.numberOfLines = 2;
+        lblOption3.numberOfLines = 2;
+    }
+    
     //max_width = 150;
     
     //
     int_x = int_x + lblOptionHiding.frame.origin.x+option_hiding_width + 40;
     
     // Set Options frame
-    lblOption1.frame=CGRectMake(int_x, 0, max_width, 40);
+    lblOption1.frame=CGRectMake(int_x, 0, max_width, option_hiding_height);
     lblOption1.backgroundColor=COLOR_CUSTOMBUTTON_BLUE;
     lblOption1.textAlignment=UITextAlignmentCenter;
     
     //
     int_x = int_x + max_width + 40;
     
-    lblOption2.frame=CGRectMake(int_x, 0, max_width, 40);
+    lblOption2.frame=CGRectMake(int_x, 0, max_width, option_hiding_height);
     lblOption2.backgroundColor=COLOR_CUSTOMBUTTON_BLUE;
     lblOption2.textAlignment=UITextAlignmentCenter;
 
     //
     if (arrcount > 3) {
         int_x = int_x + max_width + 40;
-        lblOption3.frame=CGRectMake(int_x, 0, max_width, 40);
+        lblOption3.frame=CGRectMake(int_x, 0, max_width, option_hiding_height);
         lblOption3.backgroundColor=COLOR_CUSTOMBUTTON_BLUE;
         lblOption3.textAlignment=UITextAlignmentCenter;
     }
+    
     
     //
     int_y = 0;
@@ -226,7 +256,7 @@
         objRB =[objRH.arrRadioButtons objectAtIndex:i];
         
         radioView = [[RadioGroupView alloc] init];
-        [radioView setFrame:CGRectMake(50,int_y, scrollRadioOption.frame.size.width - 50, 32)];
+        [radioView setFrame:CGRectMake(lblOptionHiding.frame.origin.x,int_y, scrollRadioOption.frame.size.width - 50, 32)];
         
         [radioView.lblQuestion setText: [NSString stringWithFormat:@"  %@", objRB.strQuestionText]];
         [radioView.lblQuestion setFrame:CGRectMake(0, 0, option_hiding_width, 32)];        
@@ -264,7 +294,33 @@
         [radioView.feedbackBt setImage:[UIImage imageNamed:@"btn_feedback_highlight.png"] forState:UIControlStateHighlighted];
         radioView.feedbackBt.hidden = YES;
         [radioView.feedbackBt addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];        
-        int_y = int_y + 50;
+        
+        // iPhone
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            
+            radioView.lblQuestion.font = FONT_12;
+            [radioView.btnOption1 setFrame:CGRectMake(radioView.lblQuestion.frame.size.width + 10 , 0, max_width, 32)];
+            [radioView.btnOption2 setFrame:CGRectMake(radioView.btnOption1.frame.origin.x+radioView.btnOption1.frame.size.width + 10, 0, max_width, 32)];
+            float width_ans = radioView.btnOption2.frame.origin.x + radioView.btnOption2.frame.size.width  ;
+            if (arrcount > 3) {
+                [radioView.btnOption3 setFrame:CGRectMake(radioView.btnOption2.frame.origin.x + radioView.btnOption2.frame.size.width + 10, 0, max_width, 32)];
+                width_ans = radioView.btnOption3.frame.origin.x + radioView.btnOption3.frame.size.width ;
+            }
+            
+            [radioView.ansImage setFrame:CGRectMake(width_ans, 0, 36, 35)];
+            
+            [radioView.feedbackBt setFrame:CGRectMake(width_ans + 22 + 10, 0, 30, 38)];
+            
+                        
+            
+            
+            int_y = int_y + 45;
+            
+        }
+        else {
+            int_y = int_y + 50;
+            
+        }
         
         [arrRadios addObject:radioView];
         [scrollRadioOption addSubview:radioView];
