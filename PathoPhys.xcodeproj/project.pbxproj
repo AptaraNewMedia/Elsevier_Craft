@@ -11,6 +11,7 @@
 		39266830173A773400F29AAE /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3926682E173A773400F29AAE /* libGoogleAnalytics.a */; };
 		39266832173A7AA100F29AAE /* DragDropViewController_cs_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39266831173A7AA100F29AAE /* DragDropViewController_cs_iPhone5.xib */; };
 		39266834173A7F3300F29AAE /* MatchPairsViewController_cs_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39266833173A7F3300F29AAE /* MatchPairsViewController_cs_iPhone5.xib */; };
+		39266836173A830100F29AAE /* SingleSelectionViewController_cs_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39266835173A830100F29AAE /* SingleSelectionViewController_cs_iPhone5.xib */; };
 		396E1B511734EC3A00076AEF /* ScoreCardViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 396E1B501734EC3A00076AEF /* ScoreCardViewController_iPhone.xib */; };
 		396E1B531734F25F00076AEF /* ScoreCardViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 396E1B521734F25F00076AEF /* ScoreCardViewController_iPhone5.xib */; };
 		39885C801734D81C007DC01C /* MenuViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39885C7F1734D81C007DC01C /* MenuViewController_iPhone5.xib */; };
@@ -1050,6 +1051,7 @@
 		3926682E173A773400F29AAE /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
 		39266831173A7AA100F29AAE /* DragDropViewController_cs_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DragDropViewController_cs_iPhone5.xib; sourceTree = "<group>"; };
 		39266833173A7F3300F29AAE /* MatchPairsViewController_cs_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchPairsViewController_cs_iPhone5.xib; sourceTree = "<group>"; };
+		39266835173A830100F29AAE /* SingleSelectionViewController_cs_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleSelectionViewController_cs_iPhone5.xib; sourceTree = "<group>"; };
 		396E1B501734EC3A00076AEF /* ScoreCardViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreCardViewController_iPhone.xib; sourceTree = "<group>"; };
 		396E1B521734F25F00076AEF /* ScoreCardViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreCardViewController_iPhone5.xib; sourceTree = "<group>"; };
 		39885C7F1734D81C007DC01C /* MenuViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController_iPhone5.xib; sourceTree = "<group>"; };
@@ -3523,6 +3525,7 @@
 		870E9EBB172C0EE000DD52A8 /* CS_Questions */ = {
 			isa = PBXGroup;
 			children = (
+				39266835173A830100F29AAE /* SingleSelectionViewController_cs_iPhone5.xib */,
 				870E9EBC172C0FAF00DD52A8 /* SingleSelectionViewController_cs_iPad.xib */,
 				87F578931738F5AF009E995C /* SingleSelectionViewController_cs_iPhone.xib */,
 				870E9EBD172C0FAF00DD52A8 /* SingleSelectionViewController_cs.h */,
@@ -5126,6 +5129,7 @@
 				8722DCE2173A220100722908 /* 140004_l_select_iphone@2x.png in Resources */,
 				39266832173A7AA100F29AAE /* DragDropViewController_cs_iPhone5.xib in Resources */,
 				39266834173A7F3300F29AAE /* MatchPairsViewController_cs_iPhone5.xib in Resources */,
+				39266836173A830100F29AAE /* SingleSelectionViewController_cs_iPhone5.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
