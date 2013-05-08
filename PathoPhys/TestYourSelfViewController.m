@@ -78,7 +78,7 @@
     
     //
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        viewMain = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 300)];
+        viewMain = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 360)];
     }
     else {
         viewMain = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1005, 600)];

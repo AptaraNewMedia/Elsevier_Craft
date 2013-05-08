@@ -475,25 +475,41 @@
     objRB = [objRH.arrRadioButtons objectAtIndex:[sender tag]];
     radioView = [arrRadios objectAtIndex:[sender tag]];
     UIButton *bn = (UIButton *)sender;
-    float x_point = bn.frame.origin.x - 150;
-    float y_point = bn.superview.frame.origin.y;
-    y_point = y_point - visibleRect.origin.y;
     
-    x_feedback_l=x_point-10;
-    y_feedback_l=y_point+60;
+    float x_point;
+    float y_point;
     
-    x_feedback_p=x_feedback_l-10;;
-    y_feedback_p=y_feedback_l+65;
-    
-    if(currentOrientaion==1 || currentOrientaion==2) // Portrait
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
-        [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:radioView.feedback];
+        x_point = bn.frame.origin.x - 104;
+        y_point = bn.superview.frame.origin.y+23;
+        y_point = y_point - visibleRect.origin.y;
+        
+        [self Fn_AddFeedbackPopup:x_point andy:y_point andText:radioView.feedback];
     }
-    else //Lanscape
+    else
     {
-        [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:radioView.feedback];
+        x_point = bn.frame.origin.x - 150;
+        y_point = bn.superview.frame.origin.y;
+        y_point = y_point - visibleRect.origin.y;
+        
+        x_feedback_l=x_point-10;
+        y_feedback_l=y_point+60;
+        
+        x_feedback_p=x_feedback_l-10;;
+        y_feedback_p=y_feedback_l+65;
+        
+        if(currentOrientaion==1 || currentOrientaion==2) // Portrait
+        {
+            [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:radioView.feedback];
+        }
+        else //Lanscape
+        {
+            [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:radioView.feedback];
+        }
     }
 }
+
 
 - (BOOL) checkForAnswer{
     BOOL flag1 = YES;

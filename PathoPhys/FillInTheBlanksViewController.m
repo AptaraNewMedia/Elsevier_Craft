@@ -58,7 +58,6 @@
     [self fn_SetFontColor];
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
         [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:10px;color:AA3934;font-family:helvetica;\">Drag the options and drop them on the correct blank areas. Once you are done, tap <b>Submit.</b> </body></html>" baseURL:nil];
-       
         
     }
     else {
@@ -306,23 +305,38 @@
 -(IBAction)onFeedbackTapped:(id)sender
 {
     CustomDragButton *bn = sender;
-    float x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objFillBlanks.fWidth - 10);
-    float y_point = bn.superview.frame.origin.y + 15;
-    y_point = y_point - visibleRect.origin.y;
     
-    x_feedback_l=x_point;
-    y_feedback_l=y_point;
+    float x_point;
+    float y_point;
     
-    x_feedback_p=x_point-238;
-    y_feedback_p=y_point+217;
-    
-    if(currentOrientaion==1 || currentOrientaion==2) // Portrait
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
-        [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:bn.strFeedback];
+        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objFillBlanks.fWidth - 132);
+        y_point = bn.superview.frame.origin.y + 120;
+        y_point = y_point - visibleRect.origin.y;
+        
+        [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
     }
-    else //Lanscape
+    else
     {
-        [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:bn.strFeedback];
+        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objFillBlanks.fWidth - 10);
+        y_point = bn.superview.frame.origin.y + 15;
+        y_point = y_point - visibleRect.origin.y;
+        
+        x_feedback_l=x_point;
+        y_feedback_l=y_point;
+        
+        x_feedback_p=x_point-238;
+        y_feedback_p=y_point+217;
+        
+        if(currentOrientaion==1 || currentOrientaion==2) // Portrait
+        {
+            [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:bn.strFeedback];
+        }
+        else //Lanscape
+        {
+            [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:bn.strFeedback];
+        }
     }
 }
 

@@ -34,7 +34,8 @@
     float x_feedback_l;
     
     
-
+    UIImage *imgTrue;
+    UIImage *imgFalse;
 }
 @end
 @implementation TrueFalseViewController
@@ -100,11 +101,18 @@
         }
     }
     
+
+    
    if (objTrueFalse.intTrueid == 1 || objTrueFalse.intTrueid == 2 || objTrueFalse.intTrueid == 3 || objTrueFalse.intTrueid == 4) {
        
-       UIImage *imgTrue;
-       UIImage *imgFalse;
-       
+       if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        
+           imgTrue = [UIImage imageNamed:[NSString stringWithFormat:@"%@_iphone.png", objTrueFalse.strOptions1]];
+           imgFalse = [UIImage imageNamed:[NSString stringWithFormat:@"%@_iphone.png", objTrueFalse.strOptions2]];
+           
+       }
+       else {
+           
         switch (objTrueFalse.intTrueid) {
             case 1:
             {
@@ -139,6 +147,7 @@
                 break;
         }
        
+       }
         [bnTrue setImage:imgTrue forState:UIControlStateNormal];
         [bnFalse setImage:imgFalse forState:UIControlStateNormal];
         [bnTrue setFrame:CGRectMake(bnTrue.frame.origin.x, bnTrue.frame.origin.y, imgTrue.size.width, imgTrue.size.height)];
@@ -410,11 +419,27 @@
     select = NO;
     userAnswer = [sender tag];
     if (objTrueFalse.intTrueid == 1 || objTrueFalse.intTrueid == 2 || objTrueFalse.intTrueid == 3 || objTrueFalse.intTrueid == 4) {
-        
-        UIImage *imgTrue;
-        UIImage *imgFalse;
+
         UIImage *imgHighlight = [UIImage imageNamed:@"truefalse_image_selection.png"];
+
         
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            
+            if ([sender tag] == 1) {
+                imgTrue = [UIImage imageNamed:[NSString stringWithFormat:@"%@_select_iphone.png", objTrueFalse.strOptions1]];
+                imgFalse = [UIImage imageNamed:[NSString stringWithFormat:@"%@_iphone.png", objTrueFalse.strOptions2]];
+                
+            }
+            else if ([sender tag] == 2) {
+                imgTrue = [UIImage imageNamed:[NSString stringWithFormat:@"%@_iphone.png", objTrueFalse.strOptions1]];
+                imgFalse = [UIImage imageNamed:[NSString stringWithFormat:@"%@_select_iphone.png", objTrueFalse.strOptions2]];
+            }
+            [bnTrue setImage:imgTrue forState:UIControlStateNormal];
+            [bnFalse setImage:imgFalse forState:UIControlStateNormal];
+            
+        }
+        else {
+          
             switch (objTrueFalse.intTrueid) {
                 case 1:
                 {
@@ -446,15 +471,16 @@
                 }
                     break;
             }
-     
-        if ([sender tag] == 1) {
-            [bnTrue setBackgroundImage:imgHighlight forState:UIControlStateNormal];
-            [bnFalse setBackgroundImage:nil forState:UIControlStateNormal];
+            if ([sender tag] == 1) {
+                [bnTrue setBackgroundImage:imgHighlight forState:UIControlStateNormal];
+                [bnFalse setBackgroundImage:nil forState:UIControlStateNormal];
+            }
+            else if ([sender tag] == 2) {
+                [bnTrue setBackgroundImage:nil forState:UIControlStateNormal];
+                [bnFalse setBackgroundImage:imgHighlight forState:UIControlStateNormal];
+            }
         }
-        else if ([sender tag] == 2) {
-            [bnTrue setBackgroundImage:nil forState:UIControlStateNormal];
-            [bnFalse setBackgroundImage:imgHighlight forState:UIControlStateNormal];
-        }
+
     }
     else {
         if ([sender tag] == 1) {
