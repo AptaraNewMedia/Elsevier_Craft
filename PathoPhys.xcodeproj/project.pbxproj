@@ -12,6 +12,8 @@
 		39266832173A7AA100F29AAE /* DragDropViewController_cs_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39266831173A7AA100F29AAE /* DragDropViewController_cs_iPhone5.xib */; };
 		39266834173A7F3300F29AAE /* MatchPairsViewController_cs_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39266833173A7F3300F29AAE /* MatchPairsViewController_cs_iPhone5.xib */; };
 		39266836173A830100F29AAE /* SingleSelectionViewController_cs_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39266835173A830100F29AAE /* SingleSelectionViewController_cs_iPhone5.xib */; };
+		39266838173A83F500F29AAE /* CasestudyChapterListViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39266837173A83F500F29AAE /* CasestudyChapterListViewController_iPhone5.xib */; };
+		3926683A173A846F00F29AAE /* CaseStudyViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39266839173A846E00F29AAE /* CaseStudyViewController_iPhone5.xib */; };
 		396E1B511734EC3A00076AEF /* ScoreCardViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 396E1B501734EC3A00076AEF /* ScoreCardViewController_iPhone.xib */; };
 		396E1B531734F25F00076AEF /* ScoreCardViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 396E1B521734F25F00076AEF /* ScoreCardViewController_iPhone5.xib */; };
 		39885C801734D81C007DC01C /* MenuViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39885C7F1734D81C007DC01C /* MenuViewController_iPhone5.xib */; };
@@ -1052,6 +1054,8 @@
 		39266831173A7AA100F29AAE /* DragDropViewController_cs_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DragDropViewController_cs_iPhone5.xib; sourceTree = "<group>"; };
 		39266833173A7F3300F29AAE /* MatchPairsViewController_cs_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchPairsViewController_cs_iPhone5.xib; sourceTree = "<group>"; };
 		39266835173A830100F29AAE /* SingleSelectionViewController_cs_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleSelectionViewController_cs_iPhone5.xib; sourceTree = "<group>"; };
+		39266837173A83F500F29AAE /* CasestudyChapterListViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CasestudyChapterListViewController_iPhone5.xib; sourceTree = "<group>"; };
+		39266839173A846E00F29AAE /* CaseStudyViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseStudyViewController_iPhone5.xib; sourceTree = "<group>"; };
 		396E1B501734EC3A00076AEF /* ScoreCardViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreCardViewController_iPhone.xib; sourceTree = "<group>"; };
 		396E1B521734F25F00076AEF /* ScoreCardViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreCardViewController_iPhone5.xib; sourceTree = "<group>"; };
 		39885C7F1734D81C007DC01C /* MenuViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController_iPhone5.xib; sourceTree = "<group>"; };
@@ -2399,12 +2403,14 @@
 		39970626170EF2D9008933DD /* CaseStudies */ = {
 			isa = PBXGroup;
 			children = (
+				39266837173A83F500F29AAE /* CasestudyChapterListViewController_iPhone5.xib */,
 				87F9DBA61712CEF8005E57EF /* CasestudyChapterListViewController_iPad.xib */,
 				87C9EBCA1736356800888E20 /* CasestudyChapterListViewController_iPhone.xib */,
 				87F9DBA71712CEF8005E57EF /* CasestudyChapterListViewController.h */,
 				87F9DBA81712CEF8005E57EF /* CasestudyChapterListViewController.m */,
 				874A236617213D230052157E /* CaseStudyViewController_iPad.xib */,
 				87F578971738F6E2009E995C /* CaseStudyViewController_iPhone.xib */,
+				39266839173A846E00F29AAE /* CaseStudyViewController_iPhone5.xib */,
 				874A236717213D230052157E /* CaseStudyViewController.h */,
 				874A236817213D230052157E /* CaseStudyViewController.m */,
 			);
@@ -5130,6 +5136,8 @@
 				39266832173A7AA100F29AAE /* DragDropViewController_cs_iPhone5.xib in Resources */,
 				39266834173A7F3300F29AAE /* MatchPairsViewController_cs_iPhone5.xib in Resources */,
 				39266836173A830100F29AAE /* SingleSelectionViewController_cs_iPhone5.xib in Resources */,
+				39266838173A83F500F29AAE /* CasestudyChapterListViewController_iPhone5.xib in Resources */,
+				3926683A173A846F00F29AAE /* CaseStudyViewController_iPhone5.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
