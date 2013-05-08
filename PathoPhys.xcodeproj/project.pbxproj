@@ -34,6 +34,7 @@
 		399D2DCA172BAB3A0073B760 /* SingleSelectionImageViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 399D2DC7172BAB3A0073B760 /* SingleSelectionImageViewController_iPad.xib */; };
 		399D2DCB172BAB3A0073B760 /* SingleSelectionImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 399D2DC9172BAB3A0073B760 /* SingleSelectionImageViewController.m */; };
 		39C449B6173A921B00E60C21 /* elsevier-logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 39C449B5173A921B00E60C21 /* elsevier-logo.jpg */; };
+		39C449B8173A9E2000E60C21 /* TestyourselfChapterListViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39C449B7173A9E2000E60C21 /* TestyourselfChapterListViewController_iPhone5.xib */; };
 		39D8D6E117391EFD0008B46E /* img_aboutus_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 39D8D46317391EFB0008B46E /* img_aboutus_bg.png */; };
 		39D8D6E217391EFD0008B46E /* img_aboutus_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39D8D46417391EFB0008B46E /* img_aboutus_bg@2x.png */; };
 		39D8D6E317391EFD0008B46E /* img_aboutus_bg_p.png in Resources */ = {isa = PBXBuildFile; fileRef = 39D8D46517391EFB0008B46E /* img_aboutus_bg_p.png */; };
@@ -1083,6 +1084,7 @@
 		399D2DC8172BAB3A0073B760 /* SingleSelectionImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleSelectionImageViewController.h; sourceTree = "<group>"; };
 		399D2DC9172BAB3A0073B760 /* SingleSelectionImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleSelectionImageViewController.m; sourceTree = "<group>"; };
 		39C449B5173A921B00E60C21 /* elsevier-logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "elsevier-logo.jpg"; sourceTree = "<group>"; };
+		39C449B7173A9E2000E60C21 /* TestyourselfChapterListViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestyourselfChapterListViewController_iPhone5.xib; sourceTree = "<group>"; };
 		39D8D46317391EFB0008B46E /* img_aboutus_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_aboutus_bg.png; sourceTree = "<group>"; };
 		39D8D46417391EFB0008B46E /* img_aboutus_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_aboutus_bg@2x.png"; sourceTree = "<group>"; };
 		39D8D46517391EFB0008B46E /* img_aboutus_bg_p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_aboutus_bg_p.png; sourceTree = "<group>"; };
@@ -2377,6 +2379,7 @@
 		3997061D170EF1FA008933DD /* TestYourself */ = {
 			isa = PBXGroup;
 			children = (
+				39C449B7173A9E2000E60C21 /* TestyourselfChapterListViewController_iPhone5.xib */,
 				87F9DB9C1712CE26005E57EF /* TestyourselfChapterListViewController_iPad.xib */,
 				87C9EBCC1736357500888E20 /* TestyourselfChapterListViewController_iPhone.xib */,
 				87F9DB9D1712CE26005E57EF /* TestyourselfChapterListViewController.h */,
@@ -5142,6 +5145,7 @@
 				39266838173A83F500F29AAE /* CasestudyChapterListViewController_iPhone5.xib in Resources */,
 				3926683A173A846F00F29AAE /* CaseStudyViewController_iPhone5.xib in Resources */,
 				39C449B6173A921B00E60C21 /* elsevier-logo.jpg in Resources */,
+				39C449B8173A9E2000E60C21 /* TestyourselfChapterListViewController_iPhone5.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
