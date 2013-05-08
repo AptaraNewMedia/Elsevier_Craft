@@ -83,18 +83,20 @@
         Chapters *objChp = (Chapters *)[arr_chaptersCaseStudy objectAtIndex:i];
         
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-            customView = [[CustomChapterHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, 275, 32)];
+            customView = [[CustomChapterHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320, 41)];
             
             UIImage *img = [UIImage imageNamed:@"Tab_white_patch1.png"];
-            customView.imgViewBg.frame = CGRectMake(0, 0, img.size.width, img.size.height);
+            customView.imgViewBg.frame = CGRectMake(0, 0, 320, 41);
             [customView.imgViewBg setImage:img];
-            [customView.headerBtn setFrame:CGRectMake(15, 0, 231, 32)];
-            [customView.headerBtn setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
+            [customView.headerBtn setFrame:CGRectMake(15, 0, 231, 40)];
+            customView.headerBtn.titleLabel.numberOfLines = 2;            
+            [customView.headerBtn setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 1.0, 0.0, 0.0)];
             imgArrowRight = [UIImage imageNamed:@"arrow1.png"];
             imgArrowDown = [UIImage imageNamed:@"arrow2.png"];
             [customView.imgArrow setImage:imgArrowRight];
-            [customView.imgArrow setFrame:CGRectMake(243, 10, 15, 14)];
+            [customView.imgArrow setFrame:CGRectMake(292, 13, 15, 14)];
             [customView.headerBtn.titleLabel setFont:FONT_12];
+            
             
             
         }
@@ -221,6 +223,19 @@
         cell.lblThematicName.text = objThematic.strThematicTitle;
         
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            if(indexPath.row==0)
+            {
+                
+                cell.imgTableCellBG.image=[UIImage imageNamed:@"InnerTab_Blue_patch1"];
+            }
+            else if(indexPath.row==[objChap.thematicData count]-1)
+            {
+                cell.imgTableCellBG.image=[UIImage imageNamed:@"InnerTab_Blue_patch3"];
+            }
+            else
+            {
+                cell.imgTableCellBG.image=[UIImage imageNamed:@"InnerTab_Blue_patch2"];
+            }
         }
         else {
             if (currentOrientaion==UIInterfaceOrientationLandscapeRight||currentOrientaion==UIInterfaceOrientationLandscapeLeft)
@@ -263,7 +278,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        return 25.0;
+        return 26.0;
     }else {
         return 37.0;
     }
@@ -286,7 +301,19 @@
         ChapterlistSubCell_iPad *cell1 = (ChapterlistSubCell_iPad *)[tableView cellForRowAtIndexPath:indexPath];
         
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-
+            if(indexPath.row==0)
+            {
+                
+                cell1.imgTableCellBG.image=[UIImage imageNamed:@"sel_InnerTab_Blue_patch1"];
+            }
+            else if(indexPath.row==[objChap.thematicData count]-1)
+            {
+                cell1.imgTableCellBG.image=[UIImage imageNamed:@"sel_InnerTab_Blue_patch3"];
+            }
+            else
+            {
+                cell1.imgTableCellBG.image=[UIImage imageNamed:@"sel_InnerTab_Blue_patch2"];
+            }
         }
         else {
         
@@ -349,7 +376,19 @@
         ChapterlistSubCell_iPad *cell1 = (ChapterlistSubCell_iPad *)[tableView cellForRowAtIndexPath:indexPath];
         
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-
+            if(indexPath.row==0)
+            {
+                
+                cell1.imgTableCellBG.image=[UIImage imageNamed:@"InnerTab_Blue_patch1"];
+            }
+            else if(indexPath.row==[objChap.thematicData count]-1)
+            {
+                cell1.imgTableCellBG.image=[UIImage imageNamed:@"InnerTab_Blue_patch3"];
+            }
+            else
+            {
+                cell1.imgTableCellBG.image=[UIImage imageNamed:@"InnerTab_Blue_patch2"];
+            }
         }
         else {
         
@@ -408,7 +447,7 @@
 }
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        return 32;
+        return 41;
     }
     else {
         return 55;
