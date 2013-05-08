@@ -1057,6 +1057,7 @@
     
 }
 -(void)Fn_rotateLandscape{
+    
     [imgBG setFrame:CGRectMake(0, 0, 1024, 699)];
     [imgBG setImage:[UIImage imageNamed:@"img_bg.png"]];
     

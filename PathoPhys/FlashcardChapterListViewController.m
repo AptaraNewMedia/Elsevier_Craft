@@ -162,7 +162,7 @@
     cell.lblChapterName.text = [NSString stringWithFormat:@"%d. %@",indexPath.row + 1,objChap.strChapterTitle];    
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        
+        cell.imgTableCellBG.image=[UIImage imageNamed:@"Tab_white_patch1.png"];        
     }
     else {
     
@@ -201,7 +201,7 @@
     ChapterlistCell_iPad *cell1 = (ChapterlistCell_iPad *)[tableView cellForRowAtIndexPath:indexPath];
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        
+        cell1.imgTableCellBG.image=[UIImage imageNamed:@"Tab_grey_patch1.png"];
     }
     else {
     if (currentOrientaion==UIInterfaceOrientationLandscapeRight||currentOrientaion==UIInterfaceOrientationLandscapeLeft)
@@ -225,7 +225,7 @@
     ChapterlistCell_iPad *cell1 = (ChapterlistCell_iPad *)[tableView cellForRowAtIndexPath:indexPath];
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-       
+       cell1.imgTableCellBG.image=[UIImage imageNamed:@"Tab_white_patch1.png"];
     }
     else {
     if (currentOrientaion==UIInterfaceOrientationLandscapeRight||currentOrientaion==UIInterfaceOrientationLandscapeLeft)
