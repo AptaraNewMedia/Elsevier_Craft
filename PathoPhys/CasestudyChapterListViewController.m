@@ -323,7 +323,10 @@
             
         }
     }
-    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+    if([UIScreen mainScreen].bounds.size.height == 568.0){
+        caseStudyViewController = [[CaseStudyViewController alloc] initWithNibName:@"CaseStudyViewController_iPhone5" bundle:nil];
+    }
+    else if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
         caseStudyViewController = [[CaseStudyViewController alloc] initWithNibName:@"CaseStudyViewController_iPhone" bundle:nil];
         
     }
@@ -423,7 +426,10 @@
         strCurrentChapterName = [NSString stringWithFormat:@"%@", objChap.strChapterTitle];
         strCurrentThematicName = [NSString stringWithFormat:@""];
         
-        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        if([UIScreen mainScreen].bounds.size.height == 568.0){
+            caseStudyViewController = [[CaseStudyViewController alloc] initWithNibName:@"CaseStudyViewController_iPhone5" bundle:nil];
+        }
+        else if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
             caseStudyViewController = [[CaseStudyViewController alloc] initWithNibName:@"CaseStudyViewController_iPhone" bundle:nil];
             
         }
