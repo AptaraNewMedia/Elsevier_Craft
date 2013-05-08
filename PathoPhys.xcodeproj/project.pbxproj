@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3926682B173A6B6A00F29AAE /* libGoogleAnalytics_debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39266829173A6B6A00F29AAE /* libGoogleAnalytics_debug.a */; };
-		3926682C173A6B6A00F29AAE /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3926682A173A6B6A00F29AAE /* libGoogleAnalytics.a */; };
+		3926682F173A773400F29AAE /* libGoogleAnalytics_debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3926682D173A773400F29AAE /* libGoogleAnalytics_debug.a */; };
+		39266830173A773400F29AAE /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3926682E173A773400F29AAE /* libGoogleAnalytics.a */; };
 		396E1B511734EC3A00076AEF /* ScoreCardViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 396E1B501734EC3A00076AEF /* ScoreCardViewController_iPhone.xib */; };
 		396E1B531734F25F00076AEF /* ScoreCardViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 396E1B521734F25F00076AEF /* ScoreCardViewController_iPhone5.xib */; };
 		39885C801734D81C007DC01C /* MenuViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39885C7F1734D81C007DC01C /* MenuViewController_iPhone5.xib */; };
@@ -1044,8 +1044,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		39266829173A6B6A00F29AAE /* libGoogleAnalytics_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics_debug.a; sourceTree = "<group>"; };
-		3926682A173A6B6A00F29AAE /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
+		3926682D173A773400F29AAE /* libGoogleAnalytics_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics_debug.a; sourceTree = "<group>"; };
+		3926682E173A773400F29AAE /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
 		396E1B501734EC3A00076AEF /* ScoreCardViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreCardViewController_iPhone.xib; sourceTree = "<group>"; };
 		396E1B521734F25F00076AEF /* ScoreCardViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreCardViewController_iPhone5.xib; sourceTree = "<group>"; };
 		39885C7F1734D81C007DC01C /* MenuViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController_iPhone5.xib; sourceTree = "<group>"; };
@@ -2252,8 +2252,8 @@
 				39970581170EEE23008933DD /* UIKit.framework in Frameworks */,
 				39970583170EEE23008933DD /* Foundation.framework in Frameworks */,
 				39970585170EEE23008933DD /* CoreGraphics.framework in Frameworks */,
-				3926682B173A6B6A00F29AAE /* libGoogleAnalytics_debug.a in Frameworks */,
-				3926682C173A6B6A00F29AAE /* libGoogleAnalytics.a in Frameworks */,
+				3926682F173A773400F29AAE /* libGoogleAnalytics_debug.a in Frameworks */,
+				39266830173A773400F29AAE /* libGoogleAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3473,8 +3473,8 @@
 		39F0ECDB1726D7B600AA09A1 /* GAnalytics */ = {
 			isa = PBXGroup;
 			children = (
-				39266829173A6B6A00F29AAE /* libGoogleAnalytics_debug.a */,
-				3926682A173A6B6A00F29AAE /* libGoogleAnalytics.a */,
+				3926682D173A773400F29AAE /* libGoogleAnalytics_debug.a */,
+				3926682E173A773400F29AAE /* libGoogleAnalytics.a */,
 				39F0ECDC1726D7B600AA09A1 /* GAI.h */,
 				39F0ECDD1726D7B600AA09A1 /* GAITrackedViewController.h */,
 				39F0ECDE1726D7B600AA09A1 /* GAITracker.h */,
