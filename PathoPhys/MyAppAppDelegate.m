@@ -134,10 +134,10 @@ UITextView *txt_feedback;
         viewController1 = [[FlashcardChapterListViewController alloc] initWithNibName:@"FlashcardChapterListViewController_iPhone5" bundle:nil];
         navController1 = [[UINavigationController alloc] initWithRootViewController:viewController1];
         
-        viewController2 = [[TestyourselfChapterListViewController alloc] initWithNibName:@"TestyourselfChapterListViewController_iPhone" bundle:nil];
+        viewController2 = [[TestyourselfChapterListViewController alloc] initWithNibName:@"TestyourselfChapterListViewController_iPhone5" bundle:nil];
         navController2 = [[UINavigationController alloc] initWithRootViewController:viewController2];
         
-        viewController3 = [[CasestudyChapterListViewController alloc] initWithNibName:@"CasestudyChapterListViewController_iPhone" bundle:nil];
+        viewController3 = [[CasestudyChapterListViewController alloc] initWithNibName:@"CasestudyChapterListViewController_iPhone5" bundle:nil];
         navController3 = [[UINavigationController alloc] initWithRootViewController:viewController3];
     }
     
