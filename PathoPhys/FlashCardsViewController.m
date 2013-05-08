@@ -133,14 +133,13 @@
 -(void) Fn_CheckNote:(NSString *)word {
     
     int question_no = intCurrentQuestionIndex + 1;
-    
     objNotes = [db fnGetNote:categoryNumber AndChapterID:intCurrentFlashcard_ChapterId AndThematicId:0 AndQuestionNo:question_no];
     
     if (objNotes == Nil) {
         objNotes = [[Notes alloc] init];
         NOTES_MODE = 1;
         objNotes.intMode = 1;
-        objNotes.strNoteTitle = [NSString stringWithFormat:@"FC-%d-%@", intCurrentFlashcard_ChapterId, word];
+        objNotes.strNoteTitle = [NSString stringWithFormat:@"FC-%d-%@", intCurrentFlashcard_ChapterId,word];
         [customRightBar.Bn_Addnote setTitle:@"Add Note" forState:UIControlStateNormal];
     }
     else {
@@ -148,6 +147,8 @@
         objNotes.intMode = 2;
         [customRightBar.Bn_Addnote setTitle:@"Edit Note" forState:UIControlStateNormal];
     }
+    
+    
     objNotes.intCategoryId = categoryNumber;
     objNotes.intChapterId = intCurrentFlashcard_ChapterId;
     objNotes.intThematicId = 0;

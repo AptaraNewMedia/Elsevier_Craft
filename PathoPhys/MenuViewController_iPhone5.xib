@@ -316,7 +316,7 @@
 					<object class="IBUILabel" id="472622639">
 						<reference key="NSNextResponder" ref="908903236"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{67, 10}, {162, 24}}</string>
+						<string key="NSFrame">{{79, 10}, {162, 24}}</string>
 						<reference key="NSSuperview" ref="908903236"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="150894952"/>
@@ -326,7 +326,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Elsevier</string>
+						<string key="IBUIText">Pathophysquiz</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -416,7 +416,6 @@
 						<string key="NSFrame">{{43, 436}, {235, 28}}</string>
 						<reference key="NSSuperview" ref="908903236"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<int key="IBUITag">2</int>
@@ -668,13 +667,13 @@
 							<reference ref="498587241"/>
 							<reference ref="524794312"/>
 							<reference ref="37769775"/>
-							<reference ref="472622639"/>
 							<reference ref="752991680"/>
 							<reference ref="82310559"/>
 							<reference ref="1043392980"/>
 							<reference ref="367649488"/>
 							<reference ref="204196844"/>
 							<reference ref="159603929"/>
+							<reference ref="472622639"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>

@@ -68,6 +68,9 @@
             lblThematicName.text = strCurrentThematicName;
             break;
     }
+    NSLog(@"Note Title: %@",objNotes.strNoteTitle);
+    NSLog(@"strCurrentChapterName: %@",strCurrentChapterName);
+    
     
     lblChapterName.text = objNotes.strNoteTitle;
     
@@ -140,7 +143,7 @@
     }
     else {
         UIAlertView *alert = [[UIAlertView alloc] init];
-        [alert setTitle:@"Message"];
+        [alert setTitle:@"Pathophysquiz"];
         [alert setDelegate:self];
         [alert setTag:1];
         [alert addButtonWithTitle:@"Ok"];

@@ -134,7 +134,24 @@
     cell.lbl_serionNo.text = [NSString stringWithFormat:@"%d",indexPath.row+1];
     cell.lbl_name.text = [NSString stringWithFormat:@"%@",objScore.strQuizTitle];
     cell.lbl_score.text = [ [NSString alloc]initWithFormat:@"%.2f%%",objScore.floatPercentage];
-    cell.lbl_date.text = [NSString stringWithFormat:@"%@", objScore.strCreatedDate];
+    
+    
+    //cell.lbl_date.text = [NSString stringWithFormat:@"%@", objScore.strCreatedDate];
+    
+    
+    NSString *stringFromWS =[NSString stringWithString:objScore.strCreatedDate];
+    //date formatter for the above string
+    NSDateFormatter *dateFormatterWS = [[NSDateFormatter alloc] init];
+    [dateFormatterWS setDateFormat:@"MM-dd-yyyy"];
+    NSDate *date =[dateFormatterWS dateFromString:stringFromWS];
+    
+    //date formatter that you want
+    NSDateFormatter *dateFormatterNew = [[NSDateFormatter alloc] init];
+    [dateFormatterNew setDateFormat:@"dd-MM-yyyy"];
+    
+    NSString *stringForNewDate = [dateFormatterNew stringFromDate:date];
+    
+    cell.lbl_date.text = stringForNewDate;
     
     cell.btn_share.hidden = YES;
     
