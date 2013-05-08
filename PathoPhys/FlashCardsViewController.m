@@ -301,8 +301,8 @@
         bnThumb.txtLabel.text = objFlashcardSet.strKey;
         bnThumb.txtLabel.textColor = COLOR_BLACK;
         [bnThumb setTitle:@"" forState:UIControlStateNormal];        
-        [bnThumb setImage:[UIImage imageNamed:@"img_flashcard_thumb.png"] forState:UIControlStateNormal];
-        [bnThumb setImage:[UIImage imageNamed:@"img_flashcard_thumb_highlight.png"] forState:UIControlStateHighlighted];      
+        [bnThumb setBackgroundImage:[UIImage imageNamed:@"img_flashcard_thumb.png"] forState:UIControlStateNormal];
+        [bnThumb setBackgroundImage:[UIImage imageNamed:@"img_flashcard_thumb_highlight.png"] forState:UIControlStateHighlighted];      
         [bnThumb addTarget:self action:@selector(onImageThumbTapped:) forControlEvents:UIControlEventTouchUpInside];
         [arrThumbs addObject:bnThumb];
         [scrollGallery addSubview:bnThumb];
@@ -311,8 +311,8 @@
             bnThumb.frame = CGRectMake(xOrigin, 0, 66, 98);
             bnThumb.txtLabel.frame = CGRectMake(5, 5, 55, 90);
             bnThumb.txtLabel.font = FONT_10;
-            [bnThumb setImage:[UIImage imageNamed:@"small_flash_card.png"] forState:UIControlStateNormal];
-            [bnThumb setImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateHighlighted];
+            [bnThumb setBackgroundImage:[UIImage imageNamed:@"small_flash_card.png"] forState:UIControlStateNormal];
+            [bnThumb setBackgroundImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateHighlighted];
             
             xOrigin = xOrigin + 66;
             
@@ -340,10 +340,10 @@
     FlashcardButton *bn = [arrThumbs objectAtIndex:prevThumbTapped];
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        [bn setImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateNormal];
+        [bn setBackgroundImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateNormal];
     }
     else {
-        [bn setImage:[UIImage imageNamed:@"img_flashcard_thumb_highlight.png"] forState:UIControlStateNormal];        
+        [bn setBackgroundImage:[UIImage imageNamed:@"img_flashcard_thumb_highlight.png"] forState:UIControlStateNormal];
     }
     
     [self fnSetLargeImage:intCurrentQuestionIndex];
@@ -386,8 +386,8 @@
                 bnThumb.frame = CGRectMake(xOrigin, 0, 66, 98);
                 bnThumb.txtLabel.frame = CGRectMake(5, 5, 55, 90);
                 bnThumb.txtLabel.font = FONT_10;
-                [bnThumb setImage:[UIImage imageNamed:@"small_flash_card.png"] forState:UIControlStateNormal];
-                [bnThumb setImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateHighlighted];
+                [bnThumb setBackgroundImage:[UIImage imageNamed:@"small_flash_card.png"] forState:UIControlStateNormal];
+                [bnThumb setBackgroundImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateHighlighted];
                 
                 xOrigin = xOrigin + 66;
                 
@@ -413,10 +413,10 @@
         FlashcardButton *bn = [arrThumbs objectAtIndex:prevThumbTapped];
         
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-            [bn setImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateNormal];            
+            [bn setBackgroundImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateNormal];            
         }
         else {
-            [bn setImage:[UIImage imageNamed:@"img_flashcard_thumb_highlight.png"] forState:UIControlStateNormal];
+            [bn setBackgroundImage:[UIImage imageNamed:@"img_flashcard_thumb_highlight.png"] forState:UIControlStateNormal];
         }
         
         lblQuestionNo.text = [NSString stringWithFormat:@"%d of %d", intCurrentQuestionIndex+1, intTotalQuestions];
@@ -545,13 +545,13 @@
     FlashcardButton *bn2 = [arrThumbs objectAtIndex:[sender selectedButton]];
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        [bn1 setImage:[UIImage imageNamed:@"small_flash_card.png"] forState:UIControlStateNormal];
-        [bn2 setImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateNormal];
+        [bn1 setBackgroundImage:[UIImage imageNamed:@"small_flash_card.png"] forState:UIControlStateNormal];
+        [bn2 setBackgroundImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateNormal];
         
     }
     else {
-        [bn1 setImage:[UIImage imageNamed:@"img_flashcard_thumb.png"] forState:UIControlStateNormal];
-        [bn2 setImage:[UIImage imageNamed:@"img_flashcard_thumb_highlight.png"] forState:UIControlStateNormal];
+        [bn1 setBackgroundImage:[UIImage imageNamed:@"img_flashcard_thumb.png"] forState:UIControlStateNormal];
+        [bn2 setBackgroundImage:[UIImage imageNamed:@"img_flashcard_thumb_highlight.png"] forState:UIControlStateNormal];
     }
     
     if (intTotalQuestions == 1) {
@@ -595,10 +595,10 @@
     for (int i =0; i < [arrThumbs count]; i++) {
         FlashcardButton *bnTemp = [arrThumbs objectAtIndex:i];
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-            [bnTemp setImage:[UIImage imageNamed:@"small_flash_card.png"] forState:UIControlStateNormal];
+            [bnTemp setBackgroundImage:[UIImage imageNamed:@"small_flash_card.png"] forState:UIControlStateNormal];
         }
         else {
-            [bnTemp setImage:[UIImage imageNamed:@"img_flashcard_thumb.png"] forState:UIControlStateNormal];
+            [bnTemp setBackgroundImage:[UIImage imageNamed:@"img_flashcard_thumb.png"] forState:UIControlStateNormal];
         }
     }
     
@@ -607,10 +607,10 @@
     
     FlashcardButton *bn2 = [arrThumbs objectAtIndex:intCurrentQuestionIndex];
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        [bn2 setImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateNormal];
+        [bn2 setBackgroundImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateNormal];
     }
     else {
-        [bn2 setImage:[UIImage imageNamed:@"img_flashcard_thumb_highlight.png"] forState:UIControlStateNormal];
+        [bn2 setBackgroundImage:[UIImage imageNamed:@"img_flashcard_thumb_highlight.png"] forState:UIControlStateNormal];
     }
     prevThumbTapped = intCurrentQuestionIndex;
     prevFlipViewIndex = intCurrentQuestionIndex;
@@ -632,10 +632,10 @@
     for (int i =0; i < [arrThumbs count]; i++) {
         FlashcardButton *bnTemp = [arrThumbs objectAtIndex:i];
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-            [bnTemp setImage:[UIImage imageNamed:@"small_flash_card.png"] forState:UIControlStateNormal];
+            [bnTemp setBackgroundImage:[UIImage imageNamed:@"small_flash_card.png"] forState:UIControlStateNormal];
         }
         else {
-            [bnTemp setImage:[UIImage imageNamed:@"img_flashcard_thumb.png"] forState:UIControlStateNormal];
+            [bnTemp setBackgroundImage:[UIImage imageNamed:@"img_flashcard_thumb.png"] forState:UIControlStateNormal];
         }
     }
     
@@ -643,10 +643,10 @@
     
     FlashcardButton *bn2 = [arrThumbs objectAtIndex:intCurrentQuestionIndex];
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        [bn2 setImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateNormal];
+        [bn2 setBackgroundImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateNormal];
     }
     else {
-        [bn2 setImage:[UIImage imageNamed:@"img_flashcard_thumb_highlight.png"] forState:UIControlStateNormal];
+        [bn2 setBackgroundImage:[UIImage imageNamed:@"img_flashcard_thumb_highlight.png"] forState:UIControlStateNormal];
     }
     prevThumbTapped = intCurrentQuestionIndex;
     prevFlipViewIndex = intCurrentQuestionIndex;
@@ -1107,16 +1107,16 @@
         else {
             intCurrentQuestionIndex = (scrollView.contentOffset.x / 382);
         }
-    }
-    else if (scrollGallery == scrollView) {
-        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-            intCurrentQuestionIndex = (scrollView.contentOffset.x / 115);
-        }
-        else {
-            intCurrentQuestionIndex = (scrollView.contentOffset.x / 66);
-        }
-        
-    }
+//    }
+//    else if (scrollGallery == scrollView) {
+//        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+//            intCurrentQuestionIndex = (scrollView.contentOffset.x / 115);
+//        }
+//        else {
+//            intCurrentQuestionIndex = (scrollView.contentOffset.x / 66);
+//        }
+//        
+//    }
     lblQuestionNo.text = [NSString stringWithFormat:@"%d of %d", intCurrentQuestionIndex+1, intTotalQuestions];
     
     int index = (intCurrentQuestionIndex/6);
@@ -1137,13 +1137,13 @@
     FlashcardButton *bn2 = [arrThumbs objectAtIndex:intCurrentQuestionIndex];
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        [bn1 setImage:[UIImage imageNamed:@"small_flash_card.png"] forState:UIControlStateNormal];
-        [bn2 setImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateNormal];
+        [bn1 setBackgroundImage:[UIImage imageNamed:@"small_flash_card.png"] forState:UIControlStateNormal];
+        [bn2 setBackgroundImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateNormal];
     }
     else {
     
-        [bn1 setImage:[UIImage imageNamed:@"img_flashcard_thumb.png"] forState:UIControlStateNormal];
-        [bn2 setImage:[UIImage imageNamed:@"img_flashcard_thumb_highlight.png"] forState:UIControlStateNormal];
+        [bn1 setBackgroundImage:[UIImage imageNamed:@"img_flashcard_thumb.png"] forState:UIControlStateNormal];
+        [bn2 setBackgroundImage:[UIImage imageNamed:@"img_flashcard_thumb_highlight.png"] forState:UIControlStateNormal];
     }
     
     if (intCurrentQuestionIndex == intTotalQuestions-1) {
@@ -1165,7 +1165,8 @@
     prevFlipViewIndex = intCurrentQuestionIndex;
     prevThumbTapped = intCurrentQuestionIndex;
     [self fnThumbScrollerMove];
-
+        
+    }
 }
 
 //Touch Swipe Detection Methods
