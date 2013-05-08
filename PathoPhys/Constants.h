@@ -17,6 +17,7 @@
 #define TITLE_CONF @"Confirm"
 #define TITLE_ALERT @"Alert"
 #define TITLE_MSG @"Message"
+#define TITLE_COMMON @"Pathophysquiz"
 //*************** ALL ALERT's TITLE **********`
 
 
