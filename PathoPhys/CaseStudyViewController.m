@@ -156,7 +156,10 @@
     switch (objQue.intType) {
         case QUESTION_TYPE_MCMS:
         {
-            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            if([UIScreen mainScreen].bounds.size.height == 568.0){
+                dragDropView = [[DragDropViewController_cs alloc] initWithNibName:@"DragDropViewController_cs_iPhone5" bundle:nil];
+            }
+            else if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
                 dragDropView = [[DragDropViewController_cs alloc] initWithNibName:@"DragDropViewController_cs_iPhone" bundle:nil];                
             }
             else {
@@ -170,7 +173,11 @@
             break;
         case QUESTION_TYPE_MATCHTERMS: {
             
-            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            
+            if([UIScreen mainScreen].bounds.size.height == 568.0){
+                matchPairsView = [[MatchPairsViewController_cs alloc] initWithNibName:@"MatchPairsViewController_cs_iPhone5" bundle:nil];
+            }
+            else if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
                 matchPairsView = [[MatchPairsViewController_cs alloc] initWithNibName:@"MatchPairsViewController_cs_iPhone" bundle:nil];
             }
             else {
@@ -184,7 +191,10 @@
             break;
         case QUESTION_TYPE_MCSS: {
             
-            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            if([UIScreen mainScreen].bounds.size.height == 568.0){
+                 singleSelectionView = [[SingleSelectionViewController_cs alloc] initWithNibName:@"SingleSelectionViewController_cs_iPhone5" bundle:nil];
+            }
+            else if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
                 singleSelectionView = [[SingleSelectionViewController_cs alloc] initWithNibName:@"SingleSelectionViewController_cs_iPhone" bundle:nil];
             }
             else {
