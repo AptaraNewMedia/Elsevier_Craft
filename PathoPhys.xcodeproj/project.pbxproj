@@ -33,6 +33,7 @@
 		39970625170EF284008933DD /* MenuViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39970624170EF284008933DD /* MenuViewController_iPhone.xib */; };
 		399D2DCA172BAB3A0073B760 /* SingleSelectionImageViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 399D2DC7172BAB3A0073B760 /* SingleSelectionImageViewController_iPad.xib */; };
 		399D2DCB172BAB3A0073B760 /* SingleSelectionImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 399D2DC9172BAB3A0073B760 /* SingleSelectionImageViewController.m */; };
+		39C449B6173A921B00E60C21 /* elsevier-logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 39C449B5173A921B00E60C21 /* elsevier-logo.jpg */; };
 		39D8D6E117391EFD0008B46E /* img_aboutus_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 39D8D46317391EFB0008B46E /* img_aboutus_bg.png */; };
 		39D8D6E217391EFD0008B46E /* img_aboutus_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39D8D46417391EFB0008B46E /* img_aboutus_bg@2x.png */; };
 		39D8D6E317391EFD0008B46E /* img_aboutus_bg_p.png in Resources */ = {isa = PBXBuildFile; fileRef = 39D8D46517391EFB0008B46E /* img_aboutus_bg_p.png */; };
@@ -1081,6 +1082,7 @@
 		399D2DC7172BAB3A0073B760 /* SingleSelectionImageViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleSelectionImageViewController_iPad.xib; sourceTree = "<group>"; };
 		399D2DC8172BAB3A0073B760 /* SingleSelectionImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleSelectionImageViewController.h; sourceTree = "<group>"; };
 		399D2DC9172BAB3A0073B760 /* SingleSelectionImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleSelectionImageViewController.m; sourceTree = "<group>"; };
+		39C449B5173A921B00E60C21 /* elsevier-logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "elsevier-logo.jpg"; sourceTree = "<group>"; };
 		39D8D46317391EFB0008B46E /* img_aboutus_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_aboutus_bg.png; sourceTree = "<group>"; };
 		39D8D46417391EFB0008B46E /* img_aboutus_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_aboutus_bg@2x.png"; sourceTree = "<group>"; };
 		39D8D46517391EFB0008B46E /* img_aboutus_bg_p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_aboutus_bg_p.png; sourceTree = "<group>"; };
@@ -3499,6 +3501,7 @@
 		8702433E171D42FD0002D145 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				39C449B5173A921B00E60C21 /* elsevier-logo.jpg */,
 				39D8D46117391EFB0008B46E /* iPad */,
 				87C9EB9A173619B700888E20 /* iPhone */,
 			);
@@ -5138,6 +5141,7 @@
 				39266836173A830100F29AAE /* SingleSelectionViewController_cs_iPhone5.xib in Resources */,
 				39266838173A83F500F29AAE /* CasestudyChapterListViewController_iPhone5.xib in Resources */,
 				3926683A173A846F00F29AAE /* CaseStudyViewController_iPhone5.xib in Resources */,
+				39C449B6173A921B00E60C21 /* elsevier-logo.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
