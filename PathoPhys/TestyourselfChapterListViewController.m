@@ -70,6 +70,8 @@
     lbl_title.textColor = COLOR_WHITE;
 
     
+    
+    
     [self fnAddNavigationItems];
     
     imgArrowRight = [UIImage imageNamed:@"arrow_right.png"];
