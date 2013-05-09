@@ -33,15 +33,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    lblTitle.font = FONT_20;
     lblTitle.textColor = COLOR_WHITE;
     
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         webView.scrollView.scrollEnabled = YES;
+        lblTitle.font = FONT_12;
     }
     else{
         webView.scrollView.scrollEnabled = NO;
+        lblTitle.font = FONT_20;
     }
     
     webView.scrollView.bounces = NO;
