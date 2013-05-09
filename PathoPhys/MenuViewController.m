@@ -71,6 +71,13 @@
         
     }
     
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        lbl_Title.font = BOLD_FONT_20;
+    }
+    else {
+        lbl_Title.font = FONT_25;
+    }
+    
     lbl_Title.text = @"Pathophysquiz";
     
     lblFlashcard.textColor = COLOR_FlashcardHeadingText;
@@ -109,6 +116,7 @@
 {
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
         customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(230, 0, 90, 44)];
+        
         
         customRightBar.btnScore.frame = CGRectMake(0.0, 7.0, 30, 30);
         customRightBar.btnNote.frame = CGRectMake(31.0, 7.0, 30, 30);

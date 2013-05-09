@@ -171,8 +171,10 @@
         [self presentViewController:mc animated:YES completion:NULL];
     }
     else{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to send email. Please check if you have configured email account." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to send email. Please check if you have configured email account." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//        [alert show];
+        NSURL *myURL = [NSURL URLWithString:@"mailto:abc@xyz.com"];
+        [[UIApplication sharedApplication] openURL:myURL];
     }
 }
 
