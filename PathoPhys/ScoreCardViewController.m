@@ -136,6 +136,8 @@
     cell.lbl_score.text = [ [NSString alloc]initWithFormat:@"%.2f%%",objScore.floatPercentage];
     
     
+    cell.backgroundColor = [UIColor redColor];
+    
     //cell.lbl_date.text = [NSString stringWithFormat:@"%@", objScore.strCreatedDate];
     
     
@@ -156,6 +158,16 @@
     cell.btn_share.hidden = YES;
     
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return 25;
+    }
+    else {
+        return 57;
+    }
+    return 0.0;
 }
 
 - (void)viewDidUnload

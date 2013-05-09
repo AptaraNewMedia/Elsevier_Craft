@@ -44,7 +44,7 @@
 						<string key="NSFrameSize">{320, 568}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="88684055"/>
+						<reference key="NSNextKeyView" ref="718402487"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -66,7 +66,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<object class="NSColor" key="IBUIHighlightedTitleColor" id="906222692">
+						<object class="NSColor" key="IBUIHighlightedTitleColor" id="456728826">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
 						</object>
@@ -205,7 +205,6 @@
 						<string key="NSFrame">{{0, 146}, {320, 201}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="379466439">
 							<int key="NSColorSpace">3</int>
@@ -220,7 +219,7 @@
 						<float key="IBUISectionHeaderHeight">22</float>
 						<float key="IBUISectionFooterHeight">22</float>
 					</object>
-					<object class="IBUILabel" id="88684055">
+					<object class="IBUILabel" id="718402487">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{128, 88}, {66, 20}}</string>
@@ -234,7 +233,7 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">Score Card</string>
-						<reference key="IBUITextColor" ref="906222692"/>
+						<reference key="IBUITextColor" ref="456728826"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
 						<float key="IBUIMinimumFontSize">10</float>
@@ -338,7 +337,7 @@
 							<reference ref="54464888"/>
 							<reference ref="799744598"/>
 							<reference ref="884071980"/>
-							<reference ref="88684055"/>
+							<reference ref="718402487"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -395,7 +394,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">23</int>
-						<reference key="object" ref="88684055"/>
+						<reference key="object" ref="718402487"/>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">lblAddNote</string>
 					</object>

@@ -195,6 +195,17 @@
     }
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        return 25;
+    }
+    else {
+        return 57;
+    }
+    return 0.0;
+}
+
+
 #pragma mark - TextField Delegates
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
