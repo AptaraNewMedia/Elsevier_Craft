@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1536</int>
-		<string key="IBDocument.SystemVersion">11E53</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2840</string>
-		<string key="IBDocument.AppKitVersion">1138.47</string>
-		<string key="IBDocument.HIToolboxVersion">569.00</string>
+		<int key="IBDocument.SystemTarget">1552</int>
+		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
+		<string key="IBDocument.AppKitVersion">1187.34</string>
+		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1926</string>
+			<string key="NS.object.0">2083</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -40,10 +40,10 @@
 					<object class="IBUIImageView" id="862638208">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrameSize">{320, 480}</string>
+						<string key="NSFrameSize">{320, 568}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="472330456"/>
+						<reference key="NSNextKeyView" ref="343704464"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -55,7 +55,7 @@
 					<object class="IBUILabel" id="536650695">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{85, 180}, {222, 35}}</string>
+						<string key="NSFrame">{{84, 193}, {222, 35}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="925470540"/>
@@ -85,10 +85,10 @@
 					<object class="IBUIButton" id="472330456">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{292, 117}, {15, 19}}</string>
+						<string key="NSFrame">{{275, 124}, {40, 28}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="343704464"/>
+						<reference key="NSNextKeyView" ref="811367647"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -123,10 +123,10 @@
 					<object class="IBUILabel" id="6063073">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{85, 142}, {222, 35}}</string>
+						<string key="NSFrame">{{84, 157}, {222, 35}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="811367647"/>
+						<reference key="NSNextKeyView" ref="472330456"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -146,7 +146,7 @@
 					<object class="IBUILabel" id="811367647">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{12, 187}, {76, 19}}</string>
+						<string key="NSFrame">{{11, 200}, {76, 19}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="536650695"/>
@@ -166,7 +166,7 @@
 					<object class="IBUILabel" id="343704464">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{11, 147}, {73, 24}}</string>
+						<string key="NSFrame">{{11, 162}, {73, 24}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="6063073"/>
@@ -186,7 +186,7 @@
 					<object class="IBUILabel" id="216600458">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{85, 221}, {222, 24}}</string>
+						<string key="NSFrame">{{84, 230}, {222, 24}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="752645513"/>
@@ -206,7 +206,7 @@
 					<object class="IBUILabel" id="925470540">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{50, 221}, {33, 24}}</string>
+						<string key="NSFrame">{{49, 230}, {33, 24}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="216600458"/>
@@ -226,7 +226,7 @@
 					<object class="IBUILabel" id="752645513">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{49, 300}, {35, 21}}</string>
+						<string key="NSFrame">{{49, 309}, {35, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="517005472"/>
@@ -246,7 +246,7 @@
 					<object class="IBUIButton" id="517005472">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{84, 298}, {36, 29}}</string>
+						<string key="NSFrame">{{84, 306}, {36, 29}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="302309259"/>
@@ -275,9 +275,10 @@
 					<object class="IBUIButton" id="302309259">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{128, 298}, {36, 29}}</string>
+						<string key="NSFrame">{{128, 306}, {36, 29}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -467,17 +468,17 @@
 						<int key="objectID">1</int>
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
+							<reference ref="752645513"/>
+							<reference ref="302309259"/>
 							<reference ref="862638208"/>
+							<reference ref="472330456"/>
+							<reference ref="517005472"/>
+							<reference ref="216600458"/>
+							<reference ref="925470540"/>
 							<reference ref="536650695"/>
-							<reference ref="6063073"/>
 							<reference ref="811367647"/>
 							<reference ref="343704464"/>
-							<reference ref="925470540"/>
-							<reference ref="752645513"/>
-							<reference ref="517005472"/>
-							<reference ref="302309259"/>
-							<reference ref="472330456"/>
-							<reference ref="216600458"/>
+							<reference ref="6063073"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -687,11 +688,11 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="Img_FacebookIconHighlight.png">{36, 29}</string>
 			<string key="Img_MailHighlight .png">{36, 29}</string>
-			<string key="Result_box_bg_iPhone.png">{320, 460}</string>
+			<string key="Result_box_bg_iPhone.png">{320, 568}</string>
 			<string key="fb_icon_iPhone.png">{36, 29}</string>
 			<string key="mail_icon_iPhone.png">{36, 29}</string>
-			<string key="white_close_btn_iPhone.png">{15, 13}</string>
+			<string key="white_close_btn_iPhone.png">{20, 20}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">1926</string>
+		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>

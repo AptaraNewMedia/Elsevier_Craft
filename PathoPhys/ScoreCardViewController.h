@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ScoreCardViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
-
+-(IBAction)onClose:(id)sender;
 @end
