@@ -203,13 +203,13 @@
         }
         else if (flagForCheckAnswer == 3) {
             [alert setTag:3];
-            [alert addButtonWithTitle:@"Ok"];
+            [alert addButtonWithTitle:@"Answer"];
             [alert addButtonWithTitle:@"Try Again"];
             [alert setMessage:[NSString stringWithFormat:@"Partially Correct. Please try other options as well."]];
         }
         else {
             [alert setTag:3];
-            [alert addButtonWithTitle:@"Ok"];
+            [alert addButtonWithTitle:@"Answer"];
             [alert addButtonWithTitle:@"Try Again"];
             [alert setMessage:[NSString stringWithFormat:@"That's Incorrect!"]];
             // Please match all the items.

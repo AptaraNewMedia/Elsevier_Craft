@@ -405,7 +405,7 @@
         }
         else {
             [alert setTag:3];
-            [alert addButtonWithTitle:@"Ok"];
+            [alert addButtonWithTitle:@"Answer"];
             [alert addButtonWithTitle:@"Try Again"];
             [alert setMessage:[NSString stringWithFormat:@"That's Incorrect!"]];
         }
