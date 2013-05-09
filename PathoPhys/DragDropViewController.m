@@ -204,7 +204,9 @@
 - (void) rotateScrollViewButtonsForPortrait{
     int counter= 0;
     int y = 10, x= 20;
-
+    
+    
+    
     for(UIView *myView in [scrollViewDrag subviews]){
         if([myView isKindOfClass:[CustomDragButton class]]){
             counter++;
@@ -468,7 +470,7 @@
         }
         else {
             [alert setTag:3];
-            [alert addButtonWithTitle:@"Answer"];
+            [alert addButtonWithTitle:@"Ok"];
             [alert addButtonWithTitle:@"Try Again"];
             [alert setMessage:[NSString stringWithFormat:@"Incorrect"]];
         }
@@ -665,6 +667,7 @@
     [imgScroller setFrame:CGRectMake(20, 370, 730, 360)];
     imgScroller.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, imgScroller.bounds.size.width - 730);
     [scrollViewDrag setFrame:CGRectMake(20, 220, 730, 150)];
+    NSLog(@"Portrait");
     [self rotateScrollViewButtonsForPortrait];
     
 }
@@ -698,6 +701,8 @@
     [imgScroller setFrame:CGRectMake(280, 153, 727, 427)];
     imgScroller.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, imgScroller.bounds.size.width - 727);
     [scrollViewDrag setFrame:CGRectMake(5, 153, 270, 427)];
+    
+    NSLog(@"Landscape");
     
     [self rotateScrollViewButtonsForLandscape];
     
