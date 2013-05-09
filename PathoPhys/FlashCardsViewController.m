@@ -208,7 +208,7 @@
     flipViewButton.textLabel.textColor = COLOR_WHITE;
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        flipViewButton.textLabel.frame = CGRectMake(5, 5, 160, 210);
+        flipViewButton.textLabel.frame = CGRectMake(10, 5, 140, 210);
         flipViewButton.textLabel.font = FONT_12;
         [flipViewButton setBackgroundImage:[UIImage imageNamed:@"Big_blue_flash_card.png"] forState:UIControlStateNormal];
     }
@@ -263,7 +263,7 @@
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
             
             flipViewButton.frame = CGRectMake(xOrigin, 0, 172, 225);
-            flipViewButton.textLabel.frame = CGRectMake(5, 5, 160, 210);
+            flipViewButton.textLabel.frame = CGRectMake(10, 5, 140, 210);
             flipViewButton.textLabel.font = FONT_12;
             [flipViewButton setBackgroundImage:[UIImage imageNamed:@"Big_grey_flash_card.png"] forState:UIControlStateNormal];
             xOrigin = xOrigin + 172;
@@ -445,7 +445,7 @@
             if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
                 
                 flipViewButton.frame = CGRectMake(xOrigin, 0, 172, 225);
-                flipViewButton.textLabel.frame = CGRectMake(5, 5, 160, 210);
+                flipViewButton.textLabel.frame = CGRectMake(10, 5, 140, 210);
                 flipViewButton.textLabel.font = FONT_12;
                 [flipViewButton setBackgroundImage:[UIImage imageNamed:@"Big_grey_flash_card.png"] forState:UIControlStateNormal];
                 xOrigin = xOrigin + 172;
@@ -665,6 +665,7 @@
     
 	if(flipViewButton.selectedButton==1)
 	{
+    
 		//Animation;
 		[UIView beginAnimations:nil context:nil];
 		[UIView setAnimationDuration:0.75];
@@ -673,7 +674,7 @@
 		[UIView commitAnimations];		
         
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-            flipViewButton.textLabel.frame = CGRectMake(5, 5, 160, 210);
+            flipViewButton.textLabel.frame = CGRectMake(10, 5, 140, 210);
             flipViewButton.textLabel.font = FONT_12;
             [flipViewButton setBackgroundImage:[UIImage imageNamed:@"Big_grey_flash_card.png"] forState:UIControlStateNormal];
             
@@ -696,7 +697,7 @@
 		[UIView commitAnimations];		
         
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-            flipViewButton.textLabel.frame = CGRectMake(5, 5, 160, 210);
+            flipViewButton.textLabel.frame = CGRectMake(10, 5, 140, 210);
             flipViewButton.textLabel.font = FONT_12;
             [flipViewButton setBackgroundImage:[UIImage imageNamed:@"Big_blue_flash_card.png"] forState:UIControlStateNormal];
         }
