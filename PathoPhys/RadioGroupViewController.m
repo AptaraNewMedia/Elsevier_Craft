@@ -609,7 +609,7 @@
 -(void) fn_OnSubmitTapped
 {
     UIAlertView *alert = [[UIAlertView alloc] init];
-    [alert setTitle:@"Message"];
+    [alert setTitle:TITLE_COMMON];
     [alert setDelegate:self];
     if (flagForAnyOptionSelect) {
         [alert setTag:1];
