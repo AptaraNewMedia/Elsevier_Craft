@@ -237,6 +237,23 @@
         message = @"Case Studies";
         categoryNumber = 3;
         
+        intCurrentCaseStudy_ChapterId = objNotes.intChapterId;
+        intCurrentCaseStudy_ThematicId = -1;
+        
+        Chapters *objChap = (Chapters *)[arr_chaptersCaseStudy objectAtIndex:intCurrentCaseStudy_ChapterId-1];
+        
+        str_BarTitle = [NSString stringWithFormat:@"%@", objChap.strChapterTitle];
+        strCurrentChapterName = [NSString stringWithFormat:@"%@", objChap.strChapterTitle];
+        
+        ThematicArea *objThematic;
+        if(objNotes.intThematicId!=0) {
+            objThematic = (ThematicArea *)[objChap.thematicData objectAtIndex:indexPath.row];
+            intCurrentTestYourSelf_ThematicId = objNotes.intThematicId;
+            str_BarTitle = [NSString stringWithFormat:@"%@ - %@", objChap.strChapterTitle, objThematic.strThematicTitle];
+            strCurrentThematicName = [NSString stringWithFormat:@"%@",  objThematic.strThematicTitle];
+            
+        }
+        
         if([UIScreen mainScreen].bounds.size.height == 568.0){
             caseStudyViewController = [[CaseStudyViewController alloc] initWithNibName:@"CaseStudyViewController_iPhone5" bundle:nil];
         }
@@ -248,16 +265,13 @@
         }
         
         [self.navigationController pushViewController:caseStudyViewController animated:YES];
-        [caseStudyViewController disableAllButtons];
+        [caseStudyViewController disableAllButtons:objNotes.intQuestionNo];
 
     }
     else{
         //Nothing
         message = @"";
     }
-    
-    [md Fn_AddNote:objNotes];
-    
     
     
 }

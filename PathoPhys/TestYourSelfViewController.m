@@ -138,8 +138,6 @@
     bnSubmit.enabled = NO;
     
     intCurrentQuestionIndex = questionNO;
-    
-    
 }
 
 -(void) fnAddNavigationItems
