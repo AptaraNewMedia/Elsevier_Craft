@@ -117,7 +117,9 @@
         }
     }
     
-
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        [self rotateScrollViewButtonsForiPhone];
+    }
 }
 
 -(void) fn_SetFontColor
@@ -150,10 +152,25 @@
         [bnDrag setTitle:[objDRAGDROP.arrOptions objectAtIndex:i] forState:UIControlStateNormal];
         [bnDrag setTitleColor:COLOR_WHITE forState:UIControlStateNormal];
         [bnDrag setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
-        bnDrag.titleLabel.font = FONT_14;
+        
+        UIFont *temp_font;
+        
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+        {
+            temp_font=FONT_10;
+        }
+        else
+        {
+            temp_font=FONT_14;
+        }
+        
+        bnDrag.titleLabel.font = temp_font;
+        
+        bnDrag.titleLabel.font = temp_font;
+        
         bnDrag.userInteractionEnabled=YES;
         bnDrag.titleLabel.numberOfLines = 10;
-
+        
         [bnDrag.ansImage setFrame:CGRectMake(objDRAGDROP.fWidth-40, -15, 22, 22)];
         
         [bnDrag.feedbackBt setTag:i];
@@ -170,6 +187,8 @@
     }
     [scrollViewDrag setContentSize:CGSizeMake(scrollViewDrag.frame.size.width, y)];
 }
+
+
 - (void) droppablePoints{
     for (int i=0; i<objDRAGDROP.arrXYpoints.count; i++) {
         
@@ -225,9 +244,9 @@
     if (objDRAGDROP.intDRAGDROPRADIOid == 25) {
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
             spacingWidth = 30;
-            spacingHeight = objDRAGDROP.fHeight;
+            spacingHeight = objDRAGDROP.fHeight+30;
             x = objDRAGDROP.fWidth + 10;
-            y = 50;
+            y = 80;
         }
         else {
             spacingWidth = 92;
@@ -242,7 +261,7 @@
             spacingWidth = 45;
             spacingHeight = objDRAGDROP.fHeight;
             x = objDRAGDROP.fWidth + 10;
-            y = 20;
+            y = 80;
         }
         else {
             spacingWidth = 100;
@@ -253,62 +272,103 @@
         }
     }
     else if (objDRAGDROP.intDRAGDROPRADIOid == 18) {
-        spacingWidth = 130;
+        spacingWidth = 70;
         spacingHeight = objDRAGDROP.fHeight;
         x = objDRAGDROP.fWidth + 10;
-        y = 32;        
+        y = 80;
     }
     else if (objDRAGDROP.intDRAGDROPRADIOid == 9) {
-        spacingWidth = 160;
+        spacingWidth = 67;
         spacingHeight = 20;
         x = objDRAGDROP.fWidth + 10;
-        y = 32;
+        y = 90;
     }
-    else if (objDRAGDROP.intDRAGDROPRADIOid == 14) {
+    else if (objDRAGDROP.intDRAGDROPRADIOid == 14)
+    {
         RadioOptions = 2;
         spacingWidth = 160;
-        firstX = 304;
-        firstY = 0;
-        secondX = 315;
-        secondY = 40;
-        thirdX = 14;
-        thirdY = 86;
+        
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+        {
+            firstX = 5;
+            firstY = 35;
+            secondX = 130;
+            secondY = 78;
+            thirdX = 5;
+            thirdY = 120;
+        }
+        else
+        {
+            firstX = 304;
+            firstY = 0;
+            secondX = 315;
+            secondY = 40;
+            thirdX = 14;
+            thirdY = 86;
+        }
     }
-    else if (objDRAGDROP.intDRAGDROPRADIOid == 15) {
-        RadioOptions = 2;        
+    else if (objDRAGDROP.intDRAGDROPRADIOid == 15)
+    {
+        RadioOptions = 2;
         spacingWidth = 160;
         spacingHeight = objDRAGDROP.fHeight;
-        firstX = 42;
-        firstY = 57;
-        secondX = 40;
-        secondY = 101;
-        thirdX = 406;
-        thirdY = 101;
+        
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+        {
+            firstX = 35;
+            firstY = 52;
+            secondX = 35;
+            secondY = 96;
+            thirdX = 52;
+            thirdY = 138;
+        }
+        else
+        {
+            firstX = 42;
+            firstY = 57;
+            secondX = 40;
+            secondY = 101;
+            thirdX = 406;
+            thirdY = 101;
+        }
     }
-
     
     if (objDRAGDROP.intDRAGDROPRADIOid == 14 || objDRAGDROP.intDRAGDROPRADIOid == 15) {
         
         for( int k =0; k < objDRAGDROP.arrRadioAnswers.count; k++){
             
-            if (k == 0 ) {
+            if (k == 0 )
+            {
                 x = firstX;
                 y = firstY;
             }
-            else if (k == 1 ) {
+            else if (k == 1 )
+            {
                 x = secondX;
                 y = secondY;
             }
-            else if (k == 2) {
+            else if (k == 2)
+            {
                 x = thirdX;
                 y = thirdY;
             }
             
             NSArray *arrTemp = [[objDRAGDROP.arrRadioOptions objectAtIndex:k] componentsSeparatedByString:@","];
             
+            UIFont *temp_font;
+            
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+            {
+                temp_font=FONT_12;
+            }
+            else
+            {
+                temp_font=FONT_14;
+            }
+            
             // Option 1
             objRadioView = [[RadioView alloc] init];
-            objRadioView.backgroundColor = COLOR_DARKGRAY;
+            objRadioView.backgroundColor = COLOR_CLEAR;
             [objRadioView setFrame:CGRectMake(x, y, spacingWidth, spacingHeight)];
             xx = 0;
             yy = (spacingHeight/2) - 5;
@@ -321,7 +381,7 @@
             [lbl1 setText:[arrTemp objectAtIndex:0]];
             [lbl1 setTextColor:COLOR_BLUE];
             lbl1.backgroundColor  = COLOR_CLEAR;
-            lbl1.font = FONT_14;
+            lbl1.font = temp_font;
             [objRadioView addSubview:lbl1];
             
             [objRadioView.ansImage1 setImage:nil];
@@ -340,18 +400,15 @@
             UILabel *lbl2 =[[UILabel alloc] initWithFrame:CGRectMake(xx+width, yy, (spacingWidth/2)-width, height)];
             [lbl2 setText:[arrTemp objectAtIndex:1]];
             [lbl2 setTextColor:COLOR_BLUE];
-            lbl2.font = FONT_14;
+            lbl2.font = temp_font;
             lbl2.backgroundColor  = COLOR_CLEAR;
             [objRadioView addSubview:lbl2];
             
             [objRadioView.ansImage2 setImage:nil];
             [objRadioView.ansImage2 setFrame:CGRectMake(objRadioView.btnOption2.frame.origin.x + width + 10, yy - 16, width, height)];
             
-
             xx = xx + spacingWidth;
             
-
-                
             objRadioView.btnOption3.hidden = YES;
             objRadioView.btnOption4.hidden = YES;
             objRadioView.btnOption5.hidden = YES;
@@ -363,184 +420,238 @@
             y = y + objDRAGDROP.fHeight + 10;
         }
     }
-    else {
-        for( int k =0; k < objDRAGDROP.arrRadioAnswers.count; k++){
-        
-        // Option 1
-        objRadioView = [[RadioView alloc] init];
-        objRadioView.backgroundColor = COLOR_DARKGRAY;
-        [objRadioView setFrame:CGRectMake(x, y, spacingWidth*RadioOptions, spacingHeight)];
-        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-            xx = 5;
-            yy = 0;
+    else
+    {
+        for( int k =0; k < objDRAGDROP.arrRadioAnswers.count; k++)
+        {
+            
+            // Option 1
+            objRadioView = [[RadioView alloc] init];
+            objRadioView.backgroundColor = COLOR_CLEAR;
+            [objRadioView setFrame:CGRectMake(x, y, spacingWidth*RadioOptions, spacingHeight)];
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                xx = 5;
+                yy = 0;
+            }
+            else {
+                xx = 5;
+                yy = (spacingHeight/2) - 5;
+                
+            }
+            [objRadioView.btnOption1 setFrame:CGRectMake(xx, yy, width, height)];
+            [objRadioView.btnOption1 setTag:k];
+            [objRadioView.btnOption1 addTarget:self action:@selector(Fn_Radio_Tapped:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [objRadioView.ansImage1 setImage:nil];
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                [objRadioView.ansImage1 setFrame:CGRectMake(xx, yy + objRadioView.btnOption1.frame.size.height, width, height)];
+                
+                [objRadioView.btnFeedback1 setFrame:CGRectMake(xx, yy + objRadioView.btnOption1.frame.size.height + objRadioView.ansImage1.frame.size.height, width, height)];
+            }
+            else {
+                [objRadioView.ansImage1 setFrame:CGRectMake(objRadioView.btnOption1.frame.origin.x + width + 10, yy, width, height)];
+                
+                [objRadioView.btnFeedback1 setFrame:CGRectMake(objRadioView.ansImage1.frame.origin.x + width + 10, yy, width, height)];
+                
+            }
+            
+            [objRadioView.btnFeedback1 setTag:k];
+            [objRadioView.btnFeedback1 addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
+            objRadioView.btnFeedback1.hidden = YES;
+            objRadioView.btnOption1.enabled = YES;
+            xx = xx + spacingWidth;
+            
+            
+            // Option 2
+            
+            [objRadioView.btnOption2 setFrame:CGRectMake(xx, yy, width, height)];
+            [objRadioView.btnOption2 setTag:k];
+            [objRadioView.btnOption2 addTarget:self action:@selector(Fn_Radio_Tapped:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [objRadioView.ansImage2 setImage:nil];
+            
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                [objRadioView.ansImage2 setFrame:CGRectMake(xx, yy + objRadioView.btnOption2.frame.size.height, width, height)];
+                
+                [objRadioView.btnFeedback2 setFrame:CGRectMake(xx, yy + objRadioView.btnOption2.frame.size.height + objRadioView.ansImage2.frame.size.height, width, height)];
+            }
+            else {
+                [objRadioView.ansImage2 setFrame:CGRectMake(objRadioView.btnOption2.frame.origin.x + width + 10, yy, width, height)];
+                
+                [objRadioView.btnFeedback2 setFrame:CGRectMake(objRadioView.ansImage2.frame.origin.x + width + 10, yy, width, height)];
+            }
+            [objRadioView.btnFeedback2 setTag:k];
+            [objRadioView.btnFeedback2 addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
+            objRadioView.btnFeedback2.hidden = YES;
+            xx = xx + spacingWidth;
+            
+            
+            // Option 3
+            
+            [objRadioView.btnOption3 setFrame:CGRectMake(xx, yy, width, height)];
+            [objRadioView.btnOption3 setTag:k];
+            [objRadioView.btnOption3 addTarget:self action:@selector(Fn_Radio_Tapped:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [objRadioView.ansImage3 setImage:nil];
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                [objRadioView.ansImage3 setFrame:CGRectMake(xx, objRadioView.btnOption3.frame.size.height , width, height)];
+                
+                [objRadioView.btnFeedback3 setFrame:CGRectMake(xx, objRadioView.btnOption3.frame.size.height + objRadioView.ansImage3.frame.size.height, width, height)];
+            }
+            else {
+                [objRadioView.ansImage3 setFrame:CGRectMake(objRadioView.btnOption3.frame.origin.x + width + 10, yy, width, height)];
+                
+                [objRadioView.btnFeedback3 setFrame:CGRectMake(objRadioView.ansImage3.frame.origin.x + width + 10, yy, width, height)];
+                
+            }
+            [objRadioView.btnFeedback3 setTag:k];
+            [objRadioView.btnFeedback3 addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
+            objRadioView.btnFeedback3.hidden = YES;
+            xx = xx + spacingWidth;
+            
+            
+            
+            // Option 4
+            [objRadioView.btnOption4 setFrame:CGRectMake(xx, yy, width, height)];
+            [objRadioView.btnOption4 setTag:k];
+            [objRadioView.btnOption4 addTarget:self action:@selector(Fn_Radio_Tapped:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [objRadioView.ansImage4 setImage:nil];
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                [objRadioView.ansImage4 setFrame:CGRectMake(xx, yy+objRadioView.btnOption4.frame.size.height, width, height)];
+                
+                [objRadioView.btnFeedback4 setFrame:CGRectMake(xx, yy+objRadioView.btnOption4.frame.size.height+objRadioView.ansImage4.frame.size.height, width, height)];
+            }
+            else {
+                [objRadioView.ansImage4 setFrame:CGRectMake(objRadioView.btnOption4.frame.origin.x + width + 10, yy, width, height)];
+                
+                [objRadioView.btnFeedback4 setFrame:CGRectMake(objRadioView.ansImage4.frame.origin.x + width + 10, yy, width, height)];
+                
+            }
+            [objRadioView.btnFeedback4 setTag:k];
+            [objRadioView.btnFeedback4 addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
+            objRadioView.btnFeedback4.hidden = YES;
+            xx = xx + spacingWidth;
+            
+            
+            // Option 5
+            [objRadioView.btnOption5 setFrame:CGRectMake(xx, yy, width, height)];
+            [objRadioView.btnOption5 setTag:k];
+            [objRadioView.btnOption5 addTarget:self action:@selector(Fn_Radio_Tapped:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [objRadioView.ansImage5 setImage:nil];
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                [objRadioView.ansImage5 setFrame:CGRectMake(xx, yy+objRadioView.btnOption5.frame.size.height, width, height)];
+                
+                [objRadioView.btnFeedback5 setFrame:CGRectMake(xx, yy+objRadioView.btnOption5.frame.size.height+objRadioView.ansImage5.frame.size.height, width, height)];
+                
+            }
+            else {
+                [objRadioView.ansImage5 setFrame:CGRectMake(objRadioView.btnOption5.frame.origin.x + width + 10, yy, width, height)];
+                
+                [objRadioView.btnFeedback5 setFrame:CGRectMake(objRadioView.ansImage5.frame.origin.x + width + 10, yy, width, height)];
+                
+            }
+            [objRadioView.btnFeedback5 setTag:k];
+            [objRadioView.btnFeedback5 addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
+            objRadioView.btnFeedback5.hidden = YES;
+            
+            
+            if(objDRAGDROP.intDRAGDROPRADIOid == 18 || objDRAGDROP.intDRAGDROPRADIOid == 9){
+                
+                //            UILabel *lbl1 =[[UILabel alloc] initWithFrame:CGRectMake(objRadioView.btnOption1.frame.origin.x+width, objRadioView.btnOption1.frame.origin.y, 90, height)];
+                ////            [lbl1 setText:[objDRAGDROP.arrRadioOptions objectAtIndex:0]];
+                //            [lbl1 setTextColor:COLOR_BLUE];
+                //            lbl1.backgroundColor  = COLOR_CLEAR;
+                //            lbl1.font = FONT_14;
+                //            [objRadioView addSubview:lbl1];
+                
+                
+                [objRadioView.ansImage1 setFrame:CGRectMake(objRadioView.ansImage1.frame.origin.x, objRadioView.ansImage1.frame.origin.y - 10, objRadioView.ansImage1.frame.size.width, objRadioView.ansImage1.frame.size.height)];
+                
+                [objRadioView.ansImage2 setFrame:CGRectMake(objRadioView.ansImage2.frame.origin.x, objRadioView.ansImage2.frame.origin.y - 10, objRadioView.ansImage2.frame.size.width, objRadioView.ansImage2.frame.size.height)];
+                
+                
+                //            UILabel *lbl2 =[[UILabel alloc] initWithFrame:CGRectMake(objRadioView.btnOption2.frame.origin.x+width, objRadioView.btnOption2.frame.origin.y, 90, height)];
+                ////            [lbl2 setText:[objDRAGDROP.arrRadioOptions objectAtIndex:1]];
+                //            [lbl2 setTextColor:COLOR_BLUE];
+                //            lbl2.backgroundColor  = COLOR_CLEAR;
+                //            lbl2.font = FONT_14;
+                //            [objRadioView addSubview:lbl2];
+                
+            }
+            
+            if (RadioOptions == 2) {
+                objRadioView.btnOption3.hidden = YES;
+                objRadioView.btnOption4.hidden = YES;
+                objRadioView.btnOption5.hidden = YES;
+            }
+            else if (RadioOptions == 3) {
+                objRadioView.btnOption4.hidden = YES;
+                objRadioView.btnOption5.hidden = YES;
+            }
+            else if (RadioOptions == 4) {
+                objRadioView.btnOption5.hidden = YES;
+            }
+            
+            [imgDropView addSubview:objRadioView];
+            
+            [arr_radioButtons addObject:objRadioView];
+            
+            
+            //        y = y + objDRAGDROP.fHeight + 20;
+            
+            //        if(k>3 && k<7)
+            //        {
+            //            y = y + objDRAGDROP.fHeight + 20;
+            //        }
+            //        else
+            
+            NSLog(@"objDRAGDROP.arrRadioAnswers.count: %d",objDRAGDROP.arrRadioAnswers.count);
+            
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+            {
+                if (objDRAGDROP.intDRAGDROPRADIOid == 25)
+                {
+                    if(k<=4)
+                    {
+                        y = y + objDRAGDROP.fHeight + 10;
+                    }
+                    else
+                    {
+                        y = y + objDRAGDROP.fHeight+7;
+                    }
+                    
+                    //                    if(k>2 && k<=5)
+                    //                {
+                    //                    y = y + objDRAGDROP.fHeight + 10;
+                    //                }
+                    //                else if(k>5 && k<8)
+                    //                {
+                    //                    y = y + objDRAGDROP.fHeight + 10;
+                    //                }
+                    //                else
+                    //                {
+                    //                    y = y + objDRAGDROP.fHeight + 10;
+                    //                }
+                }
+                else
+                {
+                    if(k<1)
+                    {
+                        y = y + objDRAGDROP.fHeight + 10;
+                    }
+                    else
+                    {
+                        y = y + objDRAGDROP.fHeight + 5;
+                    }
+                }
+            }
+            else
+            {
+                y = y + objDRAGDROP.fHeight + 10;
+            }
         }
-        else {
-            xx = 5;
-            yy = (spacingHeight/2) - 5;
-            
-        }
-        [objRadioView.btnOption1 setFrame:CGRectMake(xx, yy, width, height)];
-        [objRadioView.btnOption1 setTag:k];
-        [objRadioView.btnOption1 addTarget:self action:@selector(Fn_Radio_Tapped:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [objRadioView.ansImage1 setImage:nil];
-        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-            [objRadioView.ansImage1 setFrame:CGRectMake(xx, yy + objRadioView.btnOption1.frame.size.height, width, height)];
-            
-            [objRadioView.btnFeedback1 setFrame:CGRectMake(xx, yy + objRadioView.btnOption1.frame.size.height + objRadioView.ansImage1.frame.size.height, width, height)];
-        }
-        else {
-            [objRadioView.ansImage1 setFrame:CGRectMake(objRadioView.btnOption1.frame.origin.x + width + 10, yy, width, height)];
-            
-            [objRadioView.btnFeedback1 setFrame:CGRectMake(objRadioView.ansImage1.frame.origin.x + width + 10, yy, width, height)];
-            
-        }
-            
-        [objRadioView.btnFeedback1 setTag:k];
-        [objRadioView.btnFeedback1 addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
-        objRadioView.btnFeedback1.hidden = YES;
-        objRadioView.btnOption1.enabled = YES;
-         xx = xx + spacingWidth;
-        
-        
-        // Option 2
-        
-        [objRadioView.btnOption2 setFrame:CGRectMake(xx, yy, width, height)];
-        [objRadioView.btnOption2 setTag:k];
-        [objRadioView.btnOption2 addTarget:self action:@selector(Fn_Radio_Tapped:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [objRadioView.ansImage2 setImage:nil];
-            
-        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-            [objRadioView.ansImage2 setFrame:CGRectMake(xx, yy + objRadioView.btnOption2.frame.size.height, width, height)];
-            
-            [objRadioView.btnFeedback2 setFrame:CGRectMake(xx, yy + objRadioView.btnOption2.frame.size.height + objRadioView.ansImage2.frame.size.height, width, height)];
-        }
-        else {
-            [objRadioView.ansImage2 setFrame:CGRectMake(objRadioView.btnOption2.frame.origin.x + width + 10, yy, width, height)];
-        
-            [objRadioView.btnFeedback2 setFrame:CGRectMake(objRadioView.ansImage2.frame.origin.x + width + 10, yy, width, height)];
-        }
-        [objRadioView.btnFeedback2 setTag:k];
-        [objRadioView.btnFeedback2 addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
-        objRadioView.btnFeedback2.hidden = YES;
-        xx = xx + spacingWidth;
-        
-        
-        // Option 3
-        
-        [objRadioView.btnOption3 setFrame:CGRectMake(xx, yy, width, height)];
-        [objRadioView.btnOption3 setTag:k];
-        [objRadioView.btnOption3 addTarget:self action:@selector(Fn_Radio_Tapped:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [objRadioView.ansImage3 setImage:nil];
-        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-            [objRadioView.ansImage3 setFrame:CGRectMake(xx, objRadioView.btnOption3.frame.size.height , width, height)];
-            
-            [objRadioView.btnFeedback3 setFrame:CGRectMake(xx, objRadioView.btnOption3.frame.size.height + objRadioView.ansImage3.frame.size.height, width, height)];
-        }
-        else {
-            [objRadioView.ansImage3 setFrame:CGRectMake(objRadioView.btnOption3.frame.origin.x + width + 10, yy, width, height)];
-            
-            [objRadioView.btnFeedback3 setFrame:CGRectMake(objRadioView.ansImage3.frame.origin.x + width + 10, yy, width, height)];
-            
-        }
-        [objRadioView.btnFeedback3 setTag:k];
-        [objRadioView.btnFeedback3 addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
-        objRadioView.btnFeedback3.hidden = YES;
-        xx = xx + spacingWidth;
-
-        
-        
-        // Option 4
-        [objRadioView.btnOption4 setFrame:CGRectMake(xx, yy, width, height)];
-        [objRadioView.btnOption4 setTag:k];
-        [objRadioView.btnOption4 addTarget:self action:@selector(Fn_Radio_Tapped:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [objRadioView.ansImage4 setImage:nil];
-        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-            [objRadioView.ansImage4 setFrame:CGRectMake(xx, yy+objRadioView.btnOption4.frame.size.height, width, height)];
-            
-            [objRadioView.btnFeedback4 setFrame:CGRectMake(xx, yy+objRadioView.btnOption4.frame.size.height+objRadioView.ansImage4.frame.size.height, width, height)];
-        }
-        else {
-            [objRadioView.ansImage4 setFrame:CGRectMake(objRadioView.btnOption4.frame.origin.x + width + 10, yy, width, height)];
-            
-            [objRadioView.btnFeedback4 setFrame:CGRectMake(objRadioView.ansImage4.frame.origin.x + width + 10, yy, width, height)];
-            
-        }
-        [objRadioView.btnFeedback4 setTag:k];
-        [objRadioView.btnFeedback4 addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
-        objRadioView.btnFeedback4.hidden = YES;
-        xx = xx + spacingWidth;
-        
-        
-        // Option 5
-        [objRadioView.btnOption5 setFrame:CGRectMake(xx, yy, width, height)];
-        [objRadioView.btnOption5 setTag:k];
-        [objRadioView.btnOption5 addTarget:self action:@selector(Fn_Radio_Tapped:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [objRadioView.ansImage5 setImage:nil];
-        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-            [objRadioView.ansImage5 setFrame:CGRectMake(xx, yy+objRadioView.btnOption5.frame.size.height, width, height)];
-            
-            [objRadioView.btnFeedback5 setFrame:CGRectMake(xx, yy+objRadioView.btnOption5.frame.size.height+objRadioView.ansImage5.frame.size.height, width, height)];
-            
-        }
-        else {
-            [objRadioView.ansImage5 setFrame:CGRectMake(objRadioView.btnOption5.frame.origin.x + width + 10, yy, width, height)];
-            
-            [objRadioView.btnFeedback5 setFrame:CGRectMake(objRadioView.ansImage5.frame.origin.x + width + 10, yy, width, height)];
-            
-        }
-        [objRadioView.btnFeedback5 setTag:k];
-        [objRadioView.btnFeedback5 addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
-        objRadioView.btnFeedback5.hidden = YES;
-        
-            
-        if(objDRAGDROP.intDRAGDROPRADIOid == 18 || objDRAGDROP.intDRAGDROPRADIOid == 9){
-           
-            UILabel *lbl1 =[[UILabel alloc] initWithFrame:CGRectMake(objRadioView.btnOption1.frame.origin.x+width, objRadioView.btnOption1.frame.origin.y, 90, height)];
-            [lbl1 setText:[objDRAGDROP.arrRadioOptions objectAtIndex:0]];
-            [lbl1 setTextColor:COLOR_BLUE];
-            lbl1.backgroundColor  = COLOR_CLEAR;
-            lbl1.font = FONT_14;
-            [objRadioView addSubview:lbl1];
-            
-            
-            [objRadioView.ansImage1 setFrame:CGRectMake(objRadioView.ansImage1.frame.origin.x, objRadioView.ansImage1.frame.origin.y - 10, objRadioView.ansImage1.frame.size.width, objRadioView.ansImage1.frame.size.height)];
-
-            [objRadioView.ansImage2 setFrame:CGRectMake(objRadioView.ansImage2.frame.origin.x, objRadioView.ansImage2.frame.origin.y - 10, objRadioView.ansImage2.frame.size.width, objRadioView.ansImage2.frame.size.height)];
-
-            
-            UILabel *lbl2 =[[UILabel alloc] initWithFrame:CGRectMake(objRadioView.btnOption2.frame.origin.x+width, objRadioView.btnOption2.frame.origin.y, 90, height)];
-            [lbl2 setText:[objDRAGDROP.arrRadioOptions objectAtIndex:1]];
-            [lbl2 setTextColor:COLOR_BLUE];
-            lbl2.backgroundColor  = COLOR_CLEAR;
-            lbl2.font = FONT_14;
-            [objRadioView addSubview:lbl2];
-
-        }
-        
-        if (RadioOptions == 2) {
-            objRadioView.btnOption3.hidden = YES;
-            objRadioView.btnOption4.hidden = YES;
-            objRadioView.btnOption5.hidden = YES;
-        }
-        else if (RadioOptions == 3) {
-            objRadioView.btnOption4.hidden = YES;
-            objRadioView.btnOption5.hidden = YES;
-        }
-        else if (RadioOptions == 4) {
-            objRadioView.btnOption5.hidden = YES;
-        }
-        
-        [imgDropView addSubview:objRadioView];
-        
-        [arr_radioButtons addObject:objRadioView];
-        
-        y = y + objDRAGDROP.fHeight + 10;
-    }
     }
 }
 
@@ -758,7 +869,36 @@
     }
 }
 
-
+- (void) rotateScrollViewButtonsForiPhone{
+    int counter= 0;
+    int y = 5, x= 20;
+    int numOfColumns = 1;
+    int numOfRows =2;
+    float bnwidth = 0;
+    float btnheight;
+    
+    for(UIView *myView in [scrollViewDrag subviews]){
+        if([myView isKindOfClass:[CustomDragButton class]]){
+            bnwidth = myView.frame.size.width;
+            counter++;
+            
+            [myView removeFromSuperview];
+            myView.frame = CGRectMake(x, y, myView.frame.size.width, myView.frame.size.height);
+            [scrollViewDrag addSubview:myView];
+            btnheight = myView.frame.size.height;
+            y = y + myView.frame.size.height + 10;
+            if(counter == numOfRows){ 
+                numOfColumns++;
+                y = 5;
+                x = x + myView.frame.size.width + 10;
+                counter = 0;
+            }
+        }
+    }
+    
+    
+    [scrollViewDrag setContentSize:CGSizeMake(20 + (numOfColumns * bnwidth) + ((numOfColumns-1) * 10), 5 + (numOfRows * btnheight) + numOfRows * 10)];
+}
 
 
 //Get db data from question_id
