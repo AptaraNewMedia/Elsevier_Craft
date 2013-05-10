@@ -45,6 +45,7 @@
 {
     [super viewDidLoad];
     [self fnAddNavigationItems];
+    categoryNumber= 0;
     
     //self.trackedViewName = @"Menu Screen";
     
