@@ -130,16 +130,21 @@
     }
 }
 
--(void) Fn_CheckNote:(NSString *)word {
+-(void) Fn_CheckNote:(int)index {
     
-    int question_no = intCurrentQuestionIndex + 1;
-    objNotes = [db fnGetNote:categoryNumber AndChapterID:intCurrentFlashcard_ChapterId AndThematicId:0 AndQuestionNo:question_no];
+    objFlashcardSet = (FlashcardsSet *)[arrFlashcards objectAtIndex:index];
+    
+    NSLog(@"Flashcard Id %d", objFlashcardSet.intFlashcardId);
+//    int question_no = intCurrentQuestionIndex + 1;
+    objNotes = [db fnGetNote:categoryNumber AndChapterID:intCurrentFlashcard_ChapterId AndThematicId:0 AndQuestionNo:objFlashcardSet.intFlashcardId];
+    
+    objFlashcardSet = (FlashcardsSet *)[arrFlashcards objectAtIndex:intCurrentQuestionIndex];
     
     if (objNotes == Nil) {
         objNotes = [[Notes alloc] init];
         NOTES_MODE = 1;
         objNotes.intMode = 1;
-        objNotes.strNoteTitle = [NSString stringWithFormat:@"FC-%d-%@", intCurrentFlashcard_ChapterId,word];
+        objNotes.strNoteTitle = [NSString stringWithFormat:@"FC-%d-%d-%@", intCurrentFlashcard_ChapterId, objFlashcardSet.intFlashcardId, objFlashcardSet.strKey];
         [customRightBar.Bn_Addnote setTitle:@"Add Note" forState:UIControlStateNormal];
     }
     else {
@@ -152,7 +157,7 @@
     objNotes.intCategoryId = categoryNumber;
     objNotes.intChapterId = intCurrentFlashcard_ChapterId;
     objNotes.intThematicId = 0;
-    objNotes.intQuestionNo = question_no;
+    objNotes.intQuestionNo = objFlashcardSet.intFlashcardId;
     [md Fn_AddNote:objNotes];
 }
 -(void) fnAddNavigationItems{
@@ -220,12 +225,13 @@
     flipViewButton.selectedButton = 1;
     
     lblQuestionNo.text = [NSString stringWithFormat:@"%d of %d", intCurrentQuestionIndex+1, intTotalQuestions];
+
+    [self Fn_CheckNote:imageIndex];
     
     [self fnSetPreviousImage];
     
     prevFlipViewIndex = imageIndex;
     
-    [self Fn_CheckNote:objFlashcardSet.strKey];
 }
 -(void) fnSetThumnailsLarge{
     
@@ -614,6 +620,7 @@
     }
     prevThumbTapped = intCurrentQuestionIndex;
     prevFlipViewIndex = intCurrentQuestionIndex;
+    [self Fn_CheckNote:intCurrentQuestionIndex];
     [self fnSetPreviousImage];
     [self fnThumbScrollerMove];
     if (intCurrentQuestionIndex == intTotalQuestions-1) {
@@ -650,6 +657,7 @@
     }
     prevThumbTapped = intCurrentQuestionIndex;
     prevFlipViewIndex = intCurrentQuestionIndex;
+    [self Fn_CheckNote:intCurrentQuestionIndex];    
     [self fnSetPreviousImage];
     [self fnThumbScrollerMove];
     if (intCurrentQuestionIndex == 0) {

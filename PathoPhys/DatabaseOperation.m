@@ -924,11 +924,12 @@ NSError *error;
     
     Notes *objNote = [[Notes alloc] init];
     
-    strQuery = [NSString stringWithFormat:@"SELECT note_id, note_desc, modified_date, created_date FROM Notes WHERE category_id = %d AND chapter_id = %d AND thematic_id = %d AND question_no = %d",category_id, chapter_id, thematic_id, question_no];
+    strQuery = [NSString stringWithFormat:@"SELECT note_id, note_title, note_desc, modified_date, created_date FROM Notes WHERE category_id = %d AND chapter_id = %d AND thematic_id = %d AND question_no = %d",category_id, chapter_id, thematic_id, question_no];
     arrTempList = [dbOperation getRowsForQuery:strQuery];
     intRowCount = [arrTempList count];
     for (int i = 0; i < intRowCount; i++) {
         objNote.intNotesId  =   [[[arrTempList objectAtIndex:i] objectForKey:@"note_id"] intValue];
+        objNote.strNoteTitle = [[arrTempList objectAtIndex:i] objectForKey:@"note_title"];
         objNote.strNoteDesc = [[arrTempList objectAtIndex:i] objectForKey:@"note_desc"];
         if (objNote.strNoteDesc == (id)[NSNull null] || objNote.strNoteDesc.length == 0 )
             objNote.strNoteDesc = @"";
