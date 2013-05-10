@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		390865E8173D48E300EFE7D5 /* NotesListNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 390865E6173D48E300EFE7D5 /* NotesListNewViewController.m */; };
+		390865EB173D490600EFE7D5 /* NotesListNewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 390865EA173D490600EFE7D5 /* NotesListNewViewController.xib */; };
 		3926682F173A773400F29AAE /* libGoogleAnalytics_debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3926682D173A773400F29AAE /* libGoogleAnalytics_debug.a */; };
 		39266830173A773400F29AAE /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3926682E173A773400F29AAE /* libGoogleAnalytics.a */; };
 		39266832173A7AA100F29AAE /* DragDropViewController_cs_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39266831173A7AA100F29AAE /* DragDropViewController_cs_iPhone5.xib */; };
@@ -1051,6 +1053,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		390865E5173D48E300EFE7D5 /* NotesListNewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesListNewViewController.h; sourceTree = "<group>"; };
+		390865E6173D48E300EFE7D5 /* NotesListNewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesListNewViewController.m; sourceTree = "<group>"; };
+		390865EA173D490600EFE7D5 /* NotesListNewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotesListNewViewController.xib; sourceTree = "<group>"; };
 		3926682D173A773400F29AAE /* libGoogleAnalytics_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics_debug.a; sourceTree = "<group>"; };
 		3926682E173A773400F29AAE /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
 		39266831173A7AA100F29AAE /* DragDropViewController_cs_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DragDropViewController_cs_iPhone5.xib; sourceTree = "<group>"; };
@@ -3586,6 +3591,9 @@
 				87F0535F17244727003B51A1 /* NotesListViewController.m */,
 				87F0535D17244727003B51A1 /* NotesListViewController_iPad.xib */,
 				87F578A2173906D6009E995C /* NotesListViewController_iPhone.xib */,
+				390865E5173D48E300EFE7D5 /* NotesListNewViewController.h */,
+				390865E6173D48E300EFE7D5 /* NotesListNewViewController.m */,
+				390865EA173D490600EFE7D5 /* NotesListNewViewController.xib */,
 			);
 			name = Notes;
 			sourceTree = "<group>";
@@ -5146,6 +5154,7 @@
 				3926683A173A846F00F29AAE /* CaseStudyViewController_iPhone5.xib in Resources */,
 				39C449B6173A921B00E60C21 /* elsevier-logo.jpg in Resources */,
 				39C449B8173A9E2000E60C21 /* TestyourselfChapterListViewController_iPhone5.xib in Resources */,
+				390865EB173D490600EFE7D5 /* NotesListNewViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5278,6 +5287,7 @@
 				87FF8455172C3B9500F34B16 /* MatchPairsViewController_cs.m in Sources */,
 				87FF845B172C3D1500F34B16 /* DragDropViewController_cs.m in Sources */,
 				87ED6E00172D0101002F8472 /* CasestudyTextPopup.m in Sources */,
+				390865E8173D48E300EFE7D5 /* NotesListNewViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
