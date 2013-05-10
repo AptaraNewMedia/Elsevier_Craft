@@ -36,6 +36,7 @@
     IBOutlet UIButton *Bn_ByChapter;
 }
 
+-(void) onSelctor;
 - (IBAction)Bn_Back_Tapped:(id)sender;
 - (void) disableAllButtons:(int)questionNO;
 @end

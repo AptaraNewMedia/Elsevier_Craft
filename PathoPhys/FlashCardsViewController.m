@@ -779,8 +779,14 @@
     }    
     
     [self Fn_CheckNote:intCurrentQuestionIndex];
-    [md Fn_ShowNote:2];
+    //[md Fn_ShowNote:2];
     
+    [self performSelector:@selector(onSelctor) withObject:self afterDelay:0.7];
+    
+}
+
+-(void) onSelctor {
+    [md Fn_ShowNote:2];
 }
 
 // Segment

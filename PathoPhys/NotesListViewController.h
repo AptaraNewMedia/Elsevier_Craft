@@ -9,4 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface NotesListViewController : UIViewController <UITextFieldDelegate>
+-(void) onSelctor;
 @end
