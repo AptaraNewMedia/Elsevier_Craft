@@ -9,6 +9,11 @@
 #import "NotesListViewController.h"
 #import "NotesCell.h"
 #import "Notes.h"
+#import "Chapters.h"
+#import "FlashCardsViewController.h"
+#import "TestYourSelfViewController.h"
+#import "CaseStudyViewController.h"
+
 
 @interface NotesListViewController ()
 {
@@ -31,6 +36,10 @@
     NSMutableArray *arrsearch;
     
     int currentOrientation;
+    FlashCardsViewController *flashCardsViewController;
+    TestYourSelfViewController *testYourSelfViewController;
+    CaseStudyViewController *caseStudyViewController;
+    
     
     // 1- Landscape
     // 2- Portrait
@@ -75,10 +84,11 @@
 }
 
 // Tables
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return arrNotes.count;
 }
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *MyIdentifier = @"tblCellView";
     NotesCell *cell = (NotesCell *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     if(cell == nil) {
@@ -144,6 +154,97 @@
     
     return cell;
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    objNotes = (Notes *)[arrNotes objectAtIndex:indexPath.row];
+
+    //Navigation Logic
+    //[md Fn_SubNotesList];
+
+    
+    
+    NSString *message;
+    if(objNotes.intCategoryId == 1){
+        //Flash Cards
+        message = @"Flash Cards";
+        categoryNumber = 1;
+        [md Fn_addTabBar];
+        [md.tabBarController setSelectedIndex:0];
+        
+        Chapters *objChap = (Chapters *)[arr_chaptersTestAndFlashcard objectAtIndex:indexPath.row];
+        intCurrentFlashcard_ChapterId = objChap.intChapterId;
+        str_BarTitle = [NSString stringWithFormat:@"Flash Cards - %@", objChap.strChapterTitle];
+        
+        if([UIScreen mainScreen].bounds.size.height == 568.0){
+            flashCardsViewController = [[FlashCardsViewController alloc] initWithNibName:@"FlashCardsViewController_iPhone5" bundle:nil];
+        }
+        else if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            flashCardsViewController = [[FlashCardsViewController alloc] initWithNibName:@"FlashCardsViewController_iPhone" bundle:nil];
+        }
+        else {
+            flashCardsViewController = [[FlashCardsViewController alloc] initWithNibName:@"FlashCardsViewController_iPad" bundle:nil];
+        }
+        
+        [md.navController1 pushViewController:flashCardsViewController animated:YES];
+        
+        
+        [flashCardsViewController disableAllButtons];
+        
+        
+        
+    }
+    else if(objNotes.intCategoryId == 2){
+        //Test Yourself
+        message = @"Test Yourself";
+        categoryNumber = 2;
+        [md Fn_addTabBar];
+        [md.tabBarController setSelectedIndex:1];
+        
+        if([UIScreen mainScreen].bounds.size.height == 568.0){
+            testYourSelfViewController = [[TestYourSelfViewController alloc] initWithNibName:@"TestYourSelfViewController_iPhone5" bundle:nil];
+        }
+        else if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            testYourSelfViewController = [[TestYourSelfViewController alloc] initWithNibName:@"TestYourSelfViewController_iPhone" bundle:nil];
+        }
+        else {
+            testYourSelfViewController = [[TestYourSelfViewController alloc] initWithNibName:@"TestYourSelfViewController_iPad" bundle:nil];
+            
+        }
+        [md.navController2 pushViewController:testYourSelfViewController animated:YES];
+        [testYourSelfViewController disableAllButtons];
+        
+    }
+    else if(objNotes.intCategoryId == 3){
+        //Case Studies
+        message = @"Case Studies";
+        categoryNumber = 3;
+        [md Fn_addTabBar];
+        [md.tabBarController setSelectedIndex:2];
+        
+        if([UIScreen mainScreen].bounds.size.height == 568.0){
+            caseStudyViewController = [[CaseStudyViewController alloc] initWithNibName:@"CaseStudyViewController_iPhone5" bundle:nil];
+        }
+        else if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            caseStudyViewController = [[CaseStudyViewController alloc] initWithNibName:@"CaseStudyViewController_iPhone" bundle:nil];
+        }
+        else {
+            caseStudyViewController = [[CaseStudyViewController alloc] initWithNibName:@"CaseStudyViewController_iPad" bundle:nil];
+        }
+        
+        [md.navController3 pushViewController:caseStudyViewController animated:YES];
+        [caseStudyViewController disableAllButtons];
+
+    }
+    else{
+        //Nothing
+        message = @"";
+    }
+    
+    [md Fn_AddNote:objNotes];
+    
+    
+    
+}
+
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     NSString *data = txtSearch.text;

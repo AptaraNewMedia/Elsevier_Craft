@@ -106,6 +106,12 @@
     }
 }
 
+- (void) disableAllButtons{
+    for (UIView *myview in [self.view subviews]){
+        myview.userInteractionEnabled = NO;
+    }
+}
+
 -(void) fnAddNavigationItems
 {
     

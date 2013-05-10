@@ -37,4 +37,5 @@
 }
 
 - (IBAction)Bn_Back_Tapped:(id)sender;
+- (void) disableAllButtons;
 @end

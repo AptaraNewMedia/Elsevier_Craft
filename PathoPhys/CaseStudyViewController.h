@@ -32,5 +32,5 @@
 
 -(void)onTryAgain;
 -(void) Fn_DisableSubmit;
-
+- (void) disableAllButtons;
 @end

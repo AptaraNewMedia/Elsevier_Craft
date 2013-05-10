@@ -48,6 +48,9 @@
 -(IBAction)onNext:(id)sender;
 -(IBAction)onPrev:(id)sender;
 
+- (void) disableAllButtons;
+
+
 
 @end
 
@@ -723,7 +726,11 @@
 }
 //=====================================================
 
-
+- (void) disableAllButtons{
+    for (UIView *myview in [self.view subviews]){
+            myview.userInteractionEnabled = NO;
+        }
+}
 
 // Segment
 //=======================================================================================
