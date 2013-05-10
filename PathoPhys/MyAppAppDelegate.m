@@ -26,6 +26,8 @@
 #import "Notes.h"
 #import "CasestudyTextPopup.h"
 #import "ResultViewController.h"
+#import "NotesListNewViewController.h"
+
 
 #import "GAI.h"
 
@@ -44,6 +46,7 @@ UITextView *txt_feedback;
     InfoPopViewController *InfoPopupView;
     CasestudyTextPopup *casestudyTextView;
     ResultViewController *resultView;
+    NotesListNewViewController *notesListNewViewController;
 }
 
 @end
@@ -94,7 +97,7 @@ UITextView *txt_feedback;
     DEVICE_VERSION = [[[UIDevice currentDevice] systemVersion] floatValue];
     
     
-    NSLog(@"Type: %@",DEVICE_TYPE);
+    //NSLog(@"Type: %@",DEVICE_TYPE);
     
     md = (MyAppAppDelegate *)[[UIApplication sharedApplication] delegate];
 
@@ -248,6 +251,10 @@ UITextView *txt_feedback;
     [notesListView.view removeFromSuperview];
 }
 
+-(void) Fn_SubNotesList1{
+    [notesListNewViewController.view removeFromSuperview];
+}
+
 // Score Card
 -(void) Fn_AddScoreCard{
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
@@ -398,19 +405,34 @@ UITextView *txt_feedback;
 -(void) Fn_AddNotesListOnMenu{
     [self Fn_SubNotesListOnMenu];
     
+//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+//    {
+//        notesListView = [[NotesListViewController alloc] initWithNibName:@"NotesListViewController_iPhone" bundle:nil];
+//    }
+//    else
+//    {
+//        notesListView = [[NotesListViewController alloc] initWithNibName:@"NotesListViewController_iPad" bundle:nil];
+//    }
+//    [notesListView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
+//    navController = [[UINavigationController alloc] initWithRootViewController:notesListView];
+//    self.window.rootViewController = navController;
+//    [navController setNavigationBarHidden:YES animated:NO];
+
+    
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
-        notesListView = [[NotesListViewController alloc] initWithNibName:@"NotesListViewController_iPhone" bundle:nil];
+        notesListNewViewController = [[NotesListNewViewController alloc] initWithNibName:@"NotesListNewViewController" bundle:nil];
     }
     else
     {
-        notesListView = [[NotesListViewController alloc] initWithNibName:@"NotesListViewController_iPad" bundle:nil];
+        notesListNewViewController = [[NotesListNewViewController alloc] initWithNibName:@"NotesListNewViewController" bundle:nil];
     }
-    [notesListView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
-    
-    navController = [[UINavigationController alloc] initWithRootViewController:notesListView];
+    [notesListNewViewController shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
+    navController = [[UINavigationController alloc] initWithRootViewController:notesListNewViewController];
     self.window.rootViewController = navController;
-    
+//    [navController setNavigationBarHidden:YES animated:NO];
+
+
 }
 -(void) Fn_SubNotesListOnMenu{
     [navController.view removeFromSuperview];
