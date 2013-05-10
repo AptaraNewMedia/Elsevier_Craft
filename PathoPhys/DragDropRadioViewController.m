@@ -766,7 +766,7 @@
 -(void) fn_LoadDbData:(NSString *)question_id{
     objDRAGDROP = [db fnGetTestyourselfDRAGDROPRadio:question_id];
 }
--(void) fn_CheckAnswersBeforeSubmit{
+-(NSString *) fn_CheckAnswersBeforeSubmit{
     
 	flagForAnyOptionSelect = NO;
     
@@ -796,6 +796,7 @@
             intVisited = 2;
         }
     }
+    return nil;
 }
 -(void) fn_OnSubmitTapped{
     UIAlertView *alert = [[UIAlertView alloc] init];
@@ -821,7 +822,15 @@
 //    }
 	[alert show];
 }
+-(void) fn_ShowSelected:(NSString *)visitedAnswers
+{
+    
+}
+//--------------------------------
 
+
+
+//--------------------------------
 - (BOOL) checkForAnswer{
     int i = 0;
     NSMutableString *strAns = [[NSMutableString alloc] init];

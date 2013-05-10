@@ -169,6 +169,11 @@
             [viewMain addSubview:dragDropView.view];
             dragDropView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
             dragDropView.parentObject = self;
+            
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] != 0) {
+                [dragDropView fn_ShowSelected:[objQuizTrack.arrSelectedAnswer objectAtIndex:intCurrentQuestionIndex]];
+            }
+
         }
             break;
         case QUESTION_TYPE_MATCHTERMS: {
@@ -187,6 +192,10 @@
             [viewMain addSubview:matchPairsView.view];
             matchPairsView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
             matchPairsView.parentObject = self;
+            
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] != 0) {
+                [matchPairsView fn_ShowSelected:[objQuizTrack.arrSelectedAnswer objectAtIndex:intCurrentQuestionIndex]];
+            }
         }
             break;
         case QUESTION_TYPE_MCSS: {
@@ -204,6 +213,10 @@
             [viewMain addSubview:singleSelectionView.view];
             singleSelectionView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
             singleSelectionView.parentObject = self;
+            
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] != 0) {
+                [singleSelectionView fn_ShowSelected:[objQuizTrack.arrSelectedAnswer objectAtIndex:intCurrentQuestionIndex]];
+            }
         }
             break;
     }
@@ -296,33 +309,40 @@
 
 -(IBAction)onSubmit:(id)sender
 {
+    NSString *strSel = nil;    
     switch (objQue.intType) {
         case QUESTION_TYPE_MCMS:
-            [dragDropView fn_CheckAnswersBeforeSubmit];
-            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
-                if (dragDropView.strVisitedAnswer.length > 0)
-                    [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:dragDropView.strVisitedAnswer];
-                [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:dragDropView.intVisited]];
+            {
+                strSel = [dragDropView fn_CheckAnswersBeforeSubmit];
+                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
+                    if (strSel.length > 0)
+                        [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:strSel];
+                    [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:dragDropView.intVisited]];
+                }
+                [dragDropView fn_OnSubmitTapped];
             }
-            [dragDropView fn_OnSubmitTapped];
             break;
         case QUESTION_TYPE_MATCHTERMS:
-            [matchPairsView fn_CheckAnswersBeforeSubmit];
-            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
-                if (matchPairsView.strVisitedAnswer.length > 0)
-                    [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:matchPairsView.strVisitedAnswer];
-                [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:matchPairsView.intVisited]];
+            {
+                strSel = [matchPairsView fn_CheckAnswersBeforeSubmit];
+                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
+                    if (strSel.length > 0)
+                        [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:strSel];
+                    [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:matchPairsView.intVisited]];
+                }
+                [matchPairsView fn_OnSubmitTapped];
             }
-            [matchPairsView fn_OnSubmitTapped];
             break;
         case QUESTION_TYPE_MCSS:
-            [singleSelectionView fn_CheckAnswersBeforeSubmit];
-            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
-                if (singleSelectionView.strVisitedAnswer.length > 0)
-                    [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:singleSelectionView.strVisitedAnswer];
-                [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:singleSelectionView.intVisited]];
+            {
+                strSel = [singleSelectionView fn_CheckAnswersBeforeSubmit];
+                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
+                    if (strSel.length > 0)
+                        [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:strSel];
+                    [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:singleSelectionView.intVisited]];
+                }
+                [singleSelectionView fn_OnSubmitTapped];
             }
-            [singleSelectionView fn_OnSubmitTapped];
             break;
     }
     

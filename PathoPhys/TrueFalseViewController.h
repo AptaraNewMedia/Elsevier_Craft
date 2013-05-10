@@ -34,8 +34,10 @@
 @property (nonatomic, retain) id parentObject;
 
 -(void) fn_LoadDbData:(NSString *)question_id;
--(void) fn_CheckAnswersBeforeSubmit;
+-(NSString *) fn_CheckAnswersBeforeSubmit;
+-(void) fn_ShowSelected:(NSString *)visitedAnswers;
 -(void) fn_OnSubmitTapped;
+
 -(IBAction)onTrueFalse:(id)sender;
 -(IBAction)onFeedback:(id)sender;
 @end

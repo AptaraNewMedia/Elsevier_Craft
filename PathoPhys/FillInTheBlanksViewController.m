@@ -347,15 +347,31 @@
 {
     objFillBlanks = [db fnGetTestyourselfFillInTheBlanks:question_id];
 }
--(void) fn_CheckAnswersBeforeSubmit
+-(NSString *) fn_CheckAnswersBeforeSubmit
 {
     
 	flagForAnyOptionSelect = NO;
-    
+    NSMutableString *strTemp = [[NSMutableString alloc] init];
+    int i = 0;
     for (UIView *dropArea in _dragDropManager.dropAreas) {
         if (dropArea.subviews.count == 0) {
             flagForAnyOptionSelect = YES;
         }
+        else {
+            NSArray *arrSubviews = [dropArea subviews];
+            if (arrSubviews.count > 0) {
+                CustomDragButton *bn = [arrSubviews objectAtIndex:0];
+                NSString *tempStr = [NSString stringWithFormat:@"%d$%d", bn.tag, dropArea.tag];
+                [strTemp appendString:tempStr];
+                if (i == [ _dragDropManager.dropAreas count]-1) {
+                    
+                }
+                else {
+                    [strTemp appendString:@"#"];
+                }
+            }
+        }
+        i++;
     }
     
     if (flagForAnyOptionSelect) {
@@ -370,9 +386,10 @@
             intVisited = 2;
         }
     }
+    
+    return strTemp;
 }
--(void) fn_OnSubmitTapped
-{
+-(void) fn_OnSubmitTapped{
     UIAlertView *alert = [[UIAlertView alloc] init];
     [alert setTitle:TITLE_COMMON];
     [alert setDelegate:self];
@@ -396,9 +413,30 @@
     }
 	[alert show];
 }
+-(void) fn_ShowSelected:(NSString *)visitedAnswers {
+    NSArray *main;
+    if (visitedAnswers.length > 0) {
+        int i = 0;
+        main = [visitedAnswers componentsSeparatedByString:@"#"];
+        for (UIView *dropArea in _dragDropManager.dropAreas) {
+            NSArray *sub = [[main objectAtIndex:i] componentsSeparatedByString:@"$"];
+            int dragIndex = [[sub objectAtIndex:0] intValue];
+            UIView *viewBeingDragged = [draggableSubjects objectAtIndex:dragIndex-1];
+            [dropArea addSubview:viewBeingDragged];
+            viewBeingDragged.frame = CGRectMake(0, 0, viewBeingDragged.frame.size.width, viewBeingDragged.frame.size.height);
+            i++;
+        }
+    }
+    [self handleRevealScore];
+    [self Fn_disableAllDraggableSubjects];
+}
+
+//--------------------------------
+
+
+//--------------------------------
 - (BOOL) checkForAnswer{
     int i = 0;
-    NSMutableString *strAns = [[NSMutableString alloc] init];
     BOOL flag1 = YES;
     for (UIView *dropArea in _dragDropManager.dropAreas) {
         NSArray *arrSubviews = [dropArea subviews];
@@ -409,16 +447,13 @@
             if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
                 flag1 = NO;
             }
-            if (i == [objFillBlanks.arrAnswer count] - 1)
-                [strAns appendFormat:@"%@", ss];
-            else
-                [strAns appendFormat:@"%@#", ss];
         }
-        strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
         i++;
     }
     return flag1;
 }
+
+
 
 - (void) handleShowAnswers{
     

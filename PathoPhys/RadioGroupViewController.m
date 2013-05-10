@@ -582,7 +582,7 @@
     objRH = [db fnGetTestyourselfRadioGroup:question_id];
     
 }
--(void) fn_CheckAnswersBeforeSubmit
+-(NSString *) fn_CheckAnswersBeforeSubmit
 {
     flagForAnyOptionSelect = NO;
     for (int i =0; i <[arrRadios count]; i++) {
@@ -605,6 +605,7 @@
             intVisited = 2;
         }
     }
+    return nil;
 }
 -(void) fn_OnSubmitTapped
 {
@@ -631,7 +632,10 @@
     }
 	[alert show];
 }
-
+-(void) fn_ShowSelected:(NSString *)visitedAnswers
+{
+    
+}
 
 # pragma mark - scrollview delegate
 //---------------------Delegate-------

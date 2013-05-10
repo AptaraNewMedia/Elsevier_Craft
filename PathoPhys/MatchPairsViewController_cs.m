@@ -315,13 +315,26 @@
 {
     objMatch = [db fnGetCasestudyMatchTerms:question_id];
 }
--(void) fn_CheckAnswersBeforeSubmit
+-(NSString *) fn_CheckAnswersBeforeSubmit
 {
     int i = 0;
 	flagForAnyOptionSelect = NO;
+    NSMutableString *strTemp = [[NSMutableString alloc] init];
+    
 	while (i < [userAnswerArray count]) {
         if (![[userAnswerArray objectAtIndex:i] isKindOfClass:[T1Object_ipad class]]) {
             flagForAnyOptionSelect = YES;
+        }
+        else {
+            T1Object_ipad *obj = [userAnswerArray objectAtIndex:i];
+            NSString *tempStr = [NSString stringWithFormat:@"%d$%d$%d", obj.qnsID, obj.ansID, obj.colorID];
+            [strTemp appendString:tempStr];
+            if (i == [userAnswerArray count]-1) {
+                
+            }
+            else {
+                [strTemp appendString:@"#"];
+            }
         }
         i++;
     }
@@ -338,6 +351,8 @@
             intVisited = 2;
         }
     }
+    
+    return strTemp;
 }
 -(void) fn_OnSubmitTapped
 {
@@ -363,6 +378,41 @@
         }
     }
 	[alert show];
+}
+-(void) fn_ShowSelected:(NSString *)visitedAnswers
+{
+    
+    userAnswerArray = [[NSMutableArray alloc] init];
+    NSArray *main;
+    if (visitedAnswers.length > 0) {
+        
+        main = [visitedAnswers componentsSeparatedByString:@"#"];
+        for (int i=0; i<[main count]; i++) {
+            NSArray *sub = [[main objectAtIndex:i] componentsSeparatedByString:@"$"];
+            T1Object_ipad *obj = [[T1Object_ipad alloc]init];
+            obj.qnsID = [[sub objectAtIndex:0] intValue];
+            obj.ansID = [[sub objectAtIndex:1] intValue];
+            obj.colorID = [[sub objectAtIndex:2] intValue];
+            [userAnswerArray addObject:obj];
+            
+            currentQns = obj.qnsID;
+            currentColor = obj.colorID;
+            
+            LeftMatchView_IPad *lbt = [questionArray objectAtIndex:currentQns];
+            [lbt.customBt setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
+            [lbt.dotBt setBackgroundColor:[colorArray objectAtIndex:currentColor]];
+            startPoint = CGPointMake(lbt.frame.origin.x+lbt.dotBt.frame.origin.x+(lbt.dotBt.frame.size.width/2) , lbt.frame.origin.y+lbt.dotBt.frame.origin.y+(lbt.dotBt.frame.size.height/2));
+            
+            RightMatchView_Ipad *rbt = [answerArray objectAtIndex:obj.ansID];
+            [rbt.customBt setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
+            [rbt.dotBt setBackgroundColor:[colorArray objectAtIndex:currentColor]];
+            endPoint = CGPointMake(rbt.frame.origin.x+rbt.dotBt.frame.origin.x+(rbt.dotBt.frame.size.width/2) , rbt.frame.origin.y+rbt.dotBt.frame.origin.y+(rbt.dotBt.frame.size.height/2));
+            [self drawLine];
+        }
+    }
+    [self handleRevealScore];
+    [self disableEditFields];
+    [parentObject Fn_DisableSubmit];
 }
 //--------------------------------
 - (void) Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue

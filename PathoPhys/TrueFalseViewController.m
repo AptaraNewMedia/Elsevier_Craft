@@ -321,6 +321,52 @@
 {
     objTrueFalse = [db fnGetTestyourselfTrueFalse:question_id];
 }
+
+-(NSString *) fn_CheckAnswersBeforeSubmit
+{
+    if (select) {
+        intVisited = 0;
+    }
+    else  {
+        if (answer == userAnswer) {
+            intVisited = 1;
+        }
+        else {
+            intVisited = 2;
+        }
+    }
+    return nil;
+}
+-(void) fn_OnSubmitTapped
+{
+    UIAlertView *alert = [[UIAlertView alloc] init];
+    [alert setTitle:TITLE_COMMON];
+    [alert setDelegate:self];
+    if (select) {
+        [alert setTag:1];
+        [alert addButtonWithTitle:@"Ok"];
+        [alert setMessage:[NSString stringWithFormat:@"Please select the correct image."]];
+    }
+    else {
+        if (answer == userAnswer) {
+            [alert setTag:2];
+            [alert addButtonWithTitle:@"Ok"];
+            [alert setMessage:[NSString stringWithFormat:@"That's Correct!"]];
+        }
+        else {
+            [alert setTag:3];
+            [alert addButtonWithTitle:@"Answer"];
+            [alert addButtonWithTitle:@"Try Again"];
+            [alert setMessage:[NSString stringWithFormat:@"That's Incorrect!"]];
+        }
+    }
+	[alert show];
+    
+}
+-(void) fn_ShowSelected:(NSString *)visitedAnswers
+{
+    
+}
 //--------------------------------
 
 -(void)fn_hideAnsFeedbackImages
@@ -373,46 +419,10 @@
     bnTrue.enabled = NO;
 }
 
--(void) fn_CheckAnswersBeforeSubmit
-{
-    if (select) {
-        intVisited = 0;
-    }
-    else  {
-        if (answer == userAnswer) {
-            intVisited = 1;
-        }
-        else {
-            intVisited = 2;
-        }
-    }
-}
--(void) fn_OnSubmitTapped
-{
-    UIAlertView *alert = [[UIAlertView alloc] init];
-    [alert setTitle:TITLE_COMMON];
-    [alert setDelegate:self];
-    if (select) {
-        [alert setTag:1];
-        [alert addButtonWithTitle:@"Ok"];
-        [alert setMessage:[NSString stringWithFormat:@"Please select the correct image."]];
-    }
-    else {
-        if (answer == userAnswer) {
-            [alert setTag:2];
-            [alert addButtonWithTitle:@"Ok"];
-            [alert setMessage:[NSString stringWithFormat:@"That's Correct!"]];
-        }
-        else {
-            [alert setTag:3];
-            [alert addButtonWithTitle:@"Answer"];
-            [alert addButtonWithTitle:@"Try Again"];
-            [alert setMessage:[NSString stringWithFormat:@"That's Incorrect!"]];
-        }
-    }
-	[alert show];
 
-}
+
+
+
 
 -(IBAction)onTrueFalse:(id)sender;
 {

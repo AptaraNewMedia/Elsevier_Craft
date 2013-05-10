@@ -159,10 +159,10 @@
 {
     objMCSS = [db fnGetCasestudyMCSS:question_id];
 }
--(void) fn_CheckAnswersBeforeSubmit
+-(NSString *) fn_CheckAnswersBeforeSubmit
 {
     flagForAnyOptionSelect = NO;
-    
+    NSMutableString *strTemp = [[NSMutableString alloc] init];
     NSArray *selectedCells_temp = [tblOptions indexPathsForSelectedRows];
     
     if ([selectedCells_temp count] == 0) {
@@ -170,6 +170,20 @@
         intVisited = 0;
     }
     else  {
+        
+        for (int i=0; i < [selectedCells_temp count]; i++) {
+            NSIndexPath *indexpth = [selectedCells_temp objectAtIndex:i];
+            NSString *tempStr = [NSString stringWithFormat:@"%d", indexpth.row];
+            [strTemp appendString:tempStr];
+            if (i == [selectedCells_temp count]-1) {
+                
+            }
+            else {
+                [strTemp appendString:@"#"];
+            }
+        }
+        
+        
         flagForCheckAnswer = [self checkForAnswer];
         
         if (flagForCheckAnswer == 1) {
@@ -179,6 +193,7 @@
             intVisited = 2;
         }
     }
+    return strTemp;
 }
 -(void) fn_OnSubmitTapped
 {
@@ -218,6 +233,21 @@
     }
 	[alert show];
 }
+-(void) fn_ShowSelected:(NSString *)visitedAnswers
+{
+    NSArray *main;
+    if (visitedAnswers.length > 0) {
+        
+        main = [visitedAnswers componentsSeparatedByString:@"#"];
+        for (int i=0; i<[main count]; i++) {
+            int index = [[main objectAtIndex:i] intValue];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+            [tblOptions selectRowAtIndexPath:indexPath animated:NO scrollPosition:NO];
+        }
+    }
+    [self handleRevealScore];
+    [self Fn_createInvisibleBtn];
+}
 //--------------------------------
 
 - (IBAction)onCasestudyTextTapped:(id)sender
@@ -227,8 +257,6 @@
 }
 
 - (int) checkForAnswer{
-    
-    NSMutableString *strAns = [[NSMutableString alloc] init];
     
     NSArray *selectedCells_temp = [tblOptions indexPathsForSelectedRows];
     
@@ -256,12 +284,7 @@
                     break;
                 }
                 
-            }
-            
-            if (i == selected_count - 1)
-                [strAns appendFormat:@"%@", ss];
-            else
-                [strAns appendFormat:@"%@#", ss];
+            }            
             
         }
 
