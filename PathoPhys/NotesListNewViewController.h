@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NotesListNewViewController : UIViewController
+@interface NotesListNewViewController : UIViewController <UITextFieldDelegate>
 
 @end
