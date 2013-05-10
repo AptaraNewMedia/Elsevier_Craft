@@ -56,6 +56,9 @@
 -(void) Fn_AddResult:(NSString *)chaptername AndThematicNAme:(NSString *)thematicName AndScore:(NSString *)score;
 -(void) Fn_SubResult;
 
+-(void) Fn_AddNotesListOnMenu;
+-(void) Fn_SubNotesListOnMenu;
+
 - (int) charToScore:(char) character;
 
 -(void) Fn_CallPopupOrientaion;

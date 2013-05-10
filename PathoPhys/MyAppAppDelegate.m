@@ -237,6 +237,9 @@ UITextView *txt_feedback;
     else if (categoryNumber == 3) {
         [navController3 pushViewController:notesListView animated:YES];
     }
+    else {
+        [self Fn_AddNotesListOnMenu];
+    }
     
     //[self.window.rootViewController.view addSubview:notesListView.view];
     [notesListView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
@@ -366,7 +369,6 @@ UITextView *txt_feedback;
 
 
 // Result
-
 -(void) Fn_AddResult:(NSString *)chaptername AndThematicNAme:(NSString *)thematicName AndScore:(NSString *)score  {
     
     [resultView.view removeFromSuperview];
@@ -392,10 +394,35 @@ UITextView *txt_feedback;
     [resultView.view removeFromSuperview];
 }
 
+// Add NoteList On Menu
+-(void) Fn_AddNotesListOnMenu{
+    [self Fn_SubNotesListOnMenu];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        notesListView = [[NotesListViewController alloc] initWithNibName:@"NotesListViewController_iPhone" bundle:nil];
+    }
+    else
+    {
+        notesListView = [[NotesListViewController alloc] initWithNibName:@"NotesListViewController_iPad" bundle:nil];
+    }
+    [notesListView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
+    
+    navController = [[UINavigationController alloc] initWithRootViewController:notesListView];
+    self.window.rootViewController = navController;
+    
+}
+-(void) Fn_SubNotesListOnMenu{
+    [navController.view removeFromSuperview];
+    navController = nil;
+}
 
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+- (void)tabBarController:(UITabBarController *)tabBarController1 didSelectViewController:(UIViewController *)viewController
 {
-    categoryNumber =  tabBarController.selectedIndex + 1;
+    categoryNumber =  tabBarController1.selectedIndex + 1;
+    [self Fn_SubTabBar];
+    [self Fn_addTabBar];
+    self.tabBarController.selectedIndex = categoryNumber - 1;
     [self Fn_removeNoteViewPopup];
     [self Fn_removeInfoViewPopup];
 }
