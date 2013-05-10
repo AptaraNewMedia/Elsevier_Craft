@@ -613,27 +613,18 @@
             {
                 if (objDRAGDROP.intDRAGDROPRADIOid == 25)
                 {
-                    if(k<=4)
+                    if(k<=3)
                     {
-                        y = y + objDRAGDROP.fHeight + 10;
+                        y = y + objDRAGDROP.fHeight + 9;
+                    }
+                    else if(k>3 && k<9)
+                    {
+                        y = y + objDRAGDROP.fHeight+6;
                     }
                     else
                     {
                         y = y + objDRAGDROP.fHeight+7;
                     }
-                    
-                    //                    if(k>2 && k<=5)
-                    //                {
-                    //                    y = y + objDRAGDROP.fHeight + 10;
-                    //                }
-                    //                else if(k>5 && k<8)
-                    //                {
-                    //                    y = y + objDRAGDROP.fHeight + 10;
-                    //                }
-                    //                else
-                    //                {
-                    //                    y = y + objDRAGDROP.fHeight + 10;
-                    //                }
                 }
                 else
                 {
