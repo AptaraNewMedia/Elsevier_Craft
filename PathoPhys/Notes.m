@@ -18,6 +18,7 @@
 @synthesize intMode;
 @synthesize strNoteTitle;
 @synthesize strNoteDesc;
+@synthesize strNoteHistory;
 @synthesize strCreatedDate;
 @synthesize strModifiedDate;
 @end

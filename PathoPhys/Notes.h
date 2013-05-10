@@ -19,6 +19,7 @@
 @property (nonatomic) NSInteger intQuestionNo;
 @property (nonatomic, retain) NSString *strNoteTitle;
 @property (nonatomic, retain) NSString *strNoteDesc;
+@property (nonatomic, retain) NSString *strNoteHistory;
 @property (nonatomic, retain) NSString *strCreatedDate;
 @property (nonatomic, retain) NSString *strModifiedDate;
 @end

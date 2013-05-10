@@ -108,9 +108,14 @@
 
 - (void) disableAllButtons:(int)questionNO;
 {
-    for (UIView *myview in [self.view subviews]){
-        myview.userInteractionEnabled = NO;
-    }
+    bnNext.enabled = NO;
+    bnPrev.enabled = NO;
+    bnSubmit.enabled = NO;
+    
+    [self fn_RemoveQuestionView];
+    intCurrentQuestionIndex = questionNO - 1;
+    [self Fn_LoadQuestionData];
+
 }
 
 -(void) fnAddNavigationItems

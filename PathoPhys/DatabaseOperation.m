@@ -903,17 +903,14 @@ NSError *error;
 #pragma mark Notes
 //--------------------------------------------------------------
 -(void) fnSetNote:(Notes *)notes {
-    
-    //CREATE TABLE "Notes" ("note_id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "category_id" INTEGER, "chapter_id" INTEGER, "thematic_id" INTEGER, "question_id" TEXT, "question_no" INTEGER, "note_title" TEXT, "note_desc" TEXT, "modified_date" DATETIME, "created_date" DATETIME)
-    
-    strQuery = [NSString stringWithFormat:@"INSERT INTO Notes (category_id, chapter_id, thematic_id,  question_no, note_title, note_desc, modified_date, created_date) VALUES (%d, %d, %d, %d, '%@', '%@', '%@', '%@')", notes.intCategoryId, notes.intChapterId, notes.intThematicId, notes.intQuestionNo, notes.strNoteTitle, notes.strNoteDesc, notes.strModifiedDate, notes.strCreatedDate];
+    strQuery = [NSString stringWithFormat:@"INSERT INTO Notes (category_id, chapter_id, thematic_id,  question_no, note_title, note_desc, note_history, modified_date, created_date) VALUES (%d, %d, %d, %d, '%@', '%@', '%@', '%@', '%@')", notes.intCategoryId, notes.intChapterId, notes.intThematicId, notes.intQuestionNo, notes.strNoteTitle, notes.strNoteDesc, notes.strNoteHistory, notes.strModifiedDate, notes.strCreatedDate];
     error = [dbOperation doQuery:strQuery];
     if (error != nil) {
         NSLog(@"Error: %@",[error localizedDescription]);
     }
 }
 -(void) fnUpdateNote:(Notes *)notes {
-    strQuery = [NSString stringWithFormat:@"UPDATE Notes SET note_desc = '%@', modified_date =  '%@'  WHERE note_id = %d ", notes.strNoteDesc, notes.strModifiedDate, notes.intNotesId];
+    strQuery = [NSString stringWithFormat:@"UPDATE Notes SET note_desc = '%@', modified_date =  '%@', note_history = '%@',WHERE note_id = %d ", notes.strNoteDesc, notes.strModifiedDate, notes.strNoteHistory, notes.intNotesId];
     error = [dbOperation doQuery:strQuery];
     if (error != nil) {
         NSLog(@"Error: %@",[error localizedDescription]);
@@ -924,7 +921,7 @@ NSError *error;
     
     Notes *objNote = [[Notes alloc] init];
     
-    strQuery = [NSString stringWithFormat:@"SELECT note_id, note_title, note_desc, modified_date, created_date FROM Notes WHERE category_id = %d AND chapter_id = %d AND thematic_id = %d AND question_no = %d",category_id, chapter_id, thematic_id, question_no];
+    strQuery = [NSString stringWithFormat:@"SELECT note_id, note_title, note_desc, note_history, modified_date, created_date FROM Notes WHERE category_id = %d AND chapter_id = %d AND thematic_id = %d AND question_no = %d",category_id, chapter_id, thematic_id, question_no];
     arrTempList = [dbOperation getRowsForQuery:strQuery];
     intRowCount = [arrTempList count];
     for (int i = 0; i < intRowCount; i++) {
@@ -933,6 +930,10 @@ NSError *error;
         objNote.strNoteDesc = [[arrTempList objectAtIndex:i] objectForKey:@"note_desc"];
         if (objNote.strNoteDesc == (id)[NSNull null] || objNote.strNoteDesc.length == 0 )
             objNote.strNoteDesc = @"";
+
+        objNote.strNoteHistory = [[arrTempList objectAtIndex:i] objectForKey:@"note_history"];
+        if (objNote.strNoteHistory == (id)[NSNull null] || objNote.strNoteHistory.length == 0 )
+            objNote.strNoteHistory = @"";
         
         objNote.strModifiedDate  =    [[arrTempList objectAtIndex:i] objectForKey:@"modified_date"];
         
@@ -948,7 +949,7 @@ NSError *error;
     
     NSMutableArray *arrNotes = [[NSMutableArray alloc] init];    
     
-    strQuery = [NSString stringWithFormat:@"SELECT note_id, category_id, chapter_id, thematic_id,  question_no, note_title, note_desc, modified_date, created_date FROM Notes ORDER BY modified_date"];
+    strQuery = [NSString stringWithFormat:@"SELECT note_id, category_id, chapter_id, thematic_id,  question_no, note_title, note_desc, note_history,  modified_date, created_date FROM Notes ORDER BY modified_date"];
     arrTempList = [dbOperation getRowsForQuery:strQuery];
     intRowCount = [arrTempList count];
     for (int i = 0; i < intRowCount; i++) {
@@ -965,6 +966,10 @@ NSError *error;
         if (objNote.strNoteDesc == (id)[NSNull null] || objNote.strNoteDesc.length == 0 )
             objNote.strNoteDesc = @"";        
 
+        objNote.strNoteHistory = [[arrTempList objectAtIndex:i] objectForKey:@"note_history"];
+        if (objNote.strNoteHistory == (id)[NSNull null] || objNote.strNoteHistory.length == 0 )
+            objNote.strNoteHistory = @"";
+        
         objNote.strModifiedDate  =    [[arrTempList objectAtIndex:i] objectForKey:@"modified_date"];
 
         objNote.strCreatedDate     =    [[arrTempList objectAtIndex:i] objectForKey:@"created_date"];

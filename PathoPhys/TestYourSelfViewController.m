@@ -137,7 +137,9 @@
     bnPrev.enabled = NO;
     bnSubmit.enabled = NO;
     
-    intCurrentQuestionIndex = questionNO;
+    [self fn_RemoveQuestionView];
+    intCurrentQuestionIndex = questionNO - 1;
+    [self Fn_LoadQuestionData];
 }
 
 -(void) fnAddNavigationItems
@@ -423,6 +425,8 @@
         NOTES_MODE = 2;
         objNotes.intMode = 2;
     }
+    // add history
+    
     objNotes.intCategoryId = categoryNumber;
     objNotes.intChapterId = intCurrentTestYourSelf_ChapterId;
     objNotes.intThematicId = intCurrentTestYourSelf_ThematicId;

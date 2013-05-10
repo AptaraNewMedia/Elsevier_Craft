@@ -204,15 +204,15 @@
         intCurrentTestYourSelf_ChapterId = objNotes.intChapterId;
         intCurrentTestYourSelf_ThematicId = -1;
         
-        Chapters *objChap = (Chapters *)[arr_chaptersTestAndFlashcard objectAtIndex:intCurrentTestYourSelf_ChapterId-1];
+        Chapters *objChap = (Chapters *)[arr_chaptersTestAndFlashcard objectAtIndex:objNotes.intChapterId-1];
 
         str_BarTitle = [NSString stringWithFormat:@"%@", objChap.strChapterTitle];
         strCurrentChapterName = [NSString stringWithFormat:@"%@", objChap.strChapterTitle];
         
         ThematicArea *objThematic;
         if(objNotes.intThematicId!=0) {
-            objThematic = (ThematicArea *)[objChap.thematicData objectAtIndex:indexPath.row];        
             intCurrentTestYourSelf_ThematicId = objNotes.intThematicId;
+            objThematic = (ThematicArea *)[objChap.thematicData objectAtIndex:objNotes.intThematicId - 1];        
             str_BarTitle = [NSString stringWithFormat:@"%@ - %@", objChap.strChapterTitle, objThematic.strThematicTitle];
             strCurrentThematicName = [NSString stringWithFormat:@"%@",  objThematic.strThematicTitle];
         
@@ -240,15 +240,15 @@
         intCurrentCaseStudy_ChapterId = objNotes.intChapterId;
         intCurrentCaseStudy_ThematicId = -1;
         
-        Chapters *objChap = (Chapters *)[arr_chaptersCaseStudy objectAtIndex:intCurrentCaseStudy_ChapterId-1];
+        Chapters *objChap = (Chapters *)[arr_chaptersCaseStudy objectAtIndex:objNotes.intChapterId-40];
         
         str_BarTitle = [NSString stringWithFormat:@"%@", objChap.strChapterTitle];
         strCurrentChapterName = [NSString stringWithFormat:@"%@", objChap.strChapterTitle];
         
         ThematicArea *objThematic;
         if(objNotes.intThematicId!=0) {
-            objThematic = (ThematicArea *)[objChap.thematicData objectAtIndex:indexPath.row];
-            intCurrentTestYourSelf_ThematicId = objNotes.intThematicId;
+            intCurrentCaseStudy_ThematicId = objNotes.intThematicId;
+            objThematic = (ThematicArea *)[objChap.thematicData objectAtIndex:objNotes.intThematicId - 1];
             str_BarTitle = [NSString stringWithFormat:@"%@ - %@", objChap.strChapterTitle, objThematic.strThematicTitle];
             strCurrentThematicName = [NSString stringWithFormat:@"%@",  objThematic.strThematicTitle];
             
