@@ -948,7 +948,7 @@ NSError *error;
     
     NSMutableArray *arrNotes = [[NSMutableArray alloc] init];    
     
-    strQuery = [NSString stringWithFormat:@"SELECT note_id, category_id, chapter_id, thematic_id,  question_no, note_title, note_desc, modified_date, created_date FROM Notes "];
+    strQuery = [NSString stringWithFormat:@"SELECT note_id, category_id, chapter_id, thematic_id,  question_no, note_title, note_desc, modified_date, created_date FROM Notes ORDER BY modified_date"];
     arrTempList = [dbOperation getRowsForQuery:strQuery];
     intRowCount = [arrTempList count];
     for (int i = 0; i < intRowCount; i++) {
