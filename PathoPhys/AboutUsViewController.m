@@ -13,6 +13,8 @@
     IBOutlet UIImageView *imgBG;
     IBOutlet UIButton *btnClose;
     IBOutlet UIWebView *webView;
+    
+    IBOutlet UIImageView *imgLogo;
 }
 @end
 
@@ -136,6 +138,8 @@
     [lblTitle setFrame:CGRectMake(162,172,555,48)];
     [webView setFrame:CGRectMake(110,259,560,548)];
     
+    [imgLogo setFrame:CGRectMake(580,770,106,92)];
+    
 }
 -(void)Fn_rotateLandscape
 {
@@ -147,6 +151,10 @@
     [btnClose setFrame:CGRectMake(847,145,41,36)];
     [webView setFrame:CGRectMake(121,189,782,448)];
     [lblTitle setFrame:CGRectMake(141,143,555,48)];
+    
+    [imgLogo setFrame:CGRectMake(792,555,106,92)];
+    
+    
 }
 
 @end
