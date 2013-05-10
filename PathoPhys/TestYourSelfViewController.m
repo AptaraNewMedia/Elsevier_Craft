@@ -140,6 +140,27 @@
     [self fn_RemoveQuestionView];
     intCurrentQuestionIndex = questionNO - 1;
     [self Fn_LoadQuestionData];
+    
+    [self Fn_CheckNote];
+    
+    customRightBar.btnInfo.hidden = YES;
+    customRightBar.btnNote.hidden = YES;
+    customRightBar.btnScore.hidden = YES;
+    
+    customLeftBar.btnHome.hidden = YES;
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        customLeftBar.btnBack.frame = CGRectMake(0, 7, 45, 30) ;
+    }
+    else {
+        
+    }
+    
+    [self performSelector:@selector(onSelctor) withObject:self afterDelay:0.7];
+    
+}
+
+-(void) onSelctor {
+    [md Fn_ShowNote:2];
 }
 
 -(void) fnAddNavigationItems
