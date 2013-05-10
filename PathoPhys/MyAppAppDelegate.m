@@ -228,7 +228,17 @@ UITextView *txt_feedback;
     {
         notesListView = [[NotesListViewController alloc] initWithNibName:@"NotesListViewController_iPad" bundle:nil];
     }
-    [self.window.rootViewController.view addSubview:notesListView.view];
+    if (categoryNumber == 1) {
+        [navController1 pushViewController:notesListView animated:YES];
+    }
+    else if (categoryNumber == 2) {
+        [navController2 pushViewController:notesListView animated:YES];
+    }
+    else if (categoryNumber == 3) {
+        [navController3 pushViewController:notesListView animated:YES];
+    }
+    
+    //[self.window.rootViewController.view addSubview:notesListView.view];
     [notesListView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
 }
 -(void) Fn_SubNotesList{

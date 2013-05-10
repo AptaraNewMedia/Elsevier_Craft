@@ -10,6 +10,7 @@
 #import "NotesCell.h"
 #import "Notes.h"
 #import "Chapters.h"
+#import "ThematicArea.h"
 #import "FlashCardsViewController.h"
 #import "TestYourSelfViewController.h"
 #import "CaseStudyViewController.h"
@@ -77,6 +78,9 @@
     
 //    lblTitle.font = FONT_20;
 //    lblTitle.textColor = COLOR_WHITE;
+    
+    btnClose.hidden = YES;
+    
 
 }
 -(IBAction)onClose:(id)sender{
@@ -167,11 +171,10 @@
         //Flash Cards
         message = @"Flash Cards";
         categoryNumber = 1;
-        [md Fn_addTabBar];
-        [md.tabBarController setSelectedIndex:0];
+
+        intCurrentFlashcard_ChapterId = objNotes.intChapterId;
         
-        Chapters *objChap = (Chapters *)[arr_chaptersTestAndFlashcard objectAtIndex:indexPath.row];
-        intCurrentFlashcard_ChapterId = objChap.intChapterId;
+        Chapters *objChap = (Chapters *)[arr_chaptersTestAndFlashcard objectAtIndex:intCurrentFlashcard_ChapterId-1];
         str_BarTitle = [NSString stringWithFormat:@"Flash Cards - %@", objChap.strChapterTitle];
         
         if([UIScreen mainScreen].bounds.size.height == 568.0){
@@ -184,10 +187,10 @@
             flashCardsViewController = [[FlashCardsViewController alloc] initWithNibName:@"FlashCardsViewController_iPad" bundle:nil];
         }
         
-        [md.navController1 pushViewController:flashCardsViewController animated:YES];
+        [self.navigationController pushViewController:flashCardsViewController animated:YES];
         
         
-        [flashCardsViewController disableAllButtons];
+        [flashCardsViewController disableAllButtons:objNotes.intQuestionNo];
         
         
         
@@ -196,8 +199,24 @@
         //Test Yourself
         message = @"Test Yourself";
         categoryNumber = 2;
-        [md Fn_addTabBar];
-        [md.tabBarController setSelectedIndex:1];
+        
+        
+        intCurrentTestYourSelf_ChapterId = objNotes.intChapterId;
+        intCurrentTestYourSelf_ThematicId = -1;
+        
+        Chapters *objChap = (Chapters *)[arr_chaptersTestAndFlashcard objectAtIndex:intCurrentTestYourSelf_ChapterId-1];
+
+        str_BarTitle = [NSString stringWithFormat:@"%@", objChap.strChapterTitle];
+        strCurrentChapterName = [NSString stringWithFormat:@"%@", objChap.strChapterTitle];
+        
+        ThematicArea *objThematic;
+        if(objNotes.intThematicId!=0) {
+            objThematic = (ThematicArea *)[objChap.thematicData objectAtIndex:indexPath.row];        
+            intCurrentTestYourSelf_ThematicId = objNotes.intThematicId;
+            str_BarTitle = [NSString stringWithFormat:@"%@ - %@", objChap.strChapterTitle, objThematic.strThematicTitle];
+            strCurrentThematicName = [NSString stringWithFormat:@"%@",  objThematic.strThematicTitle];
+        
+        }
         
         if([UIScreen mainScreen].bounds.size.height == 568.0){
             testYourSelfViewController = [[TestYourSelfViewController alloc] initWithNibName:@"TestYourSelfViewController_iPhone5" bundle:nil];
@@ -209,16 +228,14 @@
             testYourSelfViewController = [[TestYourSelfViewController alloc] initWithNibName:@"TestYourSelfViewController_iPad" bundle:nil];
             
         }
-        [md.navController2 pushViewController:testYourSelfViewController animated:YES];
-        [testYourSelfViewController disableAllButtons];
+        [self.navigationController pushViewController:testYourSelfViewController animated:YES];
+        [testYourSelfViewController disableAllButtons:objNotes.intQuestionNo];
         
     }
     else if(objNotes.intCategoryId == 3){
         //Case Studies
         message = @"Case Studies";
         categoryNumber = 3;
-        [md Fn_addTabBar];
-        [md.tabBarController setSelectedIndex:2];
         
         if([UIScreen mainScreen].bounds.size.height == 568.0){
             caseStudyViewController = [[CaseStudyViewController alloc] initWithNibName:@"CaseStudyViewController_iPhone5" bundle:nil];
@@ -230,7 +247,7 @@
             caseStudyViewController = [[CaseStudyViewController alloc] initWithNibName:@"CaseStudyViewController_iPad" bundle:nil];
         }
         
-        [md.navController3 pushViewController:caseStudyViewController animated:YES];
+        [self.navigationController pushViewController:caseStudyViewController animated:YES];
         [caseStudyViewController disableAllButtons];
 
     }

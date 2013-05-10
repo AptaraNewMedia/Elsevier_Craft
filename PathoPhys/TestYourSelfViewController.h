@@ -31,5 +31,5 @@
 -(IBAction)onSubmit:(id)sender;
 -(void)onTryAgain;
 -(void) Fn_DisableSubmit;
-- (void) disableAllButtons;
+- (void) disableAllButtons:(int)questionNO;
 @end

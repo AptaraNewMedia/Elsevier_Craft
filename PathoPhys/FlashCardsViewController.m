@@ -726,10 +726,61 @@
 }
 //=====================================================
 
-- (void) disableAllButtons{
-    for (UIView *myview in [self.view subviews]){
-            myview.userInteractionEnabled = NO;
+- (void) disableAllButtons:(int)questionNO{
+
+    for (objFlashcardSet in arrFlashcards) {
+        if (objFlashcardSet.intFlashcardId == questionNO) {
+            intCurrentQuestionIndex = objFlashcardSet.intIndex;
         }
+    }
+    lblQuestionNo.text = [NSString stringWithFormat:@"%d of %d", intCurrentQuestionIndex+1, intTotalQuestions];
+    [self fnThumbScrollerMove];
+    
+    for (int i =0; i < [arrThumbs count]; i++) {
+        FlashcardButton *bnTemp = [arrThumbs objectAtIndex:i];
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            [bnTemp setBackgroundImage:[UIImage imageNamed:@"small_flash_card.png"] forState:UIControlStateNormal];
+        }
+        else {
+            [bnTemp setBackgroundImage:[UIImage imageNamed:@"img_flashcard_thumb.png"] forState:UIControlStateNormal];
+        }
+    }
+    
+    FlashcardButton *bn2 = [arrThumbs objectAtIndex:intCurrentQuestionIndex];
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        [bn2 setBackgroundImage:[UIImage imageNamed:@"small_highlite_flash_card.png"] forState:UIControlStateNormal];
+    }
+    else {
+        [bn2 setBackgroundImage:[UIImage imageNamed:@"img_flashcard_thumb_highlight.png"] forState:UIControlStateNormal];
+    }
+    
+    
+    btnLargeNext.enabled = NO;
+    btnLargePrev.enabled = NO;
+    btnNext.enabled = NO;
+    btnPrev.enabled = NO;
+    scrollGallery.userInteractionEnabled = NO;
+    scrollViewMiddle.scrollEnabled = NO;
+    Bn_Alphabet.enabled = NO;
+    Bn_ByChapter.enabled = NO;
+    Bn_Shuffle.enabled = NO;
+    
+    
+    customRightBar.btnInfo.hidden = YES;
+    customRightBar.btnNote.hidden = YES;
+    customRightBar.btnScore.hidden = YES;
+    
+    customLeftBar.btnHome.hidden = YES;
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        customLeftBar.btnBack.frame = CGRectMake(0, 7, 45, 30) ;
+    }
+    else {
+        
+    }    
+    
+    [self Fn_CheckNote:intCurrentQuestionIndex];
+    [md Fn_ShowNote:2];
+    
 }
 
 // Segment

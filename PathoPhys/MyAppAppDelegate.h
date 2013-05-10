@@ -31,6 +31,7 @@
 -(void) Fn_AddAbout:(int)index;
 -(void) Fn_SubAbout;
 
+
 -(void) Fn_AddNote:(Notes *)notes;
 -(void) Fn_ShowNote:(int)mode;
 -(void) Fn_HideAddNoteButton;
