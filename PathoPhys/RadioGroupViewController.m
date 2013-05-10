@@ -584,12 +584,22 @@
 }
 -(NSString *) fn_CheckAnswersBeforeSubmit
 {
+    NSMutableString *strTemp = [[NSMutableString alloc] init];
     flagForAnyOptionSelect = NO;
     for (int i =0; i <[arrRadios count]; i++) {
         radioView = [arrRadios objectAtIndex:i];
         if ([radioView.selected isEqualToString:@"0"]) {
             flagForAnyOptionSelect = YES;
             break;
+        }
+        else {
+            [strTemp appendString:[NSString stringWithFormat:@"%d", radioView.selectedIndex]];
+            if (i == [arrRadios count] -1) {
+                
+            }
+            else {
+                [strTemp appendString:@"#"];
+            }
         }
     }
     
@@ -605,7 +615,7 @@
             intVisited = 2;
         }
     }
-    return nil;
+    return strTemp;
 }
 -(void) fn_OnSubmitTapped
 {
@@ -634,7 +644,33 @@
 }
 -(void) fn_ShowSelected:(NSString *)visitedAnswers
 {
-    
+    NSArray *main;
+    if (visitedAnswers.length > 0) {
+        main = [visitedAnswers componentsSeparatedByString:@"#"];
+        for (int i=0; i <[main count]; i++) {
+            int index = [[main objectAtIndex:i] intValue];
+            radioView = [arrRadios objectAtIndex:i];
+            
+            if (index == 1) {
+                radioView.selected = [objRH.arrHeadingText objectAtIndex:1];
+                radioView.selectedIndex = 1;
+                [radioView.btnOption1 setImage:imgRadioSelected forState:UIControlStateNormal];
+            }
+            else if (index == 2) {
+                radioView.selected = [objRH.arrHeadingText objectAtIndex:2];
+                radioView.selectedIndex = 2;
+                [radioView.btnOption2 setImage:imgRadioSelected forState:UIControlStateNormal];
+            }
+            else if (index == 3) {
+                radioView.selected = [objRH.arrHeadingText objectAtIndex:3];
+                radioView.selectedIndex = 3;
+                [radioView.btnOption3 setImage:imgRadioSelected forState:UIControlStateNormal];
+            }
+            
+        }
+    }
+    [self handleRevealScore];
+    [self disableEditFields];
 }
 
 # pragma mark - scrollview delegate
