@@ -204,10 +204,11 @@
             dragDropView.parentObject = self;
             animateView = dragDropView.view;
             
-            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] != 0) {
-                [dragDropView fn_ShowSelected:[objQuizTrack.arrSelectedAnswer objectAtIndex:intCurrentQuestionIndex]];
+            if (TryAgainFlag != 1) {
+                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] != 0) {
+                    [dragDropView fn_ShowSelected:[objQuizTrack.arrSelectedAnswer objectAtIndex:intCurrentQuestionIndex]];
+                }
             }
-            
             
         }
             break;
@@ -229,8 +230,10 @@
             fillInTheBlanksView.parentObject = self;
             animateView = fillInTheBlanksView.view;
             
-            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] != 0) {
-                [fillInTheBlanksView fn_ShowSelected:[objQuizTrack.arrSelectedAnswer objectAtIndex:intCurrentQuestionIndex]];
+            if (TryAgainFlag != 1) {
+                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] != 0) {
+                    [fillInTheBlanksView fn_ShowSelected:[objQuizTrack.arrSelectedAnswer objectAtIndex:intCurrentQuestionIndex]];
+                }
             }
             
         }
@@ -254,8 +257,10 @@
             radioGroupView.parentObject = self;
             animateView = radioGroupView.view;
             
-            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] != 0) {
-                [radioGroupView fn_ShowSelected:[objQuizTrack.arrSelectedAnswer objectAtIndex:intCurrentQuestionIndex]];
+            if (TryAgainFlag != 1) {
+                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] != 0) {
+                    [radioGroupView fn_ShowSelected:[objQuizTrack.arrSelectedAnswer objectAtIndex:intCurrentQuestionIndex]];
+                }
             }
         }
             break;
@@ -276,9 +281,10 @@
             trueFalseView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
             trueFalseView.parentObject = self;
             animateView = trueFalseView.view;
-            
-            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] != 0) {
-                [trueFalseView fn_ShowSelected:[objQuizTrack.arrSelectedAnswer objectAtIndex:intCurrentQuestionIndex]];
+            if (TryAgainFlag != 1) {
+                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] != 0) {
+                    [trueFalseView fn_ShowSelected:[objQuizTrack.arrSelectedAnswer objectAtIndex:intCurrentQuestionIndex]];
+                }
             }
         }
             break;
@@ -300,8 +306,10 @@
             matchPairsView.lblQuestionNo.text = [NSString stringWithFormat:@"Q. %d", objQue.intSequence];
             matchPairsView.parentObject = self;
             animateView = matchPairsView.view;
-            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] != 0) {
-                [matchPairsView fn_ShowSelected:[objQuizTrack.arrSelectedAnswer objectAtIndex:intCurrentQuestionIndex]];
+            if (TryAgainFlag != 1) {
+                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] != 0) {
+                    [matchPairsView fn_ShowSelected:[objQuizTrack.arrSelectedAnswer objectAtIndex:intCurrentQuestionIndex]];
+                }
             }
         }
             break;
@@ -323,8 +331,10 @@
             singleSelectionView.parentObject = self;
             animateView = singleSelectionView.view;
             
-            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] != 0) {
-                [singleSelectionView fn_ShowSelected:[objQuizTrack.arrSelectedAnswer objectAtIndex:intCurrentQuestionIndex]];
+            if (TryAgainFlag != 1) {
+                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] != 0) {
+                    [singleSelectionView fn_ShowSelected:[objQuizTrack.arrSelectedAnswer objectAtIndex:intCurrentQuestionIndex]];
+                }
             }
         }
             break;
@@ -346,8 +356,10 @@
             dragDropView.parentObject = self;
             animateView = dragDropView.view;
             
-            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] != 0) {
-                [dragDropView fn_ShowSelected:[objQuizTrack.arrSelectedAnswer objectAtIndex:intCurrentQuestionIndex]];
+            if (TryAgainFlag != 1) {
+                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] != 0) {
+                    [dragDropView fn_ShowSelected:[objQuizTrack.arrSelectedAnswer objectAtIndex:intCurrentQuestionIndex]];
+                }
             }
         }
             break;
@@ -370,8 +382,10 @@
             dragDropRadioView.parentObject = self;
             animateView = dragDropRadioView.view;
             
-            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] != 0) {
-                [dragDropRadioView fn_ShowSelected:[objQuizTrack.arrSelectedAnswer objectAtIndex:intCurrentQuestionIndex]];
+            if (TryAgainFlag != 1) {
+                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] != 0) {
+                    [dragDropRadioView fn_ShowSelected:[objQuizTrack.arrSelectedAnswer objectAtIndex:intCurrentQuestionIndex]];
+                }
             }
             
         }
@@ -492,7 +506,7 @@
         case QUESTION_TYPE_MCMS:
             {
                 strSel = [dragDropView fn_CheckAnswersBeforeSubmit];
-                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
+                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0 && TryAgainFlag == 0) {
                     if (strSel.length > 0)
                         [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:strSel];
                     [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:dragDropView.intVisited]];
@@ -503,7 +517,7 @@
         case QUESTION_TYPE_FILLINBLANKS:
             {
                 strSel = [fillInTheBlanksView fn_CheckAnswersBeforeSubmit];
-                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
+                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0 && TryAgainFlag == 0) {
                     if (strSel.length > 0)
                         [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:strSel];
                     [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:fillInTheBlanksView.intVisited]];
@@ -514,7 +528,7 @@
         case QUESTION_TYPE_RADIOBUTTONS:
             {
                 strSel = [radioGroupView fn_CheckAnswersBeforeSubmit];
-                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
+                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0 && TryAgainFlag == 0) {
                     if (strSel.length > 0)
                         [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:strSel];
                     [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:radioGroupView.intVisited]];
@@ -525,7 +539,7 @@
         case QUESTION_TYPE_TRUEFLASE:
             {
                 strSel = [trueFalseView fn_CheckAnswersBeforeSubmit];
-                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
+                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0 && TryAgainFlag == 0) {
                     if (strSel.length > 0)
                         [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:strSel];
                     [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:trueFalseView.intVisited]];
@@ -536,7 +550,7 @@
         case QUESTION_TYPE_MATCHTERMS:
             {
                 strSel = [matchPairsView fn_CheckAnswersBeforeSubmit];
-                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
+                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0 && TryAgainFlag == 0) {
                     if (strSel.length > 0)
                         [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:strSel];
                     [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:matchPairsView.intVisited]];
@@ -547,7 +561,7 @@
         case QUESTION_TYPE_MCSS:
             {
                 strSel = [singleSelectionView fn_CheckAnswersBeforeSubmit];
-                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
+                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0 && TryAgainFlag == 0) {
                     if (strSel.length > 0)
                         [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:strSel];
                     [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:singleSelectionView.intVisited]];
@@ -562,7 +576,7 @@
         case QUESTION_TYPE_DRAGDROPRADIOBUTTONS:
             {
                 strSel = [dragDropRadioView fn_CheckAnswersBeforeSubmit];
-                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0) {
+                if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0 && TryAgainFlag == 0) {
                     if (strSel.length > 0)
                         [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:strSel];
                     [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:dragDropRadioView.intVisited]];
