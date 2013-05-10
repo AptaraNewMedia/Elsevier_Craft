@@ -106,7 +106,8 @@
     }
 }
 
-- (void) disableAllButtons{
+- (void) disableAllButtons:(int)questionNO;
+{
     for (UIView *myview in [self.view subviews]){
         myview.userInteractionEnabled = NO;
     }
