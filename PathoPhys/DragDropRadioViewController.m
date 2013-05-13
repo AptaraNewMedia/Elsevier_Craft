@@ -118,7 +118,7 @@
     }
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        //[self rotateScrollViewButtonsForiPhone];
+        [self rotateScrollViewButtonsForiPhone];
     }
     
     [scrollViewDrag.layer setBorderWidth:1.0];
