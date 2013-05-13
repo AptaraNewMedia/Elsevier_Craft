@@ -668,6 +668,8 @@
 		870D149417419C9C0097916B /* 3510003_Ref_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 870D148F17419C9C0097916B /* 3510003_Ref_iphone@2x.png */; };
 		870D149517419C9C0097916B /* 3510004_Ref_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 870D149017419C9C0097916B /* 3510004_Ref_iphone@2x.png */; };
 		870D149617419C9C0097916B /* 3510005_Ref_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 870D149117419C9C0097916B /* 3510005_Ref_iphone@2x.png */; };
+		870D14981741AC280097916B /* 160001_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 870D14971741AC280097916B /* 160001_iPhone.png */; };
+		870D149A1741AC370097916B /* 160001_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 870D14991741AC370097916B /* 160001_iPhone@2x.png */; };
 		870E9E85172C03E200DD52A8 /* MCSSCell_iPad_half.xib in Resources */ = {isa = PBXBuildFile; fileRef = 870E9E83172C03E200DD52A8 /* MCSSCell_iPad_half.xib */; };
 		870E9E86172C03E200DD52A8 /* MCSSCell_iPad_P.xib in Resources */ = {isa = PBXBuildFile; fileRef = 870E9E84172C03E200DD52A8 /* MCSSCell_iPad_P.xib */; };
 		870E9EBF172C0FAF00DD52A8 /* SingleSelectionViewController_cs_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 870E9EBC172C0FAF00DD52A8 /* SingleSelectionViewController_cs_iPad.xib */; };
@@ -1871,6 +1873,8 @@
 		870D148F17419C9C0097916B /* 3510003_Ref_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3510003_Ref_iphone@2x.png"; sourceTree = "<group>"; };
 		870D149017419C9C0097916B /* 3510004_Ref_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3510004_Ref_iphone@2x.png"; sourceTree = "<group>"; };
 		870D149117419C9C0097916B /* 3510005_Ref_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3510005_Ref_iphone@2x.png"; sourceTree = "<group>"; };
+		870D14971741AC280097916B /* 160001_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 160001_iPhone.png; sourceTree = "<group>"; };
+		870D14991741AC370097916B /* 160001_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "160001_iPhone@2x.png"; sourceTree = "<group>"; };
 		870E9E83172C03E200DD52A8 /* MCSSCell_iPad_half.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCSSCell_iPad_half.xib; sourceTree = "<group>"; };
 		870E9E84172C03E200DD52A8 /* MCSSCell_iPad_P.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCSSCell_iPad_P.xib; sourceTree = "<group>"; };
 		870E9EBC172C0FAF00DD52A8 /* SingleSelectionViewController_cs_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleSelectionViewController_cs_iPad.xib; sourceTree = "<group>"; };
@@ -2879,6 +2883,7 @@
 				39D8D54117391EFC0008B46E /* 110008_iphone.png */,
 				39D8D54217391EFC0008B46E /* 110009_iphone.png */,
 				39D8D54317391EFC0008B46E /* 110010_iphone.png */,
+				870D14971741AC280097916B /* 160001_iPhone.png */,
 				39D8D54417391EFC0008B46E /* 120001_iphone.png */,
 				39D8D54517391EFC0008B46E /* 130001_iphone.png */,
 				39D8D54E17391EFC0008B46E /* 190001_iphone.png */,
@@ -3690,6 +3695,7 @@
 				871040FD1741503700C7B076 /* 110010_iPhone@2x.png */,
 				871040FE1741503700C7B076 /* 120001_iphone@2x.png */,
 				871040FF1741503700C7B076 /* 130001_iphone@2x.png */,
+				870D14991741AC370097916B /* 160001_iPhone@2x.png */,
 				871041001741503700C7B076 /* 190001_iPhone@2x.png */,
 				871041011741503700C7B076 /* 190002_iphone@2x.png */,
 				871041021741503700C7B076 /* 190003_iphone@2x.png */,
@@ -5385,6 +5391,8 @@
 				870D149417419C9C0097916B /* 3510003_Ref_iphone@2x.png in Resources */,
 				870D149517419C9C0097916B /* 3510004_Ref_iphone@2x.png in Resources */,
 				870D149617419C9C0097916B /* 3510005_Ref_iphone@2x.png in Resources */,
+				870D14981741AC280097916B /* 160001_iPhone.png in Resources */,
+				870D149A1741AC370097916B /* 160001_iPhone@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
