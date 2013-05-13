@@ -933,6 +933,19 @@ NSError *error;
         }
         
         
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            
+            objDRAGDROP.arrXYpoints = [[[arrTempList objectAtIndex:i] objectForKey:@"iphone_normal_points"] componentsSeparatedByString:@"#$#"];
+            
+            widthhight = [[[arrTempList objectAtIndex:i] objectForKey:@"iphone_size"] componentsSeparatedByString:@","];
+            if (widthhight.count > 0) {
+                objDRAGDROP.fWidth = [[widthhight objectAtIndex:0] floatValue]/2;
+                objDRAGDROP.fHeight = [[widthhight objectAtIndex:1] floatValue]/2;
+            }
+            
+            objDRAGDROP.strImageName = [NSString stringWithFormat:@"%@_iphone", objDRAGDROP.strImageName];
+        }
+        
         NSString *strfeedback = [[arrTempList objectAtIndex:i] objectForKey:@"feedback"];
         
         if (strfeedback == (id)[NSNull null] || strfeedback.length == 0 || [strfeedback isEqualToString:@" "]) {
