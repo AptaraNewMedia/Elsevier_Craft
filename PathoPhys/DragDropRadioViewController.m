@@ -122,7 +122,7 @@
     }
     
     [scrollViewDrag.layer setBorderWidth:1.0];
-    [scrollViewDrag.layer setBorderColor:[COLOR_BLUE CGColor]];
+    [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
 }
 
 -(void) fn_SetFontColor
@@ -968,21 +968,29 @@
 - (void) rotateScrollViewButtonsForPortrait{
     int counter= 0;
     int y = 10, x= 20;
+    int numOfColumns = 1;
+    int bnWidth = 0;
+    int bnHeight = 0;
     
     for(UIView *myView in [scrollViewDrag subviews]){
         if([myView isKindOfClass:[CustomDragButton class]]){
+            bnWidth = myView.frame.size.width;
+            bnHeight = myView.frame.size.height;
             counter++;
             [myView removeFromSuperview];
             myView.frame = CGRectMake(x, y, myView.frame.size.width, myView.frame.size.height);
             [scrollViewDrag addSubview:myView];
             y = y + myView.frame.size.height + 10;
-            if(counter == 3){  /// 3 --> Number of rows
+            if(counter == 3){ /// 3 --> Number of rows
+                numOfColumns++;
                 y = 10;
                 x = x + myView.frame.size.width + 10;
                 counter = 0;
             }
         }
     }
+    
+    [scrollViewDrag setContentSize:CGSizeMake(30 + (numOfColumns * bnWidth) + ((numOfColumns-1) * 10), 10 + (3 * bnHeight) + (2 *y))];
 }
 
 - (void) rotateScrollViewButtonsForiPhone{
@@ -1398,7 +1406,8 @@
     // ScrollView
     [imgScroller setFrame:CGRectMake(258, 153, 800, 427)];
     imgScroller.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, imgScroller.bounds.size.width - 727);
-    [scrollViewDrag setFrame:CGRectMake(0, 153, 237, 427)];
+    //[scrollViewDrag setFrame:CGRectMake(0, 153, 237, 427)];
+    [scrollViewDrag setFrame:CGRectMake(20, 153, 237, 427)];
     
     [self rotateScrollViewButtonsForLandscape];
 }
