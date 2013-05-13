@@ -43,6 +43,8 @@
     
     int prevFlipViewIndex;
     
+    int firsttime;
+    
 }
 
 -(IBAction)onNext:(id)sender;
@@ -124,6 +126,7 @@
     }
     
     prevFlipViewIndex = 0;
+    firsttime = -1;
     
     //Code for Exclusive Touch Enabling.
     for (UIView *myview in [self.view subviews]){
@@ -517,7 +520,9 @@
     }
 }
 -(void) fnSetPreviousImage {
-    if (prevFlipViewIndex != intCurrentQuestionIndex) {
+    if (firsttime != -1 || prevThumbTapped != intCurrentQuestionIndex) {
+        
+        firsttime = 0;
         
         if(arrThumbsLarge.count > 1) {
         
@@ -540,7 +545,7 @@
             newflipViewButton.textLabel.text = objFlashcardSet.strKey;
             newflipViewButton.selectedButton = 0;
             
-        }
+        }        
     }
 }
 
@@ -816,6 +821,7 @@
         intCurrentQuestionIndex = 0;
         prevFlipViewIndex = 0;
         prevThumbTapped = 0;
+        firsttime = -1;
         [arrFlashcards removeAllObjects];
         arrFlashcards = [db fnGetSortedFlashcards:intCurrentFlashcard_ChapterId];
         
@@ -850,6 +856,7 @@
         intCurrentQuestionIndex = 0;
         prevFlipViewIndex = 0;
         prevThumbTapped = 0;
+        firsttime = -1;
         [arrFlashcards removeAllObjects];
 		arrFlashcards = [array mutableCopy];
         [self fnRemoveThumnails];
