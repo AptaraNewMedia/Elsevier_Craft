@@ -134,6 +134,7 @@
             objNotes.strModifiedDate = md.strCurrentDate;
             objNotes.intMode = 2;
             [db fnSetNote:objNotes];
+            lblTitle.text = @"Edit Note";            
         }
         else {
             objNotes.strModifiedDate = md.strCurrentDate;

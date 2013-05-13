@@ -193,7 +193,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{760, 544}, {100, 33}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
