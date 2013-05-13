@@ -106,7 +106,10 @@
         [ImgOption setImage:nil];
     }
     else {
-        [ImgOption setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.png", objMCSS.strImageName]]];
+        UIImage *temp = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", objMCSS.strImageName]];        
+        [ImgOption setImage:temp];
+        [ImgOption setFrame:CGRectMake(0, 0, temp.size.width, temp.size.height)];
+        
         isImage = YES;
     }
     
@@ -800,7 +803,7 @@
     
     //Table
     if (isImage) {
-        [ImgOption setFrame:CGRectMake(100, 200, 250, 200) ];
+        [ImgOption setFrame:CGRectMake(100, 200, ImgOption.frame.size.width, ImgOption.frame.size.height) ];
         [tblOptions setFrame:CGRectMake(0,400, 767, 350) ];
     }
     else
@@ -843,7 +846,8 @@
     
     if (isImage) {
         [tblOptions setFrame:CGRectMake(470,156, 516, 425) ];
-        [ImgOption setFrame:CGRectMake(30,156, 250, 200) ];
+        [ImgOption setFrame:CGRectMake(30,156, ImgOption.frame.size.width, ImgOption.frame.size.height) ];
+
     }
     else
         [tblOptions setFrame:CGRectMake(0,156, 1005, 425) ];
