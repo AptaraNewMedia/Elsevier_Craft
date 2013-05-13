@@ -110,6 +110,12 @@
 
 -(IBAction)onClose:(id)sender{
     self.view.hidden = YES;
+    if(categoryNumber == 2){
+        [md.navController2 popViewControllerAnimated:YES];
+    }
+    else{
+        [md.navController3 popViewControllerAnimated:YES];
+    }
 }
 -(IBAction)Bn_Facebook_Tapped:(id)sender{
     
