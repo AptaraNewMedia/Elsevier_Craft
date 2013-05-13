@@ -117,15 +117,16 @@
     btn_popupRemove.hidden=YES;
 
     lblQuestionNo.textColor = COLOR_BLACK;
-    
-    [self fnGetFlashcardData];
-    
+
+    firsttime = -1;
     if(viewAllFlashCards == 1){
         viewAllFlashCards = 0;
     }
     
+    [self fnGetFlashcardData];
+    
+    
     prevFlipViewIndex = 0;
-    firsttime = -1;
     
     //Code for Exclusive Touch Enabling.
     for (UIView *myview in [self.view subviews]){
@@ -525,7 +526,7 @@
     }
 }
 -(void) fnSetPreviousImage {
-    if (firsttime != -1 || prevThumbTapped != intCurrentQuestionIndex) {
+    if (firsttime == -1) {
         
         firsttime = 0;
         
@@ -552,6 +553,31 @@
             
         }        
     }
+    else if(prevThumbTapped != intCurrentQuestionIndex) {
+        if(arrThumbsLarge.count > 1) {
+            
+            FlipViewButton *newflipViewButton = [arrThumbsLarge objectAtIndex:prevFlipViewIndex];
+            
+            objFlashcardSet = (FlashcardsSet *)[arrFlashcards objectAtIndex:prevFlipViewIndex];
+            
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                newflipViewButton.textLabel.frame = CGRectMake(5, 5, 160, 210);
+                newflipViewButton.textLabel.font = FONT_12;
+                [newflipViewButton setBackgroundImage:[UIImage imageNamed:@"Big_grey_flash_card.png"] forState:UIControlStateNormal];
+                
+            }
+            else {
+                newflipViewButton.textLabel.frame = CGRectMake(55, 15, 270, 370);
+                newflipViewButton.textLabel.font = FONT_25;
+                [newflipViewButton setBackgroundImage:[UIImage imageNamed:@"img_flashcard_front.png"] forState:UIControlStateNormal];
+            }
+            newflipViewButton.textLabel.textColor = COLOR_BLACK;
+            newflipViewButton.textLabel.text = objFlashcardSet.strKey;
+            newflipViewButton.selectedButton = 0;
+            
+        }
+    }
+    
 }
 
 // =====================================================
@@ -826,6 +852,7 @@
         intCurrentQuestionIndex = 0;
         prevFlipViewIndex = 0;
         prevThumbTapped = 0;
+        firsttime = -1;        
         [arrFlashcards removeAllObjects];
         
         if (ViewAllButtons == 1) {
@@ -839,6 +866,7 @@
         [self fnSetThumnailsLarge];
         [self fnSetThumnails];
         [self fnThumbScrollerMove];
+        [tblAlphabet reloadData];
     }
     else if ([sender tag] == 1)
     {
@@ -873,6 +901,7 @@
         [self fnSetThumnailsLarge];
         [self fnSetThumnails];
         [self fnThumbScrollerMove];
+        
     }
     else if ([sender tag] == 2)
     {
@@ -966,7 +995,12 @@
              }
              else{
                  cell.userInteractionEnabled = YES;
-             }             
+             }
+        
+            if (indexPath.row == 0) {
+                [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+            }
+        
          }
     else
     {
