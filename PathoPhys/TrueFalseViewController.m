@@ -433,7 +433,7 @@
 - (void) fnSetTrueFalse{
     if (objTrueFalse.intTrueid == 1 || objTrueFalse.intTrueid == 2 || objTrueFalse.intTrueid == 3 || objTrueFalse.intTrueid == 4) {
         
-        UIImage *imgHighlight = [UIImage imageNamed:@"truefalse_image_selection.png"];
+        //UIImage *imgHighlight = [UIImage imageNamed:@"truefalse_image_selection.png"];
         
         
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
@@ -453,6 +453,19 @@
         }
         else {
             
+            if (userAnswer == 1) {
+                imgTrue = [UIImage imageNamed:[NSString stringWithFormat:@"%@_select.png", objTrueFalse.strOptions1]];
+                imgFalse = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", objTrueFalse.strOptions2]];
+                
+            }
+            else if (userAnswer == 2) {
+                imgTrue = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", objTrueFalse.strOptions1]];
+                imgFalse = [UIImage imageNamed:[NSString stringWithFormat:@"%@_select.png", objTrueFalse.strOptions2]];
+            }
+            [bnTrue setImage:imgTrue forState:UIControlStateNormal];
+            [bnFalse setImage:imgFalse forState:UIControlStateNormal];
+            
+            /*
             switch (objTrueFalse.intTrueid) {
                 case 1:
                 {
@@ -484,6 +497,8 @@
                 }
                     break;
             }
+            
+            
             if (userAnswer == 1) {
                 [bnTrue setBackgroundImage:imgHighlight forState:UIControlStateNormal];
                 [bnFalse setBackgroundImage:nil forState:UIControlStateNormal];
@@ -492,6 +507,7 @@
                 [bnTrue setBackgroundImage:nil forState:UIControlStateNormal];
                 [bnFalse setBackgroundImage:imgHighlight forState:UIControlStateNormal];
             }
+             */
         }
         
     }
