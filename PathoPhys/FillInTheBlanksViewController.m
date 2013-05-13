@@ -132,6 +132,7 @@
         [bnDrag.feedbackBt setImage:[UIImage imageNamed:@"Btn_feed.png"] forState:UIControlStateNormal];
         //[bnDrag.feedbackBt setImage:[UIImage imageNamed:@"btn_feedback_highlight.png"] forState:UIControlStateHighlighted];
         bnDrag.feedbackBt.hidden = YES;
+        [bnDrag.feedbackBt addTarget:self action:@selector(onFeedbackTapped2:) forControlEvents:UIControlEventTouchUpInside];
         
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
             bnDrag.titleLabel.font = FONT_10;
@@ -345,6 +346,44 @@
     }
 }
 
+-(IBAction)onFeedbackTapped2:(id)sender
+{
+    UIButton *btn = sender;
+    CustomDragButton *bn = [draggableSubjects objectAtIndex:btn.tag];
+    
+    float x_point;
+    float y_point;
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objFillBlanks.fWidth - 132);
+        y_point = bn.superview.frame.origin.y + 120;
+        y_point = y_point - visibleRect.origin.y;
+        
+        [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
+    }
+    else
+    {
+        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objFillBlanks.fWidth - 10);
+        y_point = bn.superview.frame.origin.y + 15;
+        y_point = y_point - visibleRect.origin.y;
+        
+        x_feedback_l=x_point;
+        y_feedback_l=y_point;
+        
+        x_feedback_p=x_point-238;
+        y_feedback_p=y_point+217;
+        
+        if(currentOrientaion==1 || currentOrientaion==2) // Portrait
+        {
+            [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:bn.strFeedback];
+        }
+        else //Lanscape
+        {
+            [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:bn.strFeedback];
+        }
+    }
+}
 
 //Get db data from question_id
 //--------------------------------
