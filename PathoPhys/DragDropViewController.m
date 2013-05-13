@@ -114,7 +114,7 @@
     }
     
     [scrollViewDrag.layer setBorderWidth:1.0];
-    [scrollViewDrag.layer setBorderColor:[COLOR_BLUE CGColor]];
+    [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
 }
 
 
