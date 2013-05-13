@@ -826,7 +826,6 @@
         intCurrentQuestionIndex = 0;
         prevFlipViewIndex = 0;
         prevThumbTapped = 0;
-        firsttime = -1;
         [arrFlashcards removeAllObjects];
         
         if (ViewAllButtons == 1) {
@@ -873,7 +872,7 @@
         [self fnRemoveThumnails];
         [self fnSetThumnailsLarge];
         [self fnSetThumnails];
-        [self fnThumbScrollerMove];        
+        [self fnThumbScrollerMove];
     }
     else if ([sender tag] == 2)
     {
