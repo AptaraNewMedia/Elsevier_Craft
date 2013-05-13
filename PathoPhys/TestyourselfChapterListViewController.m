@@ -50,7 +50,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-       self.title = NSLocalizedString(@"TestYourself", @"TestYourself");
+       self.title = NSLocalizedString(@"Test Yourself", @"Test Yourself");
        self.tabBarItem.image = [UIImage imageNamed:@"img_tab_testyourself"];
     }
     return self;

@@ -52,7 +52,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"CaseStudies", @"CaseStudies");
+        self.title = NSLocalizedString(@"Case Studies", @"Case Studies");
         self.tabBarItem.image = [UIImage imageNamed:@"img_tab_casestudies"];
     }
     return self;
@@ -67,6 +67,7 @@
     else {
         lbl_title.font = FONT_25;
     }
+    lbl_title.textColor = COLOR_WHITE;
     
     [self fnAddNavigationItems];
     

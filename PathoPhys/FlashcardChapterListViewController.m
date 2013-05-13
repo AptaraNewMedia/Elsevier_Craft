@@ -41,7 +41,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"FlashCard", @"FlashCard");
+        self.title = NSLocalizedString(@"Flash Cards", @"Flash Cards");
         self.tabBarItem.image = [UIImage imageNamed:@"img_tab_flashcard"];
     }
     return self;
