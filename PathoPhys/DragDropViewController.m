@@ -186,7 +186,10 @@
             [draggableSubjects addObject:bnDrag];
             
         }
-        [scrollViewDrag setContentSize:CGSizeMake(objDRAGDROP.fWidth, y)];    
+        [scrollViewDrag setContentSize:CGSizeMake(objDRAGDROP.fWidth, y)];
+        [scrollViewDrag.layer setBorderWidth:1.0];
+        [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
+
 }
 
 - (void) rotateScrollViewButtonsForLandscape{
@@ -770,7 +773,8 @@
     // ScrollView
     [imgScroller setFrame:CGRectMake(280, 153, 727, 427)];
     imgScroller.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, imgScroller.bounds.size.width - 727);
-    [scrollViewDrag setFrame:CGRectMake(5, 153, 270, 427)];
+    //[scrollViewDrag setFrame:CGRectMake(5, 153, 270, 427)];
+    [scrollViewDrag setFrame:CGRectMake(20, 153, 237, 427)];
     
     NSLog(@"Landscape");
     
