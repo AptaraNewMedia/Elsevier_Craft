@@ -239,12 +239,15 @@
     if (visitedAnswers.length > 0) {
         
         main = [visitedAnswers componentsSeparatedByString:@"#"];
+        selectedCells = [[NSMutableArray alloc] init];
         for (int i=0; i<[main count]; i++) {
             int index = [[main objectAtIndex:i] intValue];
+            [selectedCells addObject:[NSNumber numberWithInt:index]];
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
             [tblOptions selectRowAtIndexPath:indexPath animated:NO scrollPosition:NO];
         }
     }
+    isSubmit = YES;
     [self handleRevealScore];
     [self Fn_createInvisibleBtn];
 }
@@ -342,7 +345,12 @@
             NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
             sa = [sa lowercaseString];
             if (![ss isEqualToString:sa]) {
-                [cell.imgAns setImage:[UIImage imageNamed:@"img_false.png"]];
+                if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                    [cell.imgAns setImage:[UIImage imageNamed:@"false_Without_Border.png"]];
+                }
+                else {
+                    [cell.imgAns setImage:[UIImage imageNamed:@"img_false.png"]];
+                }
                 NSString *feeback = [self fn_getFeeback:indexPath.row];
                 if (feeback.length > 0) {
                     cell.btnFeedback.hidden = NO;
@@ -350,7 +358,12 @@
                 }
                 
             }else {
-                [cell.imgAns setImage:[UIImage imageNamed:@"img_true.png"]];
+                if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                    [cell.imgAns setImage:[UIImage imageNamed:@"True_Btn_Without_Border.png"]];
+                }
+                else {
+                    [cell.imgAns setImage:[UIImage imageNamed:@"img_true.png"]];
+                }
                 NSString *feeback = [self fn_getFeeback:indexPath.row];
                 if (feeback.length > 0) {
                     cell.btnFeedback.hidden = NO;
@@ -414,36 +427,74 @@
     [self Fn_AddFeedbackPopup:x_point andy:y_point andText:cell.strFeedback];
 }
 
-- (void) Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue {
-
+- (void) Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue
+{
     [feedbackView removeFromSuperview];
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 150, 90)];
+        feedbackView.backgroundColor = [UIColor clearColor];
         
-    feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 261, 131)];
-    feedbackView.backgroundColor = [UIColor clearColor];
-    
-    UIView *bg = [[UIView alloc] init];
-    bg.backgroundColor = [UIColor whiteColor];
-    [bg setFrame:CGRectMake(13, 13, 235, 104)];
-    [feedbackView addSubview:bg];
-    
-    
-    UIImageView *img_feedback = [[UIImageView alloc] init];
-    img_feedback.backgroundColor = [UIColor clearColor];
-    [img_feedback setImage:[UIImage imageNamed:@"img_feedback_down_box.png"]];
-    [img_feedback setFrame:CGRectMake(0, 0, 261, 131)];
-    [feedbackView addSubview:img_feedback];
-    
-    
-    UITextView *txt_feedback = [[UITextView alloc] init];
-    txt_feedback.text = textValue;
-    txt_feedback.textColor = [UIColor whiteColor];
-    txt_feedback.backgroundColor = [UIColor clearColor];
-    txt_feedback.font = FONT_14;
-    txt_feedback.editable = NO;
-    [txt_feedback setFrame:CGRectMake(13, 13, 235, 104)];
-    [feedbackView addSubview:txt_feedback];
-    [self.view addSubview:feedbackView];    
+        UIView *bg = [[UIView alloc] init];
+        bg.backgroundColor = [UIColor whiteColor];
+        [bg setFrame:CGRectMake(12, 12, 125, 65)];
+        [feedbackView addSubview:bg];
+        
+        
+        UIImageView *img_feedback = [[UIImageView alloc] init];
+        img_feedback.backgroundColor = [UIColor clearColor];
+        //        [img_feedback setImage:[UIImage imageNamed:@"img_feedback_down_box.png"]];
+        
+        [img_feedback setImage:[UIImage imageNamed:@"Small_Feedback_Box_004.png"]];
+        
+        [img_feedback setFrame:CGRectMake(0, 0, 150, 90)];
+        [feedbackView addSubview:img_feedback];
+        
+        
+        UITextView *txt_feedback = [[UITextView alloc] init];
+        txt_feedback.text = textValue;
+        txt_feedback.textColor = [UIColor whiteColor];
+        txt_feedback.backgroundColor = [UIColor clearColor];
+        txt_feedback.font = FONT_10;
+        txt_feedback.editable = NO;
+        [txt_feedback setFrame:CGRectMake(12, 12, 125, 65)];
+        [feedbackView addSubview:txt_feedback];
+        [self.view addSubview:feedbackView];
+    }
+    else
+    {
+        feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 261, 131)];
+        feedbackView.backgroundColor = [UIColor clearColor];
+        
+        UIView *bg = [[UIView alloc] init];
+        bg.backgroundColor = [UIColor whiteColor];
+        [bg setFrame:CGRectMake(13, 13, 235, 104)];
+        [feedbackView addSubview:bg];
+        
+        
+        UIImageView *img_feedback = [[UIImageView alloc] init];
+        img_feedback.backgroundColor = [UIColor clearColor];
+        [img_feedback setImage:[UIImage imageNamed:@"img_feedback_down_box.png"]];
+        
+        //    [img_feedback setImage:[UIImage imageNamed:@"Small_Feedback_Box_004.png"]];
+        
+        [img_feedback setFrame:CGRectMake(0, 0, 261, 131)];
+        [feedbackView addSubview:img_feedback];
+        
+        
+        UITextView *txt_feedback = [[UITextView alloc] init];
+        txt_feedback.text = textValue;
+        txt_feedback.textColor = [UIColor whiteColor];
+        txt_feedback.backgroundColor = [UIColor clearColor];
+        txt_feedback.font = FONT_14;
+        txt_feedback.editable = NO;
+        [txt_feedback setFrame:CGRectMake(13, 13, 235, 104)];
+        [feedbackView addSubview:txt_feedback];
+        [self.view addSubview:feedbackView];
+    }
 }
+
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 2) {

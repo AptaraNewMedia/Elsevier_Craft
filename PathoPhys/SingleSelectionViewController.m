@@ -239,12 +239,15 @@
     if (visitedAnswers.length > 0) {
         
         main = [visitedAnswers componentsSeparatedByString:@"#"];
+        selectedCells = [[NSMutableArray alloc] init];
         for (int i=0; i<[main count]; i++) {
             int index = [[main objectAtIndex:i] intValue];
+            [selectedCells addObject:[NSNumber numberWithInt:index]];
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
             [tblOptions selectRowAtIndexPath:indexPath animated:NO scrollPosition:NO];
         }
     }
+    isSubmit = YES;
     [self handleRevealScore];
     [self Fn_createInvisibleBtn];
 }
@@ -333,8 +336,7 @@
         
         
         MCSSCell_iPad *cell = [cellArray objectAtIndex:indexPath.row];
-        cell.imgAns.hidden =NO;
-        
+         
         for (int j = 0; j < answer_count; j++) {
             NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
             sa = [sa lowercaseString];
@@ -381,7 +383,8 @@
     [btnInvisible removeFromSuperview];
     btnInvisible = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnInvisible setFrame:CGRectMake(tblOptions.frame.origin.x, tblOptions.frame.origin.y, tblOptions.frame.size.width - 50, tblOptions.frame.size.height)];
-    btnInvisible.backgroundColor = [UIColor clearColor];
+    btnInvisible.backgroundColor = [UIColor blueColor];
+    [btnInvisible setAlpha:0.5];
     [btnInvisible addTarget:self action:@selector(onInvisible:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btnInvisible];    
 }
@@ -807,6 +810,7 @@
     else
         [tblOptions setFrame:CGRectMake(0, 200, 767, 525) ];
     //[tblOptions setBackgroundColor:COLOR_BottomBlueButton];
+    [cellArray removeAllObjects];
     cellArray = [[NSMutableArray alloc] init];
     [tblOptions reloadData];
     
@@ -848,6 +852,7 @@
     else
         [tblOptions setFrame:CGRectMake(0,156, 1005, 425) ];
     //[tblOptions setBackgroundColor:COLOR_BottomBlueButton];
+    [cellArray removeAllObjects];    
     cellArray = [[NSMutableArray alloc] init];    
     [tblOptions reloadData];
     
