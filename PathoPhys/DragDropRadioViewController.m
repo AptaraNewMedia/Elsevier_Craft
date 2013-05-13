@@ -1215,7 +1215,11 @@
                 if (feeback.length > 0) {
                     bn.feedbackBt.hidden = NO;
                     bn.strFeedback = feeback;
+                    if(objDRAGDROP.intDRAGDROPRADIOid == 25 || objDRAGDROP.intDRAGDROPRADIOid == 26 || objDRAGDROP.intDRAGDROPRADIOid == 18 || objDRAGDROP.intDRAGDROPRADIOid == 9){
+                    }
+                    else {
                     [bn addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
+                    }
                     
                 }
             }else {
@@ -1224,7 +1228,11 @@
                 if (feeback.length > 0) {
                     bn.feedbackBt.hidden = NO;
                     bn.strFeedback = feeback;
+                    if(objDRAGDROP.intDRAGDROPRADIOid == 25 || objDRAGDROP.intDRAGDROPRADIOid == 26 || objDRAGDROP.intDRAGDROPRADIOid == 18 || objDRAGDROP.intDRAGDROPRADIOid == 9){
+                    }
+                    else {
                     [bn addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
+                    }
                     
                 }
             }
