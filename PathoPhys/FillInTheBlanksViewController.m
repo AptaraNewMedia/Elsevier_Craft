@@ -183,6 +183,41 @@
     [scrollViewDrag setContentSize:CGSizeMake(20 + (numOfRows * bnwidth) + ((numOfRows-1) * 10), 93)];
 }
 
+- (void) rotateScrollViewButtonsForLandscape{
+    int counter= 0;
+    int y = 10;
+    for(UIView *myView in [scrollViewDrag subviews]){
+        if([myView isKindOfClass:[CustomDragButton class]]){
+            counter++;
+            [myView removeFromSuperview];
+            myView.frame = CGRectMake(20, y, myView.frame.size.width, myView.frame.size.height);
+            [scrollViewDrag addSubview:myView];
+            y = y + myView.frame.size.height + 10   ;
+        }
+    }
+}
+
+- (void) rotateScrollViewButtonsForPortrait{
+    int counter= 0;
+    int y = 10, x= 20;
+    
+    
+    
+    for(UIView *myView in [scrollViewDrag subviews]){
+        if([myView isKindOfClass:[CustomDragButton class]]){
+            counter++;
+            [myView removeFromSuperview];
+            myView.frame = CGRectMake(x, y, myView.frame.size.width, myView.frame.size.height);
+            [scrollViewDrag addSubview:myView];
+            y = y + myView.frame.size.height + 10;
+            if(counter == 3){ /// 3 --> Number of rows
+                y = 10;
+                x = x + myView.frame.size.width + 10;
+                counter = 0;
+            }
+        }
+    }
+}
 
 
 
@@ -708,6 +743,8 @@
     imgScroller.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, imgScroller.bounds.size.width - 730);
     [scrollViewDrag setFrame:CGRectMake(20, 220, 730, 150)];
     
+     [self rotateScrollViewButtonsForPortrait];
+    
     
 }
 -(void)Fn_rotateLandscape
@@ -740,6 +777,7 @@
     [imgScroller setFrame:CGRectMake(258, 153, 727, 427)];
     imgScroller.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, imgScroller.bounds.size.width - 727);
     [scrollViewDrag setFrame:CGRectMake(20, 153, 237, 427)];
+     [self rotateScrollViewButtonsForLandscape];
 }
 @end
 
