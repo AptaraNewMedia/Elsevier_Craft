@@ -58,13 +58,14 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    myTableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, myTableView.bounds.size.width-840);
 
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
         lbl_title.font = FONT_17;
     }
     else {
-        lbl_title.font = FONT_25;        
+        lbl_title.font = FONT_25;
+        //myTableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, myTableView.bounds.size.width-840);
+        
     }
     
     lbl_title.textColor = COLOR_WHITE;

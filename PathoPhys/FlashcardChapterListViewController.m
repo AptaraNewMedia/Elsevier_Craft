@@ -336,7 +336,7 @@
     [imgBG setImage:[UIImage imageNamed:@"img_chapter_bg.png"]];
     [btnViewAll setFrame:CGRectMake(778, 80, 106, 34)];
     [lbl_title setFrame:CGRectMake(140, 80, 231, 31)];
-    [myTableView setFrame:CGRectMake(104,125,786,435)];    
+    [myTableView setFrame:CGRectMake(115,125,786,435)];
     //myTableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, myTableView.bounds.size.width-810);
     [myTableView reloadData];
 }
