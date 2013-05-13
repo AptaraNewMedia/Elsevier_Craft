@@ -56,7 +56,7 @@
         lbl_title.font = FONT_25;
     }
     
-    btnViewAll.hidden = NO;
+    btnViewAll.hidden = YES;
     
     [self fnAddNavigationItems];
     //Code for Exclusive Touch Enabling.
