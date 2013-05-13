@@ -139,7 +139,7 @@
     
     NSLog(@"Flashcard Id %d", objFlashcardSet.intFlashcardId);
 //    int question_no = intCurrentQuestionIndex + 1;
-    objNotes = [db fnGetNote:categoryNumber AndChapterID:intCurrentFlashcard_ChapterId AndThematicId:0 AndQuestionNo:objFlashcardSet.intFlashcardId];
+    objNotes = [db fnGetNote:categoryNumber AndChapterID:intCurrentFlashcard_ChapterId AndThematicId:0 AndQuestionNo:objFlashcardSet.intFlashcardId AndQuizTrackId:0];
     
     objFlashcardSet = (FlashcardsSet *)[arrFlashcards objectAtIndex:intCurrentQuestionIndex];
     
@@ -161,6 +161,8 @@
     objNotes.intChapterId = intCurrentFlashcard_ChapterId;
     objNotes.intThematicId = 0;
     objNotes.intQuestionNo = objFlashcardSet.intFlashcardId;
+    objNotes.intQuizTrackId = 0;
+    objNotes.strQuestionId = @"NA";
     [md Fn_AddNote:objNotes];
 }
 -(void) fnAddNavigationItems{

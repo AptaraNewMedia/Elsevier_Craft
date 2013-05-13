@@ -76,9 +76,11 @@
     
     if (objNotes.intMode == 2) {
         txtNote.text = objNotes.strNoteDesc;
+        lblTitle.text = @"Edit Note";
     }
     else {
         txtNote.text = strNoteInstruction;
+        lblTitle.text = @"Add Note";        
     }
     //Code for Exclusive Touch Enabling.
     for (UIView *myview in [self.view subviews]){

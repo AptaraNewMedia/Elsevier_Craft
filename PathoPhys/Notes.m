@@ -13,8 +13,9 @@
 @synthesize intCategoryId;
 @synthesize intChapterId;
 @synthesize intThematicId;
-//@synthesize strQuestionId;
+@synthesize strQuestionId;
 @synthesize intQuestionNo;
+@synthesize intQuizTrackId;
 @synthesize intMode;
 @synthesize strNoteTitle;
 @synthesize strNoteDesc;

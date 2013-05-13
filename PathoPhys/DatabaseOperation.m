@@ -903,7 +903,7 @@ NSError *error;
 #pragma mark Notes
 //--------------------------------------------------------------
 -(void) fnSetNote:(Notes *)notes {
-    strQuery = [NSString stringWithFormat:@"INSERT INTO Notes (category_id, chapter_id, thematic_id,  question_no, note_title, note_desc, note_history, modified_date, created_date) VALUES (%d, %d, %d, %d, '%@', '%@', '%@', '%@', '%@')", notes.intCategoryId, notes.intChapterId, notes.intThematicId, notes.intQuestionNo, notes.strNoteTitle, notes.strNoteDesc, notes.strNoteHistory, notes.strModifiedDate, notes.strCreatedDate];
+    strQuery = [NSString stringWithFormat:@"INSERT INTO Notes (category_id, chapter_id, thematic_id,  question_no, quiztrack_id, question_id, note_title, note_desc, note_history, modified_date, created_date) VALUES (%d, %d, %d, %d, %d, '%@', '%@', '%@', '%@', '%@', '%@')", notes.intCategoryId, notes.intChapterId, notes.intThematicId, notes.intQuestionNo, notes.intQuizTrackId, notes.strQuestionId, notes.strNoteTitle, notes.strNoteDesc, notes.strNoteHistory, notes.strModifiedDate, notes.strCreatedDate];
     error = [dbOperation doQuery:strQuery];
     if (error != nil) {
         NSLog(@"Error: %@",[error localizedDescription]);
@@ -916,12 +916,12 @@ NSError *error;
         NSLog(@"Error: %@",[error localizedDescription]);
     }
 }
--(Notes *) fnGetNote:(int)category_id AndChapterID:(int)chapter_id AndThematicId:(int)thematic_id AndQuestionNo:(int)question_no {
+-(Notes *) fnGetNote:(int)category_id AndChapterID:(int)chapter_id AndThematicId:(int)thematic_id AndQuestionNo:(int)question_no AndQuizTrackId:(int)quiz_id {
 
     
     Notes *objNote = [[Notes alloc] init];
     
-    strQuery = [NSString stringWithFormat:@"SELECT note_id, note_title, note_desc, note_history, modified_date, created_date FROM Notes WHERE category_id = %d AND chapter_id = %d AND thematic_id = %d AND question_no = %d",category_id, chapter_id, thematic_id, question_no];
+    strQuery = [NSString stringWithFormat:@"SELECT note_id, note_title, note_desc, note_history, modified_date, created_date FROM Notes WHERE category_id = %d AND chapter_id = %d AND thematic_id = %d AND question_no = %d AND quiztrack_id = %d",category_id, chapter_id, thematic_id, question_no, quiz_id];
     arrTempList = [dbOperation getRowsForQuery:strQuery];
     intRowCount = [arrTempList count];
     for (int i = 0; i < intRowCount; i++) {

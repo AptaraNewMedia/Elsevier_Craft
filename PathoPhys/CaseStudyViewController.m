@@ -266,7 +266,7 @@
     
     int question_no = intCurrentQuestionIndex + 1;
     
-    objNotes = [db fnGetNote:categoryNumber AndChapterID:intCurrentCaseStudy_ChapterId AndThematicId:intCurrentCaseStudy_ThematicId AndQuestionNo:question_no];
+    objNotes = [db fnGetNote:categoryNumber AndChapterID:intCurrentCaseStudy_ChapterId AndThematicId:intCurrentCaseStudy_ThematicId AndQuestionNo:question_no AndQuizTrackId:objQuizTrack.intQuizTrackId];
     
     if (objNotes == Nil) {
         NOTES_MODE = 1;
@@ -287,6 +287,10 @@
     objNotes.intChapterId = intCurrentCaseStudy_ChapterId;
     objNotes.intThematicId = intCurrentCaseStudy_ThematicId;
     objNotes.intQuestionNo = question_no;
+    objNotes.intQuizTrackId =  objQuizTrack.intQuizTrackId;
+    
+    objQue = (ChapterQuestionSet *)[arrCaseStudies objectAtIndex:intCurrentQuestionIndex];
+    objNotes.strQuestionId = objQue.strQuestionId;
     [md Fn_AddNote:objNotes];
 }
 

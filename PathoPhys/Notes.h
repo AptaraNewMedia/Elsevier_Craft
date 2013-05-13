@@ -15,8 +15,9 @@
 @property (nonatomic) NSInteger intChapterId;
 @property (nonatomic) NSInteger intThematicId;
 @property (nonatomic) NSInteger intMode;
-//@property (nonatomic, retain) NSString *strQuestionId;
+@property (nonatomic, retain) NSString *strQuestionId;
 @property (nonatomic) NSInteger intQuestionNo;
+@property (nonatomic) NSInteger intQuizTrackId;
 @property (nonatomic, retain) NSString *strNoteTitle;
 @property (nonatomic, retain) NSString *strNoteDesc;
 @property (nonatomic, retain) NSString *strNoteHistory;

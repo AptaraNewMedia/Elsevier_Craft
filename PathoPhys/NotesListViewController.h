@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface NotesListViewController : UIViewController <UITextFieldDelegate>
--(void) onSelctor;
+@property (nonatomic) NSInteger FromMenu;
+//-(void) onSelctor;
 @end

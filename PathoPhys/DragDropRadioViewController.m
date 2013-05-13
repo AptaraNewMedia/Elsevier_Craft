@@ -118,7 +118,7 @@
     }
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        [self rotateScrollViewButtonsForiPhone];
+        //[self rotateScrollViewButtonsForiPhone];
     }
 }
 
@@ -228,8 +228,6 @@
     int spacingHeight = 50;
     
     y = 30;
-    height = 22;
-    width = 22;
     
     float firstX;
     float firstY;
@@ -244,15 +242,19 @@
     if (objDRAGDROP.intDRAGDROPRADIOid == 25) {
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
             spacingWidth = 30;
-            spacingHeight = objDRAGDROP.fHeight+30;
+            spacingHeight = objDRAGDROP.fHeight;
             x = objDRAGDROP.fWidth + 10;
-            y = 80;
+            y = 63;
+            height = 16;
+            width = 16;
         }
         else {
             spacingWidth = 92;
             spacingHeight = objDRAGDROP.fHeight;
             x = objDRAGDROP.fWidth + 10;
             y = 32;
+            height = 22;
+            width = 22;
         }
         
     }
@@ -261,44 +263,79 @@
             spacingWidth = 45;
             spacingHeight = objDRAGDROP.fHeight;
             x = objDRAGDROP.fWidth + 10;
-            y = 80;
+            y = 30;
+            height = 16;
+            width = 16;
         }
         else {
             spacingWidth = 100;
             spacingHeight = objDRAGDROP.fHeight;
             x = objDRAGDROP.fWidth + 10;
             y = 32;
+            height = 22;
+            width = 22;
             
         }
     }
     else if (objDRAGDROP.intDRAGDROPRADIOid == 18) {
-        spacingWidth = 70;
-        spacingHeight = objDRAGDROP.fHeight;
-        x = objDRAGDROP.fWidth + 10;
-        y = 80;
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            spacingWidth = 65;
+            spacingHeight = objDRAGDROP.fHeight + 5;
+            x = objDRAGDROP.fWidth + 10;
+            y = 30;
+            height = 22;
+            width = 22;
+        }
+        else {
+            spacingWidth = 65;
+            spacingHeight = objDRAGDROP.fHeight;
+            x = objDRAGDROP.fWidth + 10;
+            y = 90;
+            height = 22;
+            width = 22;
+        }
     }
     else if (objDRAGDROP.intDRAGDROPRADIOid == 9) {
-        spacingWidth = 67;
-        spacingHeight = 20;
-        x = objDRAGDROP.fWidth + 10;
-        y = 90;
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            spacingWidth = 67;
+            spacingHeight = objDRAGDROP.fHeight + 5;
+            x = objDRAGDROP.fWidth + 10;
+            y = 32;
+            height = 22;
+            width = 22;
+        }
+        else {
+            spacingWidth = 67;
+            spacingHeight = objDRAGDROP.fHeight;
+            x = objDRAGDROP.fWidth + 10;
+            y = 90;
+            height = 22;
+            width = 22;
+        }
     }
     else if (objDRAGDROP.intDRAGDROPRADIOid == 14)
     {
-        RadioOptions = 2;
-        spacingWidth = 160;
-        
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
         {
-            firstX = 5;
+            RadioOptions = 2;
+            spacingWidth = 150;
+            height = 22;
+            width = 22;
+            
+            firstX = 125;
             firstY = 35;
-            secondX = 130;
+            secondX = 0;
             secondY = 78;
             thirdX = 5;
             thirdY = 120;
         }
         else
         {
+            RadioOptions = 2;
+            spacingWidth = 160;
+            height = 22;
+            width = 22;
+            
             firstX = 304;
             firstY = 0;
             secondX = 315;
@@ -309,21 +346,29 @@
     }
     else if (objDRAGDROP.intDRAGDROPRADIOid == 15)
     {
-        RadioOptions = 2;
-        spacingWidth = 160;
-        spacingHeight = objDRAGDROP.fHeight;
-        
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
         {
+            RadioOptions = 2;
+            spacingWidth = 130;
+            spacingHeight = objDRAGDROP.fHeight;
+            height = 22;
+            width = 22;
+            
             firstX = 35;
             firstY = 52;
-            secondX = 35;
+            secondX = 30;
             secondY = 96;
-            thirdX = 52;
+            thirdX = 0;
             thirdY = 138;
         }
         else
         {
+            RadioOptions = 2;
+            spacingWidth = 160;
+            spacingHeight = objDRAGDROP.fHeight;
+            height = 22;
+            width = 22;
+            
             firstX = 42;
             firstY = 57;
             secondX = 40;
@@ -427,7 +472,9 @@
             
             // Option 1
             objRadioView = [[RadioView alloc] init];
-            objRadioView.backgroundColor = COLOR_CLEAR;
+            objRadioView.backgroundColor = COLOR_BLUE;
+            
+            NSLog(@"x: %f  Y:%f  Height: %d", x, y, spacingHeight);
             [objRadioView setFrame:CGRectMake(x, y, spacingWidth*RadioOptions, spacingHeight)];
             if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
                 xx = 5;
@@ -566,11 +613,15 @@
                 //            lbl1.font = FONT_14;
                 //            [objRadioView addSubview:lbl1];
                 
+                if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+                {
+                }
+                else {
                 
                 [objRadioView.ansImage1 setFrame:CGRectMake(objRadioView.ansImage1.frame.origin.x, objRadioView.ansImage1.frame.origin.y - 10, objRadioView.ansImage1.frame.size.width, objRadioView.ansImage1.frame.size.height)];
                 
                 [objRadioView.ansImage2 setFrame:CGRectMake(objRadioView.ansImage2.frame.origin.x, objRadioView.ansImage2.frame.origin.y - 10, objRadioView.ansImage2.frame.size.width, objRadioView.ansImage2.frame.size.height)];
-                
+                }
                 
                 //            UILabel *lbl2 =[[UILabel alloc] initWithFrame:CGRectMake(objRadioView.btnOption2.frame.origin.x+width, objRadioView.btnOption2.frame.origin.y, 90, height)];
                 ////            [lbl2 setText:[objDRAGDROP.arrRadioOptions objectAtIndex:1]];
@@ -607,7 +658,9 @@
             //        }
             //        else
             
-            NSLog(@"objDRAGDROP.arrRadioAnswers.count: %d",objDRAGDROP.arrRadioAnswers.count);
+            //NSLog(@"objDRAGDROP.arrRadioAnswers.count: %d",objDRAGDROP.arrRadioAnswers.count);
+            
+            /*
             
             if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
             {
@@ -641,6 +694,26 @@
             else
             {
                 y = y + objDRAGDROP.fHeight + 10;
+            }
+             
+             */
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+            {
+                if (objDRAGDROP.intDRAGDROPRADIOid == 25 || objDRAGDROP.intDRAGDROPRADIOid == 18) {
+                    y = y + objDRAGDROP.fHeight + 8;
+                }
+                else if (objDRAGDROP.intDRAGDROPRADIOid == 9) {
+                    y = y + objDRAGDROP.fHeight + 6;
+                }
+                else {
+                    y = y + objDRAGDROP.fHeight + 5;
+                }
+                
+            }
+            
+            else {
+                y = y + objDRAGDROP.fHeight + 10;
+                
             }
         }
     }
@@ -864,7 +937,7 @@
     int counter= 0;
     int y = 5, x= 20;
     int numOfColumns = 1;
-    int numOfRows =2;
+    int numOfRows = 4;
     float bnwidth = 0;
     float btnheight;
     
@@ -933,12 +1006,12 @@
     UIAlertView *alert = [[UIAlertView alloc] init];
     [alert setTitle:TITLE_COMMON];
     [alert setDelegate:self];
-//    if (flagForAnyOptionSelect) {
-//        [alert setTag:1];
-//        [alert addButtonWithTitle:@"Ok"];
-//        [alert setMessage:[NSString stringWithFormat:@"Please drag and drop and also select the category."]];
-//    }
-//    else {
+    if (flagForAnyOptionSelect) {
+        [alert setTag:1];
+        [alert addButtonWithTitle:@"Ok"];
+        [alert setMessage:[NSString stringWithFormat:@"Please drag and drop and also select the category."]];
+    }
+    else {
         if (flagForCheckAnswer == YES) {
             [alert setTag:2];
             [alert addButtonWithTitle:@"Ok"];
@@ -950,7 +1023,7 @@
             [alert addButtonWithTitle:@"Try Again"];
             [alert setMessage:[NSString stringWithFormat:@"Incorrect"]];
         }
-//    }
+    }
 	[alert show];
 }
 -(void) fn_ShowSelected:(NSString *)visitedAnswers

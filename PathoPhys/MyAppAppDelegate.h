@@ -58,7 +58,6 @@
 
 -(void) Fn_AddNotesListOnMenu;
 -(void) Fn_SubNotesListOnMenu;
--(void) Fn_SubNotesList1;
 
 - (int) charToScore:(char) character;
 

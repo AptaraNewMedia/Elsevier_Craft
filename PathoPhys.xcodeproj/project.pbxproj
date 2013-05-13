@@ -684,6 +684,8 @@
 		39F0ECEC1726DFC300AA09A1 /* icon_72.png in Resources */ = {isa = PBXBuildFile; fileRef = 39F0ECEB1726DFC300AA09A1 /* icon_72.png */; };
 		39F0ECEE1726DFC900AA09A1 /* icon_144.png in Resources */ = {isa = PBXBuildFile; fileRef = 39F0ECED1726DFC900AA09A1 /* icon_144.png */; };
 		870153551730121E00122579 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 870153541730121D00122579 /* QuartzCore.framework */; };
+		87030C95173E210400203AD1 /* note_box_bg_white_patch_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 87030C93173E210400203AD1 /* note_box_bg_white_patch_iPhone.png */; };
+		87030C96173E210400203AD1 /* note_box_bg_white_patch_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87030C94173E210400203AD1 /* note_box_bg_white_patch_iPhone@2x.png */; };
 		870399731724013C007EF1BE /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 870399711724013C007EF1BE /* AboutUsViewController.m */; };
 		870399761724015F007EF1BE /* AboutUsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 870399751724015E007EF1BE /* AboutUsViewController_iPad.xib */; };
 		870A6042171BF7C900D721D8 /* DragContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 870A603F171BF7C900D721D8 /* DragContext.m */; };
@@ -1822,6 +1824,8 @@
 		39F0ECEB1726DFC300AA09A1 /* icon_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_72.png; sourceTree = "<group>"; };
 		39F0ECED1726DFC900AA09A1 /* icon_144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_144.png; sourceTree = "<group>"; };
 		870153541730121D00122579 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		87030C93173E210400203AD1 /* note_box_bg_white_patch_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = note_box_bg_white_patch_iPhone.png; sourceTree = "<group>"; };
+		87030C94173E210400203AD1 /* note_box_bg_white_patch_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "note_box_bg_white_patch_iPhone@2x.png"; sourceTree = "<group>"; };
 		870399701724013C007EF1BE /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
 		870399711724013C007EF1BE /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
 		870399751724015E007EF1BE /* AboutUsViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutUsViewController_iPad.xib; sourceTree = "<group>"; };
@@ -3911,10 +3915,10 @@
 		87F67E951711B2390082C5CF /* Questions */ = {
 			isa = PBXGroup;
 			children = (
+				87F67EAC1711B27A0082C5CF /* MultipleSelection */,
 				399D2DC6172BAB290073B760 /* SingleSelectionWithImage */,
 				87FD9B681726559B0004B68D /* DragDrop&RB */,
 				87F67EAD1711B2A20082C5CF /* SingleSelection */,
-				87F67EAC1711B27A0082C5CF /* MultipleSelection */,
 				87F67EAB1711B2780082C5CF /* FillInblanks */,
 				87F67EA91711B2730082C5CF /* DragDrop */,
 				87F67EA81711B2710082C5CF /* TrueFalse */,
@@ -4110,6 +4114,8 @@
 		87FA12741737ED6200678A52 /* NotesInfo */ = {
 			isa = PBXGroup;
 			children = (
+				87030C93173E210400203AD1 /* note_box_bg_white_patch_iPhone.png */,
+				87030C94173E210400203AD1 /* note_box_bg_white_patch_iPhone@2x.png */,
 				87FA12751737ED6400678A52 /* add_note_box_bg_iPhone.png */,
 				87FA12761737ED6400678A52 /* add_note_box_bg_iPhone@2x.png */,
 				87FA12771737ED6400678A52 /* add_note_box_iPhone.png */,
@@ -5155,6 +5161,8 @@
 				39C449B6173A921B00E60C21 /* elsevier-logo.jpg in Resources */,
 				39C449B8173A9E2000E60C21 /* TestyourselfChapterListViewController_iPhone5.xib in Resources */,
 				390865EB173D490600EFE7D5 /* NotesListNewViewController.xib in Resources */,
+				87030C95173E210400203AD1 /* note_box_bg_white_patch_iPhone.png in Resources */,
+				87030C96173E210400203AD1 /* note_box_bg_white_patch_iPhone@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

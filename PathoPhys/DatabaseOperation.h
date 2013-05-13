@@ -49,7 +49,7 @@
 //Notes
 -(void) fnSetNote:(Notes *)notes;
 -(void) fnUpdateNote:(Notes *)notes;
--(Notes *) fnGetNote:(int)category_id AndChapterID:(int)chapter_id AndThematicId:(int)thematic_id AndQuestionNo:(int)question_no;
+-(Notes *) fnGetNote:(int)category_id AndChapterID:(int)chapter_id AndThematicId:(int)thematic_id AndQuestionNo:(int)question_no AndQuizTrackId:(int)quiz_id;
 -(NSMutableArray *) fnGetNotesList;
 
 

@@ -223,6 +223,7 @@ UITextView *txt_feedback;
 -(void) Fn_AddNotesList{
     [self Fn_SubNotesList];
     
+    
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
         notesListView = [[NotesListViewController alloc] initWithNibName:@"NotesListViewController_iPhone" bundle:nil];
@@ -231,6 +232,8 @@ UITextView *txt_feedback;
     {
         notesListView = [[NotesListViewController alloc] initWithNibName:@"NotesListViewController_iPad" bundle:nil];
     }
+    notesListView.FromMenu = 0;
+    
     if (categoryNumber == 1) {
         [navController1 pushViewController:notesListView animated:YES];
     }
@@ -249,10 +252,6 @@ UITextView *txt_feedback;
 }
 -(void) Fn_SubNotesList{
     [notesListView.view removeFromSuperview];
-}
-
--(void) Fn_SubNotesList1{
-    [notesListNewViewController.view removeFromSuperview];
 }
 
 // Score Card
@@ -404,35 +403,18 @@ UITextView *txt_feedback;
 // Add NoteList On Menu
 -(void) Fn_AddNotesListOnMenu{
     [self Fn_SubNotesListOnMenu];
-    
-//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-//    {
-//        notesListView = [[NotesListViewController alloc] initWithNibName:@"NotesListViewController_iPhone" bundle:nil];
-//    }
-//    else
-//    {
-//        notesListView = [[NotesListViewController alloc] initWithNibName:@"NotesListViewController_iPad" bundle:nil];
-//    }
-//    [notesListView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
-//    navController = [[UINavigationController alloc] initWithRootViewController:notesListView];
-//    self.window.rootViewController = navController;
-//    [navController setNavigationBarHidden:YES animated:NO];
-
-    
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
-        notesListNewViewController = [[NotesListNewViewController alloc] initWithNibName:@"NotesListNewViewController" bundle:nil];
+        notesListView = [[NotesListViewController alloc] initWithNibName:@"NotesListViewController_iPhone" bundle:nil];
     }
     else
     {
-        notesListNewViewController = [[NotesListNewViewController alloc] initWithNibName:@"NotesListNewViewController" bundle:nil];
+        notesListView = [[NotesListViewController alloc] initWithNibName:@"NotesListViewController_iPad" bundle:nil];
     }
-    [notesListNewViewController shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
-    navController = [[UINavigationController alloc] initWithRootViewController:notesListNewViewController];
+    notesListView.FromMenu = 1;
+    [notesListView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
+    navController = [[UINavigationController alloc] initWithRootViewController:notesListView];
     self.window.rootViewController = navController;
-//    [navController setNavigationBarHidden:YES animated:NO];
-
-
 }
 -(void) Fn_SubNotesListOnMenu{
     [navController.view removeFromSuperview];

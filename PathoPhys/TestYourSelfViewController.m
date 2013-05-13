@@ -432,7 +432,7 @@
 
     int question_no = intCurrentQuestionIndex + 1;
     
-    objNotes = [db fnGetNote:categoryNumber AndChapterID:intCurrentTestYourSelf_ChapterId AndThematicId:intCurrentTestYourSelf_ThematicId AndQuestionNo:question_no];
+    objNotes = [db fnGetNote:categoryNumber AndChapterID:intCurrentTestYourSelf_ChapterId AndThematicId:intCurrentTestYourSelf_ThematicId AndQuestionNo:question_no AndQuizTrackId:objQuizTrack.intQuizTrackId];
     
     if (objNotes == Nil) {
         
@@ -452,6 +452,10 @@
     objNotes.intChapterId = intCurrentTestYourSelf_ChapterId;
     objNotes.intThematicId = intCurrentTestYourSelf_ThematicId;
     objNotes.intQuestionNo = question_no;
+    objNotes.intQuizTrackId   = objQuizTrack.intQuizTrackId;
+    objQue = (ChapterQuestionSet *)[arrTestYourSelf objectAtIndex:intCurrentQuestionIndex];
+    objNotes.strQuestionId = objQue.strQuestionId;
+
     [md Fn_AddNote:objNotes];
 }
 

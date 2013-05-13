@@ -14,7 +14,8 @@
 #import "FlashCardsViewController.h"
 #import "TestYourSelfViewController.h"
 #import "CaseStudyViewController.h"
-
+#import "CustomLeftBarItem.h"
+#import "CustomRightBarItem.h"
 
 @interface NotesListViewController ()
 {
@@ -42,13 +43,17 @@
     CaseStudyViewController *caseStudyViewController;
     
     
+    CustomRightBarItem *customRightBar;
+    CustomLeftBarItem *customLeftBar;
+    
+    
     // 1- Landscape
     // 2- Portrait
 }
 @end
 
 @implementation NotesListViewController
-
+@synthesize FromMenu;
  
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -59,7 +64,12 @@
 }
 - (void)viewDidLoad{
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.    
+    // Do any additional setup after loading the view from its nib.
+
+    self.title = @"Notes List";
+    
+    [self fnAddNavigationItems];
+    
     arrNotes = [db fnGetNotesList];
     arrsearch = [[NSMutableArray alloc] init];
     arrsearch = arrNotes;
@@ -85,6 +95,62 @@
 }
 -(IBAction)onClose:(id)sender{
     [md Fn_SubNotesList];
+}
+
+-(IBAction)onBack:(id)sender{
+    if (FromMenu == 1) {
+        [md Fn_SubNotesListOnMenu];
+        [md Fn_AddMenu];
+    }
+    else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+-(void) fnAddNavigationItems{
+    if (DEVICE_VERSION >= 5.0) {
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"img_topbar.png"] forBarMetrics:UIBarMetricsDefault];
+    }
+    
+    [self.navigationController.navigationBar setTintColor:COLOR_BLUE];
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        customLeftBar = [[CustomLeftBarItem alloc] initWithFrame:CGRectMake(0, 0, 80, 44)];
+        customLeftBar.btnHome.frame = CGRectMake(0, 7, 35, 30) ;
+        customLeftBar.btnBack.frame = CGRectMake(31, 7, 45, 30) ;
+        [customLeftBar.btnHome setImage:[UIImage imageNamed:@"home_btn.png"] forState:UIControlStateNormal];
+        [customLeftBar.btnBack setImage:[UIImage imageNamed:@"back_btn.png"] forState:UIControlStateNormal];
+    }
+    else {
+        customLeftBar = [[CustomLeftBarItem alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+    }
+    
+    UIBarButtonItem *btnBar1 = [[UIBarButtonItem alloc] initWithCustomView:customLeftBar];
+    self.navigationItem.leftBarButtonItem = btnBar1;
+    [customLeftBar.btnBack addTarget:self action:@selector(onBack:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(230, 0, 90, 44)];
+        
+        customRightBar.btnScore.frame = CGRectMake(0.0, 7.0, 30, 30);
+        customRightBar.btnNote.frame = CGRectMake(31.0, 7.0, 30, 30);
+        customRightBar.btnInfo.frame = CGRectMake(61.0, 7.0, 30, 30);
+        
+    }
+    else {
+        customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(0, 0, 130, 44)];
+    }
+    UIBarButtonItem *btnBar = [[UIBarButtonItem alloc] initWithCustomView:customRightBar];
+    self.navigationItem.rightBarButtonItem = btnBar;
+    
+    
+    
+    customRightBar.btnScore.hidden = YES;
+    customRightBar.btnNote.hidden = YES;
+    customRightBar.btnInfo.hidden = YES;
+    
+    customLeftBar.btnHome.hidden = YES;
+    customLeftBar.btnBack.frame = CGRectMake(0, 7, 45, 30) ;
+    
 }
 
 // Tables
@@ -120,10 +186,10 @@
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
-        cell.lbl_serionNo.font = FONT_8;
-        cell.lbl_name.font = FONT_8;
-        cell.lbl_date.font = FONT_8;
-        cell.lbl_desc.font = FONT_8;
+        cell.lbl_serionNo.font = FONT_12;
+        cell.lbl_name.font = FONT_12;
+        cell.lbl_date.font = FONT_12;
+        cell.lbl_desc.font = FONT_12;
     }
     else
     {
@@ -146,6 +212,7 @@
     cell.lbl_name.text = [NSString stringWithFormat:@"%@",objNotes.strNoteTitle];
     cell.lbl_date.text = [NSString stringWithFormat:@"%@", objNotes.strCreatedDate];
     cell.lbl_desc.text = [NSString stringWithFormat:@"%@", objNotes.strNoteDesc];
+    cell.lbl_desc.hidden = YES;
     //    if(currentOrientation == 2){
     //        NSLog(@"protrait");
     //        cell.imgview_cellpatch.image = [UIImage imageNamed:@"white_patch_with_line.png"];
