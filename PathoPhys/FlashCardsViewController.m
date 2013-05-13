@@ -293,7 +293,7 @@
         scrollGallery.contentSize = CGSizeMake(66*length, 98);
     }
     else {
-        scrollGallery.contentSize = CGSizeMake(115*length, 180);
+        scrollGallery.contentSize = CGSizeMake(113*length, 180);
     }
     CGFloat xOrigin = 0;
     arrThumbs = [[NSMutableArray alloc] init];
@@ -329,7 +329,7 @@
             
         }
         else {
-            xOrigin = xOrigin + 115;            
+            xOrigin = xOrigin + 113;
         }
         
     }
@@ -517,7 +517,7 @@
     }
 }
 -(void) fnSetPreviousImage {
-    if (prevFlipViewIndex != -1) {
+    if (prevFlipViewIndex != intCurrentQuestionIndex) {
         
         if(arrThumbsLarge.count > 1) {
         
@@ -716,7 +716,7 @@
         }
         else {
             flipViewButton.textLabel.frame = CGRectMake(55, 15, 270, 370);
-            flipViewButton.textLabel.font = FONT_12;
+            flipViewButton.textLabel.font = FONT_17;
             [flipViewButton setBackgroundImage:[UIImage imageNamed:@"img_flashcard_back.png"] forState:UIControlStateNormal];
         }
         flipViewButton.textLabel.backgroundColor = COLOR_CLEAR;
@@ -1104,8 +1104,7 @@
     [scrollViewMiddle setFrame:CGRectMake(194, 177, 382, scrollViewMiddle.frame.size.height)];
     
     
-    
-    [scrollGallery setFrame:CGRectMake(147, 716, 467, 280)];
+    [scrollGallery setFrame:CGRectMake(147, 716, 452, 280)];
     
     
     [btnLargePrev setFrame:CGRectMake(78, 345, 70, 70)];
@@ -1141,7 +1140,7 @@
     
     [scrollViewMiddle setFrame:CGRectMake(321, 67, 382, scrollViewMiddle.frame.size.height)];
     
-    [scrollGallery setFrame:CGRectMake(147, 516, 687, 280)];
+    [scrollGallery setFrame:CGRectMake(157, 516, 678, 280)];
     
     [btnLargePrev setFrame:CGRectMake(242, 235, 70, 70)];
     [btnLargeNext setFrame:CGRectMake(712, 235, 70, 70)];
