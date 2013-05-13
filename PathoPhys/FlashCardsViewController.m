@@ -1044,7 +1044,12 @@
         [arrFlashcards removeAllObjects];
         
         if (indexPath.row == 0) {
-            arrFlashcards = [db fnGetFlashcardsSet:intCurrentFlashcard_ChapterId];            
+            if (ViewAllButtons == 1) {
+                arrFlashcards = [db fnGetAllFlashcardsSet];
+            }
+            else {
+                arrFlashcards = [db fnGetFlashcardsSet:intCurrentFlashcard_ChapterId];
+            }
         }
         else {
             NSString *let  =  [NSString stringWithFormat:@"%c", (char) indexPath.row + 64];
@@ -1076,7 +1081,7 @@
         btn_popupRemove.hidden=YES;
         [Bn_ByChapter setBackgroundImage:nil forState:UIControlStateNormal];
         
-        
+        ViewAllButtons = 0;
         intCurrentQuestionIndex = 0;
         prevFlipViewIndex = 0;
         prevThumbTapped = 0;

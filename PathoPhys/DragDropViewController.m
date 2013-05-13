@@ -113,6 +113,8 @@
         [self rotateScrollViewButtonsForiPhone];
     }
     
+    [scrollViewDrag.layer setBorderWidth:1.0];
+    [scrollViewDrag.layer setBorderColor:[COLOR_BLUE CGColor]];
 }
 
 

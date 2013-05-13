@@ -12,6 +12,7 @@
 #import "CustomDragButton.h"
 #import "DragDropManager.h"
 #import "TestYourSelfViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface FillInTheBlanksViewController ()
 {
@@ -88,6 +89,8 @@
      if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
          [self rotateScrollViewButtonsForiPhone];
      }
+    [scrollViewDrag.layer setBorderWidth:1.0];
+    [scrollViewDrag.layer setBorderColor:[COLOR_BLUE CGColor]];
 }
 
 -(void) fn_SetFontColor

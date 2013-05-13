@@ -120,6 +120,9 @@
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
         //[self rotateScrollViewButtonsForiPhone];
     }
+    
+    [scrollViewDrag.layer setBorderWidth:1.0];
+    [scrollViewDrag.layer setBorderColor:[COLOR_BLUE CGColor]];
 }
 
 -(void) fn_SetFontColor
