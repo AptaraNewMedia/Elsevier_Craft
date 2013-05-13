@@ -655,7 +655,6 @@
 		870E9E86172C03E200DD52A8 /* MCSSCell_iPad_P.xib in Resources */ = {isa = PBXBuildFile; fileRef = 870E9E84172C03E200DD52A8 /* MCSSCell_iPad_P.xib */; };
 		870E9EBF172C0FAF00DD52A8 /* SingleSelectionViewController_cs_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 870E9EBC172C0FAF00DD52A8 /* SingleSelectionViewController_cs_iPad.xib */; };
 		870E9EC0172C0FAF00DD52A8 /* SingleSelectionViewController_cs.m in Sources */ = {isa = PBXBuildFile; fileRef = 870E9EBE172C0FAF00DD52A8 /* SingleSelectionViewController_cs.m */; };
-		871041271741503700C7B076 /* 110001@2x_Iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 871040F31741503700C7B076 /* 110001@2x_Iphone.png */; };
 		871041281741503700C7B076 /* 110001_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 871040F41741503700C7B076 /* 110001_iphone@2x.png */; };
 		871041291741503700C7B076 /* 110002_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 871040F51741503700C7B076 /* 110002_iphone@2x.png */; };
 		8710412A1741503700C7B076 /* 110003_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 871040F61741503700C7B076 /* 110003_iphone@2x.png */; };
@@ -1810,7 +1809,6 @@
 		870E9EBC172C0FAF00DD52A8 /* SingleSelectionViewController_cs_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleSelectionViewController_cs_iPad.xib; sourceTree = "<group>"; };
 		870E9EBD172C0FAF00DD52A8 /* SingleSelectionViewController_cs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleSelectionViewController_cs.h; sourceTree = "<group>"; };
 		870E9EBE172C0FAF00DD52A8 /* SingleSelectionViewController_cs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleSelectionViewController_cs.m; sourceTree = "<group>"; };
-		871040F31741503700C7B076 /* 110001@2x_Iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "110001@2x_Iphone.png"; sourceTree = "<group>"; };
 		871040F41741503700C7B076 /* 110001_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "110001_iphone@2x.png"; sourceTree = "<group>"; };
 		871040F51741503700C7B076 /* 110002_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "110002_iphone@2x.png"; sourceTree = "<group>"; };
 		871040F61741503700C7B076 /* 110003_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "110003_iphone@2x.png"; sourceTree = "<group>"; };
@@ -3536,7 +3534,6 @@
 		871040F21741503700C7B076 /* @2x */ = {
 			isa = PBXGroup;
 			children = (
-				871040F31741503700C7B076 /* 110001@2x_Iphone.png */,
 				871040F41741503700C7B076 /* 110001_iphone@2x.png */,
 				871040F51741503700C7B076 /* 110002_iphone@2x.png */,
 				871040F61741503700C7B076 /* 110003_iphone@2x.png */,
@@ -5139,7 +5136,6 @@
 				390865EB173D490600EFE7D5 /* NotesListNewViewController.xib in Resources */,
 				87030C95173E210400203AD1 /* note_box_bg_white_patch_iPhone.png in Resources */,
 				87030C96173E210400203AD1 /* note_box_bg_white_patch_iPhone@2x.png in Resources */,
-				871041271741503700C7B076 /* 110001@2x_Iphone.png in Resources */,
 				871041281741503700C7B076 /* 110001_iphone@2x.png in Resources */,
 				871041291741503700C7B076 /* 110002_iphone@2x.png in Resources */,
 				8710412A1741503700C7B076 /* 110003_iphone@2x.png in Resources */,

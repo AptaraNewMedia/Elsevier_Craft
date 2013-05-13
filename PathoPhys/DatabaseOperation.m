@@ -906,7 +906,7 @@ NSError *error;
 -(DRAGDROP *)fnGetCasestudyDRAGDROP:(NSString *)question_id
 {
     DRAGDROP *objDRAGDROP;
-    strQuery = [NSString stringWithFormat:@"select mcms_id, question_text, options, options_text, answers, question_image, feedback, instruction, ipad_normal_points, ipad_size, casestudy_text from mcms_cs where question_id = '%@'",question_id];
+    strQuery = [NSString stringWithFormat:@"select mcms_id, question_text, options, options_text, answers, question_image, feedback, instruction, ipad_normal_points, ipad_size, casestudy_text, iphone_normal_size, iphone_size  from mcms_cs where question_id = '%@'",question_id];
     arrTempList = [dbOperation getRowsForQuery:strQuery];
     intRowCount = [arrTempList count];
     for (int i = 0; i < intRowCount; i++) {
@@ -935,7 +935,7 @@ NSError *error;
         
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
             
-            objDRAGDROP.arrXYpoints = [[[arrTempList objectAtIndex:i] objectForKey:@"iphone_normal_points"] componentsSeparatedByString:@"#$#"];
+            objDRAGDROP.arrXYpoints = [[[arrTempList objectAtIndex:i] objectForKey:@"iphone_normal_size"] componentsSeparatedByString:@"#$#"];
             
             widthhight = [[[arrTempList objectAtIndex:i] objectForKey:@"iphone_size"] componentsSeparatedByString:@","];
             if (widthhight.count > 0) {
