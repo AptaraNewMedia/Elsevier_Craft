@@ -336,7 +336,6 @@
         
         
         MCSSCell_iPad *cell = [cellArray objectAtIndex:indexPath.row];
-         
         for (int j = 0; j < answer_count; j++) {
             NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
             sa = [sa lowercaseString];
@@ -383,7 +382,7 @@
     [btnInvisible removeFromSuperview];
     btnInvisible = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnInvisible setFrame:CGRectMake(tblOptions.frame.origin.x, tblOptions.frame.origin.y, tblOptions.frame.size.width - 50, tblOptions.frame.size.height)];
-    btnInvisible.backgroundColor = [UIColor blueColor];
+    btnInvisible.backgroundColor = [UIColor clearColor];
     [btnInvisible setAlpha:0.5];
     [btnInvisible addTarget:self action:@selector(onInvisible:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btnInvisible];    
@@ -677,9 +676,6 @@
             [self handleRevealScore];
         }
     }
-    
-     cell.imgAns.hidden =YES;
-    
     return cell;
 }
 
