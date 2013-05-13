@@ -23,6 +23,9 @@
 
 
 // FlashCards
+-(NSMutableArray *) fnGetAllFlashcardsSet;
+-(NSMutableArray *) fnGetAllSortedFlashcards;
+-(NSMutableArray *) fnGetAllAlphabetFlashcards:(NSString *)word;
 -(NSMutableArray *) fnGetFlashcardsSet:(int)chapter_id;
 -(NSMutableArray *) fnGetSortedFlashcards:(int)chapter_id;
 -(NSMutableArray *) fnGetAlphabetFlashcards:(int)chapter_id AndWord:(NSString *)word;

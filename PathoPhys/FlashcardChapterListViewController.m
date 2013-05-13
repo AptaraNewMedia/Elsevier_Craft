@@ -56,7 +56,7 @@
         lbl_title.font = FONT_25;
     }
     
-    btnViewAll.hidden = YES;
+    btnViewAll.hidden = NO;
     
     [self fnAddNavigationItems];
     //Code for Exclusive Touch Enabling.
@@ -219,6 +219,7 @@
         flashCardsViewController = [[FlashCardsViewController alloc] initWithNibName:@"FlashCardsViewController_iPad" bundle:nil];
     }
     
+    flashCardsViewController.ViewAllButtons = 0;
     [self.navigationController pushViewController:flashCardsViewController animated:YES];
 }
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -245,8 +246,19 @@
     
 }
 - (IBAction)Bn_All_Tapped:(id)sender{
-    viewAllFlashCards = 1;
-    flashCardsViewController = [[FlashCardsViewController alloc] initWithNibName:@"FlashCardsViewController_iPad" bundle:nil];
+    intCurrentFlashcard_ChapterId = 1;
+    str_BarTitle = [NSString stringWithFormat:@"Flash Cards" ];
+    
+    if([UIScreen mainScreen].bounds.size.height == 568.0){
+        flashCardsViewController = [[FlashCardsViewController alloc] initWithNibName:@"FlashCardsViewController_iPhone5" bundle:nil];
+    }
+    else if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        flashCardsViewController = [[FlashCardsViewController alloc] initWithNibName:@"FlashCardsViewController_iPhone" bundle:nil];
+    }
+    else {
+        flashCardsViewController = [[FlashCardsViewController alloc] initWithNibName:@"FlashCardsViewController_iPad" bundle:nil];
+    }
+    flashCardsViewController.ViewAllButtons = 1;
     [self.navigationController pushViewController:flashCardsViewController animated:YES];
 
 }

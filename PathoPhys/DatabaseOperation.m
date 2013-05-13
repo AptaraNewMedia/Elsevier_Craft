@@ -61,6 +61,70 @@ NSError *error;
 
 //FlashCards Key definition set
 //--------------------------------------------------------------
+
+-(NSMutableArray *) fnGetAllFlashcardsSet
+{
+    FlashcardsSet *objFlashcardSet;
+    NSMutableArray *flashcardData = [[NSMutableArray  alloc] init];
+    strQuery = [NSString stringWithFormat:@"SELECT flashcard_id, chapter_id, word, definition, description FROM flashcards"];
+    arrTempList = [dbOperation getRowsForQuery:strQuery];
+    intRowCount = [arrTempList count];
+    for (int i = 0; i < intRowCount; i++) {
+        objFlashcardSet = [FlashcardsSet new];
+        objFlashcardSet.intFlashcardId = [[[arrTempList objectAtIndex:i] objectForKey:@"flashcard_id"] intValue];
+        objFlashcardSet.intChapterId = [[[arrTempList objectAtIndex:i] objectForKey:@"chapter_id"] intValue];
+        objFlashcardSet.strKey = [[arrTempList objectAtIndex:i] objectForKey:@"word"];
+        objFlashcardSet.strDefinition = [[arrTempList objectAtIndex:i] objectForKey:@"definition"];
+        objFlashcardSet.strDescription = [[arrTempList objectAtIndex:i] objectForKey:@"description"];
+        //objFlashcardSet.strInstruction = [[arrTempList objectAtIndex:i] objectForKey:@"instruction"];
+        objFlashcardSet.intIndex = i;
+        [flashcardData addObject:objFlashcardSet];
+    }
+    return flashcardData;
+}
+
+-(NSMutableArray *) fnGetAllSortedFlashcards
+{
+    FlashcardsSet *objFlashcardSet;
+    NSMutableArray *flashcardData = [[NSMutableArray  alloc] init];
+    strQuery = [NSString stringWithFormat:@"SELECT flashcard_id, chapter_id, word, definition, description FROM flashcards"];
+    arrTempList = [dbOperation getRowsForQuery:strQuery];
+    intRowCount = [arrTempList count];
+    for (int i = 0; i < intRowCount; i++) {
+        objFlashcardSet = [FlashcardsSet new];
+        objFlashcardSet.intFlashcardId = [[[arrTempList objectAtIndex:i] objectForKey:@"flashcard_id"] intValue];
+        objFlashcardSet.intChapterId = [[[arrTempList objectAtIndex:i] objectForKey:@"chapter_id"] intValue];
+        objFlashcardSet.strKey = [[arrTempList objectAtIndex:i] objectForKey:@"word"];
+        objFlashcardSet.strDefinition = [[arrTempList objectAtIndex:i] objectForKey:@"definition"];
+        objFlashcardSet.strDescription = [[arrTempList objectAtIndex:i] objectForKey:@"description"];
+        //objFlashcardSet.strInstruction = [[arrTempList objectAtIndex:i] objectForKey:@"instruction"];
+        objFlashcardSet.intIndex = i;
+        [flashcardData addObject:objFlashcardSet];
+    }
+    return flashcardData;
+}
+
+-(NSMutableArray *) fnGetAllAlphabetFlashcards:(NSString *)word
+{
+    FlashcardsSet *objFlashcardSet;
+    NSMutableArray *flashcardData = [[NSMutableArray  alloc] init];
+    strQuery = [NSString stringWithFormat:@"SELECT flashcard_id, chapter_id, word, definition, description FROM flashcards WHERE word LIKE '%@%%' ORDER BY word", word];
+    arrTempList = [dbOperation getRowsForQuery:strQuery];
+    intRowCount = [arrTempList count];
+    for (int i = 0; i < intRowCount; i++) {
+        objFlashcardSet = [FlashcardsSet new];
+        objFlashcardSet.intFlashcardId = [[[arrTempList objectAtIndex:i] objectForKey:@"flashcard_id"] intValue];
+        objFlashcardSet.intChapterId = [[[arrTempList objectAtIndex:i] objectForKey:@"chapter_id"] intValue];
+        objFlashcardSet.strKey = [[arrTempList objectAtIndex:i] objectForKey:@"word"];
+        objFlashcardSet.strDefinition = [[arrTempList objectAtIndex:i] objectForKey:@"definition"];
+        objFlashcardSet.strDescription = [[arrTempList objectAtIndex:i] objectForKey:@"description"];
+        //objFlashcardSet.strInstruction = [[arrTempList objectAtIndex:i] objectForKey:@"instruction"];
+        objFlashcardSet.intIndex = i;
+        [flashcardData addObject:objFlashcardSet];
+    }
+    return flashcardData;
+}
+
 -(NSMutableArray *) fnGetFlashcardsSet:(int)chapter_id
 {
     FlashcardsSet *objFlashcardSet;

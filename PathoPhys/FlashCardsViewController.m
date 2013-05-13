@@ -50,13 +50,12 @@
 -(IBAction)onNext:(id)sender;
 -(IBAction)onPrev:(id)sender;
 
-- (void) disableAllButtons;
-
-
 
 @end
 
 @implementation FlashCardsViewController
+
+@synthesize ViewAllButtons;
 
 -(IBAction)Bn_Back_Tapped:(id)sender{
     //[md Fn_SubFlashCards];
@@ -205,7 +204,13 @@
     self.navigationItem.rightBarButtonItem = btnBar;
 }
 -(void) fnGetFlashcardData{
-    arrFlashcards = [db fnGetFlashcardsSet:intCurrentFlashcard_ChapterId];
+    
+    if (ViewAllButtons == 1) {
+        arrFlashcards = [db fnGetAllFlashcardsSet];
+    }
+    else {
+        arrFlashcards = [db fnGetFlashcardsSet:intCurrentFlashcard_ChapterId];
+    }    
     [self fnSetThumnailsLarge];
     [self fnSetThumnails];
 }
@@ -823,7 +828,13 @@
         prevThumbTapped = 0;
         firsttime = -1;
         [arrFlashcards removeAllObjects];
-        arrFlashcards = [db fnGetSortedFlashcards:intCurrentFlashcard_ChapterId];
+        
+        if (ViewAllButtons == 1) {
+            arrFlashcards = [db fnGetAllSortedFlashcards];
+        }
+        else {
+            arrFlashcards = [db fnGetSortedFlashcards:intCurrentFlashcard_ChapterId];
+        }
         
         [self fnRemoveThumnails];
         [self fnSetThumnailsLarge];
@@ -982,8 +993,10 @@
             
             cell.selectedBackgroundView = selectionImage;
             
-            if (indexPath.row == intCurrentFlashcard_ChapterId-1) {             
-                [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+            if (indexPath.row == intCurrentFlashcard_ChapterId-1) {
+                if (ViewAllButtons != 1) {
+                    [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+                }
             }
 
         }
@@ -1002,7 +1015,12 @@
         }
         else {
             NSString *let  =  [NSString stringWithFormat:@"%c", (char) indexPath.row + 64];
-            arrFlashcards = [db fnGetAlphabetFlashcards:intCurrentFlashcard_ChapterId AndWord:let];
+            if (ViewAllButtons == 1) {
+                arrFlashcards = [db fnGetAllAlphabetFlashcards:let];                
+            }
+            else {
+                arrFlashcards = [db fnGetAlphabetFlashcards:intCurrentFlashcard_ChapterId AndWord:let];
+            }
         }
         
         [self fnRemoveThumnails];
@@ -1016,7 +1034,9 @@
         
         Chapters *objChap = (Chapters *)[arr_chaptersTestAndFlashcard objectAtIndex:indexPath.row];
         intCurrentFlashcard_ChapterId = objChap.intChapterId;
+        
         arrFlashcards = [db fnGetFlashcardsSet:intCurrentFlashcard_ChapterId];
+        
         str_BarTitle = [NSString stringWithFormat:@"Flash Cards - %@", objChap.strChapterTitle];
         self.title = str_BarTitle;
         view_chapterTbl.hidden=YES;

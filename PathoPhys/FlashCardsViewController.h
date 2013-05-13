@@ -36,6 +36,8 @@
     IBOutlet UIButton *Bn_ByChapter;
 }
 
+@property (nonatomic) NSInteger ViewAllButtons;
+
 -(void) onSelctor;
 - (IBAction)Bn_Back_Tapped:(id)sender;
 - (void) disableAllButtons:(int)questionNO;
