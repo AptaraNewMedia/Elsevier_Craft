@@ -560,6 +560,10 @@
 		39D8D93B173930300008B46E /* FlashcardChapterListViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39D8D93A173930300008B46E /* FlashcardChapterListViewController_iPhone5.xib */; };
 		39EC185E1740CD1C009D36FE /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EC185C1740CD1C009D36FE /* libGoogleAnalytics.a */; };
 		39EC185F1740CD1C009D36FE /* libGoogleAnalytics_debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EC185D1740CD1C009D36FE /* libGoogleAnalytics_debug.a */; };
+		39EC186117418CE1009D36FE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 39EC186017418CE1009D36FE /* Default.png */; };
+		39EC186317418CF5009D36FE /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39EC186217418CF5009D36FE /* Default@2x.png */; };
+		39EC1865174191C0009D36FE /* iPhone_01a.png in Resources */ = {isa = PBXBuildFile; fileRef = 39EC1864174191C0009D36FE /* iPhone_01a.png */; };
+		39EC1867174191DA009D36FE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39EC1866174191DA009D36FE /* Default-568h@2x.png */; };
 		39F0EC0717269BE100AA09A1 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39F0EC0617269BE100AA09A1 /* MessageUI.framework */; };
 		39F0EC0C1726A0AF00AA09A1 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F0EC0B1726A0AF00AA09A1 /* Reachability.m */; };
 		39F0EC0E1726A0C200AA09A1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39F0EC0D1726A0C200AA09A1 /* SystemConfiguration.framework */; };
@@ -1653,6 +1657,10 @@
 		39EC185B1740CD1C009D36FE /* GAITransactionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransactionItem.h; sourceTree = "<group>"; };
 		39EC185C1740CD1C009D36FE /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
 		39EC185D1740CD1C009D36FE /* libGoogleAnalytics_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics_debug.a; sourceTree = "<group>"; };
+		39EC186017418CE1009D36FE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		39EC186217418CF5009D36FE /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		39EC1864174191C0009D36FE /* iPhone_01a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPhone_01a.png; sourceTree = "<group>"; };
+		39EC1866174191DA009D36FE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		39F0EC0617269BE100AA09A1 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		39F0EC0A1726A0AF00AA09A1 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		39F0EC0B1726A0AF00AA09A1 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -2349,6 +2357,9 @@
 		39970574170EEE23008933DD = {
 			isa = PBXGroup;
 			children = (
+				39EC1866174191DA009D36FE /* Default-568h@2x.png */,
+				39EC186217418CF5009D36FE /* Default@2x.png */,
+				39EC186017418CE1009D36FE /* Default.png */,
 				39F0ECED1726DFC900AA09A1 /* icon_144.png */,
 				39F0ECEB1726DFC300AA09A1 /* icon_72.png */,
 				39F0ECE91726DFBB00AA09A1 /* icon_114.png */,
@@ -2884,6 +2895,7 @@
 		39D8D5AB17391EFC0008B46E /* Portrait */ = {
 			isa = PBXGroup;
 			children = (
+				39EC1864174191C0009D36FE /* iPhone_01a.png */,
 				39D8D5AC17391EFC0008B46E /* Default-Portrait@2x~ipad.png */,
 				39D8D5AD17391EFC0008B46E /* Default-Portrait~ipad.png */,
 				870D14401741815B0097916B /* DefaultiPhone.png */,
@@ -5289,6 +5301,10 @@
 				870D143F174180690097916B /* icon_114.png in Resources */,
 				870D14421741815B0097916B /* DefaultiPhone.png in Resources */,
 				870D14431741815B0097916B /* DefaultiPhone@2x.png in Resources */,
+				39EC186117418CE1009D36FE /* Default.png in Resources */,
+				39EC186317418CF5009D36FE /* Default@2x.png in Resources */,
+				39EC1865174191C0009D36FE /* iPhone_01a.png in Resources */,
+				39EC1867174191DA009D36FE /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
