@@ -1196,7 +1196,7 @@
             }
         }
         
-        if(objDRAGDROP.intDRAGDROPRADIOid == 18 || objDRAGDROP.intDRAGDROPRADIOid == 9 || objDRAGDROP.intDRAGDROPRADIOid == 14 || objDRAGDROP.intDRAGDROPRADIOid == 15){
+        if(objDRAGDROP.intDRAGDROPRADIOid == 14 || objDRAGDROP.intDRAGDROPRADIOid == 15){
             bnFeedback.hidden = YES;
         }
     
@@ -1237,9 +1237,9 @@
                 }
             }
             
-            //if(objDRAGDROP.intDRAGDROPRADIOid == 25 || objDRAGDROP.intDRAGDROPRADIOid == 26){
+            if(objDRAGDROP.intDRAGDROPRADIOid == 25 || objDRAGDROP.intDRAGDROPRADIOid == 26 || objDRAGDROP.intDRAGDROPRADIOid == 18 || objDRAGDROP.intDRAGDROPRADIOid == 9){
                 bn.feedbackBt.hidden = YES;
-            //}
+            }
         }
         i++;
     }
