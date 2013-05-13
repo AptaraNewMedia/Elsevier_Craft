@@ -244,15 +244,15 @@
             spacingWidth = 30;
             spacingHeight = objDRAGDROP.fHeight;
             x = objDRAGDROP.fWidth + 10;
-            y = 63;
+            y = 80;
             height = 16;
             width = 16;
         }
         else {
             spacingWidth = 92;
-            spacingHeight = objDRAGDROP.fHeight;
+            spacingHeight = objDRAGDROP.fHeight+5;
             x = objDRAGDROP.fWidth + 10;
-            y = 32;
+            y = 21;
             height = 22;
             width = 22;
         }
@@ -263,7 +263,7 @@
             spacingWidth = 45;
             spacingHeight = objDRAGDROP.fHeight;
             x = objDRAGDROP.fWidth + 10;
-            y = 30;
+            y = 75;
             height = 16;
             width = 16;
         }
@@ -282,15 +282,15 @@
             spacingWidth = 65;
             spacingHeight = objDRAGDROP.fHeight + 5;
             x = objDRAGDROP.fWidth + 10;
-            y = 30;
+            y = 78;
             height = 22;
             width = 22;
         }
         else {
-            spacingWidth = 65;
+            spacingWidth = 130;
             spacingHeight = objDRAGDROP.fHeight;
             x = objDRAGDROP.fWidth + 10;
-            y = 90;
+            y = 13;
             height = 22;
             width = 22;
         }
@@ -300,15 +300,15 @@
             spacingWidth = 67;
             spacingHeight = objDRAGDROP.fHeight + 5;
             x = objDRAGDROP.fWidth + 10;
-            y = 32;
+            y = 85;
             height = 22;
             width = 22;
         }
         else {
-            spacingWidth = 67;
-            spacingHeight = objDRAGDROP.fHeight;
+            spacingWidth = 160;
+            spacingHeight = objDRAGDROP.fHeight-4;
             x = objDRAGDROP.fWidth + 10;
-            y = 90;
+            y = 17;
             height = 22;
             width = 22;
         }
@@ -322,9 +322,9 @@
             height = 22;
             width = 22;
             
-            firstX = 125;
+            firstX = 5;
             firstY = 35;
-            secondX = 0;
+            secondX = 130;
             secondY = 78;
             thirdX = 5;
             thirdY = 120;
@@ -356,9 +356,9 @@
             
             firstX = 35;
             firstY = 52;
-            secondX = 30;
+            secondX = 35;
             secondY = 96;
-            thirdX = 0;
+            thirdX = 52;
             thirdY = 138;
         }
         else
@@ -430,7 +430,7 @@
             [objRadioView addSubview:lbl1];
             
             [objRadioView.ansImage1 setImage:nil];
-            [objRadioView.ansImage1 setFrame:CGRectMake(objRadioView.btnOption1.frame.origin.x + width + 10, yy - 16, width, height)];
+            [objRadioView.ansImage1 setFrame:CGRectMake(objRadioView.btnOption1.frame.origin.x + width + 10, yy - 10, width, height)];
             
             xx = xx + spacingWidth/2;
             
@@ -450,7 +450,7 @@
             [objRadioView addSubview:lbl2];
             
             [objRadioView.ansImage2 setImage:nil];
-            [objRadioView.ansImage2 setFrame:CGRectMake(objRadioView.btnOption2.frame.origin.x + width + 10, yy - 16, width, height)];
+            [objRadioView.ansImage2 setFrame:CGRectMake(objRadioView.btnOption2.frame.origin.x + width + 10, yy - 10, width, height)];
             
             xx = xx + spacingWidth;
             
@@ -472,7 +472,7 @@
             
             // Option 1
             objRadioView = [[RadioView alloc] init];
-            objRadioView.backgroundColor = COLOR_BLUE;
+            objRadioView.backgroundColor = COLOR_CLEAR;
             
             NSLog(@"x: %f  Y:%f  Height: %d", x, y, spacingHeight);
             [objRadioView setFrame:CGRectMake(x, y, spacingWidth*RadioOptions, spacingHeight)];
@@ -482,8 +482,15 @@
             }
             else {
                 xx = 5;
-                yy = (spacingHeight/2) - 5;
                 
+                if(objDRAGDROP.intDRAGDROPRADIOid == 9 || objDRAGDROP.intDRAGDROPRADIOid == 18)
+                {
+                    yy = (spacingHeight/2)-5;
+                }
+                else
+                {
+                    yy = (spacingHeight/2);
+                }
             }
             [objRadioView.btnOption1 setFrame:CGRectMake(xx, yy, width, height)];
             [objRadioView.btnOption1 setTag:k];
@@ -496,9 +503,9 @@
                 [objRadioView.btnFeedback1 setFrame:CGRectMake(xx, yy + objRadioView.btnOption1.frame.size.height + objRadioView.ansImage1.frame.size.height, width, height)];
             }
             else {
-                [objRadioView.ansImage1 setFrame:CGRectMake(objRadioView.btnOption1.frame.origin.x + width + 10, yy, width, height)];
+                [objRadioView.ansImage1 setFrame:CGRectMake(objRadioView.btnOption1.frame.origin.x + width + 10, yy+5, width, height)];
                 
-                [objRadioView.btnFeedback1 setFrame:CGRectMake(objRadioView.ansImage1.frame.origin.x + width + 10, yy, width, height)];
+                [objRadioView.btnFeedback1 setFrame:CGRectMake(objRadioView.ansImage1.frame.origin.x + width + 10, yy+5, width, height)];
                 
             }
             
@@ -523,9 +530,9 @@
                 [objRadioView.btnFeedback2 setFrame:CGRectMake(xx, yy + objRadioView.btnOption2.frame.size.height + objRadioView.ansImage2.frame.size.height, width, height)];
             }
             else {
-                [objRadioView.ansImage2 setFrame:CGRectMake(objRadioView.btnOption2.frame.origin.x + width + 10, yy, width, height)];
+                [objRadioView.ansImage2 setFrame:CGRectMake(objRadioView.btnOption2.frame.origin.x + width + 10, yy+5, width, height)];
                 
-                [objRadioView.btnFeedback2 setFrame:CGRectMake(objRadioView.ansImage2.frame.origin.x + width + 10, yy, width, height)];
+                [objRadioView.btnFeedback2 setFrame:CGRectMake(objRadioView.ansImage2.frame.origin.x + width + 10, yy+5, width, height)];
             }
             [objRadioView.btnFeedback2 setTag:k];
             [objRadioView.btnFeedback2 addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
@@ -546,9 +553,9 @@
                 [objRadioView.btnFeedback3 setFrame:CGRectMake(xx, objRadioView.btnOption3.frame.size.height + objRadioView.ansImage3.frame.size.height, width, height)];
             }
             else {
-                [objRadioView.ansImage3 setFrame:CGRectMake(objRadioView.btnOption3.frame.origin.x + width + 10, yy, width, height)];
+                [objRadioView.ansImage3 setFrame:CGRectMake(objRadioView.btnOption3.frame.origin.x + width + 10, yy+5, width, height)];
                 
-                [objRadioView.btnFeedback3 setFrame:CGRectMake(objRadioView.ansImage3.frame.origin.x + width + 10, yy, width, height)];
+                [objRadioView.btnFeedback3 setFrame:CGRectMake(objRadioView.ansImage3.frame.origin.x + width + 10, yy+5, width, height)];
                 
             }
             [objRadioView.btnFeedback3 setTag:k];
@@ -570,9 +577,9 @@
                 [objRadioView.btnFeedback4 setFrame:CGRectMake(xx, yy+objRadioView.btnOption4.frame.size.height+objRadioView.ansImage4.frame.size.height, width, height)];
             }
             else {
-                [objRadioView.ansImage4 setFrame:CGRectMake(objRadioView.btnOption4.frame.origin.x + width + 10, yy, width, height)];
+                [objRadioView.ansImage4 setFrame:CGRectMake(objRadioView.btnOption4.frame.origin.x + width + 10, yy+5, width, height)];
                 
-                [objRadioView.btnFeedback4 setFrame:CGRectMake(objRadioView.ansImage4.frame.origin.x + width + 10, yy, width, height)];
+                [objRadioView.btnFeedback4 setFrame:CGRectMake(objRadioView.ansImage4.frame.origin.x + width + 10, yy+5, width, height)];
                 
             }
             [objRadioView.btnFeedback4 setTag:k];
@@ -594,9 +601,9 @@
                 
             }
             else {
-                [objRadioView.ansImage5 setFrame:CGRectMake(objRadioView.btnOption5.frame.origin.x + width + 10, yy, width, height)];
+                [objRadioView.ansImage5 setFrame:CGRectMake(objRadioView.btnOption5.frame.origin.x + width + 10, yy+5, width, height)];
                 
-                [objRadioView.btnFeedback5 setFrame:CGRectMake(objRadioView.ansImage5.frame.origin.x + width + 10, yy, width, height)];
+                [objRadioView.btnFeedback5 setFrame:CGRectMake(objRadioView.ansImage5.frame.origin.x + width + 10, yy+5, width, height)];
                 
             }
             [objRadioView.btnFeedback5 setTag:k];
