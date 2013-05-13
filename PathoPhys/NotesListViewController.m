@@ -37,6 +37,8 @@
     
     NSMutableArray *arrsearch;
     
+    NSMutableArray *tableData;
+    
     int currentOrientation;
     FlashCardsViewController *flashCardsViewController;
     TestYourSelfViewController *testYourSelfViewController;
@@ -72,7 +74,10 @@
     
     arrNotes = [db fnGetNotesList];
     arrsearch = [[NSMutableArray alloc] init];
-    arrsearch = arrNotes;
+    //arrsearch = arrNotes;
+    
+    [arrsearch addObjectsFromArray:arrNotes];
+    
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
@@ -156,7 +161,7 @@
 // Tables
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return arrNotes.count;
+    return arrsearch.count;
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *MyIdentifier = @"tblCellView";
@@ -207,7 +212,7 @@
     cell.lbl_name.numberOfLines = 3;
     
     
-    objNotes = (Notes *)[arrNotes objectAtIndex:indexPath.row];
+    objNotes = (Notes *)[arrsearch objectAtIndex:indexPath.row];
     cell.lbl_serionNo.text = [NSString stringWithFormat:@"%d",objNotes.intNotesId];
     cell.lbl_name.text = [NSString stringWithFormat:@"%@",objNotes.strNoteTitle];
     cell.lbl_date.text = [NSString stringWithFormat:@"%@", objNotes.strCreatedDate];
@@ -226,7 +231,7 @@
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    objNotes = (Notes *)[arrNotes objectAtIndex:indexPath.row];
+    objNotes = (Notes *)[arrsearch objectAtIndex:indexPath.row];
 
     //Navigation Logic
     //[md Fn_SubNotesList];
@@ -343,7 +348,7 @@
     
 }
 
-
+/*
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     NSString *data = txtSearch.text;
     // [db Fn_GetSearchList:data];
@@ -378,6 +383,65 @@
     arrNotes = arrsearch;
     return YES;
 }
+*/
+
+-(void)textFieldDidBeginEditing:(UITextField *)sender{
+    if(txtSearch.text.length > 0){
+        txtSearch.autocorrectionType = UITextAutocorrectionTypeNo;
+        [arrsearch removeAllObjects];
+    }
+    
+  }
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if([txtSearch.text isEqualToString:@""]){
+        [arrsearch removeAllObjects];
+		[tbl reloadData];
+		return YES;
+	}
+
+    [arrsearch removeAllObjects];
+    for( int i= 0; i< [arrNotes count]; i++){
+        objNotes = (Notes *)[arrNotes objectAtIndex:i];
+        NSRange r = [[objNotes.strNoteDesc lowercaseString] rangeOfString:[txtSearch.text lowercaseString]];
+        NSRange r1 = [[objNotes.strNoteTitle lowercaseString] rangeOfString:[txtSearch.text lowercaseString]];
+        
+        if(r.location != NSNotFound || r1.location != NSNotFound){
+            [arrsearch addObject:objNotes];
+        }
+        
+    }
+    
+	[tbl reloadData];
+
+    return YES;
+}
+
+-(BOOL) textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    
+    if([txtSearch.text isEqualToString:@""]){
+        [arrsearch removeAllObjects];
+        [arrsearch addObjectsFromArray:arrNotes];
+		[tbl reloadData];
+		return YES;
+	}
+    else{
+    
+    }
+
+    
+    return YES;
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    //write code to be executed on tap of clear button
+
+    [arrsearch removeAllObjects];
+    [arrsearch addObjectsFromArray:arrNotes];
+    [tbl reloadData];
+    return YES;
+}
 
 - (void)tableView:(UITableView *)aTableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -405,13 +469,6 @@
 }
 
 
-#pragma mark - TextField Delegates
-
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
 
 
 - (void)viewDidUnload{
