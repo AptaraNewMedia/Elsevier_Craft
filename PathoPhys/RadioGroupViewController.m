@@ -138,7 +138,7 @@
     arrcount = [objRH.arrHeadingText count];
     
     // Option Headers
-    int_x = 30;
+    int_x = 0;
     int_y = 140;
     
     float option_hiding_width = 0;
@@ -269,7 +269,15 @@
         objRB =[objRH.arrRadioButtons objectAtIndex:i];
         
         radioView = [[RadioGroupView alloc] init];
-        [radioView setFrame:CGRectMake(lblOptionHiding.frame.origin.x,int_y, scrollRadioOption.frame.size.width - 50, 32)];
+        
+        // iPhone
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            [radioView setFrame:CGRectMake(lblOptionHiding.frame.origin.x,int_y, scrollRadioOption.frame.size.width - 50, 32)];
+            
+        }
+        else {
+            [radioView setFrame:CGRectMake(lblOptionHiding.frame.origin.x+20,int_y, scrollRadioOption.frame.size.width - 50, 32)];
+        }
         
         [radioView.lblQuestion setText: [NSString stringWithFormat:@"  %@", objRB.strQuestionText]];
         [radioView.lblQuestion setFrame:CGRectMake(0, 0, option_hiding_width, 32)];        
