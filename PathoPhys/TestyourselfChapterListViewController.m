@@ -131,7 +131,7 @@
         [self shouldAutorotateToInterfaceOrientation:currentOrientaion];
     }
     
-    
+    NOTES_MODE = 0;
     
 }
 - (void) fnAddNavigationItems
