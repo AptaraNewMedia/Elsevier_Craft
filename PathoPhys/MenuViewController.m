@@ -112,7 +112,14 @@
         }
     }
 }
-
+- (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    [md Fn_removeInfoViewPopup];
+    [md Fn_removeNoteViewPopup];
+    NOTES_MODE = 0;
+    
+    
+}
 - (void) fnAddNavigationItems
 {
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {

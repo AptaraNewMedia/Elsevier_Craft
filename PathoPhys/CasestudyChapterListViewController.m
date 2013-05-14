@@ -131,8 +131,10 @@
     else{
         [self shouldAutorotateToInterfaceOrientation:currentOrientaion];
     }
-    
+    [md Fn_removeInfoViewPopup];    
+    [md Fn_removeNoteViewPopup];
     NOTES_MODE = 0;
+
     
 }
 
