@@ -25,8 +25,6 @@
 		3997058B170EEE23008933DD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 39970589170EEE23008933DD /* InfoPlist.strings */; };
 		3997058D170EEE23008933DD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3997058C170EEE23008933DD /* main.m */; };
 		39970591170EEE23008933DD /* MyAppAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 39970590170EEE23008933DD /* MyAppAppDelegate.m */; };
-		39970595170EEE23008933DD /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39970594170EEE23008933DD /* Default@2x.png */; };
-		39970597170EEE23008933DD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39970596170EEE23008933DD /* Default-568h@2x.png */; };
 		39970622170EF26D008933DD /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39970620170EF26D008933DD /* MenuViewController.m */; };
 		39970623170EF26D008933DD /* MenuViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39970621170EF26D008933DD /* MenuViewController_iPad.xib */; };
 		39970625170EF284008933DD /* MenuViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39970624170EF284008933DD /* MenuViewController_iPhone.xib */; };
@@ -324,7 +322,6 @@
 		39D8D84F17391EFD0008B46E /* icon_144.png in Resources */ = {isa = PBXBuildFile; fileRef = 39D8D5E417391EFC0008B46E /* icon_144.png */; };
 		39D8D85017391EFD0008B46E /* icon_512.png in Resources */ = {isa = PBXBuildFile; fileRef = 39D8D5E517391EFC0008B46E /* icon_512.png */; };
 		39D8D85117391EFD0008B46E /* icon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 39D8D5E617391EFC0008B46E /* icon_57.png */; };
-		39D8D85217391EFD0008B46E /* icon_72.png in Resources */ = {isa = PBXBuildFile; fileRef = 39D8D5E717391EFC0008B46E /* icon_72.png */; };
 		39D8D85317391EFD0008B46E /* btn_cs_glow.png in Resources */ = {isa = PBXBuildFile; fileRef = 39D8D5E917391EFC0008B46E /* btn_cs_glow.png */; };
 		39D8D85417391EFD0008B46E /* btn_cs_glow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39D8D5EA17391EFC0008B46E /* btn_cs_glow@2x.png */; };
 		39D8D85517391EFD0008B46E /* btn_cs_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 39D8D5EB17391EFC0008B46E /* btn_cs_icon.png */; };
@@ -1129,8 +1126,6 @@
 		3997058F170EEE23008933DD /* MyAppAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyAppAppDelegate.h; sourceTree = "<group>"; };
 		39970590170EEE23008933DD /* MyAppAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyAppAppDelegate.m; sourceTree = "<group>"; };
 		39970592170EEE23008933DD /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		39970594170EEE23008933DD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		39970596170EEE23008933DD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3997061F170EF26D008933DD /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		39970620170EF26D008933DD /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		39970621170EF26D008933DD /* MenuViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController_iPad.xib; sourceTree = "<group>"; };
@@ -1431,7 +1426,6 @@
 		39D8D5E417391EFC0008B46E /* icon_144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_144.png; sourceTree = "<group>"; };
 		39D8D5E517391EFC0008B46E /* icon_512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_512.png; sourceTree = "<group>"; };
 		39D8D5E617391EFC0008B46E /* icon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_57.png; sourceTree = "<group>"; };
-		39D8D5E717391EFC0008B46E /* icon_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_72.png; sourceTree = "<group>"; };
 		39D8D5E917391EFC0008B46E /* btn_cs_glow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_cs_glow.png; sourceTree = "<group>"; };
 		39D8D5EA17391EFC0008B46E /* btn_cs_glow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_cs_glow@2x.png"; sourceTree = "<group>"; };
 		39D8D5EB17391EFC0008B46E /* btn_cs_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_cs_icon.png; sourceTree = "<group>"; };
@@ -2453,8 +2447,6 @@
 				3997058C170EEE23008933DD /* main.m */,
 				3997058E170EEE23008933DD /* PathoPhys-Prefix.pch */,
 				39970592170EEE23008933DD /* Default.png */,
-				39970594170EEE23008933DD /* Default@2x.png */,
-				39970596170EEE23008933DD /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -3021,7 +3013,6 @@
 				39D8D5E417391EFC0008B46E /* icon_144.png */,
 				39D8D5E517391EFC0008B46E /* icon_512.png */,
 				39D8D5E617391EFC0008B46E /* icon_57.png */,
-				39D8D5E717391EFC0008B46E /* icon_72.png */,
 			);
 			path = Icons;
 			sourceTree = "<group>";
@@ -4408,8 +4399,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3997058B170EEE23008933DD /* InfoPlist.strings in Resources */,
-				39970595170EEE23008933DD /* Default@2x.png in Resources */,
-				39970597170EEE23008933DD /* Default-568h@2x.png in Resources */,
 				39970623170EF26D008933DD /* MenuViewController_iPad.xib in Resources */,
 				39970625170EF284008933DD /* MenuViewController_iPhone.xib in Resources */,
 				87F67EB21711B2B30082C5CF /* RadioGroupViewController_iPad.xib in Resources */,
@@ -4966,7 +4955,6 @@
 				39D8D84F17391EFD0008B46E /* icon_144.png in Resources */,
 				39D8D85017391EFD0008B46E /* icon_512.png in Resources */,
 				39D8D85117391EFD0008B46E /* icon_57.png in Resources */,
-				39D8D85217391EFD0008B46E /* icon_72.png in Resources */,
 				39D8D85317391EFD0008B46E /* btn_cs_glow.png in Resources */,
 				39D8D85417391EFD0008B46E /* btn_cs_glow@2x.png in Resources */,
 				39D8D85517391EFD0008B46E /* btn_cs_icon.png in Resources */,
