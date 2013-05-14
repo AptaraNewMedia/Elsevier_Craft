@@ -135,7 +135,12 @@
         }
     }
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [md Fn_removeInfoViewPopup];
+    [md Fn_removeNoteViewPopup];
+    NOTES_MODE = 0;
+}
 -(void) Fn_CheckNote:(int)index {
     
     objFlashcardSet = (FlashcardsSet *)[arrFlashcards objectAtIndex:index];

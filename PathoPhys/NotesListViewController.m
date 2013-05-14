@@ -98,6 +98,11 @@
     
 
 }
+-(void)viewWillAppear:(BOOL)animated {
+    [md Fn_removeInfoViewPopup];
+    [md Fn_removeNoteViewPopup];
+    NOTES_MODE = 0;
+}
 -(IBAction)onClose:(id)sender{
     [md Fn_SubNotesList];
 }
