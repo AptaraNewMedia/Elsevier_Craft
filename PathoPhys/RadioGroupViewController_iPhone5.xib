@@ -41,7 +41,7 @@
 					<object class="IBUIImageView" id="726280149">
 						<reference key="NSNextResponder" ref="771107766"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrameSize">{320, 488}</string>
+						<string key="NSFrameSize">{320, 455}</string>
 						<reference key="NSSuperview" ref="771107766"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="218595812"/>
@@ -235,7 +235,7 @@
 					<object class="IBUIScrollView" id="238371165">
 						<reference key="NSNextResponder" ref="771107766"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{0, 112}, {320, 301}}</string>
+						<string key="NSFrame">{{0, 120}, {320, 288}}</string>
 						<reference key="NSSuperview" ref="771107766"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -380,8 +380,8 @@
 							<reference ref="218595812"/>
 							<reference ref="428750887"/>
 							<reference ref="726280149"/>
-							<reference ref="238371165"/>
 							<reference ref="341535708"/>
+							<reference ref="238371165"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>

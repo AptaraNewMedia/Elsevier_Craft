@@ -334,10 +334,6 @@
             [radioView.ansImage setFrame:CGRectMake(width_ans, 0, 36, 35)];
             
             [radioView.feedbackBt setFrame:CGRectMake(width_ans + 22 + 10, 0, 30, 38)];
-            
-                        
-            
-            
             int_y = int_y + 45;
             
         }
@@ -350,8 +346,15 @@
         [scrollRadioOption addSubview:radioView];
         
     }
-    
-    scrollRadioOption.contentSize=CGSizeMake(scrollRadioOption.frame.size.width, int_y);
+    if([UIScreen mainScreen].bounds.size.height == 568.0){
+        [scrollRadioOption setFrame:CGRectMake(5, 120, 320, 285)];
+        [scrollRadioOption setScrollEnabled:YES];
+         scrollRadioOption.contentSize=CGSizeMake(scrollRadioOption.frame.size.width, int_y);
+    }
+    else{
+         scrollRadioOption.contentSize=CGSizeMake(scrollRadioOption.frame.size.width, int_y);
+    }
+   
 }
 
 -(CGSize) getSize:(NSString *)str

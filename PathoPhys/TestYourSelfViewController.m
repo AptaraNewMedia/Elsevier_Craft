@@ -321,8 +321,9 @@
             break;
         case QUESTION_TYPE_MATCHTERMS:
         {
-            NSLog(@"Match Pairs");
+            
             if([UIScreen mainScreen].bounds.size.height == 568.0){
+                NSLog(@"Match Pairs iPhone5");
                 matchPairsView = [[MatchPairsViewController alloc] initWithNibName:@"MatchPairsViewController_iPhone5" bundle:nil];                
             }
             else if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {

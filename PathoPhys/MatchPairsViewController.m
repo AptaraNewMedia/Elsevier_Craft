@@ -97,8 +97,10 @@
         // ScrollView
         
         self.view.frame = CGRectMake(0, 0, 320, 360);
-        
-        [scrollViewOptions setFrame:CGRectMake(5, 91, 315, 235)];
+        if([UIScreen mainScreen].bounds.size.height != 568.0){
+            NSLog(@"Not in iPhone5");
+            [scrollViewOptions setFrame:CGRectMake(5, 91, 315, 235)];
+        }
         
     }
     else {
@@ -220,7 +222,14 @@
     
     float greaterHeight =MAX(heightLeftScorll, heightScorll);
     
-  	scrollViewOptions.contentSize = CGSizeMake(scrollViewOptions.frame.size.width, greaterHeight);
+     if([UIScreen mainScreen].bounds.size.height == 568.0){
+         [scrollViewOptions setFrame:CGRectMake(10, 100, 315, 274)];
+         [scrollViewOptions setScrollEnabled:YES];
+         scrollViewOptions.contentSize = CGSizeMake(scrollViewOptions.frame.size.width, greaterHeight);
+     }
+     else{
+         scrollViewOptions.contentSize = CGSizeMake(scrollViewOptions.frame.size.width, greaterHeight);
+     }
     
     // create imageview for lines
     for (int i = 0; i < [objMatch.arrOptions1 count]; i++) {
