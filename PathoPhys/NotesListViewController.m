@@ -48,6 +48,8 @@
     CustomRightBarItem *customRightBar;
     CustomLeftBarItem *customLeftBar;
     
+    IBOutlet UILabel *lbl_swipe;
+    
     
     // 1- Landscape
     // 2- Portrait
@@ -94,7 +96,7 @@
 //    lblTitle.font = FONT_20;
 //    lblTitle.textColor = COLOR_WHITE;
     
-    btnClose.hidden = YES;
+    //btnClose.hidden = YES;
     
 
 }
@@ -104,7 +106,13 @@
     NOTES_MODE = 0;
 }
 -(IBAction)onClose:(id)sender{
-    [md Fn_SubNotesList];
+    if (FromMenu == 1) {
+        [md Fn_SubNotesListOnMenu];
+        [md Fn_AddMenu];
+    }
+    else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 -(IBAction)onBack:(id)sender{
@@ -196,10 +204,10 @@
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
-        cell.lbl_serionNo.font = FONT_12;
-        cell.lbl_name.font = FONT_12;
-        cell.lbl_date.font = FONT_12;
-        cell.lbl_desc.font = FONT_12;
+        cell.lbl_serionNo.font = FONT_8;
+        cell.lbl_name.font = FONT_8;
+        cell.lbl_date.font = FONT_8;
+        cell.lbl_desc.font = FONT_8;
     }
     else
     {
@@ -216,11 +224,27 @@
     
     cell.lbl_name.numberOfLines = 3;
     
+
+    
     
     objNotes = (Notes *)[arrsearch objectAtIndex:indexPath.row];
     cell.lbl_serionNo.text = [NSString stringWithFormat:@"%d",objNotes.intNotesId];
     cell.lbl_name.text = [NSString stringWithFormat:@"%@",objNotes.strNoteTitle];
     cell.lbl_date.text = [NSString stringWithFormat:@"%@", objNotes.strCreatedDate];
+    NSString *stringFromWS =[NSString stringWithString:objNotes.strCreatedDate];
+    //date formatter for the above string
+    NSDateFormatter *dateFormatterWS = [[NSDateFormatter alloc] init];
+    [dateFormatterWS setDateFormat:@"MM-dd-yyyy"];
+    NSDate *date =[dateFormatterWS dateFromString:stringFromWS];
+    
+    //date formatter that you want
+    NSDateFormatter *dateFormatterNew = [[NSDateFormatter alloc] init];
+    [dateFormatterNew setDateFormat:@"dd-MM-yyyy"];
+    
+    NSString *stringForNewDate = [dateFormatterNew stringFromDate:date];
+    
+    cell.lbl_date.text = stringForNewDate;
+    
     cell.lbl_desc.text = [NSString stringWithFormat:@"%@", objNotes.strNoteDesc];
     cell.lbl_desc.hidden = YES;
     //    if(currentOrientation == 2){
@@ -457,10 +481,21 @@
         //int int_success = [db Fn_DeleteNotes:obj.int_note_id];
         
         [db Fn_DeleteNotes:objNotes.intNotesId];
-        
         [arrNotes removeObjectAtIndex:indexPath.row];
+        arrsearch=arrNotes;
+        
+        if([arrsearch count] > 0)
+        {
+            lbl_swipe.hidden=NO;
+        }
+        else
+        {
+            lbl_swipe.hidden=YES;
+        }
+        
         [tbl reloadData];
     }
+
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

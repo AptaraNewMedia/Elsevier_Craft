@@ -253,8 +253,11 @@
         lblOption2.numberOfLines = 2;
         lblOption3.numberOfLines = 2;
         
+        
+        lblOption2.lineBreakMode=NSLineBreakByCharWrapping;
+        
         lblOption1.frame=CGRectMake(lblOptionHiding.frame.size.width + 15, 0, max_width, option_hiding_height);
-        lblOption2.frame=CGRectMake(lblOption1.frame.origin.x+lblOption1.frame.size.width + 10, 0, max_width, option_hiding_height);
+        lblOption2.frame=CGRectMake(lblOption1.frame.origin.x+lblOption1.frame.size.width + 10, -3, max_width, option_hiding_height+3);
         if (arrcount > 3) {
             lblOption3.frame=CGRectMake(lblOption2.frame.origin.x+lblOption2.frame.size.width + 10, 0, max_width, option_hiding_height);
         }

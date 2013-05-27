@@ -133,7 +133,7 @@
 {
     [md Fn_removeInfoViewPopup];
     [md Fn_removeNoteViewPopup];
-    NOTES_MODE = 0;
+   // NOTES_MODE = 0;
 }
 
 - (void) disableAllButtons:(int)questionNO{
