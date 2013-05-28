@@ -133,7 +133,9 @@
     objScore = [scoreArray objectAtIndex:indexPath.row];
     cell.lbl_serionNo.text = [NSString stringWithFormat:@"%d",indexPath.row+1];
     cell.lbl_name.text = [NSString stringWithFormat:@"%@",objScore.strQuizTitle];
-    cell.lbl_score.text = [ [NSString alloc]initWithFormat:@"%.2f%%",objScore.floatPercentage];
+    //cell.lbl_score.text = [ [NSString alloc]initWithFormat:@"%.2f%%",objScore.floatPercentage];
+    cell.lbl_score.text = [NSString stringWithFormat:@"%d of %d",objScore.intCorrectQuestion, objScore.intMissedQuestion + objScore.intCorrectQuestion];
+    
     
     
     cell.backgroundColor = [UIColor redColor];

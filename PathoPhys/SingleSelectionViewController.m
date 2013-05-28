@@ -30,7 +30,11 @@
     float y_feedback_p;
     
     float y_feedback_l;
-    float x_feedback_l;    
+    float x_feedback_l;
+    
+    NSString *str_feedback;
+    
+    
 
     NSMutableArray *selectedCells;
 }
@@ -439,6 +443,23 @@
     
     [self Fn_AddFeedbackPopup:x_point andy:y_point andText:cell.strFeedback];
     
+    x_feedback_p = x_point;
+    y_feedback_p = y_point;
+    
+    x_feedback_l = bn.frame.origin.x + 245 ;
+    y_feedback_l = bn.frame.origin.y + 20 ;
+    
+    if(currentOrientaion==1 || currentOrientaion==2) // Portrait
+    {
+        [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:cell.strFeedback];
+    }
+    else // Landscape
+    {
+        [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:cell.strFeedback];
+    }
+    
+    str_feedback = cell.strFeedback;
+    
 }
 
 - (void) Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue
@@ -813,8 +834,13 @@
     cellArray = [[NSMutableArray alloc] init];
     [tblOptions reloadData];
     
+//    // Feedback
+//    [feedbackView setFrame:CGRectMake(767-x_feedback_l, y_feedback_l+tblOptions.frame.origin.y, feedbackView.frame.size.width, feedbackView.frame.size.height)];
+    
+    
     // Feedback
-    [feedbackView setFrame:CGRectMake(767-x_feedback_l, y_feedback_l+tblOptions.frame.origin.y, feedbackView.frame.size.width, feedbackView.frame.size.height)];
+    [feedbackView setFrame:CGRectMake(x_feedback_l, y_feedback_l, 261, 131)];
+    
 }
 -(void)Fn_rotateLandscape
 {
@@ -857,6 +883,11 @@
     [tblOptions reloadData];
     
     // Feedback
-    [feedbackView setFrame:CGRectMake(1005-x_feedback_l, y_feedback_l+tblOptions.frame.origin.y, feedbackView.frame.size.width, feedbackView.frame.size.height)];
+    //[feedbackView setFrame:CGRectMake(1005-x_feedback_l, y_feedback_l+tblOptions.frame.origin.y, feedbackView.frame.size.width, feedbackView.frame.size.height)];
+    
+   
+    // Feedback
+    [feedbackView setFrame:CGRectMake(x_feedback_p, y_feedback_p, 261, 131)];
+    
 }
 @end

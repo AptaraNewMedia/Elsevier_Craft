@@ -303,7 +303,7 @@
     
     [btnClose setFrame:CGRectMake(663,191,33,29)];
     
-    [lblChapterName_Title setFrame:CGRectMake(116,258,128,24)];
+    [lblChapterName_Title setFrame:CGRectMake(116,252,128,50)];
     [lblChapterName  setFrame:CGRectMake(252,252,500,50)];
     
     [lblThematicArea setFrame:CGRectMake(252,345,500,50)];
@@ -328,7 +328,7 @@
     [imgPatch  setFrame:CGRectMake(0,0,1024,768)];
     
     [lblChapterName  setFrame:CGRectMake(332,158,500,50)];
-    [lblChapterName_Title setFrame:CGRectMake(196,163,128,24)];
+    [lblChapterName_Title setFrame:CGRectMake(196,158,128,50)];
     
     [lblThematicArea setFrame:CGRectMake(332,230,500,50)];
     [lblThematicArea_Title setFrame:CGRectMake(196,246,130,19)];
