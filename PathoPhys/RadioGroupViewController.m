@@ -275,7 +275,8 @@
         
         // iPhone
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-            [radioView setFrame:CGRectMake(lblOptionHiding.frame.origin.x,int_y, scrollRadioOption.frame.size.width - 50, 32)];
+            [radioView setFrame:CGRectMake(lblOptionHiding.frame.origin.x,int_y, 315, 32)];
+           // [radioView setFrame:CGRectMake(lblOptionHiding.frame.origin.x,int_y, scrollRadioOption.frame.size.width - 50, 32)];
             
         }
         else {
