@@ -104,6 +104,8 @@
             myview.exclusiveTouch = YES;
         }
     }
+    
+    [scrollRadioOption setDelegate:self];
 }
 
 -(void) fn_SetFontColor
@@ -692,6 +694,7 @@
 //---------------------Delegate-------
 - (void)scrollViewDidScroll:(UIScrollView *)aScrollView
 {
+    NSLog(@"scrollview delegate method called.");
     // or if you are sure you wanna it always on left:
     [aScrollView setContentOffset: CGPointMake(0, aScrollView.contentOffset.y)];
     
