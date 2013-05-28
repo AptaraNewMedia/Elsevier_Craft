@@ -37,6 +37,8 @@
     
 
     NSMutableArray *selectedCells;
+    
+    CGRect visibleRect;
 }
 @end
 
@@ -385,14 +387,24 @@
 //--------------------------------
 
 -(void) Fn_createInvisibleBtn
-{    
-    [btnInvisible removeFromSuperview];
-    btnInvisible = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btnInvisible setFrame:CGRectMake(tblOptions.frame.origin.x, tblOptions.frame.origin.y, tblOptions.frame.size.width - 50, tblOptions.frame.size.height)];
-    btnInvisible.backgroundColor = [UIColor clearColor];
-    [btnInvisible setAlpha:0.5];
-    [btnInvisible addTarget:self action:@selector(onInvisible:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btnInvisible];    
+{
+    tblOptions.allowsSelection=NO;
+    //    [btnInvisible removeFromSuperview];
+    //    btnInvisible = [UIButton buttonWithType:UIButtonTypeCustom];
+    //    [btnInvisible setFrame:CGRectMake(tblOptions.frame.origin.x, tblOptions.frame.origin.y, tblOptions.frame.size.width - 50, tblOptions.frame.size.height)];
+    //    btnInvisible.backgroundColor = [UIColor clearColor];
+    //    [btnInvisible setAlpha:0.5];
+    //    [btnInvisible addTarget:self action:@selector(onInvisible:) forControlEvents:UIControlEventTouchUpInside];
+    //    [self.view addSubview:btnInvisible];
+}
+
+# pragma mark - scrollview delegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    feedbackView.hidden=YES;
+    if (tblOptions == scrollView) {
+        visibleRect.origin = tblOptions.contentOffset;
+    }
 }
 
 -(IBAction)onInvisible:(id)sender
@@ -420,6 +432,7 @@
 }
 
 
+
 -(IBAction)onFeedbackTapped:(id)sender{
     UIButton *bn = sender;
     MCSSCell_iPad *cell = [cellArray objectAtIndex:bn.tag];
@@ -429,8 +442,8 @@
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
-        x_point = bn.frame.origin.x - (123);
-        y_point = tblOptions.frame.origin.y + cell.frame.origin.y + bn.frame.origin.y  - (90);
+        x_point = bn.frame.origin.x - (148);
+        y_point = tblOptions.frame.origin.y + cell.frame.origin.y + bn.frame.origin.y  - (123)-visibleRect.origin.y;
     }
     else
     {
@@ -442,24 +455,6 @@
     }
     
     [self Fn_AddFeedbackPopup:x_point andy:y_point andText:cell.strFeedback];
-    
-    x_feedback_p = x_point;
-    y_feedback_p = y_point;
-    
-    x_feedback_l = bn.frame.origin.x + 245 ;
-    y_feedback_l = bn.frame.origin.y + 20 ;
-    
-    if(currentOrientaion==1 || currentOrientaion==2) // Portrait
-    {
-        [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:cell.strFeedback];
-    }
-    else // Landscape
-    {
-        [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:cell.strFeedback];
-    }
-    
-    str_feedback = cell.strFeedback;
-    
 }
 
 - (void) Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue
@@ -468,14 +463,14 @@
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
-        feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 150, 90)];
+        feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 180, 125)];
+        
         feedbackView.backgroundColor = [UIColor clearColor];
         
         UIView *bg = [[UIView alloc] init];
         bg.backgroundColor = [UIColor whiteColor];
-        [bg setFrame:CGRectMake(12, 12, 125, 65)];
+        [bg setFrame:CGRectMake(12, 17, 152, 90)];
         [feedbackView addSubview:bg];
-        
         
         UIImageView *img_feedback = [[UIImageView alloc] init];
         img_feedback.backgroundColor = [UIColor clearColor];
@@ -483,9 +478,9 @@
         
         [img_feedback setImage:[UIImage imageNamed:@"Small_Feedback_Box_004.png"]];
         
-        [img_feedback setFrame:CGRectMake(0, 0, 150, 90)];
-        [feedbackView addSubview:img_feedback];
+        [img_feedback setFrame:CGRectMake(0, 0, 180, 125)];
         
+        [feedbackView addSubview:img_feedback];
         
         UITextView *txt_feedback = [[UITextView alloc] init];
         txt_feedback.text = textValue;
@@ -493,7 +488,7 @@
         txt_feedback.backgroundColor = [UIColor clearColor];
         txt_feedback.font = FONT_10;
         txt_feedback.editable = NO;
-        [txt_feedback setFrame:CGRectMake(12, 12, 125, 65)];
+        [txt_feedback setFrame:CGRectMake(12, 17, 152, 90)];
         [feedbackView addSubview:txt_feedback];
         [self.view addSubview:feedbackView];
     }

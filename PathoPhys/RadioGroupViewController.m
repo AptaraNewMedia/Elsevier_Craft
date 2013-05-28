@@ -425,14 +425,14 @@
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
-        feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 150, 90)];
+        feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 180, 125)];
+        
         feedbackView.backgroundColor = [UIColor clearColor];
         
         UIView *bg = [[UIView alloc] init];
         bg.backgroundColor = [UIColor whiteColor];
-        [bg setFrame:CGRectMake(12, 12, 125, 65)];
+        [bg setFrame:CGRectMake(12, 17, 152, 90)];
         [feedbackView addSubview:bg];
-        
         
         UIImageView *img_feedback = [[UIImageView alloc] init];
         img_feedback.backgroundColor = [UIColor clearColor];
@@ -440,9 +440,9 @@
         
         [img_feedback setImage:[UIImage imageNamed:@"Small_Feedback_Box_004.png"]];
         
-        [img_feedback setFrame:CGRectMake(0, 0, 150, 90)];
-        [feedbackView addSubview:img_feedback];
+        [img_feedback setFrame:CGRectMake(0, 0, 180, 125)];
         
+        [feedbackView addSubview:img_feedback];
         
         UITextView *txt_feedback = [[UITextView alloc] init];
         txt_feedback.text = textValue;
@@ -450,7 +450,7 @@
         txt_feedback.backgroundColor = [UIColor clearColor];
         txt_feedback.font = FONT_10;
         txt_feedback.editable = NO;
-        [txt_feedback setFrame:CGRectMake(12, 12, 125, 65)];
+        [txt_feedback setFrame:CGRectMake(12, 17, 152, 90)];
         [feedbackView addSubview:txt_feedback];
         [self.view addSubview:feedbackView];
     }
@@ -487,6 +487,7 @@
     }
 }
 
+
 -(IBAction)onFeedbackTapped:(id)sender
 {
     objRB = [objRH.arrRadioButtons objectAtIndex:[sender tag]];
@@ -498,8 +499,8 @@
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
-        x_point = bn.frame.origin.x - 104;
-        y_point = bn.superview.frame.origin.y+23;
+        x_point = bn.frame.origin.x - 134;
+        y_point = bn.superview.frame.origin.y-10;
         y_point = y_point - visibleRect.origin.y;
         
         [self Fn_AddFeedbackPopup:x_point andy:y_point andText:radioView.feedback];
@@ -526,7 +527,6 @@
         }
     }
 }
-
 
 - (BOOL) checkForAnswer{
     BOOL flag1 = YES;
