@@ -830,11 +830,7 @@
     [tblOptions reloadData];
     
 //    // Feedback
-//    [feedbackView setFrame:CGRectMake(767-x_feedback_l, y_feedback_l+tblOptions.frame.origin.y, feedbackView.frame.size.width, feedbackView.frame.size.height)];
-    
-    
-    // Feedback
-    [feedbackView setFrame:CGRectMake(x_feedback_l, y_feedback_l, 261, 131)];
+   [feedbackView setFrame:CGRectMake(767-x_feedback_l, y_feedback_l+tblOptions.frame.origin.y, feedbackView.frame.size.width, feedbackView.frame.size.height)];
     
 }
 -(void)Fn_rotateLandscape
@@ -878,11 +874,6 @@
     [tblOptions reloadData];
     
     // Feedback
-    //[feedbackView setFrame:CGRectMake(1005-x_feedback_l, y_feedback_l+tblOptions.frame.origin.y, feedbackView.frame.size.width, feedbackView.frame.size.height)];
-    
-   
-    // Feedback
-    [feedbackView setFrame:CGRectMake(x_feedback_p, y_feedback_p, 261, 131)];
-    
+    [feedbackView setFrame:CGRectMake(1005-x_feedback_l, y_feedback_l+tblOptions.frame.origin.y, feedbackView.frame.size.width, feedbackView.frame.size.height)];
 }
 @end

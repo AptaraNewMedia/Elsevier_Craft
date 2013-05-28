@@ -13,7 +13,7 @@
 #import "DragDropManager.h"
 #import "CustomDragButton.h"
 #import "TestYourSelfViewController.h"
-
+    
 @interface DragDropViewController ()
 {
     DRAGDROP *objDRAGDROP;
@@ -393,43 +393,7 @@
 }
 
 
--(IBAction)onFeedbackTapped:(id)sender
-{
-    CustomDragButton *bn = sender;
-    
-    float x_point;
-    float y_point;
-    
-    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
-    {
-        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 132);
-        y_point = bn.superview.frame.origin.y + 88;
-        y_point = y_point - visibleRect.origin.y;
-        
-        [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
-    }
-    else
-    {
-        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 10);
-        y_point = bn.superview.frame.origin.y + 15;
-        y_point = y_point - visibleRect.origin.y;
-        
-        x_feedback_l=x_point;
-        y_feedback_l=y_point;
-        
-        x_feedback_p=x_point-238;
-        y_feedback_p=y_point+217;
-        
-        if(currentOrientaion==1 || currentOrientaion==2) // Portrait
-        {
-            [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:bn.strFeedback];
-        }
-        else //Lanscape
-        {
-            [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:bn.strFeedback];
-        }
-    }
-}
+
 
 -(IBAction)onFeedbackTapped:(id)sender
 {
