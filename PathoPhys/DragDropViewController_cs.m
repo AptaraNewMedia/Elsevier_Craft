@@ -128,7 +128,7 @@
     lblQuestionNo.textColor = COLOR_WHITE;
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        lblQuestionNo.font = FONT_20;
+        lblQuestionNo.font = FONT_15;
     }
     else {
         lblQuestionNo.font = FONT_31;
