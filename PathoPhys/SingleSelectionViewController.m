@@ -494,6 +494,9 @@
     for (int i = 0; i < selected_count; i++) {
         
         MCSSCell_iPad *cell = [cellArray objectAtIndex:i];
+        [cell.btnFeedback setImage:[UIImage imageNamed:@"btn_feedback.png"] forState:UIControlStateNormal];
+        
+        
         NSIndexPath *indexPath = [tblOptions indexPathForCell:cell];
         
         NSString *ss = [objMCSS.arrOptions objectAtIndex:indexPath.row];
@@ -808,7 +811,7 @@
 
 #pragma Orientation
 //---------------------------------------------------------
-- (BOOL) shouldAutorotate
+-(BOOL)shouldAutorotate
 {
     UIInterfaceOrientation interfaceOrientation = (UIInterfaceOrientation)[UIApplication sharedApplication].statusBarOrientation;
     currentOrientaion = interfaceOrientation;

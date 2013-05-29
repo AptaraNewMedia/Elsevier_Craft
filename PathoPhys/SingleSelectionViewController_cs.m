@@ -43,7 +43,9 @@
 @synthesize strVisitedAnswer;
 @synthesize parentObject;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+#pragma mark - View lifecycle
+//---------------------------------------------------------
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -51,18 +53,14 @@
     }
     return self;
 }
-
-- (void)didReceiveMemoryWarning
+-(void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
 }
-
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad
+-(void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -131,16 +129,18 @@
         }
     }
 }
-
-- (void)viewDidUnload
+-(void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
+//---------------------------------------------------------
 
 
--(void) fn_SetFontColor
+#pragma mark - Common Function
+//---------------------------------------------------------
+-(void)fn_SetFontColor
 {
     lblQuestionNo.textColor = COLOR_WHITE;
     
@@ -152,250 +152,21 @@
     }
     
 }
+//---------------------------------------------------------
 
-//Get db data from question_id
-//--------------------------------
--(void) fn_LoadDbData:(NSString *)question_id 
+
+#pragma mark - Normal Function
+//---------------------------------------------------------
+-(void)Fn_createInvisibleBtn
 {
-    objMCSS = [db fnGetCasestudyMCSS:question_id];
-}
--(NSString *) fn_CheckAnswersBeforeSubmit
-{
-    flagForAnyOptionSelect = NO;
-    NSMutableString *strTemp = [[NSMutableString alloc] init];
-    NSArray *selectedCells_temp = [tblOptions indexPathsForSelectedRows];
-    
-    if ([selectedCells_temp count] == 0) {
-        flagForAnyOptionSelect = YES;
-        intVisited = 0;
-    }
-    else  {
-        
-        for (int i=0; i < [selectedCells_temp count]; i++) {
-            NSIndexPath *indexpth = [selectedCells_temp objectAtIndex:i];
-            NSString *tempStr = [NSString stringWithFormat:@"%d", indexpth.row];
-            [strTemp appendString:tempStr];
-            if (i == [selectedCells_temp count]-1) {
-                
-            }
-            else {
-                [strTemp appendString:@"#"];
-            }
-        }
-        
-        
-        flagForCheckAnswer = [self checkForAnswer];
-        
-        if (flagForCheckAnswer == 1) {
-            intVisited = 1;
-        }
-        else {
-            intVisited = 2;
-        }
-    }
-    return strTemp;
-}
--(void) fn_OnSubmitTapped
-{
-    UIAlertView *alert = [[UIAlertView alloc] init];
-    [alert setTitle:TITLE_COMMON];
-    [alert setDelegate:self];
-    if (flagForAnyOptionSelect) {
-        [alert setTag:1];
-        [alert addButtonWithTitle:@"Ok"];
-        if (MultipleSelect) {
-            [alert setMessage:[NSString stringWithFormat:@"Please select options."]];
-        }
-        else {
-            [alert setMessage:[NSString stringWithFormat:@"Please select an option."]];
-        }
-    }
-    else {
-        if (flagForCheckAnswer == 1) {
-            [alert setTag:2];
-            [alert addButtonWithTitle:@"Ok"];
-            [alert setMessage:[NSString stringWithFormat:@"That's Correct!"]];
-        }
-        else if (flagForCheckAnswer == 3) {
-            [alert setTag:3];
-            [alert addButtonWithTitle:@"Answer"];
-            [alert addButtonWithTitle:@"Try Again"];
-            [alert setMessage:[NSString stringWithFormat:@"Partially Correct. Please try other options as well."]];
-        }
-        else {
-            [alert setTag:3];
-            [alert addButtonWithTitle:@"Answer"];
-            [alert addButtonWithTitle:@"Try Again"];
-            [alert setMessage:[NSString stringWithFormat:@"That's Incorrect!"]];
-            // Please match all the items.
-            
-        }
-    }
-	[alert show];
-}
--(void) fn_ShowSelected:(NSString *)visitedAnswers
-{
-    NSArray *main;
-    if (visitedAnswers.length > 0) {
-        
-        main = [visitedAnswers componentsSeparatedByString:@"#"];
-        selectedCells = [[NSMutableArray alloc] init];
-        for (int i=0; i<[main count]; i++) {
-            int index = [[main objectAtIndex:i] intValue];
-            [selectedCells addObject:[NSNumber numberWithInt:index]];
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-            [tblOptions selectRowAtIndexPath:indexPath animated:NO scrollPosition:NO];
-        }
-    }
-    isSubmit = YES;
-    [self handleRevealScore];
-    [self Fn_createInvisibleBtn];
-}
-//--------------------------------
-
-- (IBAction)onCasestudyTextTapped:(id)sender
-{
-    strCaseStudyText = objMCSS.strCasestudyText;
-    [md Fn_AddCaseStudyText];
-}
-
-- (int) checkForAnswer{
-    
-    NSArray *selectedCells_temp = [tblOptions indexPathsForSelectedRows];
-    
-    int answer_count = [objMCSS.arrAnswer count];
-    int selected_count = [selectedCells_temp count];
-    
-    NSMutableArray *selected_answer_check = [[NSMutableArray alloc] init];
-    for (int i = 0; i < selected_count; i++) {
-        [selected_answer_check addObject:[NSNumber numberWithInt:2]];
-    }
-    
-    
-    //if (selected_count == answer_count) {
-        for (int i = 0; i < selected_count; i++) {
-
-            NSIndexPath *indexPath = [selectedCells_temp objectAtIndex:i];
-            
-            NSString *ss = [objMCSS.arrOptions objectAtIndex:indexPath.row];
-            ss = [ss stringByReplacingOccurrencesOfString:@" " withString:@""];            
-            
-            for (int j = 0; j < answer_count; j++) {
-                NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
-                if ([[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
-                    [selected_answer_check replaceObjectAtIndex:i withObject:[NSNumber numberWithInt:1]];
-                    break;
-                }
-                
-            }            
-            
-        }
-
-    BOOL flag_answer = 3;
-    
-    int incorrectcount = 0;
-    int correctcount = 0;
-    
-    for (int x =0; x < [selected_answer_check count]; x++) {
-        if ([[selected_answer_check objectAtIndex:x] intValue] == 1) {
-            correctcount++;
-        }
-        else if ([[selected_answer_check objectAtIndex:x] intValue] == 2) {
-            incorrectcount++;
-        }
-    }
-
-    if (incorrectcount > 0) {
-        flag_answer = 2;
-    }
-    else if (correctcount == [objMCSS.arrAnswer count]) {
-        flag_answer = 1;
-    }
-    
-    return flag_answer;
-}
-
-- (void) handleShowAnswers{
-
-    [(CaseStudyViewController*)self.parentViewController onTryAgain];
-    
-}
-
-- (void) handleRevealScore{
-    
-    NSArray *selectedCells_temp = [tblOptions indexPathsForSelectedRows];
-    
-    int answer_count = [objMCSS.arrAnswer count];
-    int selected_count = [selectedCells_temp count];
-    
-    //if (selected_count == answer_count) {
-    for (int i = 0; i < selected_count; i++) {
-        
-        NSIndexPath *indexPath = [selectedCells_temp objectAtIndex:i];
-        
-        NSString *ss = [objMCSS.arrOptions objectAtIndex:indexPath.row];
-        ss = [ss stringByReplacingOccurrencesOfString:@" " withString:@""];
-        ss = [ss lowercaseString];
-        
-        
-        
-        MCSSCell_iPad *cell = [cellArray objectAtIndex:indexPath.row];
-        
-        for (int j = 0; j < answer_count; j++) {
-            NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
-            sa = [sa lowercaseString];
-            if (![ss isEqualToString:sa]) {
-                if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-                    [cell.imgAns setImage:[UIImage imageNamed:@"false_Without_Border.png"]];
-                }
-                else {
-                    [cell.imgAns setImage:[UIImage imageNamed:@"img_false.png"]];
-                }
-                NSString *feeback = [self fn_getFeeback:indexPath.row];
-                if (feeback.length > 0) {
-                    cell.btnFeedback.hidden = NO;
-                    cell.strFeedback = feeback;
-                }
-                
-            }else {
-                if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-                    [cell.imgAns setImage:[UIImage imageNamed:@"True_Btn_Without_Border.png"]];
-                }
-                else {
-                    [cell.imgAns setImage:[UIImage imageNamed:@"img_true.png"]];
-                }
-                NSString *feeback = [self fn_getFeeback:indexPath.row];
-                if (feeback.length > 0) {
-                    cell.btnFeedback.hidden = NO;
-                    cell.strFeedback = feeback;
-                }
-                break;
-            }
-        }
-        
-    }
-    //}
-    
-    [self Fn_createInvisibleBtn];
-}
-//--------------------------------
-
--(void) Fn_createInvisibleBtn
-{    
     [btnInvisible removeFromSuperview];
     btnInvisible = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnInvisible setFrame:CGRectMake(tblOptions.frame.origin.x, tblOptions.frame.origin.y, tblOptions.frame.size.width - 50, tblOptions.frame.size.height)];
     btnInvisible.backgroundColor = [UIColor clearColor];
     [btnInvisible addTarget:self action:@selector(onInvisible:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btnInvisible];    
+    [self.view addSubview:btnInvisible];
 }
-
--(IBAction)onInvisible:(id)sender
-{
-    feedbackView.hidden = YES;
-}
-
-- (NSString *) fn_getFeeback:(int)intfeed 
+-(NSString *)fn_getFeeback:(int)intfeed
 {
     NSString *strTemp = nil;
     
@@ -413,21 +184,7 @@
     
     return strTemp;
 }
-
-
--(IBAction)onFeedbackTapped:(id)sender{
-    UIButton *bn = sender;
-    MCSSCell_iPad *cell = [cellArray objectAtIndex:bn.tag];
-    float x_point = bn.frame.origin.x - (221);
-    float y_point = tblOptions.frame.origin.y + cell.frame.origin.y + bn.frame.origin.y  - (128);
-    
-    x_feedback_l = 270;
-    y_feedback_l = cell.frame.origin.y + bn.frame.origin.y  - (131);
-    
-    [self Fn_AddFeedbackPopup:x_point andy:y_point andText:cell.strFeedback];
-}
-
-- (void) Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue
+-(void)Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue
 {
     [feedbackView removeFromSuperview];
     
@@ -494,28 +251,328 @@
         [self.view addSubview:feedbackView];
     }
 }
+-(void)handleRevealScore
+{
+    
+    NSArray *selectedCells_temp = [tblOptions indexPathsForSelectedRows];
+    
+    int answer_count = [objMCSS.arrAnswer count];
+    int selected_count = [selectedCells_temp count];
+    
+    //if (selected_count == answer_count) {
+    for (int i = 0; i < selected_count; i++) {
+        
+        NSIndexPath *indexPath = [selectedCells_temp objectAtIndex:i];
+        
+        NSString *ss = [objMCSS.arrOptions objectAtIndex:indexPath.row];
+        ss = [ss stringByReplacingOccurrencesOfString:@" " withString:@""];
+        ss = [ss lowercaseString];
+        
+        
+        
+        MCSSCell_iPad *cell = [cellArray objectAtIndex:indexPath.row];
+        
+        for (int j = 0; j < answer_count; j++) {
+            NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
+            sa = [sa lowercaseString];
+            if (![ss isEqualToString:sa]) {
+                if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                    [cell.imgAns setImage:[UIImage imageNamed:@"false_Without_Border.png"]];
+                }
+                else {
+                    [cell.imgAns setImage:[UIImage imageNamed:@"img_false.png"]];
+                }
+                NSString *feeback = [self fn_getFeeback:indexPath.row];
+                if (feeback.length > 0) {
+                    cell.btnFeedback.hidden = NO;
+                    cell.strFeedback = feeback;
+                }
+                
+            }else {
+                if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                    [cell.imgAns setImage:[UIImage imageNamed:@"True_Btn_Without_Border.png"]];
+                }
+                else {
+                    [cell.imgAns setImage:[UIImage imageNamed:@"img_true.png"]];
+                }
+                NSString *feeback = [self fn_getFeeback:indexPath.row];
+                if (feeback.length > 0) {
+                    cell.btnFeedback.hidden = NO;
+                    cell.strFeedback = feeback;
+                }
+                break;
+            }
+        }
+        
+    }
+    //}
+    
+    [self Fn_createInvisibleBtn];
+}
+//---------------------------------------------------------
 
 
-#pragma mark - View lifecycle
-//---------------------------------------------------------
-#pragma mark - Common Function
-//---------------------------------------------------------
-
-#pragma mark - Normal Function
-//---------------------------------------------------------
 #pragma mark - Public Function
 //---------------------------------------------------------
-#pragma mark - Button Actions
-//---------------------------------------------------------
-#pragma mark - AlertView
-//---------------------------------------------------------
-#pragma mark - scrollview delegate
-//---------------------------------------------------------
-#pragma mark - Touch
-//---------------------------------------------------------
-#pragma mark - Orientation
+-(void)fn_LoadDbData:(NSString *)question_id
+{
+    objMCSS = [db fnGetCasestudyMCSS:question_id];
+}
+-(NSString *)fn_CheckAnswersBeforeSubmit
+{
+    flagForAnyOptionSelect = NO;
+    NSMutableString *strTemp = [[NSMutableString alloc] init];
+    NSArray *selectedCells_temp = [tblOptions indexPathsForSelectedRows];
+    
+    if ([selectedCells_temp count] == 0) {
+        flagForAnyOptionSelect = YES;
+        intVisited = 0;
+    }
+    else  {
+        
+        for (int i=0; i < [selectedCells_temp count]; i++) {
+            NSIndexPath *indexpth = [selectedCells_temp objectAtIndex:i];
+            NSString *tempStr = [NSString stringWithFormat:@"%d", indexpth.row];
+            [strTemp appendString:tempStr];
+            if (i == [selectedCells_temp count]-1) {
+                
+            }
+            else {
+                [strTemp appendString:@"#"];
+            }
+        }
+        
+        
+        flagForCheckAnswer = [self checkForAnswer];
+        
+        if (flagForCheckAnswer == 1) {
+            intVisited = 1;
+        }
+        else {
+            intVisited = 2;
+        }
+    }
+    return strTemp;
+}
+-(void)fn_OnSubmitTapped
+{
+    UIAlertView *alert = [[UIAlertView alloc] init];
+    [alert setTitle:TITLE_COMMON];
+    [alert setDelegate:self];
+    if (flagForAnyOptionSelect) {
+        [alert setTag:1];
+        [alert addButtonWithTitle:@"Ok"];
+        if (MultipleSelect) {
+            [alert setMessage:[NSString stringWithFormat:@"Please select options."]];
+        }
+        else {
+            [alert setMessage:[NSString stringWithFormat:@"Please select an option."]];
+        }
+    }
+    else {
+        if (flagForCheckAnswer == 1) {
+            [alert setTag:2];
+            [alert addButtonWithTitle:@"Ok"];
+            [alert setMessage:[NSString stringWithFormat:@"That's Correct!"]];
+        }
+        else if (flagForCheckAnswer == 3) {
+            [alert setTag:3];
+            [alert addButtonWithTitle:@"Answer"];
+            [alert addButtonWithTitle:@"Try Again"];
+            [alert setMessage:[NSString stringWithFormat:@"Partially Correct. Please try other options as well."]];
+        }
+        else {
+            [alert setTag:3];
+            [alert addButtonWithTitle:@"Answer"];
+            [alert addButtonWithTitle:@"Try Again"];
+            [alert setMessage:[NSString stringWithFormat:@"That's Incorrect!"]];
+            // Please match all the items.
+            
+        }
+    }
+	[alert show];
+}
+-(void)fn_ShowSelected:(NSString *)visitedAnswers
+{
+    NSArray *main;
+    if (visitedAnswers.length > 0) {
+        
+        main = [visitedAnswers componentsSeparatedByString:@"#"];
+        selectedCells = [[NSMutableArray alloc] init];
+        for (int i=0; i<[main count]; i++) {
+            int index = [[main objectAtIndex:i] intValue];
+            [selectedCells addObject:[NSNumber numberWithInt:index]];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+            [tblOptions selectRowAtIndexPath:indexPath animated:NO scrollPosition:NO];
+        }
+    }
+    isSubmit = YES;
+    [self handleRevealScore];
+    [self Fn_createInvisibleBtn];
+}
+-(int)checkForAnswer
+{
+    
+    NSArray *selectedCells_temp = [tblOptions indexPathsForSelectedRows];
+    
+    int answer_count = [objMCSS.arrAnswer count];
+    int selected_count = [selectedCells_temp count];
+    
+    NSMutableArray *selected_answer_check = [[NSMutableArray alloc] init];
+    for (int i = 0; i < selected_count; i++) {
+        [selected_answer_check addObject:[NSNumber numberWithInt:2]];
+    }
+    
+    
+    //if (selected_count == answer_count) {
+    for (int i = 0; i < selected_count; i++) {
+        
+        NSIndexPath *indexPath = [selectedCells_temp objectAtIndex:i];
+        
+        NSString *ss = [objMCSS.arrOptions objectAtIndex:indexPath.row];
+        ss = [ss stringByReplacingOccurrencesOfString:@" " withString:@""];
+        
+        for (int j = 0; j < answer_count; j++) {
+            NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
+            if ([[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
+                [selected_answer_check replaceObjectAtIndex:i withObject:[NSNumber numberWithInt:1]];
+                break;
+            }
+            
+        }
+        
+    }
+    
+    BOOL flag_answer = 3;
+    
+    int incorrectcount = 0;
+    int correctcount = 0;
+    
+    for (int x =0; x < [selected_answer_check count]; x++) {
+        if ([[selected_answer_check objectAtIndex:x] intValue] == 1) {
+            correctcount++;
+        }
+        else if ([[selected_answer_check objectAtIndex:x] intValue] == 2) {
+            incorrectcount++;
+        }
+    }
+    
+    if (incorrectcount > 0) {
+        flag_answer = 2;
+    }
+    else if (correctcount == [objMCSS.arrAnswer count]) {
+        flag_answer = 1;
+    }
+    
+    return flag_answer;
+}
+-(void)handleShowAnswers
+{
+    
+    
+    NSArray *selectedCells_temp = [tblOptions indexPathsForSelectedRows];
+    int selected_count = [selectedCells_temp count];
+    
+    for (int i = 0; i < selected_count; i++) {
+        NSIndexPath *indexPath = [selectedCells_temp objectAtIndex:i];
+        MCSSCell_iPad *cell = [cellArray objectAtIndex:indexPath.row];
+        [cell.imgAns setImage:nil];
+        [cell.btnFeedback setImage:nil forState:UIControlStateNormal];
+        [tblOptions deselectRowAtIndexPath:indexPath animated:NO];
+    }
+    
+    
+    int answer_count = [objMCSS.arrAnswer count];
+    selected_count = [cellArray count];
+    
+    for (int i = 0; i < selected_count; i++) {
+        
+        MCSSCell_iPad *cell = [cellArray objectAtIndex:i];
+        [cell.btnFeedback setImage:[UIImage imageNamed:@"btn_feedback.png"] forState:UIControlStateNormal];
+        
+        
+        NSIndexPath *indexPath = [tblOptions indexPathForCell:cell];
+        
+        NSString *ss = [objMCSS.arrOptions objectAtIndex:indexPath.row];
+        ss = [ss stringByReplacingOccurrencesOfString:@" " withString:@""];
+        ss = [ss lowercaseString];
+        
+        for (int j = 0; j < answer_count; j++) {
+            NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
+            sa = [sa lowercaseString];
+            if (![ss isEqualToString:sa]) {
+                if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                    [cell.imgAns setImage:[UIImage imageNamed:@"false_Without_Border.png"]];
+                }
+                else {
+                    [cell.imgAns setImage:[UIImage imageNamed:@"img_false.png"]];
+                }
+                NSString *feeback = [self fn_getFeeback:indexPath.row];
+                if (feeback.length > 0) {
+                    cell.btnFeedback.hidden = NO;
+                    cell.strFeedback = feeback;
+                }
+                
+            }
+            else {
+                if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                    [cell.imgAns setImage:[UIImage imageNamed:@"True_Btn_Without_Border.png"]];
+                }
+                else {
+                    [cell.imgAns setImage:[UIImage imageNamed:@"img_true.png"]];
+                }
+                NSString *feeback = [self fn_getFeeback:indexPath.row];
+                if (feeback.length > 0) {
+                    cell.btnFeedback.hidden = NO;
+                    cell.strFeedback = feeback;
+                }
+                
+                cell.lblAlphabet.highlighted = YES;
+                cell.lblOptionName.highlighted = YES;
+                cell.imgTableCellBG.highlighted = YES;
+                
+                break;
+            }
+            
+            
+        }
+        
+        
+    }
+    
+    [self Fn_createInvisibleBtn];
+    
+}
 //---------------------------------------------------------
 
+
+#pragma mark - Button Actions
+//---------------------------------------------------------
+- (IBAction)onCasestudyTextTapped:(id)sender
+{
+    strCaseStudyText = objMCSS.strCasestudyText;
+    [md Fn_AddCaseStudyText];
+}
+-(IBAction)onInvisible:(id)sender
+{
+    feedbackView.hidden = YES;
+}
+-(IBAction)onFeedbackTapped:(id)sender
+{
+    UIButton *bn = sender;
+    MCSSCell_iPad *cell = [cellArray objectAtIndex:bn.tag];
+    float x_point = bn.frame.origin.x - (221);
+    float y_point = tblOptions.frame.origin.y + cell.frame.origin.y + bn.frame.origin.y  - (128);
+    
+    x_feedback_l = 270;
+    y_feedback_l = cell.frame.origin.y + bn.frame.origin.y  - (131);
+    
+    [self Fn_AddFeedbackPopup:x_point andy:y_point andText:cell.strFeedback];
+}
+//---------------------------------------------------------
+
+#pragma mark - AlertView
+//---------------------------------------------------------
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 2) {
         if (buttonIndex == 0)
@@ -531,6 +588,7 @@
             isSubmit = YES;
             [parentObject Fn_DisableSubmit];            
             [self handleRevealScore];
+            [parentObject Fn_ShowAnswer];
         }
         else if (buttonIndex == 1)
         {
@@ -539,13 +597,16 @@
         }
     }
 }
+//---------------------------------------------------------
 
-#pragma mark Touch Events
+#pragma mark - Touch
+//---------------------------------------------------------
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     if (feedbackView) {
         [feedbackView removeFromSuperview];
     }
 }
+//---------------------------------------------------------
 
 #pragma mark - Table View
 //---------------------------------------------------------
@@ -553,13 +614,10 @@
 {
     return 1;
 }
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [objMCSS.arrOptions count];
 }
-
-// Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {    
     static NSString *MyIdentifier = @"tblCellView";
@@ -690,7 +748,6 @@
     }
     return cell;
 }
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     float height = 55;
@@ -710,8 +767,7 @@
     }
     return height;
 }
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *Cells = [tblOptions indexPathsForSelectedRows];
     selectedCells = [[NSMutableArray alloc] init];
     for (NSIndexPath *indexPath in Cells) {
@@ -722,9 +778,10 @@
 }
 //---------------------------------------------------------
 
-#pragma Orientation
-//------------------------------
-- (BOOL) shouldAutorotate{
+#pragma mark - Orientation
+//---------------------------------------------------------
+-(BOOL)shouldAutorotate
+{
     UIInterfaceOrientation interfaceOrientation = (UIInterfaceOrientation)[UIApplication sharedApplication].statusBarOrientation;
     currentOrientaion = interfaceOrientation;
     return YES;
@@ -760,7 +817,8 @@
 	}
     return UIInterfaceOrientationMaskAll;
 }
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
     return NO;
     }
@@ -785,8 +843,6 @@
     
 	return YES;
 }
-//------------------------------
-
 -(void)Fn_rotatePortrait
 {
     // Self View
@@ -865,4 +921,5 @@
     [feedbackView setFrame:CGRectMake(1005-x_feedback_l, y_feedback_l+tblOptions.frame.origin.y, feedbackView.frame.size.width, feedbackView.frame.size.height)];
     
 }
+//---------------------------------------------------------
 @end

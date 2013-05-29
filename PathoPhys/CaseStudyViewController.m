@@ -20,7 +20,6 @@
 #import "QuizTrack.h"
 #import "Chapters.h"
 #import "ThematicArea.h"
-//#import "ResultViewController.h"
 
 //
 #import "Notes.h"
@@ -34,7 +33,6 @@
     DragDropViewController_cs *dragDropView;
     
     QuizTrack *objQuizTrack;
-    //ResultViewController *resultView;
     CustomRightBarItem *customRightBar;
     CustomLeftBarItem *customLeftBar;
     
@@ -49,7 +47,9 @@
 
 @implementation CaseStudyViewController
 
-- (void)viewDidLoad
+#pragma mark - View lifecycle
+//---------------------------------------------------------
+-(void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -100,51 +100,30 @@
         [self Fn_LoadQuestionData];
     }
     
+    [self fnDisableBottomBarButtons];
+    bnSubmit.hidden = NO;
+    bnSubmit.enabled = YES;
+    
     bnPrev.enabled = NO;
     if(intTotalQuestions == 1){
         bnNext.enabled = NO;
     }
 }
-
 -(void)viewWillAppear:(BOOL)animated
 {
     [md Fn_removeInfoViewPopup];
     [md Fn_removeNoteViewPopup];
     NOTES_MODE = 0;
 }
-
-- (void) disableAllButtons:(int)questionNO;
+- (void)didReceiveMemoryWarning
 {
-    bnNext.enabled = NO;
-    bnPrev.enabled = NO;
-    bnSubmit.enabled = NO;
-    
-    [self fn_RemoveQuestionView];
-    intCurrentQuestionIndex = questionNO - 1;
-    [self Fn_LoadQuestionData];
-    
-    [self Fn_CheckNote];
-    
-    customRightBar.btnInfo.hidden = YES;
-    customRightBar.btnNote.hidden = YES;
-    customRightBar.btnScore.hidden = YES;
-    
-    customLeftBar.btnHome.hidden = YES;
-    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        customLeftBar.btnBack.frame = CGRectMake(0, 7, 45, 30) ;
-    }
-    else {
-        
-    }
-    
-    [self performSelector:@selector(onSelctor) withObject:self afterDelay:0.7];
-    
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
+//--------------------------------------------------------
 
--(void) onSelctor {
-    [md Fn_ShowNote:2];
-}
-
+#pragma mark - Common Function
+//---------------------------------------------------------
 -(void) fnAddNavigationItems
 {
     
@@ -179,15 +158,12 @@
     UIBarButtonItem *btnBar = [[UIBarButtonItem alloc] initWithCustomView:customRightBar];
     self.navigationItem.rightBarButtonItem = btnBar;
 }
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+//--------------------------------------------------------
 
 
--(void) Fn_LoadQuestionData
+#pragma mark - Normal Function
+//---------------------------------------------------------
+-(void)Fn_LoadQuestionData
 {
     objQue = (ChapterQuestionSet *)[arrCaseStudies objectAtIndex:intCurrentQuestionIndex];
     lblQuestionNo.text = [NSString stringWithFormat:@"%d/%d", objQue.intSequence, intTotalQuestions];
@@ -268,8 +244,8 @@
     
     [self Fn_CheckNote];
 }
-
--(void) Fn_CheckNote {
+-(void)Fn_CheckNote
+{
     
     int question_no = intCurrentQuestionIndex + 1;
     
@@ -300,8 +276,7 @@
     objNotes.strQuestionId = objQue.strQuestionId;
     [md Fn_AddNote:objNotes];
 }
-
--(void) fn_RemoveQuestionView
+-(void)fn_RemoveQuestionView
 {
     switch (objQue.intType) {
         case QUESTION_TYPE_MCMS:
@@ -315,19 +290,107 @@
             break;
     }
 }
+-(void)fnDisableBottomBarButtons
+{
+    bnShowAnswer.hidden = YES;
+    bnTryAgian.hidden = YES;
+    bnShowScore.hidden = YES;
+    bnSubmit.hidden = YES;
+}
+-(void)disableAllButtons:(int)questionNO;
+{
+    bnNext.enabled = NO;
+    bnPrev.enabled = NO;
+    bnSubmit.enabled = NO;
+    
+    [self fn_RemoveQuestionView];
+    intCurrentQuestionIndex = questionNO - 1;
+    [self Fn_LoadQuestionData];
+    
+    [self Fn_CheckNote];
+    
+    customRightBar.btnInfo.hidden = YES;
+    customRightBar.btnNote.hidden = YES;
+    customRightBar.btnScore.hidden = YES;
+    
+    customLeftBar.btnHome.hidden = YES;
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        customLeftBar.btnBack.frame = CGRectMake(0, 7, 45, 30) ;
+    }
+    else {
+        
+    }
+    
+    [self performSelector:@selector(onSelctor) withObject:self afterDelay:0.7];
+    
+}
+-(void)onSelctor
+{
+    [md Fn_ShowNote:2];
+}
+-(void)Fn_CallOrientaion
+{
+    switch (objQue.intType) {
+        case QUESTION_TYPE_MCMS:
+            //[multipleSelectionView.view removeFromSuperview];
+            [dragDropView shouldAutorotateToInterfaceOrientation:currentOrientaion];
+            break;
+        case QUESTION_TYPE_MATCHTERMS:
+            [matchPairsView shouldAutorotateToInterfaceOrientation:currentOrientaion];
+            break;
+        case QUESTION_TYPE_MCSS:
+            [singleSelectionView shouldAutorotateToInterfaceOrientation:currentOrientaion];
+            break;
+    }
+    
+    //[resultView shouldAutorotateToInterfaceOrientation:currentOrientaion];
+    
+    
+}
+//--------------------------------------------------------
 
 
+#pragma mark - Public Function
+//---------------------------------------------------------
+-(void)onTryAgain
+{
+    TryAgainFlag = 1;
+    int_MoveNextPre = 0;
+    [self Fn_DisableSubmit];
+    bnSubmit.hidden = NO;
+    bnSubmit.enabled = YES;
+    [self fn_RemoveQuestionView];
+    [md Fn_SubAddNote];
+    [self Fn_LoadQuestionData];
+}
+-(void)Fn_DisableSubmit
+{
+    bnSubmit.hidden = YES;
+    bnSubmit.enabled = NO;
+    bnShowAnswer.hidden = YES;
+    bnTryAgian.hidden = YES;
+}
+-(void)Fn_ShowAnswer
+{
+    bnShowAnswer.hidden = NO;
+    bnTryAgian.hidden = NO;
+}
+//---------------------------------------------------------
+
+
+#pragma mark - Button Actions
+//---------------------------------------------------------
 -(IBAction)onBack:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-
 -(IBAction)onNext:(id)sender
 {
     if (intCurrentQuestionIndex == intTotalQuestions-1) {
         return;
     }
+    [self fnDisableBottomBarButtons];
+    bnSubmit.hidden = NO;
     bnSubmit.enabled = YES;
     TryAgainFlag = 0;
     [self fn_RemoveQuestionView];
@@ -338,12 +401,13 @@
         bnNext.enabled = NO;
     }
 }
-
 -(IBAction)onPrev:(id)sender
 {
     if (intCurrentQuestionIndex == 0) {
         return;
     }
+    [self fnDisableBottomBarButtons];
+    bnSubmit.hidden = NO;
     bnSubmit.enabled = YES;
     TryAgainFlag = 0;
     [self fn_RemoveQuestionView];
@@ -355,7 +419,6 @@
     }
     
 }
-
 -(IBAction)onSubmit:(id)sender
 {
     NSString *strSel = nil;    
@@ -400,7 +463,6 @@
     }
     
 }
-
 -(IBAction)onShowScore:(id)sender
 {
     
@@ -425,86 +487,34 @@
     
     [db fnSetQuizTrack:objQuizTrack];
 }
-
--(void)onTryAgain
+-(IBAction)onShowAnswer:(id)sender
 {
-    TryAgainFlag = 1;
-    int_MoveNextPre = 0;
-    [self fn_RemoveQuestionView];
-    [md Fn_SubAddNote];
-    [self Fn_LoadQuestionData];
-}
-
--(void) Fn_DisableSubmit {
-    bnSubmit.enabled = NO;
-}
--(void)Fn_CallOrientaion
-{
+    //
     switch (objQue.intType) {
         case QUESTION_TYPE_MCMS:
-            //[multipleSelectionView.view removeFromSuperview];
-            [dragDropView shouldAutorotateToInterfaceOrientation:currentOrientaion];
-            break;
+            [dragDropView handleShowAnswers];
+            break;        
         case QUESTION_TYPE_MATCHTERMS:
-            [matchPairsView shouldAutorotateToInterfaceOrientation:currentOrientaion];
+            [matchPairsView handleShowAnswers];
             break;
         case QUESTION_TYPE_MCSS:
-            [singleSelectionView shouldAutorotateToInterfaceOrientation:currentOrientaion];
+            [singleSelectionView handleShowAnswers];
             break;
     }
-    
-    //[resultView shouldAutorotateToInterfaceOrientation:currentOrientaion];
-
+    //
     
 }
-
-
--(void)Fn_CallOrientaion_ios6
+-(IBAction)onTryAgainTapped:(id)sender
 {
-    switch (objQue.intType) {
-        case QUESTION_TYPE_MCMS:
-            //[multipleSelectionView.view removeFromSuperview];
-            [dragDropView supportedInterfaceOrientations];
-            break;
-        case QUESTION_TYPE_MATCHTERMS:
-            [matchPairsView supportedInterfaceOrientations];
-            break;
-        case QUESTION_TYPE_MCSS:
-            [singleSelectionView supportedInterfaceOrientations];
-            break;
-        case QUESTION_TYPE_DRAGDROP:
-            [dragDropView supportedInterfaceOrientations];
-            break;
-    }
-    
-    //[resultView shouldAutorotateToInterfaceOrientation:currentOrientaion];
-
-    
+    [self onTryAgain];
 }
+//--------------------------------------------------------
 
-#pragma mark - View lifecycle
-//---------------------------------------------------------
-#pragma mark - Common Function
-//---------------------------------------------------------
 
-#pragma mark - Normal Function
-//---------------------------------------------------------
-#pragma mark - Public Function
-//---------------------------------------------------------
-#pragma mark - Button Actions
-//---------------------------------------------------------
-#pragma mark - AlertView
-//---------------------------------------------------------
-#pragma mark - scrollview delegate
-//---------------------------------------------------------
-#pragma mark - Touch
-//---------------------------------------------------------
 #pragma mark - Orientation
-//---------------------------------------------------------
-
-#pragma Orientation
-//------------------------------
-- (BOOL) shouldAutorotate{
+//--------------------------------------------------------
+-(BOOL)shouldAutorotate
+{
     UIInterfaceOrientation interfaceOrientation = (UIInterfaceOrientation)[UIApplication sharedApplication].statusBarOrientation;
     currentOrientaion = interfaceOrientation;
     return YES;
@@ -517,7 +527,7 @@
     NSUInteger mask= UIInterfaceOrientationMaskPortrait;
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     currentOrientaion = interfaceOrientation;
-    [self Fn_CallOrientaion_ios6];
+    [self Fn_CallOrientaion];
     if(interfaceOrientation==UIInterfaceOrientationLandscapeLeft){
         [self Fn_rotateLandscape];
         
@@ -541,7 +551,8 @@
 	}
     return UIInterfaceOrientationMaskAll;
 }
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
         return NO;
     }
@@ -566,8 +577,6 @@
     
 	return YES;
 }
-//------------------------------
-
 -(void)Fn_rotatePortrait
 {
     
@@ -601,5 +610,6 @@
     [bnShowScore setFrame:CGRectMake(674, 613, 139, 43)];
     [lblQuestionNo setFrame:CGRectMake(116, 620, 68, 26)];
 }
+//--------------------------------------------------------
 
 @end

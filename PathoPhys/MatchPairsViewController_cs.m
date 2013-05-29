@@ -71,8 +71,8 @@
 @synthesize strVisitedAnswer;
 @synthesize parentObject;
 
-// Defaults
-//--------------------------------
+#pragma mark - View lifecycle
+//---------------------------------------------------------
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -244,12 +244,12 @@
     // Dispose of any resources that can be recreated.
 
 }
-//--------------------------------
+//---------------------------------------------------------
 
 
-// Set local variables
-//--------------------------------
--(void) fn_SetVariables
+#pragma mark - Common Function
+//---------------------------------------------------------
+-(void)fn_SetVariables
 {
     LEFT_OPTION_WIDTH = 200;
     LEFT_OPTION_MARGIN = 10;
@@ -293,7 +293,7 @@
 	qnsFlag = TRUE;
 	currentAnswer = -2;    
 }
--(void) fn_SetFontColor
+-(void)fn_SetFontColor
 {
     lblQuestionNo.textColor = COLOR_WHITE;
     
@@ -305,116 +305,167 @@
     }
     
 }
+//---------------------------------------------------------
 
-//--------------------------------
 
 
-//Get db data from question_id
-//--------------------------------
--(void) fn_LoadDbData:(NSString *)question_id
+#pragma mark - Normal Function
+//---------------------------------------------------------
+-(void)drawLine
 {
-    objMatch = [db fnGetCasestudyMatchTerms:question_id];
-}
--(NSString *) fn_CheckAnswersBeforeSubmit
-{
-    int i = 0;
-	flagForAnyOptionSelect = NO;
-    NSMutableString *strTemp = [[NSMutableString alloc] init];
     
+    UIImageView *drawLineView = [imgviewArray objectAtIndex:currentQns];
+    
+    UIGraphicsBeginImageContext(drawLineView.frame.size);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetLineWidth(context, 4.0);
+    
+    CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
+    
+    CGContextSetStrokeColorWithColor(context, [[colorArray objectAtIndex:currentColor] CGColor]);
+    
+    CGContextBeginPath(context);
+    
+    CGContextMoveToPoint(context, startPoint.x, startPoint.y);
+    CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
+    
+    CGContextStrokePath(context);
+    CGColorSpaceRelease(colorspace);
+    
+    UIImage *ret = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [drawLineView setImage:ret];
+}
+-(float)fn_getLeftSize:(NSString *)data
+{
+    CGSize constraint = CGSizeMake(LEFT_OPTION_WIDTH - (LEFT_OPTION_MARGIN * 2), 20000.0f);
+    CGSize size = [data sizeWithFont:FONT_15 constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+    return size.height;
+}
+-(float)fn_getRightSize:(NSString *)data
+{
+    CGSize constraint = CGSizeMake(RIGHT_OPTION_WIDTH - (RIGHT_OPTION_MARGIN * 2), 40000.0f);
+    CGSize size = [data sizeWithFont:FONT_15 constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+    return size.height;
+}
+-(NSInteger)getRandomColor
+{
+	
+	int i = 0;
+	
+	int colorId = arc4random() % ([colorArray count]);
 	while (i < [userAnswerArray count]) {
-        if (![[userAnswerArray objectAtIndex:i] isKindOfClass:[T1Object_ipad class]]) {
-            flagForAnyOptionSelect = YES;
-        }
-        else {
-            T1Object_ipad *obj = [userAnswerArray objectAtIndex:i];
-            NSString *tempStr = [NSString stringWithFormat:@"%d$%d$%d", obj.qnsID, obj.ansID, obj.colorID];
-            [strTemp appendString:tempStr];
-            if (i == [userAnswerArray count]-1) {
+		
+		T1Object_ipad *obj = [userAnswerArray objectAtIndex:i];
+		if ([[userAnswerArray objectAtIndex:i] isKindOfClass:[T1Object_ipad class]]) {
+			
+			if (obj.colorID == colorId) {
+				
+				i = -1;
+				colorId = arc4random() % ([colorArray count]);
+			}
+		}
+		i++;
+	}
+	
+	return colorId;
+}
+-(NSInteger)checkQuenstion:(NSInteger) ansID
+{
+	
+	int i = 0;
+	
+	while (i < [userAnswerArray count]) {
+		
+		if ([[userAnswerArray objectAtIndex:i] isKindOfClass:[T1Object_ipad class]]) {
+			
+			T1Object_ipad * obj = [userAnswerArray objectAtIndex:i];
+			
+			if (obj.ansID == ansID && currentQns != obj.qnsID) {
+				
+				LeftMatchView_IPad *pqnsBt = [questionArray objectAtIndex:obj.qnsID];
+				[pqnsBt.dotBt setBackgroundColor:COLOR_CLEAR];
+				[pqnsBt.customBt setBackgroundColor:COLOR_BottomGrayButton];
+                UIImageView *drawLineView = [imgviewArray objectAtIndex:obj.qnsID];
+                [drawLineView setImage:nil];
                 
-            }
-            else {
-                [strTemp appendString:@"#"];
-            }
-        }
-        i++;
-    }
-    
-    if (flagForAnyOptionSelect) {
-        intVisited = 0;
-    }
-    else  {
-        flagForCheckAnswer = [self checkForAnswer];
-        if (flagForCheckAnswer == YES) {
-            intVisited = 1;
-        }
-        else {
-            intVisited = 2;
-        }
-    }
-    
-    return strTemp;
+				obj.ansID = -1;
+				ansID = -1;
+				
+				countNo--;
+				break;
+			}
+		}
+		i++;
+	}
+	
+	if (ansID == -1) {
+		
+		return 1;
+	}
+	return 0;
 }
--(void) fn_OnSubmitTapped
-{
-    UIAlertView *alert = [[UIAlertView alloc] init];
-    [alert setTitle:TITLE_COMMON];
-    [alert setDelegate:self];
-    if (flagForAnyOptionSelect) {
-        [alert setTag:1];
-        [alert addButtonWithTitle:@"Ok"];
-        [alert setMessage:[NSString stringWithFormat:@"Please match the items."]];
-    }
-    else {
-        if (flagForCheckAnswer == YES) {
-            [alert setTag:2];
-            [alert addButtonWithTitle:@"Ok"];
-            [alert setMessage:[NSString stringWithFormat:@"That's Correct!"]];
-        }
-        else {
-            [alert setTag:3];
-            [alert addButtonWithTitle:@"Answer"];
-            [alert addButtonWithTitle:@"Try Again"];
-            [alert setMessage:[NSString stringWithFormat:@"That's Incorrect!"]];
-        }
-    }
-	[alert show];
-}
--(void) fn_ShowSelected:(NSString *)visitedAnswers
+-(void)handle_questions:(id)selector
 {
     
-    userAnswerArray = [[NSMutableArray alloc] init];
-    NSArray *main;
-    if (visitedAnswers.length > 0) {
-        
-        main = [visitedAnswers componentsSeparatedByString:@"#"];
-        for (int i=0; i<[main count]; i++) {
-            NSArray *sub = [[main objectAtIndex:i] componentsSeparatedByString:@"$"];
-            T1Object_ipad *obj = [[T1Object_ipad alloc]init];
-            obj.qnsID = [[sub objectAtIndex:0] intValue];
-            obj.ansID = [[sub objectAtIndex:1] intValue];
-            obj.colorID = [[sub objectAtIndex:2] intValue];
-            [userAnswerArray addObject:obj];
-            
-            currentQns = obj.qnsID;
-            currentColor = obj.colorID;
-            
-            LeftMatchView_IPad *lbt = [questionArray objectAtIndex:currentQns];
-            [lbt.customBt setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
-            [lbt.dotBt setBackgroundColor:[colorArray objectAtIndex:currentColor]];
-            startPoint = CGPointMake(lbt.frame.origin.x+lbt.dotBt.frame.origin.x+(lbt.dotBt.frame.size.width/2) , lbt.frame.origin.y+lbt.dotBt.frame.origin.y+(lbt.dotBt.frame.size.height/2));
-            
-            RightMatchView_Ipad *rbt = [answerArray objectAtIndex:obj.ansID];
-            [rbt.customBt setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
-            [rbt.dotBt setBackgroundColor:[colorArray objectAtIndex:currentColor]];
-            endPoint = CGPointMake(rbt.frame.origin.x+rbt.dotBt.frame.origin.x+(rbt.dotBt.frame.size.width/2) , rbt.frame.origin.y+rbt.dotBt.frame.origin.y+(rbt.dotBt.frame.size.height/2));
-            [self drawLine];
-        }
-    }
-    [self handleRevealScore];
-    [self disableEditFields];
-    [parentObject Fn_DisableSubmit];
+	UIButton *tempBt = (UIButton *) selector;
+    LeftMatchView_IPad *bt = [questionArray objectAtIndex:tempBt.tag];
+	countNo++;
+	if (qnsFlag) {
+		
+		qnsFlag =  FALSE;
+		
+		currentQns = tempBt.tag;
+		currentColor = [self getRandomColor];
+		currentAnswer = -1;
+        startPoint = CGPointMake(bt.frame.origin.x+bt.dotBt.frame.origin.x+(bt.dotBt.frame.size.width/2) , bt.frame.origin.y+bt.dotBt.frame.origin.y+(bt.dotBt.frame.size.height/2));
+        [bt.customBt setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
+		[bt.dotBt setBackgroundColor:[colorArray objectAtIndex:currentColor]];
+	}
 }
-//--------------------------------
+-(void)handle_answers:(id)selector
+{
+	
+	UIButton *tempBt = (UIButton *) selector;
+    RightMatchView_Ipad *bt = [answerArray objectAtIndex:tempBt.tag];
+	if ((currentAnswer != tempBt.tag || currentAnswer == -1) && currentAnswer != -2) {
+		
+		currentAnswer = tempBt.tag;
+		qnsFlag = TRUE;
+		if (currentQns != -1) {
+			
+			[self checkQuenstion:tempBt.tag];
+			
+			if ([[userAnswerArray objectAtIndex:currentQns] isKindOfClass:[T1Object_ipad class]]) {
+				
+				T1Object_ipad *obj = [userAnswerArray objectAtIndex:currentQns];
+				
+				if (obj.ansID != -1) {
+					
+					RightMatchView_Ipad *pansBt = [answerArray objectAtIndex:obj.ansID];
+                    [pansBt.dotBt setBackgroundColor:COLOR_CLEAR];
+					[pansBt.customBt setBackgroundColor:COLOR_BottomGrayButton];
+				}
+				
+				obj.ansID = tempBt.tag;
+				obj.colorID = currentColor;
+			}else {
+				
+				T1Object_ipad *obj = [[T1Object_ipad alloc]init];
+				obj.qnsID = currentQns;
+				obj.ansID = tempBt.tag;
+				obj.colorID = currentColor;
+				[userAnswerArray replaceObjectAtIndex:currentQns withObject:obj];
+			}
+		}
+        [bt.customBt setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
+		[bt.dotBt setBackgroundColor:[colorArray objectAtIndex:currentColor]];
+        endPoint = CGPointMake(bt.frame.origin.x+bt.dotBt.frame.origin.x+(bt.dotBt.frame.size.width/2) , bt.frame.origin.y+bt.dotBt.frame.origin.y+(bt.dotBt.frame.size.height/2));
+        [self drawLine];
+	}
+}
 - (void) Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue
 {
     [feedbackView removeFromSuperview];
@@ -482,7 +533,6 @@
         [self.view addSubview:feedbackView];
     }
 }
-
 - (NSString *) fn_getFeeback:(int)intfeed AndCorrect:(NSString *)correctincorrect
 {
     NSString *strTemp = nil;
@@ -495,7 +545,7 @@
         int char_index = [md charToScore:letter];
         
         NSString *trimmedType = [objFeedback.strType stringByTrimmingCharactersInSet:
-                                   [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                                 [NSCharacterSet whitespaceAndNewlineCharacterSet]];
         
         trimmedType = [trimmedType lowercaseString];
         
@@ -509,6 +559,273 @@
     
     return strTemp;
 }
+-(void)disableEditFields
+{
+    
+	int i = 0;
+	
+	while (i < [questionArray count]) {
+		
+		LeftMatchView_IPad *bt = [questionArray objectAtIndex:i];
+		bt.customBt.enabled = NO;
+        bt.dotBt.enabled = NO;
+		i++;
+	}
+	
+	i = 0;
+	
+	while (i < [answerArray count]) {
+		
+		RightMatchView_Ipad *bt = [answerArray objectAtIndex:i];
+		bt.customBt.enabled = NO;
+        bt.dotBt.enabled = NO;
+		i++;
+	}
+	
+}
+-(void)handleRevealScore
+{
+	
+	int i = 0;
+	
+	while (i < [userAnswerArray count]) {
+		
+		T1Object_ipad *obj = [userAnswerArray objectAtIndex:i];
+		RightMatchView_Ipad *bt = [answerArray objectAtIndex:obj.ansID];
+		NSString *ss = [bt.customBt.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+		NSString *sa = [[objMatch.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
+		
+		RightMatchView_Ipad *btTemp = [answerArray objectAtIndex:obj.ansID];
+		
+		if (![ss isEqualToString:sa]) {
+			
+			[btTemp.ansImage setImage:[UIImage imageNamed:@"img_false.png"]];
+            
+            NSString *feeback = [self fn_getFeeback:obj.ansID AndCorrect:@"incorrect"];
+            if (feeback.length > 0) {
+                btTemp.feedbackBt.hidden = NO;
+                btTemp.strFeedback = feeback;
+            }
+            
+		}else {
+			
+			[btTemp.ansImage setImage:[UIImage imageNamed:@"img_true.png"]];
+            
+            NSString *feeback = [self fn_getFeeback:obj.ansID AndCorrect:@"correct"];
+            if (feeback.length > 0) {
+                btTemp.feedbackBt.hidden = NO;
+                btTemp.strFeedback = feeback;
+            }
+            
+		}
+		
+		i++;
+	}
+	
+	[self disableEditFields];
+}
+//---------------------------------------------------------
+
+
+#pragma mark - Public Function
+//---------------------------------------------------------
+-(void)fn_LoadDbData:(NSString *)question_id
+{
+    objMatch = [db fnGetCasestudyMatchTerms:question_id];
+}
+-(NSString *)fn_CheckAnswersBeforeSubmit
+{
+    int i = 0;
+	flagForAnyOptionSelect = NO;
+    NSMutableString *strTemp = [[NSMutableString alloc] init];
+    
+	while (i < [userAnswerArray count]) {
+        if (![[userAnswerArray objectAtIndex:i] isKindOfClass:[T1Object_ipad class]]) {
+            flagForAnyOptionSelect = YES;
+        }
+        else {
+            T1Object_ipad *obj = [userAnswerArray objectAtIndex:i];
+            NSString *tempStr = [NSString stringWithFormat:@"%d$%d$%d", obj.qnsID, obj.ansID, obj.colorID];
+            [strTemp appendString:tempStr];
+            if (i == [userAnswerArray count]-1) {
+                
+            }
+            else {
+                [strTemp appendString:@"#"];
+            }
+        }
+        i++;
+    }
+    
+    if (flagForAnyOptionSelect) {
+        intVisited = 0;
+    }
+    else  {
+        flagForCheckAnswer = [self checkForAnswer];
+        if (flagForCheckAnswer == YES) {
+            intVisited = 1;
+        }
+        else {
+            intVisited = 2;
+        }
+    }
+    
+    return strTemp;
+}
+-(void)fn_OnSubmitTapped
+{
+    UIAlertView *alert = [[UIAlertView alloc] init];
+    [alert setTitle:TITLE_COMMON];
+    [alert setDelegate:self];
+    if (flagForAnyOptionSelect) {
+        [alert setTag:1];
+        [alert addButtonWithTitle:@"Ok"];
+        [alert setMessage:[NSString stringWithFormat:@"Please match the items."]];
+    }
+    else {
+        if (flagForCheckAnswer == YES) {
+            [alert setTag:2];
+            [alert addButtonWithTitle:@"Ok"];
+            [alert setMessage:[NSString stringWithFormat:@"That's Correct!"]];
+        }
+        else {
+            [alert setTag:3];
+            [alert addButtonWithTitle:@"Answer"];
+            [alert addButtonWithTitle:@"Try Again"];
+            [alert setMessage:[NSString stringWithFormat:@"That's Incorrect!"]];
+        }
+    }
+	[alert show];
+}
+-(void)fn_ShowSelected:(NSString *)visitedAnswers
+{
+    
+    userAnswerArray = [[NSMutableArray alloc] init];
+    NSArray *main;
+    if (visitedAnswers.length > 0) {
+        
+        main = [visitedAnswers componentsSeparatedByString:@"#"];
+        for (int i=0; i<[main count]; i++) {
+            NSArray *sub = [[main objectAtIndex:i] componentsSeparatedByString:@"$"];
+            T1Object_ipad *obj = [[T1Object_ipad alloc]init];
+            obj.qnsID = [[sub objectAtIndex:0] intValue];
+            obj.ansID = [[sub objectAtIndex:1] intValue];
+            obj.colorID = [[sub objectAtIndex:2] intValue];
+            [userAnswerArray addObject:obj];
+            
+            currentQns = obj.qnsID;
+            currentColor = obj.colorID;
+            
+            LeftMatchView_IPad *lbt = [questionArray objectAtIndex:currentQns];
+            [lbt.customBt setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
+            [lbt.dotBt setBackgroundColor:[colorArray objectAtIndex:currentColor]];
+            startPoint = CGPointMake(lbt.frame.origin.x+lbt.dotBt.frame.origin.x+(lbt.dotBt.frame.size.width/2) , lbt.frame.origin.y+lbt.dotBt.frame.origin.y+(lbt.dotBt.frame.size.height/2));
+            
+            RightMatchView_Ipad *rbt = [answerArray objectAtIndex:obj.ansID];
+            [rbt.customBt setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
+            [rbt.dotBt setBackgroundColor:[colorArray objectAtIndex:currentColor]];
+            endPoint = CGPointMake(rbt.frame.origin.x+rbt.dotBt.frame.origin.x+(rbt.dotBt.frame.size.width/2) , rbt.frame.origin.y+rbt.dotBt.frame.origin.y+(rbt.dotBt.frame.size.height/2));
+            [self drawLine];
+        }
+    }
+    [self handleRevealScore];
+    [self disableEditFields];
+    [parentObject Fn_DisableSubmit];
+}
+-(BOOL)checkForAnswer
+{
+	NSMutableString *strAns = [[NSMutableString alloc] init];
+	int i = 0;
+	BOOL flag1 = YES;
+	while (i < [userAnswerArray count]) {
+		
+		T1Object_ipad *obj = [userAnswerArray objectAtIndex:i];
+		RightMatchView_Ipad *bt = [answerArray objectAtIndex:obj.ansID];
+		NSString *ss = [bt.customBt.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+		NSString *sa = [[objMatch.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
+		if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
+			flag1 = NO;
+			break;
+		}
+		i++;
+        
+        if (i == [userAnswerArray count] - 1)
+            [strAns appendFormat:@"%d$%d$%d", obj.ansID, obj.qnsID, obj.colorID];
+        else
+            [strAns appendFormat:@"%d$%d$%d#", obj.ansID, obj.qnsID, obj.colorID];
+	}
+	strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
+	return flag1;
+}
+-(void)handleShowAnswers
+{
+    
+    userAnswerArray = [[NSMutableArray alloc] init];
+    
+    for (UIImageView *imgView in imgviewArray) {
+        [imgView setImage:nil];
+    }
+    
+    for (int i=0; i<questionArray.count; i++) {
+        currentColor = [self getRandomColor];
+        
+        LeftMatchView_IPad *lbt = [questionArray objectAtIndex:i];
+        [lbt.customBt setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
+        [lbt.dotBt setBackgroundColor:[colorArray objectAtIndex:currentColor]];
+        startPoint = CGPointMake(lbt.frame.origin.x+lbt.dotBt.frame.origin.x+(lbt.dotBt.frame.size.width/2) , lbt.frame.origin.y+lbt.dotBt.frame.origin.y+(lbt.dotBt.frame.size.height/2));
+        
+        NSString *sa = [[objMatch.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
+        
+        
+        for (RightMatchView_Ipad *rbt in answerArray) {
+            
+            NSString *ss = [rbt.customBt.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+            
+            
+            if ([ss isEqualToString:sa]) {
+                
+                T1Object_ipad *obj = [[T1Object_ipad alloc]init];
+                obj.qnsID = lbt.customBt.tag;
+                obj.ansID = rbt.customBt.tag;
+                obj.colorID = currentColor;
+                [userAnswerArray addObject:obj];
+                
+                currentQns = lbt.customBt.tag;
+                
+                RightMatchView_Ipad *rbt = [answerArray objectAtIndex:obj.ansID];
+                [rbt.customBt setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
+                [rbt.dotBt setBackgroundColor:[colorArray objectAtIndex:currentColor]];
+                endPoint = CGPointMake(rbt.frame.origin.x+rbt.dotBt.frame.origin.x+(rbt.dotBt.frame.size.width/2) , rbt.frame.origin.y+rbt.dotBt.frame.origin.y+(rbt.dotBt.frame.size.height/2));
+                
+                [rbt.ansImage setImage:[UIImage imageNamed:@"img_true.png"]];
+                
+                NSString *feeback = [self fn_getFeeback:obj.ansID AndCorrect:@"correct"];
+                if (feeback.length > 0) {
+                    rbt.feedbackBt.hidden = NO;
+                    rbt.strFeedback = feeback;
+                }
+                else {
+                    rbt.feedbackBt.hidden = YES;
+                }
+                
+                
+                [self drawLine];
+                
+                break;
+            }
+            
+        }
+        
+        
+    }
+    
+	[self disableEditFields];
+}
+//--------------------------------
+
+
+#pragma mark - Button Actions
+//---------------------------------------------------------
 -(IBAction)onFeedbackTapped:(id)sender
 {
     UIButton *bn = sender;
@@ -547,290 +864,16 @@
         }
     }
 }
-
-- (IBAction)onCasestudyTextTapped:(id)sender
+-(IBAction)onCasestudyTextTapped:(id)sender
 {
     strCaseStudyText = objMatch.strCasestudyText;
     [md Fn_AddCaseStudyText];
 }
-
-// Get Size of text
-//--------------------------------
--(float) fn_getLeftSize:(NSString *)data
-{
-    CGSize constraint = CGSizeMake(LEFT_OPTION_WIDTH - (LEFT_OPTION_MARGIN * 2), 20000.0f);
-    CGSize size = [data sizeWithFont:FONT_15 constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
-    return size.height;
-}
-
--(float) fn_getRightSize:(NSString *)data
-//--------------------------------
-{
-    CGSize constraint = CGSizeMake(RIGHT_OPTION_WIDTH - (RIGHT_OPTION_MARGIN * 2), 40000.0f);
-    CGSize size = [data sizeWithFont:FONT_15 constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
-    return size.height;
-}
-
-
-- (void)drawLine{
-    UIImageView *drawLineView = [imgviewArray objectAtIndex:currentQns];
-    
-    UIGraphicsBeginImageContext(drawLineView.frame.size);
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGContextSetLineWidth(context, 4.0);
-    
-    CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();    
-    
-    CGContextSetStrokeColorWithColor(context, [[colorArray objectAtIndex:currentColor] CGColor]);
-    
-    CGContextBeginPath(context);
-    
-    CGContextMoveToPoint(context, startPoint.x, startPoint.y);
-    CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
-    
-    CGContextStrokePath(context);
-    CGColorSpaceRelease(colorspace);
-    
-    UIImage *ret = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    [drawLineView setImage:ret];
-}
-
-- (void) disableEditFields{
-    
-	int i = 0;
-	
-	while (i < [questionArray count]) {
-		
-		LeftMatchView_IPad *bt = [questionArray objectAtIndex:i];
-		bt.customBt.enabled = NO;
-        bt.dotBt.enabled = NO;
-		i++;
-	}
-	
-	i = 0;
-	
-	while (i < [answerArray count]) {
-		
-		RightMatchView_Ipad *bt = [answerArray objectAtIndex:i];
-		bt.customBt.enabled = NO;
-        bt.dotBt.enabled = NO;
-		i++;
-	}
-	
-}
-
-
-- (void) handleShowAnswers{
-    
-}
-
-- (void) handleRevealScore{
-	
-	int i = 0;
-	
-	while (i < [userAnswerArray count]) {
-		
-		T1Object_ipad *obj = [userAnswerArray objectAtIndex:i];
-		RightMatchView_Ipad *bt = [answerArray objectAtIndex:obj.ansID];
-		NSString *ss = [bt.customBt.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-		NSString *sa = [[objMatch.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
-		
-		RightMatchView_Ipad *btTemp = [answerArray objectAtIndex:obj.ansID];
-		
-		if (![ss isEqualToString:sa]) {
-			
-			[btTemp.ansImage setImage:[UIImage imageNamed:@"img_false.png"]];
-            
-            NSString *feeback = [self fn_getFeeback:obj.ansID AndCorrect:@"incorrect"];
-            if (feeback.length > 0) {
-                btTemp.feedbackBt.hidden = NO;
-                btTemp.strFeedback = feeback;
-            }
-            
-		}else {
-			
-			[btTemp.ansImage setImage:[UIImage imageNamed:@"img_true.png"]];
-            
-            NSString *feeback = [self fn_getFeeback:obj.ansID AndCorrect:@"correct"];
-            if (feeback.length > 0) {
-                btTemp.feedbackBt.hidden = NO;
-                btTemp.strFeedback = feeback;
-            }
-            
-		}        
-		
-		i++;
-	}
-	
-	[self disableEditFields];    
-}
-
-- (BOOL) checkForAnswer{
-	NSMutableString *strAns = [[NSMutableString alloc] init];
-	int i = 0;
-	BOOL flag1 = YES;
-	while (i < [userAnswerArray count]) {
-		
-		T1Object_ipad *obj = [userAnswerArray objectAtIndex:i];
-		RightMatchView_Ipad *bt = [answerArray objectAtIndex:obj.ansID];
-		NSString *ss = [bt.customBt.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-		NSString *sa = [[objMatch.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
-		if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {			
-			flag1 = NO;
-			break;
-		}
-		i++;
-        
-        if (i == [userAnswerArray count] - 1)
-            [strAns appendFormat:@"%d$%d$%d", obj.ansID, obj.qnsID, obj.colorID];
-        else
-            [strAns appendFormat:@"%d$%d$%d#", obj.ansID, obj.qnsID, obj.colorID];
-	}
-	strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
-	return flag1;
-}
-
-- (NSInteger) getRandomColor{
-	
-	int i = 0;
-	
-	int colorId = arc4random() % ([colorArray count]);
-	while (i < [userAnswerArray count]) {
-		
-		T1Object_ipad *obj = [userAnswerArray objectAtIndex:i];
-		if ([[userAnswerArray objectAtIndex:i] isKindOfClass:[T1Object_ipad class]]) {
-			
-			if (obj.colorID == colorId) {
-				
-				i = -1;
-				colorId = arc4random() % ([colorArray count]);
-			}
-		}
-		i++;
-	}
-	
-	return colorId;
-}
-
-- (NSInteger) checkQuenstion:(NSInteger) ansID{
-	
-	int i = 0;
-	
-	while (i < [userAnswerArray count]) {
-		
-		if ([[userAnswerArray objectAtIndex:i] isKindOfClass:[T1Object_ipad class]]) {
-			
-			T1Object_ipad * obj = [userAnswerArray objectAtIndex:i];
-			
-			if (obj.ansID == ansID && currentQns != obj.qnsID) {
-				
-				LeftMatchView_IPad *pqnsBt = [questionArray objectAtIndex:obj.qnsID];
-				[pqnsBt.dotBt setBackgroundColor:COLOR_CLEAR];
-				[pqnsBt.customBt setBackgroundColor:COLOR_BottomGrayButton];
-                UIImageView *drawLineView = [imgviewArray objectAtIndex:obj.qnsID];
-                [drawLineView setImage:nil];
-                
-				obj.ansID = -1;
-				ansID = -1;
-				
-				countNo--;
-				break;
-			}
-		}
-		i++;
-	}
-	
-	if (ansID == -1) {
-		
-		return 1;
-	}
-	return 0;
-}
-
-- (void) handle_questions:(id)selector{
-    
-	UIButton *tempBt = (UIButton *) selector;
-    LeftMatchView_IPad *bt = [questionArray objectAtIndex:tempBt.tag];    
-	countNo++;
-	if (qnsFlag) {
-		
-		qnsFlag =  FALSE;
-		
-		currentQns = tempBt.tag;
-		currentColor = [self getRandomColor];
-		currentAnswer = -1;
-        startPoint = CGPointMake(bt.frame.origin.x+bt.dotBt.frame.origin.x+(bt.dotBt.frame.size.width/2) , bt.frame.origin.y+bt.dotBt.frame.origin.y+(bt.dotBt.frame.size.height/2));
-        [bt.customBt setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
-		[bt.dotBt setBackgroundColor:[colorArray objectAtIndex:currentColor]];
-	}
-}
-
-- (void) handle_answers:(id)selector{
-	
-	UIButton *tempBt = (UIButton *) selector;
-    RightMatchView_Ipad *bt = [answerArray objectAtIndex:tempBt.tag];
-	if ((currentAnswer != tempBt.tag || currentAnswer == -1) && currentAnswer != -2) {
-		
-		currentAnswer = tempBt.tag;
-		qnsFlag = TRUE;
-		if (currentQns != -1) {
-			
-			[self checkQuenstion:tempBt.tag];
-			
-			if ([[userAnswerArray objectAtIndex:currentQns] isKindOfClass:[T1Object_ipad class]]) {
-				
-				T1Object_ipad *obj = [userAnswerArray objectAtIndex:currentQns];
-				
-				if (obj.ansID != -1) {
-					
-					RightMatchView_Ipad *pansBt = [answerArray objectAtIndex:obj.ansID];
-                    [pansBt.dotBt setBackgroundColor:COLOR_CLEAR];
-					[pansBt.customBt setBackgroundColor:COLOR_BottomGrayButton];
-				}
-				
-				obj.ansID = tempBt.tag;
-				obj.colorID = currentColor;
-			}else {
-				
-				T1Object_ipad *obj = [[T1Object_ipad alloc]init];
-				obj.qnsID = currentQns;
-				obj.ansID = tempBt.tag;
-				obj.colorID = currentColor;
-				[userAnswerArray replaceObjectAtIndex:currentQns withObject:obj];
-			}
-		}
-        [bt.customBt setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
-		[bt.dotBt setBackgroundColor:[colorArray objectAtIndex:currentColor]];
-        endPoint = CGPointMake(bt.frame.origin.x+bt.dotBt.frame.origin.x+(bt.dotBt.frame.size.width/2) , bt.frame.origin.y+bt.dotBt.frame.origin.y+(bt.dotBt.frame.size.height/2));
-        [self drawLine];
-	}
-}
-
-
-
-#pragma mark - View lifecycle
-//---------------------------------------------------------
-#pragma mark - Common Function
 //---------------------------------------------------------
 
-#pragma mark - Normal Function
-//---------------------------------------------------------
-#pragma mark - Public Function
-//---------------------------------------------------------
-#pragma mark - Button Actions
-//---------------------------------------------------------
+
 #pragma mark - AlertView
 //---------------------------------------------------------
-#pragma mark - scrollview delegate
-//---------------------------------------------------------
-#pragma mark - Touch
-//---------------------------------------------------------
-#pragma mark - Orientation
-//---------------------------------------------------------
-
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 2) {
@@ -845,6 +888,7 @@
         {
             [parentObject Fn_DisableSubmit];            
             [self handleRevealScore];
+            [parentObject Fn_ShowAnswer];            
         }
         else if (buttonIndex == 1)
         {
@@ -852,25 +896,29 @@
         }
     }
 }
+//---------------------------------------------------------
 
-
-# pragma mark - scrollview delegate
+#pragma mark - scrollview delegate
+//---------------------------------------------------------
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     feedbackView.hidden=YES;    
     visibleRect.origin = scrollViewOptions.contentOffset;
 }
+//---------------------------------------------------------
 
+#pragma mark - Touch
+//---------------------------------------------------------
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     feedbackView.hidden = YES;
 }
+//---------------------------------------------------------
 
-
-
-#pragma Orientation
-//------------------------------
-- (BOOL) shouldAutorotate{
+#pragma mark - Orientation
+//---------------------------------------------------------
+-(BOOL)shouldAutorotate
+{
     UIInterfaceOrientation interfaceOrientation = (UIInterfaceOrientation)[UIApplication sharedApplication].statusBarOrientation;
     currentOrientaion = interfaceOrientation;
     return YES;
@@ -906,7 +954,8 @@
 	}
     return UIInterfaceOrientationMaskAll;
 }
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
         return NO;
     }
@@ -930,7 +979,6 @@
     
 	return YES;
 }
-//------------------------------
 -(void)Fn_rotatePortrait
 {
     // Self View
@@ -988,7 +1036,7 @@
     [scrollViewOptions setFrame:CGRectMake(150, 142, 954, 430)];
     scrollViewOptions.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, scrollViewOptions.bounds.size.width - 830);
 }
-
+//---------------------------------------------------------
 @end
 
 

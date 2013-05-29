@@ -14,6 +14,8 @@
     IBOutlet UIButton *bnPrev;
     IBOutlet UIButton *bnSubmit;
     IBOutlet UIButton *bnShowScore;
+    IBOutlet UIButton *bnShowAnswer;
+    IBOutlet UIButton *bnTryAgian;    
     IBOutlet UILabel *lblQuestionNo;
     
     IBOutlet UIImageView *imgBG;
@@ -31,7 +33,8 @@
 -(IBAction)onSubmit:(id)sender;
 
 -(void)onTryAgain;
--(void) Fn_DisableSubmit;
-- (void) disableAllButtons:(int)questionNO;
+-(void)Fn_DisableSubmit;
+-(void)disableAllButtons:(int)questionNO;
+-(void)Fn_ShowAnswer;
 
 @end
