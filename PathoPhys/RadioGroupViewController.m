@@ -58,7 +58,9 @@
 @synthesize strVisitedAnswer;
 @synthesize parentObject;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+#pragma mark - View lifecycle
+//---------------------------------------------------------
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -66,8 +68,7 @@
     }
     return self;
 }
-
-- (void)viewDidLoad
+-(void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -107,8 +108,17 @@
     
     [scrollRadioOption setDelegate:self];
 }
+-(void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+//---------------------------------------------------------
 
--(void) fn_SetFontColor
+
+#pragma mark - Common Function
+//---------------------------------------------------------
+-(void)fn_SetFontColor
 {
     lblQuestionNo.textColor = COLOR_WHITE;
     lblQuestionText.textColor = COLOR_WHITE;
@@ -122,17 +132,11 @@
         lblQuestionText.font = FONT_17;
     }    
 }
+//---------------------------------------------------------
 
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-// Function
-
--(void) createRadios
+#pragma mark - Normal Function
+//---------------------------------------------------------
+-(void)createRadios
 {
     // Question Text
     lblQuestionText.text = objRH.strQuestionText;    
@@ -359,41 +363,13 @@
     }
    
 }
-
--(CGSize) getSize:(NSString *)str
+-(CGSize)getSize:(NSString *)str
 {
     CGSize constraintSiz = CGSizeMake(280.0f, 10000.0f);
     CGSize labelSiz = [str sizeWithFont:FONT_20 constrainedToSize:constraintSiz lineBreakMode:UILineBreakModeWordWrap];
     return labelSiz;
 }
-
--(IBAction)onOptionTapped:(id)sender
-{
-    radioView = [arrRadios objectAtIndex:[sender tag]];
-    
-    [radioView.btnOption1 setImage:imgRadio forState:UIControlStateNormal];
-    [radioView.btnOption2 setImage:imgRadio forState:UIControlStateNormal];
-    if (arrcount > 3)
-        [radioView.btnOption3 setImage:imgRadio forState:UIControlStateNormal];
-    
-    [sender setImage:imgRadioSelected forState:UIControlStateNormal];
-    
-    if (sender == radioView.btnOption1) {
-        radioView.selected = [objRH.arrHeadingText objectAtIndex:1];
-        radioView.selectedIndex = 1;
-    }
-    else if (sender == radioView.btnOption2) {
-        radioView.selected = [objRH.arrHeadingText objectAtIndex:2];
-        radioView.selectedIndex = 2;
-    }
-    else if (sender == radioView.btnOption3) {
-        radioView.selected = [objRH.arrHeadingText objectAtIndex:3];
-        radioView.selectedIndex = 3;
-    }
-    
-}
-
-- (NSString *) fn_getFeeback:(NSMutableArray *)feedbackArr AndCorrect:(NSString *)correctincorrect Andfeed:(int)intfeed
+-(NSString *)fn_getFeeback:(NSMutableArray *)feedbackArr AndCorrect:(NSString *)correctincorrect Andfeed:(int)intfeed
 {
     NSString *strTemp = nil;
     
@@ -418,8 +394,7 @@
     
     return strTemp;
 }
-
-- (void) Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue
+-(void)Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue
 {
     [feedbackView removeFromSuperview];
     
@@ -486,8 +461,223 @@
         [self.view addSubview:feedbackView];
     }
 }
+-(void)disableEditFields
+{
+    
+    for (int i =0; i <[arrRadios count]; i++) {
+        radioView = [arrRadios objectAtIndex:i];
+        radioView.btnOption1.enabled = NO;
+        radioView.btnOption2.enabled = NO;
+        radioView.btnOption3.enabled = NO;
+    }
+}
+-(void)handleRevealScore
+{
+    for (int i =0; i <[arrRadios count]; i++) {
+        radioView = [arrRadios objectAtIndex:i];
+        objRB = [objRH.arrRadioButtons objectAtIndex:i];
+        
+        NSString *ss = [radioView.selected stringByReplacingOccurrencesOfString:@" " withString:@""];
+		NSString *sa = [objRB.strAnswer stringByReplacingOccurrencesOfString:@" " withString:@""];
+        
+        if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
+			[radioView.ansImage setImage:[UIImage imageNamed:@"img_false.png"]];
+            
+            NSString *feeback = [self fn_getFeeback:objRB.arrFeedback AndCorrect:@"incorrect" Andfeed:radioView.selectedIndex];
+            if (feeback.length > 0) {
+                radioView.feedbackBt.hidden = NO;
+                [radioView.feedbackBt addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
+                radioView.feedback = feeback;
+            }
+            
+		}else {
+			
+			[radioView.ansImage setImage:[UIImage imageNamed:@"img_true.png"]];
+            
+            NSString *feeback = [self fn_getFeeback:objRB.arrFeedback AndCorrect:@"correct" Andfeed:radioView.selectedIndex];
+            if (feeback.length > 0) {
+                radioView.feedbackBt.hidden = NO;
+                [radioView.feedbackBt addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
+                radioView.feedback = feeback;                
+            }
+        }
+    }
+    
+    [self disableEditFields];
+}
+//---------------------------------------------------------
 
 
+#pragma mark - Public Function
+//---------------------------------------------------------
+-(void)fn_LoadDbData:(NSString *)question_id
+{
+    objRH = [db fnGetTestyourselfRadioGroup:question_id];
+    
+}
+-(NSString *)fn_CheckAnswersBeforeSubmit
+{
+    NSMutableString *strTemp = [[NSMutableString alloc] init];
+    flagForAnyOptionSelect = NO;
+    for (int i =0; i <[arrRadios count]; i++) {
+        radioView = [arrRadios objectAtIndex:i];
+        if ([radioView.selected isEqualToString:@"0"]) {
+            flagForAnyOptionSelect = YES;
+            break;
+        }
+        else {
+            [strTemp appendString:[NSString stringWithFormat:@"%d", radioView.selectedIndex]];
+            if (i == [arrRadios count] -1) {
+                
+            }
+            else {
+                [strTemp appendString:@"#"];
+            }
+        }
+    }
+    
+    if (flagForAnyOptionSelect) {
+        intVisited = 0;
+    }
+    else  {
+        flagForCheckAnswer = [self checkForAnswer];
+        if (flagForCheckAnswer == YES) {
+            intVisited = 1;
+        }
+        else {
+            intVisited = 2;
+        }
+    }
+    return strTemp;
+}
+-(void)fn_OnSubmitTapped
+{
+    UIAlertView *alert = [[UIAlertView alloc] init];
+    [alert setTitle:TITLE_COMMON];
+    [alert setDelegate:self];
+    if (flagForAnyOptionSelect) {
+        [alert setTag:1];
+        [alert addButtonWithTitle:@"Ok"];
+        [alert setMessage:[NSString stringWithFormat:@"Please select options."]];
+    }
+    else {
+        if (flagForCheckAnswer == YES) {
+            [alert setTag:2];
+            [alert addButtonWithTitle:@"Ok"];
+            [alert setMessage:[NSString stringWithFormat:@"Correct"]];
+        }
+        else {
+            [alert setTag:3];
+            [alert addButtonWithTitle:@"Answer"];
+            [alert addButtonWithTitle:@"Try Again"];
+            [alert setMessage:[NSString stringWithFormat:@"Incorrect"]];
+        }
+    }
+	[alert show];
+}
+-(void)fn_ShowSelected:(NSString *)visitedAnswers
+{
+    NSArray *main;
+    if (visitedAnswers.length > 0) {
+        main = [visitedAnswers componentsSeparatedByString:@"#"];
+        for (int i=0; i <[main count]; i++) {
+            int index = [[main objectAtIndex:i] intValue];
+            radioView = [arrRadios objectAtIndex:i];
+            
+            if (index == 1) {
+                radioView.selected = [objRH.arrHeadingText objectAtIndex:1];
+                radioView.selectedIndex = 1;
+                [radioView.btnOption1 setImage:imgRadioSelected forState:UIControlStateNormal];
+            }
+            else if (index == 2) {
+                radioView.selected = [objRH.arrHeadingText objectAtIndex:2];
+                radioView.selectedIndex = 2;
+                [radioView.btnOption2 setImage:imgRadioSelected forState:UIControlStateNormal];
+            }
+            else if (index == 3) {
+                radioView.selected = [objRH.arrHeadingText objectAtIndex:3];
+                radioView.selectedIndex = 3;
+                [radioView.btnOption3 setImage:imgRadioSelected forState:UIControlStateNormal];
+            }
+            
+        }
+    }
+    [self handleRevealScore];
+    [self disableEditFields];
+}
+-(BOOL)checkForAnswer
+{
+    BOOL flag1 = YES;
+    NSMutableString *strAns = [[NSMutableString alloc] init];
+    for (int i =0; i <[arrRadios count]; i++) {
+        radioView = [arrRadios objectAtIndex:i];
+        objRB = [objRH.arrRadioButtons objectAtIndex:i];
+        
+        NSString *ss = [radioView.selected stringByReplacingOccurrencesOfString:@" " withString:@""];
+		NSString *sa = [objRB.strAnswer stringByReplacingOccurrencesOfString:@" " withString:@""];
+        
+        if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
+			flag1 = NO;
+		}
+        if (i == [arrRadios count] - 1)
+            [strAns appendFormat:@"%@", ss];
+        else
+            [strAns appendFormat:@"%@#", ss];
+    }
+    strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
+	return flag1;
+}
+-(void)handleShowAnswers
+{
+    for (int i =0; i <[arrRadios count]; i++) {
+        radioView = [arrRadios objectAtIndex:i];
+        objRB = [objRH.arrRadioButtons objectAtIndex:i];        
+        
+        [radioView.btnOption1 setImage:imgRadio forState:UIControlStateNormal];
+        [radioView.btnOption2 setImage:imgRadio forState:UIControlStateNormal];
+        if (arrcount > 3)
+            [radioView.btnOption3 setImage:imgRadio forState:UIControlStateNormal];
+        
+        for (int x=1; x<objRH.arrHeadingText.count ; x++) {
+            NSString *ss = [[objRH.arrHeadingText objectAtIndex:x]stringByReplacingOccurrencesOfString:@" " withString:@""];       
+            
+            NSString *sa = [objRB.strAnswer stringByReplacingOccurrencesOfString:@" " withString:@""];
+            
+            if ([ss isEqualToString:sa]) {
+                switch (x) {
+                    case 1:
+                        [radioView.btnOption1 setImage:imgRadioSelected forState:UIControlStateNormal];
+                        radioView.selectedIndex = 1;
+                        break;
+                    case 2:
+                        [radioView.btnOption2 setImage:imgRadioSelected forState:UIControlStateNormal];
+                        radioView.selectedIndex = 2;
+                        break;
+                    case 3:
+                        [radioView.btnOption3 setImage:imgRadioSelected forState:UIControlStateNormal];
+                        radioView.selectedIndex = 3;
+                        break;
+                }
+            }
+        }
+		
+        [radioView.ansImage setImage:[UIImage imageNamed:@"img_true.png"]];
+        
+        NSString *feeback = [self fn_getFeeback:objRB.arrFeedback AndCorrect:@"correct" Andfeed:radioView.selectedIndex];
+        if (feeback.length > 0) {
+            radioView.feedbackBt.hidden = NO;
+            [radioView.feedbackBt addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
+            radioView.feedback = feeback;
+        }
+    }
+    
+    [self disableEditFields];
+}
+//---------------------------------------------------------
+
+
+#pragma mark - Button Actions
+//---------------------------------------------------------
 -(IBAction)onFeedbackTapped:(id)sender
 {
     objRB = [objRH.arrRadioButtons objectAtIndex:[sender tag]];
@@ -527,171 +717,35 @@
         }
     }
 }
+-(IBAction)onOptionTapped:(id)sender
+{
+    radioView = [arrRadios objectAtIndex:[sender tag]];
+    
+    [radioView.btnOption1 setImage:imgRadio forState:UIControlStateNormal];
+    [radioView.btnOption2 setImage:imgRadio forState:UIControlStateNormal];
+    if (arrcount > 3)
+        [radioView.btnOption3 setImage:imgRadio forState:UIControlStateNormal];
+    
+    [sender setImage:imgRadioSelected forState:UIControlStateNormal];
+    
+    if (sender == radioView.btnOption1) {
+        radioView.selected = [objRH.arrHeadingText objectAtIndex:1];
+        radioView.selectedIndex = 1;
+    }
+    else if (sender == radioView.btnOption2) {
+        radioView.selected = [objRH.arrHeadingText objectAtIndex:2];
+        radioView.selectedIndex = 2;
+    }
+    else if (sender == radioView.btnOption3) {
+        radioView.selected = [objRH.arrHeadingText objectAtIndex:3];
+        radioView.selectedIndex = 3;
+    }
+    
+}
+//---------------------------------------------------------
 
-- (BOOL) checkForAnswer{
-    BOOL flag1 = YES;
-    NSMutableString *strAns = [[NSMutableString alloc] init];
-    for (int i =0; i <[arrRadios count]; i++) {
-        radioView = [arrRadios objectAtIndex:i];
-        objRB = [objRH.arrRadioButtons objectAtIndex:i];
-        
-        NSString *ss = [radioView.selected stringByReplacingOccurrencesOfString:@" " withString:@""];
-		NSString *sa = [objRB.strAnswer stringByReplacingOccurrencesOfString:@" " withString:@""];
-        
-        if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
-			flag1 = NO;
-		}
-        if (i == [arrRadios count] - 1)
-            [strAns appendFormat:@"%@", ss];
-        else
-            [strAns appendFormat:@"%@#", ss];
-    }
-    strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
-	return flag1;
-}
-- (void) handleRevealScore{
-    for (int i =0; i <[arrRadios count]; i++) {
-        radioView = [arrRadios objectAtIndex:i];
-        objRB = [objRH.arrRadioButtons objectAtIndex:i];
-        
-        NSString *ss = [radioView.selected stringByReplacingOccurrencesOfString:@" " withString:@""];
-		NSString *sa = [objRB.strAnswer stringByReplacingOccurrencesOfString:@" " withString:@""];
-        
-        if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
-			[radioView.ansImage setImage:[UIImage imageNamed:@"img_false.png"]];
-            
-            NSString *feeback = [self fn_getFeeback:objRB.arrFeedback AndCorrect:@"incorrect" Andfeed:radioView.selectedIndex];
-            if (feeback.length > 0) {
-                radioView.feedbackBt.hidden = NO;
-                [radioView.feedbackBt addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
-                radioView.feedback = feeback;
-            }
-            
-		}else {
-			
-			[radioView.ansImage setImage:[UIImage imageNamed:@"img_true.png"]];
-            
-            NSString *feeback = [self fn_getFeeback:objRB.arrFeedback AndCorrect:@"correct" Andfeed:radioView.selectedIndex];
-            if (feeback.length > 0) {
-                radioView.feedbackBt.hidden = NO;
-                [radioView.feedbackBt addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
-                radioView.feedback = feeback;                
-            }
-        }
-    }
-    
-    [self disableEditFields];
-}
-- (void) disableEditFields {
-    
-    for (int i =0; i <[arrRadios count]; i++) {
-        radioView = [arrRadios objectAtIndex:i];
-        radioView.btnOption1.enabled = NO;
-        radioView.btnOption2.enabled = NO;
-        radioView.btnOption3.enabled = NO;
-    }
-}
-
-//Get db data from question_id
-//--------------------------------
--(void) fn_LoadDbData:(NSString *)question_id
-{
-    objRH = [db fnGetTestyourselfRadioGroup:question_id];
-    
-}
--(NSString *) fn_CheckAnswersBeforeSubmit
-{
-    NSMutableString *strTemp = [[NSMutableString alloc] init];
-    flagForAnyOptionSelect = NO;
-    for (int i =0; i <[arrRadios count]; i++) {
-        radioView = [arrRadios objectAtIndex:i];
-        if ([radioView.selected isEqualToString:@"0"]) {
-            flagForAnyOptionSelect = YES;
-            break;
-        }
-        else {
-            [strTemp appendString:[NSString stringWithFormat:@"%d", radioView.selectedIndex]];
-            if (i == [arrRadios count] -1) {
-                
-            }
-            else {
-                [strTemp appendString:@"#"];
-            }
-        }
-    }
-    
-    if (flagForAnyOptionSelect) {
-        intVisited = 0;
-    }
-    else  {
-        flagForCheckAnswer = [self checkForAnswer];
-        if (flagForCheckAnswer == YES) {
-            intVisited = 1;
-        }
-        else {
-            intVisited = 2;
-        }
-    }
-    return strTemp;
-}
--(void) fn_OnSubmitTapped
-{
-    UIAlertView *alert = [[UIAlertView alloc] init];
-    [alert setTitle:TITLE_COMMON];
-    [alert setDelegate:self];
-    if (flagForAnyOptionSelect) {
-        [alert setTag:1];
-        [alert addButtonWithTitle:@"Ok"];
-        [alert setMessage:[NSString stringWithFormat:@"Please select options."]];
-    }
-    else {
-        if (flagForCheckAnswer == YES) {
-            [alert setTag:2];
-            [alert addButtonWithTitle:@"Ok"];
-            [alert setMessage:[NSString stringWithFormat:@"Correct"]];
-        }
-        else {
-            [alert setTag:3];
-            [alert addButtonWithTitle:@"Answer"];
-            [alert addButtonWithTitle:@"Try Again"];
-            [alert setMessage:[NSString stringWithFormat:@"Incorrect"]];
-        }
-    }
-	[alert show];
-}
--(void) fn_ShowSelected:(NSString *)visitedAnswers
-{
-    NSArray *main;
-    if (visitedAnswers.length > 0) {
-        main = [visitedAnswers componentsSeparatedByString:@"#"];
-        for (int i=0; i <[main count]; i++) {
-            int index = [[main objectAtIndex:i] intValue];
-            radioView = [arrRadios objectAtIndex:i];
-            
-            if (index == 1) {
-                radioView.selected = [objRH.arrHeadingText objectAtIndex:1];
-                radioView.selectedIndex = 1;
-                [radioView.btnOption1 setImage:imgRadioSelected forState:UIControlStateNormal];
-            }
-            else if (index == 2) {
-                radioView.selected = [objRH.arrHeadingText objectAtIndex:2];
-                radioView.selectedIndex = 2;
-                [radioView.btnOption2 setImage:imgRadioSelected forState:UIControlStateNormal];
-            }
-            else if (index == 3) {
-                radioView.selected = [objRH.arrHeadingText objectAtIndex:3];
-                radioView.selectedIndex = 3;
-                [radioView.btnOption3 setImage:imgRadioSelected forState:UIControlStateNormal];
-            }
-            
-        }
-    }
-    [self handleRevealScore];
-    [self disableEditFields];
-}
-
-# pragma mark - scrollview delegate
-//---------------------Delegate-------
+#pragma mark - scrollview delegate
+//---------------------------------------------------------
 - (void)scrollViewDidScroll:(UIScrollView *)aScrollView
 {
     // or if you are sure you wanna it always on left:
@@ -700,7 +754,10 @@
     feedbackView.hidden=YES;
     visibleRect.origin = aScrollView.contentOffset;    
 }
+//---------------------------------------------------------
 
+#pragma mark - AlertView
+//---------------------------------------------------------
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 2) {
@@ -715,6 +772,7 @@
         {
             [parentObject Fn_DisableSubmit];            
             [self handleRevealScore];
+            [parentObject Fn_ShowAnswer];
         }
         else if (buttonIndex == 1)
         {
@@ -722,16 +780,20 @@
         }
     }
 }
+//---------------------------------------------------------
 
+#pragma mark - Touch
+//---------------------------------------------------------
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     feedbackView.hidden = YES;
 }
+//---------------------------------------------------------
 
-
-#pragma Orientation
-//------------------------------
-- (BOOL) shouldAutorotate{
+#pragma mark - Orientation
+//---------------------------------------------------------
+-(BOOL)shouldAutorotate
+{
     UIInterfaceOrientation interfaceOrientation = (UIInterfaceOrientation)[UIApplication sharedApplication].statusBarOrientation;
     currentOrientaion = interfaceOrientation;
     return YES;
@@ -767,7 +829,8 @@
 	}
     return UIInterfaceOrientationMaskAll;
 }
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
         return NO;
     }
@@ -791,54 +854,6 @@
     
 	return YES;
 }
-//------------------------------
-/*
--(void)Fn_rotatePortrait
-{
-    [self.view setFrame:CGRectMake(0, 0, 767, 803)];
-    [ImgQuestionBg setImage:[UIImage imageNamed:@"question_bg_p.png"]];
-    [ImgQuestionBg setFrame:CGRectMake(0, 0, 767, 803)];
-    
-    [lblQuestionNo setFrame:CGRectMake(17, 25, 93, 114) ];
-    [lblQuestionText setFrame:CGRectMake(118, 25, 567, 114) ];
-    [webviewInstructions setFrame:CGRectMake(20, 140, 727, 32) ];
-    
-    [scrollRadioOption setFrame:CGRectMake(0,230, 767, 475) ];    
-    
-    //[ImgQuestionTextBg setImage:[UIImage imageNamed:@"blue_5text_bar.png"]];
-    //[ImgQuestionTextBg setFrame:CGRectMake(0, 17, 767, 177)];
-    
-    [webviewInstructions setFrame:CGRectMake(19, 190, 725, 45)];
-    
-    //[ImgQuestionSeperator setImage:[UIImage imageNamed:@"img_question_seperator_P.png"]];
-    //[ImgQuestionSeperator setFrame:CGRectMake(4, 225, 767, 53)];
-    
-    
-}
--(void)Fn_rotateLandscape
-{
-    [self.view setFrame:CGRectMake(0, 0, 1005, 600)];
-    [ImgQuestionBg setImage:[UIImage imageNamed:@"question_bg.png"]];
-    [ImgQuestionBg setFrame:CGRectMake(0, 0, 1005, 600)];
-
-    
-    [lblQuestionNo setFrame:CGRectMake(17, 17, 93, 75) ];
-    [lblQuestionText setFrame:CGRectMake(118, 19, 867, 72) ];
-    [webviewInstructions setFrame:CGRectMake(17, 93, 968, 32) ];
-    
-    [scrollRadioOption setFrame:CGRectMake(10,170, 968, 415) ];
-   
-    
-    //[ImgQuestionTextBg setFrame:CGRectMake(0, 17, 1005, 75)];
-    //[ImgQuestionTextBg setImage:[UIImage imageNamed:@"img_questiontext2_bg.png"]];
-    
-   // [ImgQuestionSeperator setFrame:CGRectMake(13, 128, 977, 54)];
-    //[ImgQuestionSeperator setImage:[UIImage imageNamed:@"img_question_seperator.png"]];
-    
-    
-}
- */
-
 -(void)Fn_rotatePortrait
 {
     // Self View
@@ -897,5 +912,5 @@
     // Title Options
     [viewTitle setFrame:CGRectMake(30, 150, 965, 45)];
 }
-
+//---------------------------------------------------------
 @end

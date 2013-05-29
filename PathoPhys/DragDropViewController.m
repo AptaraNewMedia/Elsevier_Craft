@@ -52,6 +52,8 @@
 @synthesize strVisitedAnswer;
 @synthesize parentObject;
 
+#pragma mark - View lifecycle
+//---------------------------------------------------------
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -60,7 +62,6 @@
     }
     return self;
 }
-
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -68,9 +69,6 @@
     
     // Release any cached data, images, etc that aren't in use.
 }
-
-#pragma mark - View lifecycle
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];       
@@ -116,16 +114,16 @@
     [scrollViewDrag.layer setBorderWidth:1.0];
     [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
 }
-
-
-
-- (void) Fn_disableAllDraggableSubjects{
-    for(UIButton *subview in [imgDropView subviews]) {
-        [self.view removeGestureRecognizer:uiTapGestureRecognizer];
-    }
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
 }
+//---------------------------------------------------------
 
-
+#pragma mark - Common Function
+//---------------------------------------------------------
 -(void) fn_SetFontColor
 {
     lblQuestionNo.textColor = COLOR_WHITE;
@@ -141,58 +139,89 @@
     }
     
 }
+//---------------------------------------------------------
 
 
-- (void) draggblePoints
+#pragma mark - Normal Function
+//---------------------------------------------------------
+-(void)draggblePoints
 {
- 
-        int y = 10;
-        for (int i = 0; i < [objDRAGDROP.arrOptions count]; i++){
+    
+    int y = 10;
+    for (int i = 0; i < [objDRAGDROP.arrOptions count]; i++){
+        
+        CustomDragButton *bnDrag = [CustomDragButton buttonWithType:UIButtonTypeCustom];
+        bnDrag.frame = CGRectMake(0, y, objDRAGDROP.fWidth, objDRAGDROP.fHeight);
+        bnDrag.exclusiveTouch = YES;
+        bnDrag.tag = i+1;
+        [bnDrag setTitle:[objDRAGDROP.arrOptions objectAtIndex:i] forState:UIControlStateNormal];
+        [bnDrag setTitleColor:COLOR_WHITE forState:UIControlStateNormal];
+        [bnDrag setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
+        bnDrag.titleLabel.font = FONT_14;
+        bnDrag.titleLabel.numberOfLines = 3;
+        bnDrag.userInteractionEnabled=YES;
+        
+        [bnDrag.ansImage setFrame:CGRectMake(objDRAGDROP.fWidth-40, -10, 22, 22)];
+        
+        [bnDrag.feedbackBt setTag:i];
+        bnDrag.feedbackBt.frame = CGRectMake(bnDrag.ansImage.frame.origin.x+bnDrag.ansImage.frame.size.width+1, -15, 22, 22);
+        [bnDrag.feedbackBt setTag:i];
+        [bnDrag.feedbackBt setImage:[UIImage imageNamed:@"Btn_feed.png"] forState:UIControlStateNormal];
+        bnDrag.feedbackBt.hidden = YES;
+        [bnDrag.feedbackBt addTarget:self action:@selector(onFeedbackTapped2:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [scrollViewDrag addSubview:bnDrag];
+        
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            bnDrag.titleLabel.font = FONT_10;
+            [bnDrag.ansImage setFrame:CGRectMake(objDRAGDROP.fWidth-40, -15, 22, 22)];
             
-            CustomDragButton *bnDrag = [CustomDragButton buttonWithType:UIButtonTypeCustom];
-            bnDrag.frame = CGRectMake(0, y, objDRAGDROP.fWidth, objDRAGDROP.fHeight);
-            bnDrag.exclusiveTouch = YES;
-            bnDrag.tag = i+1;
-            [bnDrag setTitle:[objDRAGDROP.arrOptions objectAtIndex:i] forState:UIControlStateNormal];
-            [bnDrag setTitleColor:COLOR_WHITE forState:UIControlStateNormal];
-            [bnDrag setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
-            bnDrag.titleLabel.font = FONT_14;
-            bnDrag.titleLabel.numberOfLines = 3;
-            bnDrag.userInteractionEnabled=YES;
-            
-            [bnDrag.ansImage setFrame:CGRectMake(objDRAGDROP.fWidth-40, -10, 22, 22)];
-            
-            [bnDrag.feedbackBt setTag:i];
             bnDrag.feedbackBt.frame = CGRectMake(bnDrag.ansImage.frame.origin.x+bnDrag.ansImage.frame.size.width+1, -15, 22, 22);
-            [bnDrag.feedbackBt setTag:i];
-            [bnDrag.feedbackBt setImage:[UIImage imageNamed:@"Btn_feed.png"] forState:UIControlStateNormal];
-            bnDrag.feedbackBt.hidden = YES;
-            [bnDrag.feedbackBt addTarget:self action:@selector(onFeedbackTapped2:) forControlEvents:UIControlEventTouchUpInside];
-            
-            [scrollViewDrag addSubview:bnDrag];
-            
-            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-                bnDrag.titleLabel.font = FONT_10;
-                [bnDrag.ansImage setFrame:CGRectMake(objDRAGDROP.fWidth-40, -15, 22, 22)];
-                
-                bnDrag.feedbackBt.frame = CGRectMake(bnDrag.ansImage.frame.origin.x+bnDrag.ansImage.frame.size.width+1, -15, 22, 22);
-                y=y+objDRAGDROP.fHeight+2;
-            }
-            else {
-                y=y+objDRAGDROP.fHeight+10;
-            }
-
-            
-            [draggableSubjects addObject:bnDrag];
-            
+            y=y+objDRAGDROP.fHeight+2;
         }
-        [scrollViewDrag setContentSize:CGSizeMake(objDRAGDROP.fWidth, y)];
-        [scrollViewDrag.layer setBorderWidth:1.0];
-        [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
-
+        else {
+            y=y+objDRAGDROP.fHeight+10;
+        }
+        
+        
+        [draggableSubjects addObject:bnDrag];
+        
+    }
+    [scrollViewDrag setContentSize:CGSizeMake(objDRAGDROP.fWidth, y)];
+    [scrollViewDrag.layer setBorderWidth:1.0];
+    [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
+    
 }
-
-- (void) rotateScrollViewButtonsForLandscape{
+-(void)droppablePoints
+{
+    for (int i=0; i<objDRAGDROP.arrXYpoints.count; i++) {
+        
+        NSArray *points = [[objDRAGDROP.arrXYpoints objectAtIndex:i] componentsSeparatedByString:@","];
+        float x_point = [[points objectAtIndex:0] floatValue];
+        float y_point = [[points objectAtIndex:1] floatValue];
+        UIButton *bn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [bn setFrame:CGRectMake(x_point, y_point, objDRAGDROP.fWidth, objDRAGDROP.fHeight)];
+        [bn setBackgroundColor:COLOR_CLEAR];
+        [imgDropView addSubview:bn];
+        [droppableAreas addObject:bn];
+    }
+    
+    
+    _dragDropManager = [[DragDropManager alloc] initWithDragSubjects:draggableSubjects andDropAreas:droppableAreas];
+    
+    uiTapGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:_dragDropManager action:@selector(dragging:)];
+    [[self view] addGestureRecognizer:uiTapGestureRecognizer];
+    
+    
+}
+-(void)Fn_disableAllDraggableSubjects
+{
+    for(UIButton *subview in [imgDropView subviews]) {
+        [self.view removeGestureRecognizer:uiTapGestureRecognizer];
+    }
+}
+-(void)rotateScrollViewButtonsForLandscape
+{
     int counter= 0;
     int y = 10;
     for(UIView *myView in [scrollViewDrag subviews]){
@@ -205,8 +234,8 @@
         }
     }
 }
-
-- (void) rotateScrollViewButtonsForPortrait{
+-(void)rotateScrollViewButtonsForPortrait
+{
     int counter= 0;
     int y = 10, x= 20;
     int numOfColumns = 1;
@@ -233,9 +262,8 @@
     
     [scrollViewDrag setContentSize:CGSizeMake(30 + (numOfColumns * bnWidth) + ((numOfColumns-1) * 10), 10 + (3 * bnHeight) + (2 *y))];
 }
-
-
-- (void) rotateScrollViewButtonsForiPhone{
+-(void)rotateScrollViewButtonsForiPhone
+{
     int counter= 0;
     int y = 5, x= 20;
     int numOfRows = 1;
@@ -261,43 +289,7 @@
     [scrollViewDrag setContentSize:CGSizeMake(20 + (numOfRows * bnwidth) + ((numOfRows-1) * 10), 93)];
     
 }
-
-
-
-
-- (void) droppablePoints
-{
-    for (int i=0; i<objDRAGDROP.arrXYpoints.count; i++) {
-        
-        NSArray *points = [[objDRAGDROP.arrXYpoints objectAtIndex:i] componentsSeparatedByString:@","];
-        float x_point = [[points objectAtIndex:0] floatValue];
-        float y_point = [[points objectAtIndex:1] floatValue];
-        UIButton *bn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [bn setFrame:CGRectMake(x_point, y_point, objDRAGDROP.fWidth, objDRAGDROP.fHeight)];        
-        [bn setBackgroundColor:COLOR_CLEAR];
-        [imgDropView addSubview:bn];
-        [droppableAreas addObject:bn];
-    }
-    
-    
-    _dragDropManager = [[DragDropManager alloc] initWithDragSubjects:draggableSubjects andDropAreas:droppableAreas];
-    
-    uiTapGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:_dragDropManager action:@selector(dragging:)];
-    [[self view] addGestureRecognizer:uiTapGestureRecognizer];
-
-    
-}
-
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-
-- (NSString *) fn_getFeeback:(int)intfeed AndCorrect:(NSString *)correctincorrect
+-(NSString *)fn_getFeeback:(int)intfeed AndCorrect:(NSString *)correctincorrect
 {
     NSString *strTemp = nil;
     
@@ -323,8 +315,7 @@
     
     return strTemp;
 }
-
-- (void) Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue
+-(void)Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue
 {
     [feedbackView removeFromSuperview];
     
@@ -391,94 +382,49 @@
         [self.view addSubview:feedbackView];
     }
 }
-
-
-
-
--(IBAction)onFeedbackTapped:(id)sender
+-(void)handleRevealScore
 {
-    CustomDragButton *bn = sender;
-    
-    float x_point;
-    float y_point;
-    
-    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    int i = 0;
+    for (UIView *dropArea in _dragDropManager.dropAreas)
     {
-        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 157);
-        y_point = bn.superview.frame.origin.y;// + 88;
-        y_point = y_point - visibleRect.origin.y;
-        
-        [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
-    }
-    else
-    {
-        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 10);
-        y_point = bn.superview.frame.origin.y + 15;
-        y_point = y_point - visibleRect.origin.y;
-        
-        x_feedback_l=x_point;
-        y_feedback_l=y_point;
-        
-        x_feedback_p=x_point-238;
-        y_feedback_p=y_point+217;
-        
-        if(currentOrientaion==1 || currentOrientaion==2) // Portrait
-        {
-            [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:bn.strFeedback];
+        NSArray *arrSubviews = [dropArea subviews];
+        if (arrSubviews.count > 0) {
+            CustomDragButton *bn = [arrSubviews objectAtIndex:0];
+            NSString *ss = [bn.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+            NSString *sa = [[objDRAGDROP.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
+            if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
+                [bn.ansImage setImage:[UIImage imageNamed:@"Btn_feed_false.png"]];
+                NSString *feeback = [self fn_getFeeback:bn.tag AndCorrect:@"incorrect"];
+                if (feeback.length > 0) {
+                    bn.feedbackBt.hidden = NO;
+                    bn.strFeedback = feeback;
+                    [bn addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
+                    
+                }
+            }else {
+                [bn.ansImage setImage:[UIImage imageNamed:@"Btn_feed_true.png"]];
+                NSString *feeback = [self fn_getFeeback:bn.tag AndCorrect:@"correct"];
+                if (feeback.length > 0) {
+                    bn.feedbackBt.hidden = NO;
+                    bn.strFeedback = feeback;
+                    [bn addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
+                    
+                }
+            }
         }
-        else //Lanscape
-        {
-            [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:bn.strFeedback];
-        }
+        i++;
     }
 }
+//---------------------------------------------------------
 
--(IBAction)onFeedbackTapped2:(id)sender
-{
-    UIButton *btn = sender;
-    CustomDragButton *bn = [draggableSubjects objectAtIndex:btn.tag];
-    
-    float x_point;
-    float y_point;
-    
-    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
-    {
-        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 157);
-        y_point = bn.superview.frame.origin.y;// + 120;
-        y_point = y_point - visibleRect.origin.y;
-        
-        [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
-    }
-    else
-    {
-        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 10);
-        y_point = bn.superview.frame.origin.y + 15;
-        y_point = y_point - visibleRect.origin.y;
-        
-        x_feedback_l=x_point;
-        y_feedback_l=y_point;
-        
-        x_feedback_p=x_point-238;
-        y_feedback_p=y_point+217;
-        
-        if(currentOrientaion==1 || currentOrientaion==2) // Portrait
-        {
-            [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:bn.strFeedback];
-        }
-        else //Lanscape
-        {
-            [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:bn.strFeedback];
-        }
-    }
-}
 
-//Get db data from questi˛on_id
-//--------------------------------
--(void) fn_LoadDbData:(NSString *)question_id
+#pragma mark - Public Function
+//---------------------------------------------------------
+-(void)fn_LoadDbData:(NSString *)question_id
 {
    objDRAGDROP = [db fnGetTestyourselfDRAGDROP:question_id];
 }
--(NSString *) fn_CheckAnswersBeforeSubmit
+-(NSString *)fn_CheckAnswersBeforeSubmit
 {
     
 	flagForAnyOptionSelect = NO;
@@ -520,7 +466,7 @@
     
     return strTemp;
 }
--(void) fn_OnSubmitTapped
+-(void)fn_OnSubmitTapped
 {
     
     
@@ -547,7 +493,8 @@
     }
 	[alert show];
 }
--(void) fn_ShowSelected:(NSString *)visitedAnswers {
+-(void)fn_ShowSelected:(NSString *)visitedAnswers
+{
     NSArray *main;
     if (visitedAnswers.length > 0) {
         int i = 0;
@@ -564,10 +511,8 @@
     [self handleRevealScore];
     [self Fn_disableAllDraggableSubjects];
 }
-//--------------------------------
-
-
-- (BOOL) checkForAnswer{
+-(BOOL)checkForAnswer
+{
     int i = 0;
     BOOL flag1 = YES;
     for (UIView *dropArea in _dragDropManager.dropAreas) {
@@ -585,43 +530,111 @@
     }
     return flag1;
 }
-- (void) handleShowAnswers{
-    
-}
-
-- (void) handleRevealScore{
+-(void)handleShowAnswers
+{
     int i = 0;
-    for (UIView *dropArea in _dragDropManager.dropAreas) {
-        NSArray *arrSubviews = [dropArea subviews];
-        if (arrSubviews.count > 0) {
-            CustomDragButton *bn = [arrSubviews objectAtIndex:0];
-            NSString *ss = [bn.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-            NSString *sa = [[objDRAGDROP.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
-            if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
-                [bn.ansImage setImage:[UIImage imageNamed:@"Btn_feed_false.png"]];
-                NSString *feeback = [self fn_getFeeback:bn.tag AndCorrect:@"incorrect"];
-                if (feeback.length > 0) {
-                    bn.feedbackBt.hidden = NO;
-                    bn.strFeedback = feeback;
-                    [bn addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
-                    
-                }
-            }else {
-                [bn.ansImage setImage:[UIImage imageNamed:@"Btn_feed_true.png"]];
-                NSString *feeback = [self fn_getFeeback:bn.tag AndCorrect:@"correct"];
-                if (feeback.length > 0) {
-                    bn.feedbackBt.hidden = NO;
-                    bn.strFeedback = feeback;
-                    [bn addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
-                    
-                }
-            }
+    for (CustomDragButton *bnDrag in draggableSubjects) {
+        UIView *dropArea =  [_dragDropManager.dropAreas objectAtIndex:i];
+        [dropArea addSubview:bnDrag];
+        bnDrag.frame = CGRectMake(0, 0, bnDrag.frame.size.width, bnDrag.frame.size.height);
+        
+        [bnDrag.ansImage setImage:[UIImage imageNamed:@"Btn_feed_true.png"]];
+        NSString *feeback = [self fn_getFeeback:bnDrag.tag AndCorrect:@"correct"];
+        if (feeback.length > 0) {
+            bnDrag.feedbackBt.hidden = NO;
+            bnDrag.strFeedback = feeback;
+            [bnDrag addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
+            
         }
         i++;
-    }  
+    }
 }
-//--------------------------------
+//---------------------------------------------------------
 
+
+
+#pragma mark - Button Actions
+//---------------------------------------------------------
+-(IBAction)onFeedbackTapped:(id)sender
+{
+    CustomDragButton *bn = sender;
+    
+    float x_point;
+    float y_point;
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 157);
+        y_point = bn.superview.frame.origin.y;// + 88;
+        y_point = y_point - visibleRect.origin.y;
+        
+        [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
+    }
+    else
+    {
+        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 10);
+        y_point = bn.superview.frame.origin.y + 15;
+        y_point = y_point - visibleRect.origin.y;
+        
+        x_feedback_l=x_point;
+        y_feedback_l=y_point;
+        
+        x_feedback_p=x_point-238;
+        y_feedback_p=y_point+217;
+        
+        if(currentOrientaion==1 || currentOrientaion==2) // Portrait
+        {
+            [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:bn.strFeedback];
+        }
+        else //Lanscape
+        {
+            [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:bn.strFeedback];
+        }
+    }
+}
+-(IBAction)onFeedbackTapped2:(id)sender
+{
+    UIButton *btn = sender;
+    CustomDragButton *bn = [draggableSubjects objectAtIndex:btn.tag];
+    
+    float x_point;
+    float y_point;
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 157);
+        y_point = bn.superview.frame.origin.y;// + 120;
+        y_point = y_point - visibleRect.origin.y;
+        
+        [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
+    }
+    else
+    {
+        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 10);
+        y_point = bn.superview.frame.origin.y + 15;
+        y_point = y_point - visibleRect.origin.y;
+        
+        x_feedback_l=x_point;
+        y_feedback_l=y_point;
+        
+        x_feedback_p=x_point-238;
+        y_feedback_p=y_point+217;
+        
+        if(currentOrientaion==1 || currentOrientaion==2) // Portrait
+        {
+            [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:bn.strFeedback];
+        }
+        else //Lanscape
+        {
+            [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:bn.strFeedback];
+        }
+    }
+}
+//---------------------------------------------------------
+
+
+#pragma mark - AlertView
+//---------------------------------------------------------
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 2) {
@@ -638,6 +651,7 @@
             [parentObject Fn_DisableSubmit];            
             [self handleRevealScore];
             [self Fn_disableAllDraggableSubjects];
+            [parentObject Fn_ShowAnswer];
         }
         else if (buttonIndex == 1)
         {
@@ -645,8 +659,11 @@
         }
     }
 }
+//---------------------------------------------------------
 
-# pragma mark - scrollview delegate
+
+#pragma mark - scrollview delegate
+//---------------------------------------------------------
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     feedbackView.hidden=YES;
@@ -654,15 +671,21 @@
         visibleRect.origin = imgScroller.contentOffset;
     }
 }
+//---------------------------------------------------------
 
+#pragma mark - Touch
+//---------------------------------------------------------
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     feedbackView.hidden = YES;
 }
+//---------------------------------------------------------
 
-#pragma Orientation
-//------------------------------
-- (BOOL) shouldAutorotate{
+
+#pragma mark - Orientation
+//---------------------------------------------------------
+-(BOOL)shouldAutorotate
+{
     UIInterfaceOrientation interfaceOrientation = (UIInterfaceOrientation)[UIApplication sharedApplication].statusBarOrientation;
     currentOrientaion = interfaceOrientation;
     return YES;
@@ -698,7 +721,8 @@
 	}
     return UIInterfaceOrientationMaskAll;
 }
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
         return NO;
     }
@@ -722,8 +746,6 @@
     
 	return YES;
 }
-//------------------------------
-
 -(void)Fn_rotatePortrait
 {
     // Self View
@@ -791,4 +813,5 @@
     [self rotateScrollViewButtonsForLandscape];
     
 }
+//---------------------------------------------------------
 @end

@@ -14,6 +14,8 @@
     IBOutlet UIButton *bnPrev;
     IBOutlet UIButton *bnSubmit;
     IBOutlet UIButton *bnShowScore;
+    IBOutlet UIButton *bnShowAnswer;
+    IBOutlet UIButton *bnTryAgian;
     IBOutlet UILabel *lblQuestionNo;
     
     IBOutlet UIImageView *imgBG;
@@ -26,10 +28,8 @@
     NSInteger intCurrentQuestionIndex;
 }
 
--(IBAction)onNext:(id)sender;
--(IBAction)onPrev:(id)sender;
--(IBAction)onSubmit:(id)sender;
 -(void)onTryAgain;
--(void) Fn_DisableSubmit;
-- (void) disableAllButtons:(int)questionNO;
+-(void)Fn_DisableSubmit;
+-(void)Fn_ShowAnswer;
+-(void)disableAllButtons:(int)questionNO;
 @end

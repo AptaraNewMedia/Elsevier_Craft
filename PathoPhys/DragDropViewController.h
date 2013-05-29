@@ -37,8 +37,9 @@
 -(void) fn_ShowSelected:(NSString *)visitedAnswers;
 -(NSString *) fn_CheckAnswersBeforeSubmit;
 -(void) fn_OnSubmitTapped;
+-(void) handleShowAnswers;
 
-- (void) rotateScrollViewButtonsForLandscape;
-- (void) rotateScrollViewButtonsForPortrait;
+-(void) rotateScrollViewButtonsForLandscape;
+-(void) rotateScrollViewButtonsForPortrait;
 
 @end

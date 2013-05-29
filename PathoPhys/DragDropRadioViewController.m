@@ -60,23 +60,25 @@
 @synthesize strVisitedAnswer;
 @synthesize parentObject;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+#pragma mark - View lifecycle
+//---------------------------------------------------------
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
     return self;
 }
-- (void)didReceiveMemoryWarning{
+-(void)didReceiveMemoryWarning
+{
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
 }
-
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad{
+-(void)viewDidLoad
+{
     [super viewDidLoad];
     
     // Do any additional setup after loading the view from its nib.
@@ -124,7 +126,17 @@
     [scrollViewDrag.layer setBorderWidth:1.0];
     [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
 }
+-(void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+//---------------------------------------------------------
 
+
+#pragma mark - Common Function
+//---------------------------------------------------------
 -(void) fn_SetFontColor
 {
     lblQuestionNo.textColor = COLOR_WHITE;
@@ -140,8 +152,13 @@
     }
     
 }
+//---------------------------------------------------------
 
-- (void) draggblePoints{
+
+#pragma mark - Normal Function
+//---------------------------------------------------------
+-(void)draggblePoints
+{
     int y = 10;
     for (int i = 0; i < [objDRAGDROP.arrOptions count]; i++){
         
@@ -192,9 +209,8 @@
     [scrollViewDrag.layer setBorderWidth:1.0];
     [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
 }
-
-
-- (void) droppablePoints{
+-(void)droppablePoints
+{
     for (int i=0; i<objDRAGDROP.arrXYpoints.count; i++) {
         
         NSArray *points = [[objDRAGDROP.arrXYpoints objectAtIndex:i] componentsSeparatedByString:@","];
@@ -214,9 +230,8 @@
     [[self view] addGestureRecognizer:uiTapGestureRecognizer];
     
 }
-
-
-- (void) createRadioButtons{
+-(void)createRadioButtons
+{
     
     
     arr_radioButtons = [[NSMutableArray alloc] init];
@@ -730,50 +745,87 @@
         }
     }
 }
-
-- (void) Fn_Radio_Tapped:(id)sender{
-
-    objRadioView = [arr_radioButtons objectAtIndex:[sender tag]];
-    
-    [objRadioView.btnOption1 setImage:imgRadio forState:UIControlStateNormal];
-    [objRadioView.btnOption2 setImage:imgRadio forState:UIControlStateNormal];
-    [objRadioView.btnOption3 setImage:imgRadio forState:UIControlStateNormal];
-    [objRadioView.btnOption4 setImage:imgRadio forState:UIControlStateNormal];
-    [objRadioView.btnOption5 setImage:imgRadio forState:UIControlStateNormal];
-    
-    [sender setImage:imgRadioSelected forState:UIControlStateNormal];
-    
-    if (sender == objRadioView.btnOption1) {
-        objRadioView.selected = [objDRAGDROP.arrRadioOptions objectAtIndex:0];
-        if (objDRAGDROP.intDRAGDROPRADIOid == 14 || objDRAGDROP.intDRAGDROPRADIOid == 15) {
-            NSArray *temp = [[objDRAGDROP.arrRadioOptions objectAtIndex:[sender tag]] componentsSeparatedByString:@","];
-            objRadioView.selected = [temp objectAtIndex:0];
-        }
-        objRadioView.selectedIndex = 1;
-    }
-    else if (sender == objRadioView.btnOption2) {
-        objRadioView.selected = [objDRAGDROP.arrRadioOptions objectAtIndex:1];
-        if (objDRAGDROP.intDRAGDROPRADIOid == 14 || objDRAGDROP.intDRAGDROPRADIOid == 15) {
-            NSArray *temp = [[objDRAGDROP.arrRadioOptions objectAtIndex:[sender tag]] componentsSeparatedByString:@","];
-            objRadioView.selected = [temp objectAtIndex:1];
-        }
-        objRadioView.selectedIndex = 2;
-    }
-    else if (sender == objRadioView.btnOption3) {
-        objRadioView.selected = [objDRAGDROP.arrRadioOptions objectAtIndex:2];
-        objRadioView.selectedIndex = 3;
-    }
-    else if (sender == objRadioView.btnOption4) {
-        objRadioView.selected = [objDRAGDROP.arrRadioOptions objectAtIndex:3];
-        objRadioView.selectedIndex = 4;
-    }
-    else if (sender == objRadioView.btnOption5) {
-        objRadioView.selected = [objDRAGDROP.arrRadioOptions objectAtIndex:4];
-        objRadioView.selectedIndex = 5;
+-(void)Fn_disableAllDraggableSubjects
+{
+    for(UIButton *subview in [imgDropView subviews]) {
+        [self.view removeGestureRecognizer:uiTapGestureRecognizer];
     }
 }
-
-- (NSString *) fn_getFeeback:(NSMutableArray *)feedbackArr AndCorrect:(NSString *)correctincorrect Andfeed:(int)intfeed {
+-(void)rotateScrollViewButtonsForLandscape
+{
+    int counter= 0;
+    int y = 10;
+    for(UIView *myView in [scrollViewDrag subviews]){
+        if([myView isKindOfClass:[CustomDragButton class]]){
+            counter++;
+            [myView removeFromSuperview];
+            myView.frame = CGRectMake(20, y, myView.frame.size.width, myView.frame.size.height);
+            [scrollViewDrag addSubview:myView];
+            y = y + myView.frame.size.height + 10   ;
+        }
+    }
+}
+-(void)rotateScrollViewButtonsForPortrait
+{
+    int counter= 0;
+    int y = 10, x= 20;
+    int numOfColumns = 1;
+    int bnWidth = 0;
+    int bnHeight = 0;
+    
+    for(UIView *myView in [scrollViewDrag subviews]){
+        if([myView isKindOfClass:[CustomDragButton class]]){
+            bnWidth = myView.frame.size.width;
+            bnHeight = myView.frame.size.height;
+            counter++;
+            [myView removeFromSuperview];
+            myView.frame = CGRectMake(x, y, myView.frame.size.width, myView.frame.size.height);
+            [scrollViewDrag addSubview:myView];
+            y = y + myView.frame.size.height + 10;
+            if(counter == 3){ /// 3 --> Number of rows
+                numOfColumns++;
+                y = 10;
+                x = x + myView.frame.size.width + 10;
+                counter = 0;
+            }
+        }
+    }
+    
+    [scrollViewDrag setContentSize:CGSizeMake(30 + (numOfColumns * bnWidth) + ((numOfColumns-1) * 10), 10 + (3 * bnHeight) + (2 *y))];
+}
+-(void)rotateScrollViewButtonsForiPhone
+{
+    int counter= 0;
+    int y = 5, x= 20;
+    int numOfColumns = 1;
+    int numOfRows = 4;
+    float bnwidth = 0;
+    float btnheight;
+    
+    for(UIView *myView in [scrollViewDrag subviews]){
+        if([myView isKindOfClass:[CustomDragButton class]]){
+            bnwidth = myView.frame.size.width;
+            counter++;
+            
+            [myView removeFromSuperview];
+            myView.frame = CGRectMake(x, y, myView.frame.size.width, myView.frame.size.height);
+            [scrollViewDrag addSubview:myView];
+            btnheight = myView.frame.size.height;
+            y = y + myView.frame.size.height + 10;
+            if(counter == numOfRows){
+                numOfColumns++;
+                y = 5;
+                x = x + myView.frame.size.width + 10;
+                counter = 0;
+            }
+        }
+    }
+    
+    
+    [scrollViewDrag setContentSize:CGSizeMake(20 + (numOfColumns * bnwidth) + ((numOfColumns-1) * 10), 5 + (numOfRows * btnheight) + numOfRows * 10)];
+}
+-(NSString *)fn_getFeeback:(NSMutableArray *)feedbackArr AndCorrect:(NSString *)correctincorrect Andfeed:(int)intfeed
+{
     NSString *strTemp = nil;
     
     for (int x=0; x<feedbackArr.count; x++) {
@@ -797,7 +849,8 @@
     
     return strTemp;
 }
-- (NSString *) fn_getFeeback2:(int)intfeed AndCorrect:(NSString *)correctincorrect{
+-(NSString *)fn_getFeeback2:(int)intfeed AndCorrect:(NSString *)correctincorrect
+{
     NSString *strTemp = nil;
     
     for (int x=0; x<objDRAGDROP.arrFeedback.count; x++) {
@@ -822,9 +875,7 @@
     
     return strTemp;
 }
-
-
-- (void) Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue
+-(void)Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue
 {
     [feedbackView removeFromSuperview];
     
@@ -891,256 +942,20 @@
         [self.view addSubview:feedbackView];
     }
 }
-- (void) Fn_Feedback_Tapped:(id)sender {
-    
-    objRadioView = [arr_radioButtons objectAtIndex:[sender tag]];
-    
-    UIButton *bn = (UIButton *)sender;
-    float x_point =  imgScroller.frame.origin.x + bn.frame.origin.x + bn.superview.frame.origin.x - (225);
-    float y_point =  imgScroller.frame.origin.y + bn.frame.origin.y + bn.superview.frame.origin.y - (131);
-    y_point = y_point - visibleRect.origin.y;
-    
-    x_feedback_l = bn.frame.origin.x + bn.superview.frame.origin.x - (225) ;
-    y_feedback_l = bn.frame.origin.y + bn.superview.frame.origin.y - (131);
-    [self Fn_AddFeedbackPopup:x_point andy:y_point andText:objRadioView.feedback];
-    
-}
-
-
--(IBAction)onFeedbackTapped2:(id)sender
+-(void)disableEditFields
 {
-    UIButton *btn = sender;
-    CustomDragButton *bn = [draggableSubjects objectAtIndex:btn.tag];
-    
-    float x_point;
-    float y_point;
-    
-    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
-    {
-        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 132);
-        y_point = bn.superview.frame.origin.y + 120;
-        y_point = y_point - visibleRect.origin.y;
-        
-        [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
-    }
-    else
-    {
-        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 10);
-        y_point = bn.superview.frame.origin.y + 15;
-        y_point = y_point - visibleRect.origin.y;
-        
-        x_feedback_l=x_point;
-        y_feedback_l=y_point;
-        
-        x_feedback_p=x_point-238;
-        y_feedback_p=y_point+217;
-        
-        if(currentOrientaion==1 || currentOrientaion==2) // Portrait
-        {
-            [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:bn.strFeedback];
-        }
-        else //Lanscape
-        {
-            [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:bn.strFeedback];
-        }
-    }
-}
-
-- (void)viewDidUnload{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-- (void) rotateScrollViewButtonsForLandscape{
-    int counter= 0;
-    int y = 10;
-    for(UIView *myView in [scrollViewDrag subviews]){
-        if([myView isKindOfClass:[CustomDragButton class]]){
-            counter++;
-            [myView removeFromSuperview];
-            myView.frame = CGRectMake(20, y, myView.frame.size.width, myView.frame.size.height);
-            [scrollViewDrag addSubview:myView];
-            y = y + myView.frame.size.height + 10   ;
-        }
-    }
-}
-
-- (void) rotateScrollViewButtonsForPortrait{
-    int counter= 0;
-    int y = 10, x= 20;
-    int numOfColumns = 1;
-    int bnWidth = 0;
-    int bnHeight = 0;
-    
-    for(UIView *myView in [scrollViewDrag subviews]){
-        if([myView isKindOfClass:[CustomDragButton class]]){
-            bnWidth = myView.frame.size.width;
-            bnHeight = myView.frame.size.height;
-            counter++;
-            [myView removeFromSuperview];
-            myView.frame = CGRectMake(x, y, myView.frame.size.width, myView.frame.size.height);
-            [scrollViewDrag addSubview:myView];
-            y = y + myView.frame.size.height + 10;
-            if(counter == 3){ /// 3 --> Number of rows
-                numOfColumns++;
-                y = 10;
-                x = x + myView.frame.size.width + 10;
-                counter = 0;
-            }
-        }
-    }
-    
-    [scrollViewDrag setContentSize:CGSizeMake(30 + (numOfColumns * bnWidth) + ((numOfColumns-1) * 10), 10 + (3 * bnHeight) + (2 *y))];
-}
-
-- (void) rotateScrollViewButtonsForiPhone{
-    int counter= 0;
-    int y = 5, x= 20;
-    int numOfColumns = 1;
-    int numOfRows = 4;
-    float bnwidth = 0;
-    float btnheight;
-    
-    for(UIView *myView in [scrollViewDrag subviews]){
-        if([myView isKindOfClass:[CustomDragButton class]]){
-            bnwidth = myView.frame.size.width;
-            counter++;
-            
-            [myView removeFromSuperview];
-            myView.frame = CGRectMake(x, y, myView.frame.size.width, myView.frame.size.height);
-            [scrollViewDrag addSubview:myView];
-            btnheight = myView.frame.size.height;
-            y = y + myView.frame.size.height + 10;
-            if(counter == numOfRows){ 
-                numOfColumns++;
-                y = 5;
-                x = x + myView.frame.size.width + 10;
-                counter = 0;
-            }
-        }
-    }
-    
-    
-    [scrollViewDrag setContentSize:CGSizeMake(20 + (numOfColumns * bnwidth) + ((numOfColumns-1) * 10), 5 + (numOfRows * btnheight) + numOfRows * 10)];
-}
-
-
-//Get db data from question_id
-//--------------------------------
--(void) fn_LoadDbData:(NSString *)question_id{
-    objDRAGDROP = [db fnGetTestyourselfDRAGDROPRadio:question_id];
-}
--(NSString *) fn_CheckAnswersBeforeSubmit{
-    
-	flagForAnyOptionSelect = NO;
-    
-    for (UIView *dropArea in _dragDropManager.dropAreas) {
-        if (dropArea.subviews.count == 0) {
-            flagForAnyOptionSelect = YES;
-        }
-    }
     
     for (int i =0; i <[arr_radioButtons count]; i++) {
         objRadioView = [arr_radioButtons objectAtIndex:i];
-        if ([objRadioView.selected isEqualToString:@"0"]) {
-            flagForAnyOptionSelect = YES;
-            break;
-        }
+        objRadioView.btnOption1.enabled = NO;
+        objRadioView.btnOption2.enabled = NO;
+        objRadioView.btnOption3.enabled = NO;
+        objRadioView.btnOption4.enabled = NO;
+        objRadioView.btnOption5.enabled = NO;
     }
-    
-    if (flagForAnyOptionSelect) {
-        intVisited = 0;
-    }
-    else  {
-        flagForCheckAnswer = [self checkForAnswer];
-        if (flagForCheckAnswer == YES) {
-            intVisited = 1;
-        }
-        else {
-            intVisited = 2;
-        }
-    }
-    return nil;
 }
--(void) fn_OnSubmitTapped{
-    UIAlertView *alert = [[UIAlertView alloc] init];
-    [alert setTitle:TITLE_COMMON];
-    [alert setDelegate:self];
-    if (flagForAnyOptionSelect) {
-        [alert setTag:1];
-        [alert addButtonWithTitle:@"Ok"];
-        [alert setMessage:[NSString stringWithFormat:@"Please drag and drop and also select the category."]];
-    }
-    else {
-        if (flagForCheckAnswer == YES) {
-            [alert setTag:2];
-            [alert addButtonWithTitle:@"Ok"];
-            [alert setMessage:[NSString stringWithFormat:@"Correct"]];
-        }
-        else {
-            [alert setTag:3];
-            [alert addButtonWithTitle:@"Answer"];
-            [alert addButtonWithTitle:@"Try Again"];
-            [alert setMessage:[NSString stringWithFormat:@"Incorrect"]];
-        }
-    }
-	[alert show];
-}
--(void) fn_ShowSelected:(NSString *)visitedAnswers
+-(void)handleRevealScore
 {
-    
-}
-//--------------------------------
-
-
-
-//--------------------------------
-- (BOOL) checkForAnswer{
-    int i = 0;
-    NSMutableString *strAns = [[NSMutableString alloc] init];
-    BOOL flag1 = YES;
-    for (UIView *dropArea in _dragDropManager.dropAreas) {
-        NSArray *arrSubviews = [dropArea subviews];
-        if (arrSubviews.count > 0) {
-            UIButton *bn = [arrSubviews objectAtIndex:0];
-            NSString *ss = [bn.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-            NSString *sa = [[objDRAGDROP.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
-            if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
-                flag1 = NO;
-                break;
-            }
-            if (i == [objDRAGDROP.arrAnswer count] - 1)
-                [strAns appendFormat:@"%@", ss];
-            else
-                [strAns appendFormat:@"%@#", ss];
-        }
-        strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
-        i++;
-    }
-    
-    for (int i =0; i <[arr_radioButtons count]; i++) {
-        objRadioView = [arr_radioButtons objectAtIndex:i];
-        NSString *answer = [objDRAGDROP.arrRadioAnswers objectAtIndex:i];
-        
-        NSString *ss = [objRadioView.selected stringByReplacingOccurrencesOfString:@" " withString:@""];
-		NSString *sa = [answer stringByReplacingOccurrencesOfString:@" " withString:@""];
-        
-        if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
-			flag1 = NO;
-		}
-        if (i == [arr_radioButtons count] - 1)
-            [strAns appendFormat:@"%@", ss];
-        else
-            [strAns appendFormat:@"%@#", ss];
-    }
-    strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
-    
-    return flag1;
-}
-- (void) handleShowAnswers{
-    
-}
-- (void) handleRevealScore{
     
     
     for (int i =0; i <[arr_radioButtons count]; i++) {
@@ -1199,7 +1014,7 @@
         if(objDRAGDROP.intDRAGDROPRADIOid == 14 || objDRAGDROP.intDRAGDROPRADIOid == 15){
             bnFeedback.hidden = YES;
         }
-    
+        
     }
     
     int i = 0;
@@ -1218,7 +1033,7 @@
                     if(objDRAGDROP.intDRAGDROPRADIOid == 25 || objDRAGDROP.intDRAGDROPRADIOid == 26 || objDRAGDROP.intDRAGDROPRADIOid == 18 || objDRAGDROP.intDRAGDROPRADIOid == 9){
                     }
                     else {
-                    [bn addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
+                        [bn addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
                     }
                     
                 }
@@ -1231,7 +1046,7 @@
                     if(objDRAGDROP.intDRAGDROPRADIOid == 25 || objDRAGDROP.intDRAGDROPRADIOid == 26 || objDRAGDROP.intDRAGDROPRADIOid == 18 || objDRAGDROP.intDRAGDROPRADIOid == 9){
                     }
                     else {
-                    [bn addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
+                        [bn addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
                     }
                     
                 }
@@ -1246,25 +1061,354 @@
     
     [self disableEditFields];
 }
-- (void) disableEditFields {
+//---------------------------------------------------------
+
+
+
+#pragma mark - Public Function
+//---------------------------------------------------------
+-(void)fn_LoadDbData:(NSString *)question_id
+{
+    objDRAGDROP = [db fnGetTestyourselfDRAGDROPRadio:question_id];
+}
+-(NSString *)fn_CheckAnswersBeforeSubmit
+{
+    
+	flagForAnyOptionSelect = NO;
+    
+    for (UIView *dropArea in _dragDropManager.dropAreas) {
+        if (dropArea.subviews.count == 0) {
+            flagForAnyOptionSelect = YES;
+        }
+    }
     
     for (int i =0; i <[arr_radioButtons count]; i++) {
         objRadioView = [arr_radioButtons objectAtIndex:i];
-        objRadioView.btnOption1.enabled = NO;
-        objRadioView.btnOption2.enabled = NO;
-        objRadioView.btnOption3.enabled = NO;
-        objRadioView.btnOption4.enabled = NO;
-        objRadioView.btnOption5.enabled = NO;
+        if ([objRadioView.selected isEqualToString:@"0"]) {
+            flagForAnyOptionSelect = YES;
+            break;
+        }
     }
-}
-- (void) Fn_disableAllDraggableSubjects{
-    for(UIButton *subview in [imgDropView subviews]) {
-        [self.view removeGestureRecognizer:uiTapGestureRecognizer];
+    
+    if (flagForAnyOptionSelect) {
+        intVisited = 0;
     }
+    else  {
+        flagForCheckAnswer = [self checkForAnswer];
+        if (flagForCheckAnswer == YES) {
+            intVisited = 1;
+        }
+        else {
+            intVisited = 2;
+        }
+    }
+    return nil;
 }
-//--------------------------------
+-(void)fn_OnSubmitTapped
+{
+    UIAlertView *alert = [[UIAlertView alloc] init];
+    [alert setTitle:TITLE_COMMON];
+    [alert setDelegate:self];
+    if (flagForAnyOptionSelect) {
+        [alert setTag:1];
+        [alert addButtonWithTitle:@"Ok"];
+        [alert setMessage:[NSString stringWithFormat:@"Please drag and drop and also select the category."]];
+    }
+    else {
+        if (flagForCheckAnswer == YES) {
+            [alert setTag:2];
+            [alert addButtonWithTitle:@"Ok"];
+            [alert setMessage:[NSString stringWithFormat:@"Correct"]];
+        }
+        else {
+            [alert setTag:3];
+            [alert addButtonWithTitle:@"Answer"];
+            [alert addButtonWithTitle:@"Try Again"];
+            [alert setMessage:[NSString stringWithFormat:@"Incorrect"]];
+        }
+    }
+	[alert show];
+}
+-(void)fn_ShowSelected:(NSString *)visitedAnswers
+{
+    
+}
+-(BOOL)checkForAnswer
+{
+    int i = 0;
+    NSMutableString *strAns = [[NSMutableString alloc] init];
+    BOOL flag1 = YES;
+    for (UIView *dropArea in _dragDropManager.dropAreas) {
+        NSArray *arrSubviews = [dropArea subviews];
+        if (arrSubviews.count > 0) {
+            UIButton *bn = [arrSubviews objectAtIndex:0];
+            NSString *ss = [bn.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+            NSString *sa = [[objDRAGDROP.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
+            if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
+                flag1 = NO;
+                break;
+            }
+            if (i == [objDRAGDROP.arrAnswer count] - 1)
+                [strAns appendFormat:@"%@", ss];
+            else
+                [strAns appendFormat:@"%@#", ss];
+        }
+        strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
+        i++;
+    }
+    
+    for (int i =0; i <[arr_radioButtons count]; i++) {
+        objRadioView = [arr_radioButtons objectAtIndex:i];
+        NSString *answer = [objDRAGDROP.arrRadioAnswers objectAtIndex:i];
+        
+        NSString *ss = [objRadioView.selected stringByReplacingOccurrencesOfString:@" " withString:@""];
+		NSString *sa = [answer stringByReplacingOccurrencesOfString:@" " withString:@""];
+        
+        if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
+			flag1 = NO;
+		}
+        if (i == [arr_radioButtons count] - 1)
+            [strAns appendFormat:@"%@", ss];
+        else
+            [strAns appendFormat:@"%@#", ss];
+    }
+    strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
+    
+    return flag1;
+}
+-(void)handleShowAnswers
+{
+    // Drag Drop
+    int i = 0;
+    for (CustomDragButton *bnDrag in draggableSubjects) {
+        UIView *dropArea =  [_dragDropManager.dropAreas objectAtIndex:i];
+        [dropArea addSubview:bnDrag];
+        bnDrag.frame = CGRectMake(0, 0, bnDrag.frame.size.width, bnDrag.frame.size.height);
+        
+        [bnDrag.ansImage setImage:[UIImage imageNamed:@"Btn_feed_true.png"]];
+        NSString *feeback = [self fn_getFeeback2:bnDrag.tag AndCorrect:@"correct"];
+        if (feeback.length > 0) {
+            bnDrag.feedbackBt.hidden = NO;
+            bnDrag.strFeedback = feeback;
+            [bnDrag addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
+            
+        }
+        if(objDRAGDROP.intDRAGDROPRADIOid == 25 || objDRAGDROP.intDRAGDROPRADIOid == 26 || objDRAGDROP.intDRAGDROPRADIOid == 18 || objDRAGDROP.intDRAGDROPRADIOid == 9){
+            bnDrag.feedbackBt.hidden = YES;
+        }
+        i++;
+    }
+    
+    // Radio    
+    for (int i =0; i <[arr_radioButtons count]; i++)
+    {
+        objRadioView = [arr_radioButtons objectAtIndex:i];
+        NSString *answer = [objDRAGDROP.arrRadioAnswers objectAtIndex:i];
+        
+        [objRadioView.btnOption1 setImage:imgRadio forState:UIControlStateNormal];
+        [objRadioView.btnOption2 setImage:imgRadio forState:UIControlStateNormal];
+        [objRadioView.btnOption3 setImage:imgRadio forState:UIControlStateNormal];
+        [objRadioView.btnOption4 setImage:imgRadio forState:UIControlStateNormal];
+        [objRadioView.btnOption5 setImage:imgRadio forState:UIControlStateNormal];
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+        objRadioView.btnFeedback1.hidden = YES;
+        objRadioView.btnFeedback2.hidden = YES;
+        objRadioView.btnFeedback3.hidden = YES;
+        objRadioView.btnFeedback4.hidden = YES;
+        objRadioView.btnFeedback5.hidden = YES;
+        
+        [objRadioView.ansImage1 setImage:nil];
+        [objRadioView.ansImage2 setImage:nil];
+        [objRadioView.ansImage3 setImage:nil];
+        [objRadioView.ansImage4 setImage:nil];
+        [objRadioView.ansImage5 setImage:nil];
+        
+        for (int x=0; x<objDRAGDROP.arrRadioOptions.count ; x++) {
+            NSString *ss = [[objDRAGDROP.arrRadioOptions objectAtIndex:x]stringByReplacingOccurrencesOfString:@" " withString:@""];
+            
+            NSString *sa = [answer stringByReplacingOccurrencesOfString:@" " withString:@""];
+            
+            if ([ss isEqualToString:sa]) {
+                switch (x) {
+                        case 0:
+                            [objRadioView.btnOption1 setImage:imgRadioSelected forState:UIControlStateNormal];
+                            objRadioView.selectedIndex = 1;
+                            break;
+                        case 1:
+                            [objRadioView.btnOption2 setImage:imgRadioSelected forState:UIControlStateNormal];
+                            objRadioView.selectedIndex = 2;
+                            break;
+                        case 2:
+                            [objRadioView.btnOption3 setImage:imgRadioSelected forState:UIControlStateNormal];
+                            objRadioView.selectedIndex = 3;
+                            break;
+                        case 3:
+                            [objRadioView.btnOption4 setImage:imgRadioSelected forState:UIControlStateNormal];
+                            objRadioView.selectedIndex = 4;
+                            break;
+                        case 4:
+                            [objRadioView.btnOption5 setImage:imgRadioSelected forState:UIControlStateNormal];
+                            objRadioView.selectedIndex = 5;
+                            break;
+                    }
+                
+                UIImageView *ansImage =  nil;
+                UIButton *bnFeedback = nil;
+                
+                switch (objRadioView.selectedIndex) {
+                    case 1:
+                        ansImage =  objRadioView.ansImage1;
+                        bnFeedback = objRadioView.btnFeedback1;
+                        break;
+                    case 2:
+                        ansImage =  objRadioView.ansImage2;
+                        bnFeedback = objRadioView.btnFeedback2;
+                        break;
+                    case 3:
+                        ansImage =  objRadioView.ansImage3;
+                        bnFeedback = objRadioView.btnFeedback3;
+                        break;
+                    case 4:
+                        ansImage =  objRadioView.ansImage4;
+                        bnFeedback = objRadioView.btnFeedback4;
+                        break;
+                    case 5:
+                        ansImage =  objRadioView.ansImage5;
+                        bnFeedback = objRadioView.btnFeedback5;
+                        break;
+                }
+                
+                
+                [ansImage setImage:[UIImage imageNamed:@"Btn_feed_true.png"]];
+                
+                NSString *feeback = [self fn_getFeeback:objDRAGDROP.arrFeedback AndCorrect:@"correct" Andfeed:objRadioView.selectedIndex];
+                if (feeback.length > 0) {
+                    bnFeedback.hidden = NO;
+                    objRadioView.feedback = feeback;
+                }
+                
+                if(objDRAGDROP.intDRAGDROPRADIOid == 14 || objDRAGDROP.intDRAGDROPRADIOid == 15){
+                    bnFeedback.hidden = YES;
+                }
+
+                
+            }
+            //
+        
+        }
+        //
+    }
+
+    
+    [self disableEditFields];
+}
+//---------------------------------------------------------
+
+
+# pragma mark - Button Actions
+//---------------------------------------------------------
+-(void)Fn_Feedback_Tapped:(id)sender
+{
+    
+    objRadioView = [arr_radioButtons objectAtIndex:[sender tag]];
+    
+    UIButton *bn = (UIButton *)sender;
+    float x_point =  imgScroller.frame.origin.x + bn.frame.origin.x + bn.superview.frame.origin.x - (225);
+    float y_point =  imgScroller.frame.origin.y + bn.frame.origin.y + bn.superview.frame.origin.y - (131);
+    y_point = y_point - visibleRect.origin.y;
+    
+    x_feedback_l = bn.frame.origin.x + bn.superview.frame.origin.x - (225) ;
+    y_feedback_l = bn.frame.origin.y + bn.superview.frame.origin.y - (131);
+    [self Fn_AddFeedbackPopup:x_point andy:y_point andText:objRadioView.feedback];
+    
+}
+-(IBAction)onFeedbackTapped2:(id)sender
+{
+    UIButton *btn = sender;
+    CustomDragButton *bn = [draggableSubjects objectAtIndex:btn.tag];
+    
+    float x_point;
+    float y_point;
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 132);
+        y_point = bn.superview.frame.origin.y + 120;
+        y_point = y_point - visibleRect.origin.y;
+        
+        [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
+    }
+    else
+    {
+        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 10);
+        y_point = bn.superview.frame.origin.y + 15;
+        y_point = y_point - visibleRect.origin.y;
+        
+        x_feedback_l=x_point;
+        y_feedback_l=y_point;
+        
+        x_feedback_p=x_point-238;
+        y_feedback_p=y_point+217;
+        
+        if(currentOrientaion==1 || currentOrientaion==2) // Portrait
+        {
+            [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:bn.strFeedback];
+        }
+        else //Lanscape
+        {
+            [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:bn.strFeedback];
+        }
+    }
+}
+-(void)Fn_Radio_Tapped:(id)sender
+{
+    
+    objRadioView = [arr_radioButtons objectAtIndex:[sender tag]];
+    
+    [objRadioView.btnOption1 setImage:imgRadio forState:UIControlStateNormal];
+    [objRadioView.btnOption2 setImage:imgRadio forState:UIControlStateNormal];
+    [objRadioView.btnOption3 setImage:imgRadio forState:UIControlStateNormal];
+    [objRadioView.btnOption4 setImage:imgRadio forState:UIControlStateNormal];
+    [objRadioView.btnOption5 setImage:imgRadio forState:UIControlStateNormal];
+    
+    [sender setImage:imgRadioSelected forState:UIControlStateNormal];
+    
+    if (sender == objRadioView.btnOption1) {
+        objRadioView.selected = [objDRAGDROP.arrRadioOptions objectAtIndex:0];
+        if (objDRAGDROP.intDRAGDROPRADIOid == 14 || objDRAGDROP.intDRAGDROPRADIOid == 15) {
+            NSArray *temp = [[objDRAGDROP.arrRadioOptions objectAtIndex:[sender tag]] componentsSeparatedByString:@","];
+            objRadioView.selected = [temp objectAtIndex:0];
+        }
+        objRadioView.selectedIndex = 1;
+    }
+    else if (sender == objRadioView.btnOption2) {
+        objRadioView.selected = [objDRAGDROP.arrRadioOptions objectAtIndex:1];
+        if (objDRAGDROP.intDRAGDROPRADIOid == 14 || objDRAGDROP.intDRAGDROPRADIOid == 15) {
+            NSArray *temp = [[objDRAGDROP.arrRadioOptions objectAtIndex:[sender tag]] componentsSeparatedByString:@","];
+            objRadioView.selected = [temp objectAtIndex:1];
+        }
+        objRadioView.selectedIndex = 2;
+    }
+    else if (sender == objRadioView.btnOption3) {
+        objRadioView.selected = [objDRAGDROP.arrRadioOptions objectAtIndex:2];
+        objRadioView.selectedIndex = 3;
+    }
+    else if (sender == objRadioView.btnOption4) {
+        objRadioView.selected = [objDRAGDROP.arrRadioOptions objectAtIndex:3];
+        objRadioView.selectedIndex = 4;
+    }
+    else if (sender == objRadioView.btnOption5) {
+        objRadioView.selected = [objDRAGDROP.arrRadioOptions objectAtIndex:4];
+        objRadioView.selectedIndex = 5;
+    }
+}
+//---------------------------------------------------------
+
+
+#pragma mark - AlertView
+//---------------------------------------------------------
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
     if (alertView.tag == 2) {
         if (buttonIndex == 0)
         {
@@ -1278,7 +1422,8 @@
         {
             [parentObject Fn_DisableSubmit];            
             [self handleRevealScore];
-            [self Fn_disableAllDraggableSubjects];            
+            [self Fn_disableAllDraggableSubjects];
+            [parentObject Fn_ShowAnswer];
         }
         else if (buttonIndex == 1)
         {
@@ -1286,19 +1431,32 @@
         }
     }
 }
+//---------------------------------------------------------
 
 
-# pragma mark - scrollview delegate
-//---------------------Delegate-------
-- (void)scrollViewDidScroll:(UIScrollView *)aScrollView
+#pragma mark - scrollview delegate
+//---------------------------------------------------------
+-(void)scrollViewDidScroll:(UIScrollView *)aScrollView
 {
     feedbackView.hidden=YES;
     visibleRect.origin = aScrollView.contentOffset;
 }
+//---------------------------------------------------------
 
-#pragma Orientation
-//------------------------------
-- (BOOL) shouldAutorotate{
+
+#pragma mark - Touch
+//---------------------------------------------------------
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    feedbackView.hidden = YES;
+}
+//---------------------------------------------------------
+
+
+#pragma mark - Orientation
+//---------------------------------------------------------
+-(BOOL)shouldAutorotate
+{
     UIInterfaceOrientation interfaceOrientation = (UIInterfaceOrientation)[UIApplication sharedApplication].statusBarOrientation;
     currentOrientaion = interfaceOrientation;
     return YES;
@@ -1334,7 +1492,8 @@
 	}
     return UIInterfaceOrientationMaskAll;
 }
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
         return NO;
     }
@@ -1358,7 +1517,6 @@
     
 	return YES;
 }
-//------------------------------
 -(void)Fn_rotatePortrait
 {
     // Self View
@@ -1419,4 +1577,5 @@
     
     [self rotateScrollViewButtonsForLandscape];
 }
+//---------------------------------------------------------
 @end

@@ -486,6 +486,28 @@
 }
 //--------------------------------
 
+
+#pragma mark - View lifecycle
+//---------------------------------------------------------
+#pragma mark - Common Function
+//---------------------------------------------------------
+
+#pragma mark - Normal Function
+//---------------------------------------------------------
+#pragma mark - Public Function
+//---------------------------------------------------------
+#pragma mark - Button Actions
+//---------------------------------------------------------
+#pragma mark - AlertView
+//---------------------------------------------------------
+#pragma mark - scrollview delegate
+//---------------------------------------------------------
+#pragma mark - Touch
+//---------------------------------------------------------
+#pragma mark - Orientation
+//---------------------------------------------------------
+
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 2) {
