@@ -33,3 +33,7 @@
 
 
 #define DELIMITER_ARR @"$#$"
+
+
+#define BOOKMARKING_ALERT_TAG 11
+int isTestInProgress;
