@@ -91,7 +91,6 @@
 
 }
 
-
 -(void) Fn_SetFontColor
 {
     lblChapterName.textColor = COLOR_BottomBlueButton;
@@ -113,7 +112,6 @@
         lblTitle.font = FONT_20;
     }
 }
-
 
 - (void) Fn_LoadNoteData:(Notes *)notes
 {

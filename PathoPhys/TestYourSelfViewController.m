@@ -155,6 +155,7 @@
 {
     [md Fn_removeInfoViewPopup];
     [md Fn_removeNoteViewPopup];
+    [self Fn_CheckNote];    
 }
 -(void)didReceiveMemoryWarning
 {
