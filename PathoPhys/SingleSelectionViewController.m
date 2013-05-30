@@ -165,13 +165,18 @@
 //---------------------------------------------------------
 -(void)Fn_createInvisibleBtn
 {
-    [btnInvisible removeFromSuperview];
-    btnInvisible = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btnInvisible setFrame:CGRectMake(tblOptions.frame.origin.x, tblOptions.frame.origin.y, tblOptions.frame.size.width - 50, tblOptions.frame.size.height)];
-    btnInvisible.backgroundColor = [UIColor clearColor];
-    [btnInvisible setAlpha:0.5];
-    [btnInvisible addTarget:self action:@selector(onInvisible:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btnInvisible];
+    if([[DEVICE_TYPE substringToIndex:6] isEqualToString:@"iPhone"]) {
+        tblOptions.allowsSelection=NO;
+    }
+    else {
+        [btnInvisible removeFromSuperview];
+        btnInvisible = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnInvisible setFrame:CGRectMake(tblOptions.frame.origin.x, tblOptions.frame.origin.y, tblOptions.frame.size.width - 50, tblOptions.frame.size.height)];
+        btnInvisible.backgroundColor = [UIColor clearColor];
+        [btnInvisible setAlpha:0.5];
+        [btnInvisible addTarget:self action:@selector(onInvisible:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:btnInvisible];
+    }
 }
 -(NSString *)fn_getFeeback:(int)intfeed
 {
@@ -687,6 +692,29 @@
         UIView *v = [[UIView alloc] init];
     	v.backgroundColor = [UIColor clearColor];
     	cell.selectedBackgroundView = v;
+        
+        cell.lblOptionName.lineBreakMode = UILineBreakModeWordWrap;
+        cell.lblOptionName.numberOfLines = 3;
+        cell.lblOptionName.font = FONT_17;
+        cell.lblOptionName.textColor = COLOR_BLACK;
+        cell.lblOptionName.highlightedTextColor = COLOR_BottomBlueButton;
+        cell.lblOptionName.numberOfLines = 5;
+        
+        cell.lblAlphabet.font = FONT_17;
+        cell.lblAlphabet.textColor = COLOR_BLACK;
+        cell.lblAlphabet.highlightedTextColor = COLOR_BottomBlueButton;
+        
+        cell.btnFeedback.hidden = YES;
+        cell.btnFeedback.tag = indexPath.row;
+        [cell.btnFeedback addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
+        
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            cell.lblOptionName.font = FONT_12;
+            cell.lblAlphabet.font = FONT_12;
+        }
+        
+
+        
     }
     
     
@@ -741,37 +769,64 @@
             }
         }
     
-    }
-    if (selectedCells) {
-        
-        if ([selectedCells containsObject:[NSNumber numberWithInt:indexPath.row]]) {
-          [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone          ];  
-        }        
-    }
+    }    
     
     cell.tag = indexPath.row;
-    cell.lblOptionName.lineBreakMode = UILineBreakModeWordWrap;
-    cell.lblOptionName.numberOfLines = 3;
-    cell.lblOptionName.font = FONT_17;
-    cell.lblOptionName.textColor = COLOR_BLACK;
-    cell.lblOptionName.highlightedTextColor = COLOR_BottomBlueButton;
-    cell.lblOptionName.numberOfLines = 5;
     cell.lblOptionName.text = [objMCSS.arrOptions objectAtIndex:indexPath.row];
     
     char letter = (char) indexPath.row + 65;
-    cell.lblAlphabet.font = FONT_17;
-    cell.lblAlphabet.textColor = COLOR_BLACK;
-    cell.lblAlphabet.highlightedTextColor = COLOR_BottomBlueButton;    
     cell.lblAlphabet.text = [[NSString stringWithFormat:@"%c.", letter] lowercaseString];
     
-    cell.btnFeedback.hidden = YES;
     cell.btnFeedback.tag = indexPath.row;
-    [cell.btnFeedback addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
+   
     
-    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        cell.lblOptionName.font = FONT_12;
-        cell.lblAlphabet.font = FONT_12;
+    if (selectedCells) {
+        
+        if ([selectedCells containsObject:[NSNumber numberWithInt:indexPath.row]]) {
+            [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone          ];
+            
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                
+                NSString *ss = [objMCSS.arrOptions objectAtIndex:indexPath.row];
+                ss = [ss stringByReplacingOccurrencesOfString:@" " withString:@""];
+                ss = [ss lowercaseString];
+                int answer_count = [objMCSS.arrAnswer count];
+                for (int j = 0; j < answer_count; j++) {
+                    NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
+                    sa = [sa lowercaseString];
+                    if (![ss isEqualToString:sa]) {
+                        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                            [cell.imgAns setImage:[UIImage imageNamed:@"false_Without_Border.png"]];
+                        }
+                        else {
+                            [cell.imgAns setImage:[UIImage imageNamed:@"img_false.png"]];
+                        }
+                        NSString *feeback = [self fn_getFeeback:indexPath.row];
+                        if (feeback.length > 0) {
+                            cell.btnFeedback.hidden = NO;
+                            cell.strFeedback = feeback;
+                        }
+                        
+                    }else {
+                        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                            [cell.imgAns setImage:[UIImage imageNamed:@"True_Btn_Without_Border.png"]];
+                        }
+                        else {
+                            [cell.imgAns setImage:[UIImage imageNamed:@"img_true.png"]];
+                        }
+                        NSString *feeback = [self fn_getFeeback:indexPath.row];
+                        if (feeback.length > 0) {
+                            cell.btnFeedback.hidden = NO;
+                            cell.strFeedback = feeback;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
     }
+    
+
     
     [cellArray addObject:cell];
     

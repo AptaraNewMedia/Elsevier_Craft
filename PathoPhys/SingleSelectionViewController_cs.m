@@ -624,7 +624,7 @@
     return [objMCSS.arrOptions count];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{    
+{
     static NSString *MyIdentifier = @"tblCellView";
     MCSSCell_iPad *cell = (MCSSCell_iPad *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     if(cell == nil) {
@@ -634,28 +634,51 @@
             cell = [cellArray2 lastObject];
         }
         else {
-        
-        if (currentOrientaion==1||currentOrientaion==2) {
-            NSArray *cellArray2 = [[NSBundle mainBundle] loadNibNamed:@"MCSSCell_iPad_P" owner:self options:nil];
-            cell = [cellArray2 lastObject];            
-        }
-        else {
             
-            if (isImage) {
-                NSArray *cellArray2 = [[NSBundle mainBundle] loadNibNamed:@"MCSSCell_iPad_half" owner:self options:nil];
+            
+            if (currentOrientaion==1||currentOrientaion==2) {
+                NSArray *cellArray2 = [[NSBundle mainBundle] loadNibNamed:@"MCSSCell_iPad_P" owner:self options:nil];
                 cell = [cellArray2 lastObject];
             }
             else {
-                NSArray *cellArray2 = [[NSBundle mainBundle] loadNibNamed:@"MCSSCell_iPad" owner:self options:nil];
-                cell = [cellArray2 lastObject];
+                
+                if (isImage) {
+                    NSArray *cellArray2 = [[NSBundle mainBundle] loadNibNamed:@"MCSSCell_iPad_half" owner:self options:nil];
+                    cell = [cellArray2 lastObject];
+                }
+                else {
+                    NSArray *cellArray2 = [[NSBundle mainBundle] loadNibNamed:@"MCSSCell_iPad" owner:self options:nil];
+                    cell = [cellArray2 lastObject];
+                }
             }
-        }
-            
         }
         
         UIView *v = [[UIView alloc] init];
     	v.backgroundColor = [UIColor clearColor];
     	cell.selectedBackgroundView = v;
+        
+        cell.lblOptionName.lineBreakMode = UILineBreakModeWordWrap;
+        cell.lblOptionName.numberOfLines = 3;
+        cell.lblOptionName.font = FONT_17;
+        cell.lblOptionName.textColor = COLOR_BLACK;
+        cell.lblOptionName.highlightedTextColor = COLOR_BottomBlueButton;
+        cell.lblOptionName.numberOfLines = 5;
+        
+        cell.lblAlphabet.font = FONT_17;
+        cell.lblAlphabet.textColor = COLOR_BLACK;
+        cell.lblAlphabet.highlightedTextColor = COLOR_BottomBlueButton;
+        
+        cell.btnFeedback.hidden = YES;
+        cell.btnFeedback.tag = indexPath.row;
+        [cell.btnFeedback addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
+        
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            cell.lblOptionName.font = FONT_12;
+            cell.lblAlphabet.font = FONT_12;
+        }
+        
+        
+        
     }
     
     
@@ -673,76 +696,101 @@
         }
     }
     else {
-    
-    if (currentOrientaion==1||currentOrientaion==2) {
         
-        if (MultipleSelect) {
-            cell.imgTableCellBG.image=[UIImage imageNamed:@"P_Question_multiple.png"];
-            cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"P_Question_multiple_select.png"];
-        }
-        else {
-            cell.imgTableCellBG.image=[UIImage imageNamed:@"P_Question_redio_btn.png"];
-            cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"P_Question_redio_btn_select.png"];
-        }
-    }
-    else {
-        
-        if (isImage) {
-            if (MultipleSelect) {
-                cell.imgTableCellBG.image=[UIImage imageNamed:@"L_Que-Box_Multiple_half.png"];
-                cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"L_Que-Box_Multiple_select_half.png"];
-            }
-            else {
-                cell.imgTableCellBG.image=[UIImage imageNamed:@"L_Que-Box_redio_btn_half.png"];
-                cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"L_Que-Box_redio_btn_select_half.png"];
-            }
+        if (currentOrientaion==1||currentOrientaion==2) {
             
-        }
-        else {
             if (MultipleSelect) {
-                cell.imgTableCellBG.image=[UIImage imageNamed:@"L_Que-Box_Multiple.png"];
-                cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"L_Que-Box_Multiple_select.png"];
+                cell.imgTableCellBG.image=[UIImage imageNamed:@"P_Question_multiple.png"];
+                cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"P_Question_multiple_select.png"];
             }
             else {
-                cell.imgTableCellBG.image=[UIImage imageNamed:@"L_Que-Box_redio_btn.png"];
-                cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"L_Que-Box_redio_btn_select.png"];
+                cell.imgTableCellBG.image=[UIImage imageNamed:@"P_Question_redio_btn.png"];
+                cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"P_Question_redio_btn_select.png"];
             }
         }
-    }
-    
-    }
-
-    if (selectedCells) {
+        else {
+            
+            if (isImage) {
+                if (MultipleSelect) {
+                    cell.imgTableCellBG.image=[UIImage imageNamed:@"L_Que-Box_Multiple_half.png"];
+                    cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"L_Que-Box_Multiple_select_half.png"];
+                }
+                else {
+                    cell.imgTableCellBG.image=[UIImage imageNamed:@"L_Que-Box_redio_btn_half.png"];
+                    cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"L_Que-Box_redio_btn_select_half.png"];
+                }
+                
+            }
+            else {
+                if (MultipleSelect) {
+                    cell.imgTableCellBG.image=[UIImage imageNamed:@"L_Que-Box_Multiple.png"];
+                    cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"L_Que-Box_Multiple_select.png"];
+                }
+                else {
+                    cell.imgTableCellBG.image=[UIImage imageNamed:@"L_Que-Box_redio_btn.png"];
+                    cell.imgTableCellBG.highlightedImage=[UIImage imageNamed:@"L_Que-Box_redio_btn_select.png"];
+                }
+            }
+        }
         
-        if ([selectedCells containsObject:[NSNumber numberWithInt:indexPath.row]]) {
-          [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone          ];
-
-        }        
     }
     
     cell.tag = indexPath.row;
-    cell.lblOptionName.lineBreakMode = UILineBreakModeWordWrap;
-    cell.lblOptionName.numberOfLines = 3;
-    cell.lblOptionName.font = FONT_17;
-    cell.lblOptionName.textColor = COLOR_BLACK;
-    cell.lblOptionName.highlightedTextColor = COLOR_BottomBlueButton;
-    cell.lblOptionName.numberOfLines = 5;
     cell.lblOptionName.text = [objMCSS.arrOptions objectAtIndex:indexPath.row];
     
     char letter = (char) indexPath.row + 65;
-    cell.lblAlphabet.font = FONT_17;
-    cell.lblAlphabet.textColor = COLOR_BLACK;
-    cell.lblAlphabet.highlightedTextColor = COLOR_BottomBlueButton;    
     cell.lblAlphabet.text = [[NSString stringWithFormat:@"%c.", letter] lowercaseString];
     
-    cell.btnFeedback.hidden = YES;
     cell.btnFeedback.tag = indexPath.row;
-    [cell.btnFeedback addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
     
-    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        cell.lblOptionName.font = FONT_12;
-        cell.lblAlphabet.font = FONT_12;
+    
+    if (selectedCells) {
+        
+        if ([selectedCells containsObject:[NSNumber numberWithInt:indexPath.row]]) {
+            [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone          ];
+            
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                
+                NSString *ss = [objMCSS.arrOptions objectAtIndex:indexPath.row];
+                ss = [ss stringByReplacingOccurrencesOfString:@" " withString:@""];
+                ss = [ss lowercaseString];
+                int answer_count = [objMCSS.arrAnswer count];
+                for (int j = 0; j < answer_count; j++) {
+                    NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
+                    sa = [sa lowercaseString];
+                    if (![ss isEqualToString:sa]) {
+                        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                            [cell.imgAns setImage:[UIImage imageNamed:@"false_Without_Border.png"]];
+                        }
+                        else {
+                            [cell.imgAns setImage:[UIImage imageNamed:@"img_false.png"]];
+                        }
+                        NSString *feeback = [self fn_getFeeback:indexPath.row];
+                        if (feeback.length > 0) {
+                            cell.btnFeedback.hidden = NO;
+                            cell.strFeedback = feeback;
+                        }
+                        
+                    }else {
+                        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                            [cell.imgAns setImage:[UIImage imageNamed:@"True_Btn_Without_Border.png"]];
+                        }
+                        else {
+                            [cell.imgAns setImage:[UIImage imageNamed:@"img_true.png"]];
+                        }
+                        NSString *feeback = [self fn_getFeeback:indexPath.row];
+                        if (feeback.length > 0) {
+                            cell.btnFeedback.hidden = NO;
+                            cell.strFeedback = feeback;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
     }
+    
+    
     
     [cellArray addObject:cell];
     
@@ -753,6 +801,7 @@
     }
     return cell;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     float height = 55;
