@@ -165,14 +165,13 @@
 //---------------------------------------------------------
 -(void)Fn_createInvisibleBtn
 {
-    tblOptions.allowsSelection=NO;
-    //    [btnInvisible removeFromSuperview];
-    //    btnInvisible = [UIButton buttonWithType:UIButtonTypeCustom];
-    //    [btnInvisible setFrame:CGRectMake(tblOptions.frame.origin.x, tblOptions.frame.origin.y, tblOptions.frame.size.width - 50, tblOptions.frame.size.height)];
-    //    btnInvisible.backgroundColor = [UIColor clearColor];
-    //    [btnInvisible setAlpha:0.5];
-    //    [btnInvisible addTarget:self action:@selector(onInvisible:) forControlEvents:UIControlEventTouchUpInside];
-    //    [self.view addSubview:btnInvisible];
+    [btnInvisible removeFromSuperview];
+    btnInvisible = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btnInvisible setFrame:CGRectMake(tblOptions.frame.origin.x, tblOptions.frame.origin.y, tblOptions.frame.size.width - 50, tblOptions.frame.size.height)];
+    btnInvisible.backgroundColor = [UIColor clearColor];
+    [btnInvisible setAlpha:0.5];
+    [btnInvisible addTarget:self action:@selector(onInvisible:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btnInvisible];
 }
 -(NSString *)fn_getFeeback:(int)intfeed
 {
@@ -911,7 +910,7 @@
     else
         [tblOptions setFrame:CGRectMake(0, 200, 767, 525) ];
     //[tblOptions setBackgroundColor:COLOR_BottomBlueButton];
-    [cellArray removeAllObjects];
+    //[cellArray removeAllObjects];
     cellArray = [[NSMutableArray alloc] init];
     [tblOptions reloadData];
     
@@ -955,7 +954,7 @@
     else
         [tblOptions setFrame:CGRectMake(0,156, 1005, 425) ];
     //[tblOptions setBackgroundColor:COLOR_BottomBlueButton];
-    [cellArray removeAllObjects];    
+    //[cellArray removeAllObjects];
     cellArray = [[NSMutableArray alloc] init];    
     [tblOptions reloadData];
     
