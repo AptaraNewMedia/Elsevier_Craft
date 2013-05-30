@@ -382,7 +382,68 @@
 }
 -(void)Fn_SaveBookmarkingData
 {
+    // Save
     
+    NSString *strSel = nil;
+    switch (objQue.intType) {
+        case QUESTION_TYPE_MCMS:
+        {
+            strSel = [dragDropView fn_CheckAnswersBeforeSubmit];
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0 && TryAgainFlag == 0) {
+                if (strSel.length > 0)
+                    [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:strSel];
+                [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:dragDropView.intVisited]];
+            }
+        }
+            break;
+
+
+        case QUESTION_TYPE_MATCHTERMS:
+        {
+            strSel = [matchPairsView fn_CheckAnswersBeforeSubmit];
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0 && TryAgainFlag == 0) {
+                if (strSel.length > 0)
+                    [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:strSel];
+                [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:matchPairsView.intVisited]];
+            }
+        }
+            break;
+        case QUESTION_TYPE_MCSS:
+        {
+            strSel = [singleSelectionView fn_CheckAnswersBeforeSubmit];
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0 && TryAgainFlag == 0) {
+                if (strSel.length > 0)
+                    [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:strSel];
+                [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:singleSelectionView.intVisited]];
+            }
+        }
+            break;
+    }
+    
+    
+    
+    
+    // Calculation
+    
+    int total_score = 0;
+    for (int i =0; i<[objQuizTrack.arrVisited count]; i++) {
+        int ans = [[objQuizTrack.arrVisited objectAtIndex:i] intValue];
+        if (ans == 1) {
+            total_score++;
+        }
+    }
+    
+    int_currentScore =(total_score / intTotalQuestions) * 100;
+    
+    objQuizTrack.intCorrectQuestion = total_score;
+    objQuizTrack.intMissedQuestion = (intTotalQuestions - total_score);
+    float percentage = (total_score*100) / intTotalQuestions;
+    objQuizTrack.floatPercentage =  percentage;
+    objQuizTrack.intLastVisitedQuestion = intCurrentQuestionIndex;
+    objQuizTrack.strCreatedDate = md.strCurrentDate;
+    objQuizTrack.intComplete = 0;
+    [db fnSetQuizTrack:objQuizTrack];
+
 }
 //---------------------------------------------------------
 
@@ -493,7 +554,7 @@
     objQuizTrack.floatPercentage =  percentage;
     objQuizTrack.intLastVisitedQuestion = 0;
     objQuizTrack.strCreatedDate = md.strCurrentDate;
-    
+    objQuizTrack.intComplete = 1;
     [db fnSetQuizTrack:objQuizTrack];
 }
 -(IBAction)onShowAnswer:(id)sender
@@ -528,8 +589,11 @@
         if (buttonIndex == 0)
         {
             [self Fn_SaveBookmarkingData];
-            [self.navigationController popViewControllerAnimated:YES];
         }
+        else if(buttonIndex == 1) {
+            [db fnDeleteQuizTrack:objQuizTrack.intQuizTrackId];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 //---------------------------------------------------------
@@ -618,6 +682,10 @@
     [bnShowScore setFrame:CGRectMake(430, 860, 139, 43)];
     
     [lblQuestionNo setFrame:CGRectMake(116, 870, 68, 26)];
+    
+    [bnTryAgian setFrame:CGRectMake(620, 860, 139, 43)];
+    [bnShowAnswer setFrame:CGRectMake(430, 860, 139, 43)];
+
 }
 -(void)Fn_rotateLandscape
 {
@@ -633,6 +701,9 @@
     [bnSubmit setFrame:CGRectMake(873, 613, 139, 43)];
     [bnShowScore setFrame:CGRectMake(674, 613, 139, 43)];
     [lblQuestionNo setFrame:CGRectMake(116, 620, 68, 26)];
+    
+    [bnTryAgian setFrame:CGRectMake(873, 613, 139, 43)];
+    [bnShowAnswer setFrame:CGRectMake(674, 613, 139, 43)];
 }
 //--------------------------------------------------------
 

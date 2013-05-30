@@ -1080,9 +1080,53 @@ NSError *error;
     }
     
 }
+-(QuizTrack *)fnGetQuizTRack:(int)category_id AndChapterID:(int)chapter_id AndThematicId:(int)thematic_id {
+    strQuery = [NSString stringWithFormat:@"SELECT track_id, category_id, chapter_id, thematic_id, quiz_title, question_ids, visited, selected_answers, correct_question, missed_question, Percentage, last_visited, created_date, completed FROM QuizTrack WHERE completed = 0 AND category_id = %d  AND chapter_id = %d AND thematic_id = %d", category_id, chapter_id, thematic_id];
+    arrTempList = [dbOperation getRowsForQuery:strQuery];
+    intRowCount = [arrTempList count];
+    QuizTrack *objQuiz = [[QuizTrack alloc] init];    
+    for (int i = 0; i < intRowCount; i++) {
+        objQuiz.intQuizTrackId  =   [[[arrTempList objectAtIndex:i] objectForKey:@"track_id"] intValue];
+        objQuiz.intCategoryId   =   [[[arrTempList objectAtIndex:i] objectForKey:@"category_id"] intValue];
+        objQuiz.intChapterId    =   [[[arrTempList objectAtIndex:i] objectForKey:@"chapter_id"] intValue];
+        objQuiz.intThematicId   =   [[[arrTempList objectAtIndex:i] objectForKey:@"thematic_id"] intValue];
+        objQuiz.strQuizTitle    =    [[arrTempList objectAtIndex:i] objectForKey:@"quiz_title"];
+        
+        NSArray *q_ids = [[[arrTempList objectAtIndex:i] objectForKey:@"question_ids"] componentsSeparatedByString:@"#$#"];
+        objQuiz.arrQuestionIds = [NSMutableArray arrayWithArray:q_ids];
+        
+        NSArray *visit = [[[arrTempList objectAtIndex:i] objectForKey:@"visited"] componentsSeparatedByString:@"#$#"];
+        objQuiz.arrVisited = [NSMutableArray arrayWithArray:visit];
+        
+        NSArray *ans = [[[arrTempList objectAtIndex:i] objectForKey:@"selected_answers"] componentsSeparatedByString:@"#$#"];
+        objQuiz.arrSelectedAnswer = [NSMutableArray arrayWithArray:ans];
+        
+        objQuiz.intCorrectQuestion = [[[arrTempList objectAtIndex:i] objectForKey:@"correct_question"] intValue];
+        objQuiz.intMissedQuestion = [[[arrTempList objectAtIndex:i] objectForKey:@"missed_question"] intValue];
+        objQuiz.floatPercentage = [[[arrTempList objectAtIndex:i] objectForKey:@"Percentage"] floatValue];
+        objQuiz.intLastVisitedQuestion = [[[arrTempList objectAtIndex:i] objectForKey:@"last_visited"] intValue];
+        
+        objQuiz.strCreatedDate  =    [[arrTempList objectAtIndex:i] objectForKey:@"created_date"];
+
+        objQuiz.intComplete   =   [[[arrTempList objectAtIndex:i] objectForKey:@"completed"] intValue];
+    }
+    
+    if (intRowCount == 0) {
+        return nil;
+    }
+    return objQuiz;
+}
+-(void)fnDeleteQuizTrack:(int)trackid{
+    strQuery = [NSString stringWithFormat:@"DELETE FROM QuizTrack WHERE QuizTrack = %d ", trackid];
+    error = [dbOperation doQuery:strQuery];
+	if (error != nil) {
+		NSLog(@"Error: %@",[error localizedDescription]);
+	}
+    
+}
 -(NSMutableArray *)fnGetScores {
     NSMutableArray *arrScore = [[NSMutableArray alloc] init];
-    strQuery = [NSString stringWithFormat:@"SELECT track_id, category_id, chapter_id, thematic_id, quiz_title, question_ids, visited, selected_answers, correct_question, missed_question, Percentage, last_visited, created_date FROM QuizTrack ORDER BY track_id DESC LIMIT 5"];
+    strQuery = [NSString stringWithFormat:@"SELECT track_id, category_id, chapter_id, thematic_id, quiz_title, question_ids, visited, selected_answers, correct_question, missed_question, Percentage, last_visited, created_date FROM QuizTrack WHERE completed = 1 ORDER BY track_id DESC LIMIT 5"];
     arrTempList = [dbOperation getRowsForQuery:strQuery];
     intRowCount = [arrTempList count];
     for (int i = 0; i < intRowCount; i++) {

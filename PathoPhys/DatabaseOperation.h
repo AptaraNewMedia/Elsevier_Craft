@@ -58,6 +58,8 @@
 
 //Quiz
 -(void) fnSetQuizTrack:(QuizTrack *)quiztrack;
+-(QuizTrack *)fnGetQuizTRack:(int)category_id AndChapterID:(int)chapter_id AndThematicId:(int)thematic_id;
+-(void)fnDeleteQuizTrack:(int)trackid;
 -(NSMutableArray *)fnGetScores;
 
 // For creating clean database

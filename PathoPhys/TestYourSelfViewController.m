@@ -99,28 +99,36 @@
     bnShowScore.hidden = YES;
     
     
-    // Tracking data
-    objQuizTrack = [[QuizTrack alloc] init];
-    objQuizTrack.arrQuestionIds = [[NSMutableArray alloc] init];
-    objQuizTrack.arrSelectedAnswer = [[NSMutableArray alloc] init];
-    objQuizTrack.arrVisited = [[NSMutableArray alloc] init];
-    
-    objQuizTrack.intCategoryId = categoryNumber;
-    objQuizTrack.intChapterId = intCurrentTestYourSelf_ChapterId;
-    objQuizTrack.intThematicId = intCurrentTestYourSelf_ThematicId;
-    objQuizTrack.strQuizTitle = str_BarTitle;
-    
-    intTotalQuestions = [arrTestYourSelf count];
-    for (int i =0; i<intTotalQuestions; i++) {
-        objQue = (ChapterQuestionSet *)[arrTestYourSelf objectAtIndex:i];
-        [objQuizTrack.arrQuestionIds addObject:objQue.strQuestionId];
-        [objQuizTrack.arrSelectedAnswer addObject:[NSNumber numberWithInt:0]];
-        [objQuizTrack.arrVisited addObject:[NSNumber numberWithInt:0]];
+    objQuizTrack = [db fnGetQuizTRack:categoryNumber AndChapterID:intCurrentTestYourSelf_ChapterId AndThematicId:intCurrentTestYourSelf_ThematicId];
+    if (objQuizTrack == nil) {
+        // Tracking data
+        objQuizTrack = [[QuizTrack alloc] init];
+        objQuizTrack.arrQuestionIds = [[NSMutableArray alloc] init];
+        objQuizTrack.arrSelectedAnswer = [[NSMutableArray alloc] init];
+        objQuizTrack.arrVisited = [[NSMutableArray alloc] init];
+        
+        objQuizTrack.intCategoryId = categoryNumber;
+        objQuizTrack.intChapterId = intCurrentTestYourSelf_ChapterId;
+        objQuizTrack.intThematicId = intCurrentTestYourSelf_ThematicId;
+        objQuizTrack.strQuizTitle = str_BarTitle;
+        
+        intTotalQuestions = [arrTestYourSelf count];
+        for (int i =0; i<intTotalQuestions; i++) {
+            objQue = (ChapterQuestionSet *)[arrTestYourSelf objectAtIndex:i];
+            [objQuizTrack.arrQuestionIds addObject:objQue.strQuestionId];
+            [objQuizTrack.arrSelectedAnswer addObject:[NSNumber numberWithInt:0]];
+            [objQuizTrack.arrVisited addObject:[NSNumber numberWithInt:0]];
+        }
+        intCurrentQuestionIndex = 0;
+        TryAgainFlag = 0;
+        int_MoveNextPre = 0;
     }
-    intCurrentQuestionIndex = 0;
-    TryAgainFlag = 0;
-    int_MoveNextPre = 0;
-    
+    else {
+        intCurrentQuestionIndex = objQuizTrack.intLastVisitedQuestion;
+        intTotalQuestions = [arrTestYourSelf count];
+        TryAgainFlag = 0;
+        int_MoveNextPre = 0;
+    }
     //
     [self Fn_LoadQuestionData];
     
@@ -579,6 +587,87 @@
 }
 -(void)Fn_SaveBookmarkingData
 {
+    // Save
+    
+    NSString *strSel = nil;
+    switch (objQue.intType) {
+        case QUESTION_TYPE_MCMS:
+        {
+            strSel = [dragDropView fn_CheckAnswersBeforeSubmit];
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0 && TryAgainFlag == 0) {
+                if (strSel.length > 0)
+                    [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:strSel];
+                [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:dragDropView.intVisited]];
+            }
+        }
+            break;
+        case QUESTION_TYPE_FILLINBLANKS:
+        {
+            strSel = [fillInTheBlanksView fn_CheckAnswersBeforeSubmit];
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0 && TryAgainFlag == 0) {
+                if (strSel.length > 0)
+                    [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:strSel];
+                [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:fillInTheBlanksView.intVisited]];
+            }
+        }
+            break;
+        case QUESTION_TYPE_RADIOBUTTONS:
+        {
+            strSel = [radioGroupView fn_CheckAnswersBeforeSubmit];
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0 && TryAgainFlag == 0) {
+                if (strSel.length > 0)
+                    [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:strSel];
+                [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:radioGroupView.intVisited]];
+            }
+        }
+            break;
+        case QUESTION_TYPE_TRUEFLASE:
+        {
+            strSel = [trueFalseView fn_CheckAnswersBeforeSubmit];
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0 && TryAgainFlag == 0) {
+                if (strSel.length > 0)
+                    [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:strSel];
+                [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:trueFalseView.intVisited]];
+            }
+        }
+            break;
+        case QUESTION_TYPE_MATCHTERMS:
+        {
+            strSel = [matchPairsView fn_CheckAnswersBeforeSubmit];
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0 && TryAgainFlag == 0) {
+                if (strSel.length > 0)
+                    [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:strSel];
+                [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:matchPairsView.intVisited]];
+            }
+        }
+            break;
+        case QUESTION_TYPE_MCSS:
+        {
+            strSel = [singleSelectionView fn_CheckAnswersBeforeSubmit];
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0 && TryAgainFlag == 0) {
+                if (strSel.length > 0)
+                    [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:strSel];
+                [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:singleSelectionView.intVisited]];
+            }
+        }
+            break;
+        case QUESTION_TYPE_DRAGDROPRADIOBUTTONS:
+        {
+            strSel = [dragDropRadioView fn_CheckAnswersBeforeSubmit];
+            if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] == 0 && TryAgainFlag == 0) {
+                if (strSel.length > 0)
+                    [objQuizTrack.arrSelectedAnswer replaceObjectAtIndex:intCurrentQuestionIndex withObject:strSel];
+                [objQuizTrack.arrVisited replaceObjectAtIndex:intCurrentQuestionIndex withObject:[NSNumber numberWithInt:dragDropRadioView.intVisited]];
+            }
+        }
+            break;
+    }
+
+    
+    
+    
+    // Calculation
+    
     int total_score = 0;
     for (int i =0; i<[objQuizTrack.arrVisited count]; i++) {
         int ans = [[objQuizTrack.arrVisited objectAtIndex:i] intValue];
@@ -816,8 +905,11 @@
         if (buttonIndex == 0)
         {
             [self Fn_SaveBookmarkingData];
-            [self.navigationController popViewControllerAnimated:YES];
         }
+        else if(buttonIndex == 1) {
+            [db fnDeleteQuizTrack:objQuizTrack.intQuizTrackId];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 //---------------------------------------------------------
@@ -905,7 +997,11 @@
     [bnSubmit setFrame:CGRectMake(620, 860, 139, 43)];
     [bnShowScore setFrame:CGRectMake(430, 860, 139, 43)];
     
-    [lblQuestionNo setFrame:CGRectMake(116, 870, 68, 26)];
+    [lblQuestionNo setFrame:CGRectMake(116, 870, 68, 26)];    
+    
+    [bnTryAgian setFrame:CGRectMake(620, 860, 139, 43)];
+    [bnShowAnswer setFrame:CGRectMake(430, 860, 139, 43)];
+    
 }
 -(void)Fn_rotateLandscape
 {
@@ -921,6 +1017,9 @@
     [bnSubmit setFrame:CGRectMake(873, 613, 139, 43)];
     [bnShowScore setFrame:CGRectMake(674, 613, 139, 43)];
     [lblQuestionNo setFrame:CGRectMake(116, 620, 68, 26)];
+    
+    [bnTryAgian setFrame:CGRectMake(873, 613, 139, 43)];
+    [bnShowAnswer setFrame:CGRectMake(674, 613, 139, 43)];
 }
 //------------------------------
 

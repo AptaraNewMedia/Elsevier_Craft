@@ -781,12 +781,9 @@
 		}
 		i++;
         
-        if (i == [userAnswerArray count] - 1)
-            [strAns appendFormat:@"%d$%d$%d", obj.ansID, obj.qnsID, obj.colorID];
-        else
-            [strAns appendFormat:@"%d$%d$%d#", obj.ansID, obj.qnsID, obj.colorID];
+        [strAns appendFormat:@"%d$%d$%d#", obj.ansID, obj.qnsID, obj.colorID];
 	}
-	strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
+	strVisitedAnswer = [NSString stringWithFormat:@"%@",[strAns substringFromIndex:[strAns length] -1]];
 	return flag1;
 }
 -(void)handleShowAnswers

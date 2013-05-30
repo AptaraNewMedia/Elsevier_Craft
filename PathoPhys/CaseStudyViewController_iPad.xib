@@ -115,7 +115,7 @@
 						<string key="NSFrame">{{172, 604}, {63, 57}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="111558053"/>
+						<reference key="NSNextKeyView" ref="490832664"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -144,6 +144,7 @@
 						<string key="NSFrame">{{860, 613}, {139, 43}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -215,7 +216,7 @@
 					<object class="IBUIButton" id="490832664">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{394, 611}, {118, 44}}</string>
+						<string key="NSFrame">{{384, 611}, {139, 43}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="853995553"/>
@@ -224,36 +225,41 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Show Answer</string>
 						<reference key="IBUIHighlightedTitleColor" ref="740480283"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="495702334"/>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">btn_showsanswer_highlight.png</string>
+						</object>
 						<reference key="IBUIFontDescription" ref="327775050"/>
 						<reference key="IBUIFont" ref="863277053"/>
 					</object>
 					<object class="IBUIButton" id="853995553">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{536, 611}, {114, 44}}</string>
+						<string key="NSFrame">{{524, 611}, {139, 43}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="111558053"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Try Again</string>
 						<reference key="IBUIHighlightedTitleColor" ref="740480283"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="495702334"/>
+						<object class="NSCustomResource" key="IBUINormalImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">btn_tryagian_highlight.png</string>
+						</object>
 						<reference key="IBUIFontDescription" ref="327775050"/>
 						<reference key="IBUIFont" ref="863277053"/>
 					</object>
@@ -429,8 +435,8 @@
 							<reference ref="337233107"/>
 							<reference ref="111558053"/>
 							<reference ref="535343392"/>
-							<reference ref="853995553"/>
 							<reference ref="490832664"/>
+							<reference ref="853995553"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -622,8 +628,10 @@
 			<string key="btn_next_highlight.png">{63, 57}</string>
 			<string key="btn_prev.png">{71, 62}</string>
 			<string key="btn_prev_highlight.png">{71, 62}</string>
+			<string key="btn_showsanswer_highlight.png">{139, 43}</string>
 			<string key="btn_showscore_highlight.png">{139, 43}</string>
 			<string key="btn_submit_highlight.png">{139, 43}</string>
+			<string key="btn_tryagian_highlight.png">{139, 43}</string>
 			<string key="img_bg.png">{1024, 699}</string>
 			<string key="img_bg_shadow.png">{1024, 437}</string>
 		</dictionary>
