@@ -58,6 +58,10 @@
     
     btnViewAll.hidden = YES;
     
+    //Global Variables
+    isTestInProgress = 0;
+
+    
     [self fnAddNavigationItems];
     //Code for Exclusive Touch Enabling.
     for (UIView *myview in [self.view subviews]){

@@ -17,6 +17,10 @@
 #define MSG_CORRECT @"That's Correct!"
 #define MSG_INCORRECT @"That's Incorrect!"
 
+#define MSG_BOOKMARK_TEST @"You are leaving the test. Do you want to save the state?"
+#define MSG_BOOKMARK_CASESTUDY @"You are leaving the test. Do you want to save the state?"
+
+
 #define COLOR_CUSTOMBUTTON_BLUE [UIColor colorWithRed:0 green:0.478 blue:0.749 alpha:1]
 #define COLOR_CUSTOMBUTTON_GRAY [UIColor colorWithRed:0.949 green:0.949 blue:0.949 alpha:1]
 #define COLOR_CLEAR [UIColor clearColor]

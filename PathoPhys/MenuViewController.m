@@ -47,6 +47,10 @@
     [self fnAddNavigationItems];
     categoryNumber= 0;
     
+    //Global Variables
+    isTestInProgress = 1;
+
+    
     //self.trackedViewName = @"Menu Screen";
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {

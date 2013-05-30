@@ -70,7 +70,8 @@
     
     lbl_title.textColor = COLOR_WHITE;
 
-    
+    //Global Variables
+    isTestInProgress = 0;
     
     
     [self fnAddNavigationItems];

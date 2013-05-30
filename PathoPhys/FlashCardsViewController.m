@@ -67,6 +67,9 @@
     [super viewDidLoad];
     self.title = str_BarTitle;
     
+    //Global Variables
+    isTestInProgress = 0;
+
     // Do any additional setup after loading the view from its nib.
     scrollGallery.showsHorizontalScrollIndicator = NO;
     scrollGallery.showsVerticalScrollIndicator = NO;    

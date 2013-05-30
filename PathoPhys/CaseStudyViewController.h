@@ -36,5 +36,5 @@
 -(void)Fn_DisableSubmit;
 -(void)disableAllButtons:(int)questionNO;
 -(void)Fn_ShowAnswer;
-
+-(void)Fn_SaveBookmarkingData;
 @end

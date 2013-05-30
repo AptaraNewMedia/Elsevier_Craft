@@ -78,6 +78,9 @@
     self.title = str_BarTitle;
     [self fnAddNavigationItems];
     
+    //Global Variables    
+    isTestInProgress = 1;
+    
     //
     arrTestYourSelf = [db fnGetTestyourSelfQuestions:intCurrentTestYourSelf_ChapterId AndThematicId:intCurrentTestYourSelf_ThematicId];
     
@@ -574,6 +577,27 @@
     bnShowAnswer.hidden = NO;
     bnTryAgian.hidden = NO;
 }
+-(void)Fn_SaveBookmarkingData
+{
+    int total_score = 0;
+    for (int i =0; i<[objQuizTrack.arrVisited count]; i++) {
+        int ans = [[objQuizTrack.arrVisited objectAtIndex:i] intValue];
+        if (ans == 1) {
+            total_score++;
+        }
+    }
+    
+    int_currentScore =(total_score / intTotalQuestions) * 100;
+    
+    objQuizTrack.intCorrectQuestion = total_score;
+    objQuizTrack.intMissedQuestion = (intTotalQuestions - total_score);
+    float percentage = (total_score*100) / intTotalQuestions;
+    objQuizTrack.floatPercentage =  percentage;
+    objQuizTrack.intLastVisitedQuestion = intCurrentQuestionIndex;
+    objQuizTrack.strCreatedDate = md.strCurrentDate;
+    objQuizTrack.intComplete = 0;
+    [db fnSetQuizTrack:objQuizTrack];
+}
 //-----------------------------------------
 
 
@@ -581,7 +605,14 @@
 //-----------------------------------------
 -(IBAction)onBack:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    UIAlertView *alert = [[UIAlertView alloc] init];
+    [alert setTitle:@"Pathophysquiz"];
+    [alert setDelegate:self];
+    [alert setTag:BOOKMARKING_ALERT_TAG];
+    [alert addButtonWithTitle:@"YES"];
+    [alert addButtonWithTitle:@"NO"];
+    [alert setMessage:[NSString stringWithFormat:MSG_BOOKMARK_TEST]];
+    [alert show];
 }
 -(IBAction)onNext:(id)sender
 {
@@ -725,13 +756,9 @@
     
     NSString *score = [NSString stringWithFormat:@"%d out of %d questions answered correctly.", total_score, intTotalQuestions];
     
-    [md Fn_AddResult:strCurrentChapterName AndThematicNAme:strCurrentThematicName AndScore:score];
+    [md Fn_AddResult:strCurrentChapterName AndThematicNAme:strCurrentThematicName AndScore:score];    
     
-    
-    int_currentScore =(total_score / intTotalQuestions) * 100;
-    
-    //bnShowScore.enabled = NO;
-    
+    int_currentScore =(total_score / intTotalQuestions) * 100;     
     
     objQuizTrack.intCorrectQuestion = total_score;
     objQuizTrack.intMissedQuestion = (intTotalQuestions - total_score);
@@ -739,7 +766,7 @@
     objQuizTrack.floatPercentage =  percentage;
     objQuizTrack.intLastVisitedQuestion = 0;
     objQuizTrack.strCreatedDate = md.strCurrentDate;
-    
+    objQuizTrack.intComplete = 1;
     [db fnSetQuizTrack:objQuizTrack];
     
 }
@@ -780,6 +807,20 @@
     [self onTryAgain];
 }
 //-----------------------------------------
+
+#pragma mark - AlertView
+//---------------------------------------------------------
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == BOOKMARKING_ALERT_TAG) {
+        if (buttonIndex == 0)
+        {
+            [self Fn_SaveBookmarkingData];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+}
+//---------------------------------------------------------
 
 
 #pragma mark - Rotations

@@ -57,6 +57,11 @@
     self.title = str_BarTitle;
     [self fnAddNavigationItems];
     
+    
+    //Global Variables
+    isTestInProgress = 2;
+
+    
     //
     arrCaseStudies = [db fnGetCaseStudyQuestions:intCurrentCaseStudy_ChapterId AndThematicId:intCurrentCaseStudy_ThematicId];
     
@@ -115,7 +120,7 @@
     [md Fn_removeNoteViewPopup];
     NOTES_MODE = 0;
 }
-- (void)didReceiveMemoryWarning
+-(void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -375,6 +380,10 @@
     bnShowAnswer.hidden = NO;
     bnTryAgian.hidden = NO;
 }
+-(void)Fn_SaveBookmarkingData
+{
+    
+}
 //---------------------------------------------------------
 
 
@@ -509,6 +518,21 @@
     [self onTryAgain];
 }
 //--------------------------------------------------------
+
+
+#pragma mark - AlertView
+//---------------------------------------------------------
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == BOOKMARKING_ALERT_TAG) {
+        if (buttonIndex == 0)
+        {
+            [self Fn_SaveBookmarkingData];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+}
+//---------------------------------------------------------
 
 
 #pragma mark - Orientation
