@@ -25,7 +25,7 @@
 @property (nonatomic, retain) IBOutlet UIWebView *webQuestionText;
 @property (nonatomic, retain) IBOutlet UILabel *lblInstructions;
 @property (nonatomic, retain) IBOutlet UIWebView *webviewInstructions;
-
+@property (nonatomic, retain) IBOutlet UITableView *tblOptions;
 @property (nonatomic) NSInteger intVisited;
 @property (nonatomic, retain) NSString *strVisitedAnswer;
 

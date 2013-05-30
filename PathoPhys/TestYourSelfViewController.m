@@ -57,7 +57,7 @@
     
     NSInteger TryAgainFlag;
     int int_MoveNextPre;    
-    
+    BOOL backFromNotes;
 }
 
 -(IBAction)onNext:(id)sender;
@@ -142,6 +142,8 @@
     bnSubmit.hidden = NO;
     bnSubmit.enabled = YES;
     
+    backFromNotes = NO;
+    
     //Code for Exclusive Touch Enabling.
     for (UIView *myview in [self.view subviews]){
         if([myview isKindOfClass:[UIButton class]]){
@@ -153,7 +155,6 @@
 {
     [md Fn_removeInfoViewPopup];
     [md Fn_removeNoteViewPopup];
-    // NOTES_MODE = 0;
 }
 -(void)didReceiveMemoryWarning
 {
@@ -501,11 +502,23 @@
     bnPrev.enabled = NO;
     bnSubmit.enabled = NO;
     
+    backFromNotes = YES;
+    
     [self fn_RemoveQuestionView];
     intCurrentQuestionIndex = questionNO - 1;
     [self Fn_LoadQuestionData];
     
     [self Fn_CheckNote];
+        
+    switch (objQue.intType) {
+        case QUESTION_TYPE_MCMS:
+            break;
+        case QUESTION_TYPE_MATCHTERMS:
+            break;
+        case QUESTION_TYPE_MCSS:
+            singleSelectionView.tblOptions.allowsSelection = NO;
+            break;
+    }
     
     customRightBar.btnInfo.hidden = YES;
     customRightBar.btnNote.hidden = YES;
@@ -695,14 +708,19 @@
 //-----------------------------------------
 -(IBAction)onBack:(id)sender
 {
-    UIAlertView *alert = [[UIAlertView alloc] init];
-    [alert setTitle:@"Pathophysquiz"];
-    [alert setDelegate:self];
-    [alert setTag:BOOKMARKING_ALERT_TAG];
-    [alert addButtonWithTitle:@"YES"];
-    [alert addButtonWithTitle:@"NO"];
-    [alert setMessage:[NSString stringWithFormat:MSG_BOOKMARK_TEST]];
-    [alert show];
+    if (backFromNotes) {
+        [self.navigationController popViewControllerAnimated:YES];        
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] init];
+        [alert setTitle:@"Pathophysquiz"];
+        [alert setDelegate:self];
+        [alert setTag:BOOKMARKING_ALERT_TAG];
+        [alert addButtonWithTitle:@"YES"];
+        [alert addButtonWithTitle:@"NO"];
+        [alert setMessage:[NSString stringWithFormat:MSG_BOOKMARK_TEST]];
+        [alert show];
+    }
 }
 -(IBAction)onNext:(id)sender
 {

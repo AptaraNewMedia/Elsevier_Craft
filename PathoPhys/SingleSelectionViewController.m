@@ -37,6 +37,8 @@
     NSMutableArray *selectedCells;
     
     CGRect visibleRect;
+    
+    BOOL isShowAnswer;
 }
 @end
 
@@ -46,6 +48,7 @@
 @synthesize webviewInstructions;
 @synthesize intVisited;
 @synthesize strVisitedAnswer;
+@synthesize tblOptions;
 @synthesize parentObject;
 //images
 @synthesize View_PunnetSquare,Img_TransparentBG,Img_PunnetSquare;
@@ -120,6 +123,7 @@
     }
     
     isSubmit = NO;
+    isShowAnswer = NO;
     
     //Code for Exclusive Touch Enabling.
     for (UIView *myview in [self.view subviews]){
@@ -573,7 +577,7 @@
 }
 -(void)handleShowAnswers
 {
-    
+    isShowAnswer = YES;
     
     NSArray *selectedCells_temp = [tblOptions indexPathsForSelectedRows];
     int selected_count = [selectedCells_temp count];
@@ -930,7 +934,57 @@
         }
     }
     
-
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        if (isShowAnswer) {
+            [cell.btnFeedback setImage:[UIImage imageNamed:@"btn_feedback.png"] forState:UIControlStateNormal];
+            
+            int answer_count = [objMCSS.arrAnswer count];
+            
+            NSString *ss = [objMCSS.arrOptions objectAtIndex:indexPath.row];
+            ss = [ss stringByReplacingOccurrencesOfString:@" " withString:@""];
+            ss = [ss lowercaseString];
+            
+            for (int j = 0; j < answer_count; j++) {
+                NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
+                sa = [sa lowercaseString];
+                if (![ss isEqualToString:sa]) {
+                    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                        [cell.imgAns setImage:[UIImage imageNamed:@"false_Without_Border.png"]];
+                    }
+                    else {
+                        [cell.imgAns setImage:[UIImage imageNamed:@"img_false.png"]];
+                    }
+                    NSString *feeback = [self fn_getFeeback:indexPath.row];
+                    if (feeback.length > 0) {
+                        cell.btnFeedback.hidden = NO;
+                        cell.strFeedback = feeback;
+                    }
+                    
+                }
+                else {
+                    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                        [cell.imgAns setImage:[UIImage imageNamed:@"True_Btn_Without_Border.png"]];
+                    }
+                    else {
+                        [cell.imgAns setImage:[UIImage imageNamed:@"img_true.png"]];
+                    }
+                    NSString *feeback = [self fn_getFeeback:indexPath.row];
+                    if (feeback.length > 0) {
+                        cell.btnFeedback.hidden = NO;
+                        cell.strFeedback = feeback;
+                    }
+                    
+                    cell.lblAlphabet.highlighted = YES;
+                    cell.lblOptionName.highlighted = YES;
+                    cell.imgTableCellBG.highlighted = YES;
+                    
+                    break;
+                }
+                
+                
+            }
+        }
+    }
     
     [cellArray addObject:cell];
     

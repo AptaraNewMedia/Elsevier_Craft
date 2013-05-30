@@ -39,9 +39,9 @@
     Notes *objNotes;
     NSInteger currentOrientaion;
     
-    NSInteger TryAgainFlag;
-    
+    NSInteger TryAgainFlag;    
     int int_MoveNextPre;
+    BOOL backFromNotes;
 }
 @end
 
@@ -121,6 +121,8 @@
     bnSubmit.hidden = NO;
     bnSubmit.enabled = YES;
     
+    backFromNotes = NO;
+    
     if (intCurrentQuestionIndex == 0) {
         bnPrev.enabled = NO;
     }
@@ -132,7 +134,6 @@
 {
     [md Fn_removeInfoViewPopup];
     [md Fn_removeNoteViewPopup];
-    NOTES_MODE = 0;
 }
 -(void)didReceiveMemoryWarning
 {
@@ -276,14 +277,10 @@
         objNotes = [[Notes alloc] init];
         objNotes.intMode = 1;
         objNotes.strNoteTitle = [NSString stringWithFormat:@"CS-%d, %@, Q%d", intCurrentCaseStudy_ChapterId, strCurrentThematicName, question_no];
-        //[customRightBar.Bn_Addnote setTitle:@"Add Note" forState:UIControlStateNormal];
     }
     else {
         NOTES_MODE = 2;
-
-        
         objNotes.intMode = 2;
-        //[customRightBar.Bn_Addnote setTitle:@"Edit Note" forState:UIControlStateNormal];
     }
     objNotes.intCategoryId = categoryNumber;
     objNotes.intChapterId = intCurrentCaseStudy_ChapterId;
@@ -322,11 +319,24 @@
     bnPrev.enabled = NO;
     bnSubmit.enabled = NO;
     
+    backFromNotes = YES;
+    
     [self fn_RemoveQuestionView];
     intCurrentQuestionIndex = questionNO - 1;
     [self Fn_LoadQuestionData];
     
     [self Fn_CheckNote];
+    
+
+    switch (objQue.intType) {
+        case QUESTION_TYPE_MCMS:
+            break;
+        case QUESTION_TYPE_MATCHTERMS:
+            break;
+        case QUESTION_TYPE_MCSS:
+            singleSelectionView.tblOptions.allowsSelection = NO;
+            break;
+    }
     
     customRightBar.btnInfo.hidden = YES;
     customRightBar.btnNote.hidden = YES;
@@ -466,14 +476,19 @@
 //---------------------------------------------------------
 -(IBAction)onBack:(id)sender
 {
-    UIAlertView *alert = [[UIAlertView alloc] init];
-    [alert setTitle:@"Pathophysquiz"];
-    [alert setDelegate:self];
-    [alert setTag:BOOKMARKING_ALERT_TAG];
-    [alert addButtonWithTitle:@"YES"];
-    [alert addButtonWithTitle:@"NO"];
-    [alert setMessage:[NSString stringWithFormat:MSG_BOOKMARK_CASESTUDY]];
-    [alert show];
+    if (backFromNotes) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] init];
+        [alert setTitle:@"Pathophysquiz"];
+        [alert setDelegate:self];
+        [alert setTag:BOOKMARKING_ALERT_TAG];
+        [alert addButtonWithTitle:@"YES"];
+        [alert addButtonWithTitle:@"NO"];
+        [alert setMessage:[NSString stringWithFormat:MSG_BOOKMARK_CASESTUDY]];
+        [alert show];
+    }
 }
 -(IBAction)onNext:(id)sender
 {

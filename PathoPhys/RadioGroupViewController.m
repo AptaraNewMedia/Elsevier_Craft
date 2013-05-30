@@ -702,7 +702,7 @@
     }
     else
     {
-        x_point = bn.frame.origin.x - 150;
+        x_point = bn.frame.origin.x - 180;
         y_point = bn.superview.frame.origin.y;
         y_point = y_point - visibleRect.origin.y;
         
@@ -872,7 +872,7 @@
     [webviewInstructions setFrame:CGRectMake(19, 130, 615, 70)];
     
     // Feedback
-    [feedbackView setFrame:CGRectMake(feedbackView.frame.origin.x, y_feedback_p, 261, 131)];
+    [feedbackView setFrame:CGRectMake(x_feedback_p, y_feedback_p, 261, 131)];
     
     // Question No
     [lblQuestionNo setFrame:CGRectMake(17, 20, 93, 75)];
@@ -901,7 +901,7 @@
     [webviewInstructions setFrame:CGRectMake(17, 93, 968, 45)];
     
     // Feedback
-    [feedbackView setFrame:CGRectMake(feedbackView.frame.origin.x, y_feedback_l, 261, 131)];
+    [feedbackView setFrame:CGRectMake(x_feedback_l, y_feedback_l, 261, 131)];
     
     // Question No
     [lblQuestionNo setFrame:CGRectMake(17, 17, 93, 75)];

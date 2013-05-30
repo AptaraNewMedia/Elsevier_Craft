@@ -32,6 +32,10 @@
     float x_feedback_l;    
 
     NSMutableArray *selectedCells;
+    
+    CGRect visibleRect;
+    
+    BOOL isShowAnswer;
 }
 @end
 
@@ -41,6 +45,7 @@
 @synthesize webviewInstructions;
 @synthesize intVisited;
 @synthesize strVisitedAnswer;
+@synthesize tblOptions;
 @synthesize parentObject;
 
 #pragma mark - View lifecycle
@@ -112,6 +117,7 @@
     }
     
     isSubmit = NO;
+    isShowAnswer = NO;
     
     //Code for Exclusive Touch Enabling.
     for (UIView *myview in [self.view subviews]){
@@ -159,12 +165,17 @@
 //---------------------------------------------------------
 -(void)Fn_createInvisibleBtn
 {
-    [btnInvisible removeFromSuperview];
-    btnInvisible = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btnInvisible setFrame:CGRectMake(tblOptions.frame.origin.x, tblOptions.frame.origin.y, tblOptions.frame.size.width - 50, tblOptions.frame.size.height)];
-    btnInvisible.backgroundColor = [UIColor clearColor];
-    [btnInvisible addTarget:self action:@selector(onInvisible:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btnInvisible];
+    if([[DEVICE_TYPE substringToIndex:6] isEqualToString:@"iPhone"]) {
+        tblOptions.allowsSelection=NO;
+    }
+    else {
+        [btnInvisible removeFromSuperview];
+        btnInvisible = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnInvisible setFrame:CGRectMake(tblOptions.frame.origin.x, tblOptions.frame.origin.y, tblOptions.frame.size.width - 50, tblOptions.frame.size.height)];
+        btnInvisible.backgroundColor = [UIColor clearColor];
+        [btnInvisible addTarget:self action:@selector(onInvisible:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:btnInvisible];
+    }
 }
 -(NSString *)fn_getFeeback:(int)intfeed
 {
@@ -190,14 +201,14 @@
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
-        feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 150, 90)];
+        feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 180, 125)];
+        
         feedbackView.backgroundColor = [UIColor clearColor];
         
         UIView *bg = [[UIView alloc] init];
         bg.backgroundColor = [UIColor whiteColor];
-        [bg setFrame:CGRectMake(12, 12, 125, 65)];
+        [bg setFrame:CGRectMake(12, 17, 152, 90)];
         [feedbackView addSubview:bg];
-        
         
         UIImageView *img_feedback = [[UIImageView alloc] init];
         img_feedback.backgroundColor = [UIColor clearColor];
@@ -205,9 +216,9 @@
         
         [img_feedback setImage:[UIImage imageNamed:@"Small_Feedback_Box_004.png"]];
         
-        [img_feedback setFrame:CGRectMake(0, 0, 150, 90)];
-        [feedbackView addSubview:img_feedback];
+        [img_feedback setFrame:CGRectMake(0, 0, 180, 125)];
         
+        [feedbackView addSubview:img_feedback];
         
         UITextView *txt_feedback = [[UITextView alloc] init];
         txt_feedback.text = textValue;
@@ -215,7 +226,7 @@
         txt_feedback.backgroundColor = [UIColor clearColor];
         txt_feedback.font = FONT_10;
         txt_feedback.editable = NO;
-        [txt_feedback setFrame:CGRectMake(12, 12, 125, 65)];
+        [txt_feedback setFrame:CGRectMake(12, 17, 152, 90)];
         [feedbackView addSubview:txt_feedback];
         [self.view addSubview:feedbackView];
     }
@@ -473,7 +484,7 @@
 }
 -(void)handleShowAnswers
 {
-    
+    isShowAnswer = YES;
     
     NSArray *selectedCells_temp = [tblOptions indexPathsForSelectedRows];
     int selected_count = [selectedCells_temp count];
@@ -566,13 +577,29 @@
 {
     UIButton *bn = sender;
     MCSSCell_iPad *cell = [cellArray objectAtIndex:bn.tag];
-    float x_point = bn.frame.origin.x - (221);
-    float y_point = tblOptions.frame.origin.y + cell.frame.origin.y + bn.frame.origin.y  - (128);
     
-    x_feedback_l = 270;
-    y_feedback_l = cell.frame.origin.y + bn.frame.origin.y  - (131);
+    float x_point;
+    float y_point;
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        x_point = bn.frame.origin.x - (148);
+        y_point = tblOptions.frame.origin.y + cell.frame.origin.y + bn.frame.origin.y  - (123)-visibleRect.origin.y;
+    }
+    else
+    {
+        x_point = bn.frame.origin.x - (221);
+        y_point = tblOptions.frame.origin.y + cell.frame.origin.y + bn.frame.origin.y  - (131);
+        x_feedback_l = 270;
+        if(currentOrientaion==3 || currentOrientaion==4)
+        {
+            x_point=1005-x_feedback_l;
+        }
+        y_feedback_l = cell.frame.origin.y + bn.frame.origin.y  - (131);
+    }
     
     [self Fn_AddFeedbackPopup:x_point andy:y_point andText:cell.strFeedback];
+
 }
 //---------------------------------------------------------
 
@@ -612,6 +639,19 @@
     }
 }
 //---------------------------------------------------------
+
+
+# pragma mark - scrollview delegate
+//---------------------------------------------------------
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    feedbackView.hidden=YES;
+    if (tblOptions == scrollView) {
+        visibleRect.origin = tblOptions.contentOffset;
+    }
+}
+//---------------------------------------------------------
+
 
 #pragma mark - Table View
 //---------------------------------------------------------
@@ -790,7 +830,57 @@
         }
     }
     
-    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        if (isShowAnswer) {
+            [cell.btnFeedback setImage:[UIImage imageNamed:@"btn_feedback.png"] forState:UIControlStateNormal];
+            
+            int answer_count = [objMCSS.arrAnswer count];
+            
+            NSString *ss = [objMCSS.arrOptions objectAtIndex:indexPath.row];
+            ss = [ss stringByReplacingOccurrencesOfString:@" " withString:@""];
+            ss = [ss lowercaseString];
+            
+            for (int j = 0; j < answer_count; j++) {
+                NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
+                sa = [sa lowercaseString];
+                if (![ss isEqualToString:sa]) {
+                    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                        [cell.imgAns setImage:[UIImage imageNamed:@"false_Without_Border.png"]];
+                    }
+                    else {
+                        [cell.imgAns setImage:[UIImage imageNamed:@"img_false.png"]];
+                    }
+                    NSString *feeback = [self fn_getFeeback:indexPath.row];
+                    if (feeback.length > 0) {
+                        cell.btnFeedback.hidden = NO;
+                        cell.strFeedback = feeback;
+                    }
+                    
+                }
+                else {
+                    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                        [cell.imgAns setImage:[UIImage imageNamed:@"True_Btn_Without_Border.png"]];
+                    }
+                    else {
+                        [cell.imgAns setImage:[UIImage imageNamed:@"img_true.png"]];
+                    }
+                    NSString *feeback = [self fn_getFeeback:indexPath.row];
+                    if (feeback.length > 0) {
+                        cell.btnFeedback.hidden = NO;
+                        cell.strFeedback = feeback;
+                    }
+                    
+                    cell.lblAlphabet.highlighted = YES;
+                    cell.lblOptionName.highlighted = YES;
+                    cell.imgTableCellBG.highlighted = YES;
+                    
+                    break;
+                }
+                
+                
+            }
+        }
+    }
     
     [cellArray addObject:cell];
     
