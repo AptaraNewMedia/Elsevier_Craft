@@ -1117,7 +1117,7 @@ NSError *error;
     return objQuiz;
 }
 -(void)fnDeleteQuizTrack:(int)trackid{
-    strQuery = [NSString stringWithFormat:@"DELETE FROM QuizTrack WHERE QuizTrack = %d ", trackid];
+    strQuery = [NSString stringWithFormat:@"DELETE FROM QuizTrack WHERE track_id = %d ", trackid];
     error = [dbOperation doQuery:strQuery];
 	if (error != nil) {
 		NSLog(@"Error: %@",[error localizedDescription]);

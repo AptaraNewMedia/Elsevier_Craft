@@ -414,6 +414,11 @@
     isSubmit = YES;
     [self handleRevealScore];
     [self Fn_createInvisibleBtn];
+    [parentObject Fn_DisableSubmit];
+    int check =  [self checkForAnswer];
+    if (check == 2) {
+        [parentObject Fn_ShowAnswer];
+    }
 }
 -(int)checkForAnswer
 {

@@ -131,8 +131,9 @@
     }
     //
     [self Fn_LoadQuestionData];
-    
-    bnPrev.enabled = NO;
+    if (intCurrentQuestionIndex == 0) {
+        bnPrev.enabled = NO;
+    }
     if(intTotalQuestions == 1){
         bnNext.enabled = NO;
     }
@@ -856,6 +857,7 @@
     objQuizTrack.intLastVisitedQuestion = 0;
     objQuizTrack.strCreatedDate = md.strCurrentDate;
     objQuizTrack.intComplete = 1;
+    [db fnDeleteQuizTrack:objQuizTrack.intQuizTrackId];
     [db fnSetQuizTrack:objQuizTrack];
     
 }

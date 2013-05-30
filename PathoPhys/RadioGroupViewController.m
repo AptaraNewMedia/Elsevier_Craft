@@ -604,6 +604,11 @@
     }
     [self handleRevealScore];
     [self disableEditFields];
+    [parentObject Fn_DisableSubmit];    
+    int check =  [self checkForAnswer];
+    if (!check) {
+        [parentObject Fn_ShowAnswer];
+    }
 }
 -(BOOL)checkForAnswer
 {

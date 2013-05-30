@@ -763,6 +763,10 @@
     [self handleRevealScore];
     [self disableEditFields];
     [parentObject Fn_DisableSubmit];
+    int check =  [self checkForAnswer];
+    if (!check) {
+        [parentObject Fn_ShowAnswer];
+    }
 }
 -(BOOL)checkForAnswer
 {
@@ -781,9 +785,12 @@
 		}
 		i++;
         
-        [strAns appendFormat:@"%d$%d$%d#", obj.ansID, obj.qnsID, obj.colorID];
+        if (i == [userAnswerArray count] - 1)
+            [strAns appendFormat:@"%d$%d$%d", obj.ansID, obj.qnsID, obj.colorID];
+        else
+            [strAns appendFormat:@"%d$%d$%d#", obj.ansID, obj.qnsID, obj.colorID];
 	}
-	strVisitedAnswer = [NSString stringWithFormat:@"%@",[strAns substringFromIndex:[strAns length] -1]];
+	strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
 	return flag1;
 }
 -(void)handleShowAnswers

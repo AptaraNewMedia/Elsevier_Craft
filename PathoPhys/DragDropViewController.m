@@ -510,6 +510,11 @@
     }
     [self handleRevealScore];
     [self Fn_disableAllDraggableSubjects];
+    [parentObject Fn_DisableSubmit];
+    int check =  [self checkForAnswer];
+    if (!check) {
+        [parentObject Fn_ShowAnswer];
+    }
 }
 -(BOOL)checkForAnswer
 {

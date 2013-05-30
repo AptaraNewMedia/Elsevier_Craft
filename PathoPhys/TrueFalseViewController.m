@@ -481,6 +481,10 @@
         [self fnSetTrueFalse];
         [self handleRevealScore];
         [self disableEditFields];
+        [parentObject Fn_DisableSubmit];
+        if (answer != userAnswer) {
+            [parentObject Fn_ShowAnswer];
+        }
     }
 }
 -(void)handleShowAnswers

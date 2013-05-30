@@ -78,28 +78,40 @@
     //
     bnShowScore.hidden = YES;
     
-    
+  
+
     // Tracking data
-    objQuizTrack = [[QuizTrack alloc] init];
-    objQuizTrack.arrQuestionIds = [[NSMutableArray alloc] init];
-    objQuizTrack.arrSelectedAnswer = [[NSMutableArray alloc] init];
-    objQuizTrack.arrVisited = [[NSMutableArray alloc] init];
-    
-    objQuizTrack.intCategoryId = categoryNumber;
-    objQuizTrack.intChapterId = intCurrentCaseStudy_ChapterId;
-    objQuizTrack.intThematicId = intCurrentCaseStudy_ThematicId;
-    objQuizTrack.strQuizTitle = str_BarTitle;
-    
-    intTotalQuestions = [arrCaseStudies count];
-    for (int i =0; i<intTotalQuestions; i++) {
-        objQue = (ChapterQuestionSet *)[arrCaseStudies objectAtIndex:i];
-        [objQuizTrack.arrQuestionIds addObject:objQue.strQuestionId];
-        [objQuizTrack.arrSelectedAnswer addObject:[NSNumber numberWithInt:0]];
-        [objQuizTrack.arrVisited addObject:[NSNumber numberWithInt:0]];
+    objQuizTrack = [db fnGetQuizTRack:categoryNumber AndChapterID:intCurrentTestYourSelf_ChapterId AndThematicId:intCurrentTestYourSelf_ThematicId];
+    if (objQuizTrack == nil) {
+        // Tracking data
+        objQuizTrack = [[QuizTrack alloc] init];
+        objQuizTrack.arrQuestionIds = [[NSMutableArray alloc] init];
+        objQuizTrack.arrSelectedAnswer = [[NSMutableArray alloc] init];
+        objQuizTrack.arrVisited = [[NSMutableArray alloc] init];
+        
+        objQuizTrack.intCategoryId = categoryNumber;
+        objQuizTrack.intChapterId = intCurrentTestYourSelf_ChapterId;
+        objQuizTrack.intThematicId = intCurrentTestYourSelf_ThematicId;
+        objQuizTrack.strQuizTitle = str_BarTitle;
+        
+        intTotalQuestions = [arrCaseStudies count];
+        for (int i =0; i<intTotalQuestions; i++) {
+            objQue = (ChapterQuestionSet *)[arrCaseStudies objectAtIndex:i];
+            [objQuizTrack.arrQuestionIds addObject:objQue.strQuestionId];
+            [objQuizTrack.arrSelectedAnswer addObject:[NSNumber numberWithInt:0]];
+            [objQuizTrack.arrVisited addObject:[NSNumber numberWithInt:0]];
+        }
+        intCurrentQuestionIndex = 0;
+        TryAgainFlag = 0;
+        int_MoveNextPre = 0;
     }
-    intCurrentQuestionIndex = 0;
-    TryAgainFlag = 0;
-    int_MoveNextPre = 0;
+    else {
+        intCurrentQuestionIndex = objQuizTrack.intLastVisitedQuestion;
+        intTotalQuestions = [arrCaseStudies count];
+        TryAgainFlag = 0;
+        int_MoveNextPre = 0;
+    }
+
     //
     if (intTotalQuestions > 0) {
         [self Fn_LoadQuestionData];
@@ -109,7 +121,9 @@
     bnSubmit.hidden = NO;
     bnSubmit.enabled = YES;
     
-    bnPrev.enabled = NO;
+    if (intCurrentQuestionIndex == 0) {
+        bnPrev.enabled = NO;
+    }
     if(intTotalQuestions == 1){
         bnNext.enabled = NO;
     }
@@ -452,7 +466,14 @@
 //---------------------------------------------------------
 -(IBAction)onBack:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    UIAlertView *alert = [[UIAlertView alloc] init];
+    [alert setTitle:@"Pathophysquiz"];
+    [alert setDelegate:self];
+    [alert setTag:BOOKMARKING_ALERT_TAG];
+    [alert addButtonWithTitle:@"YES"];
+    [alert addButtonWithTitle:@"NO"];
+    [alert setMessage:[NSString stringWithFormat:MSG_BOOKMARK_CASESTUDY]];
+    [alert show];
 }
 -(IBAction)onNext:(id)sender
 {
@@ -555,6 +576,7 @@
     objQuizTrack.intLastVisitedQuestion = 0;
     objQuizTrack.strCreatedDate = md.strCurrentDate;
     objQuizTrack.intComplete = 1;
+    [db fnDeleteQuizTrack:objQuizTrack.intQuizTrackId];    
     [db fnSetQuizTrack:objQuizTrack];
 }
 -(IBAction)onShowAnswer:(id)sender
