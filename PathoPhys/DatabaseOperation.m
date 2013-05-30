@@ -987,7 +987,7 @@ NSError *error;
     }
 }
 -(void) fnUpdateNote:(Notes *)notes {
-    strQuery = [NSString stringWithFormat:@"UPDATE Notes SET note_desc = '%@', modified_date =  '%@', note_history = '%@',WHERE note_id = %d ", notes.strNoteDesc, notes.strModifiedDate, notes.strNoteHistory, notes.intNotesId];
+    strQuery = [NSString stringWithFormat:@"UPDATE Notes SET note_desc = '%@', modified_date =  '%@', note_history = '%@' WHERE note_id = %d ", notes.strNoteDesc, notes.strModifiedDate, notes.strNoteHistory, notes.intNotesId];
     error = [dbOperation doQuery:strQuery];
     if (error != nil) {
         NSLog(@"Error: %@",[error localizedDescription]);
