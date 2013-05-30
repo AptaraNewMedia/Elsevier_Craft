@@ -31,6 +31,17 @@
 
 @property (nonatomic, retain) id parentObject;
 
+// images
+@property (nonatomic,retain) IBOutlet UIButton *Bn_ShowPunnetSquare;
+@property (nonatomic,retain) IBOutlet UIButton *Bn_ClosePunnetSquare;
+@property (nonatomic,retain) UIView *View_PunnetSquare;
+@property (nonatomic,retain) UIImageView *Img_TransparentBG;
+@property (nonatomic,retain) UIImageView *Img_PunnetSquare;
+-(IBAction)Bn_ShowPunnetSquare_Tapped:(id)sender;
+-(IBAction)Bn_ClosePunnetSquare_Tapped:(id)sender;
+-(void)fn_AddImg; 
+// images
+
 -(void) fn_LoadDbData:(NSString *)question_id;
 -(void) fn_ShowSelected:(NSString *)visitedAnswers;
 -(NSString *) fn_CheckAnswersBeforeSubmit;

@@ -458,6 +458,8 @@ UITextView *txt_feedback;
         [self Fn_removeInfoViewPopup];
 //    }
 }
+
+// Alertview
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(alertView.tag == BOOKMARKING_ALERT_TAG){
@@ -473,6 +475,7 @@ UITextView *txt_feedback;
     }
 }
 
+// Popup
 -(void) Fn_CallPopupOrientaion {
     [InfoPopupView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
     [NotePopupView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
@@ -482,6 +485,12 @@ UITextView *txt_feedback;
     [scoreCardView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
     [casestudyTextView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
     [resultView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
+}
+
+//images
+-(void) Fn_ZoomImgWithView:(UIView *)view
+{
+    [self.window.rootViewController.view addSubview:view];
 }
 
 @end

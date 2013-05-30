@@ -63,4 +63,6 @@
 
 -(void) Fn_CallPopupOrientaion;
 
+-(void) Fn_ZoomImgWithView:(UIView *)view;
+
 @end

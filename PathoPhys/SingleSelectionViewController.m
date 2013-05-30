@@ -47,6 +47,10 @@
 @synthesize intVisited;
 @synthesize strVisitedAnswer;
 @synthesize parentObject;
+//images
+@synthesize View_PunnetSquare,Img_TransparentBG,Img_PunnetSquare;
+@synthesize Bn_ShowPunnetSquare,Bn_ClosePunnetSquare;
+//images
 
 #pragma mark - View lifecycle
 //---------------------------------------------------------
@@ -132,6 +136,33 @@
             myview.exclusiveTouch = YES;
         }
     }
+    
+    
+    //images
+    Bn_ClosePunnetSquare.hidden=YES;
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        if (isImage)
+        {
+            [self.view addSubview:ImgOption];
+            
+            [self.view addSubview:Bn_ShowPunnetSquare];
+            
+            [self fn_AddImg];
+            
+            [ImgOption setFrame:CGRectMake(75, 88, (ImgOption.frame.size.width/2), (ImgOption.frame.size.height/2)) ];
+            
+            [Bn_ShowPunnetSquare setImage:[UIImage imageNamed:@"Zoom_icon_iPhone.png"] forState:UIControlStateNormal];
+            
+            [Bn_ShowPunnetSquare setFrame:CGRectMake(75, 88, (ImgOption.frame.size.width), (ImgOption.frame.size.height))];
+            
+            [tblOptions setFrame:CGRectMake(0,89+ImgOption.frame.size.height, 320, 165) ];
+        }
+        else
+            [tblOptions setFrame:CGRectMake(0, 95, 320, 203) ];
+    }
+    //images
 }
 - (void)viewDidUnload
 {
@@ -317,6 +348,65 @@
     
     [self Fn_createInvisibleBtn];
 }
+//images
+-(void)fn_AddImg
+{
+    View_PunnetSquare=[[UIView alloc] init];
+    
+    [View_PunnetSquare setFrame:CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height)];
+    
+    Img_TransparentBG=[[UIImageView alloc]initWithFrame:CGRectMake(0,0,self.view.frame.size.width, self.view.frame.size.height)];
+    Img_TransparentBG.image=[UIImage imageNamed:@"Transparent_Bg_iPhone.png"];
+    Img_TransparentBG.hidden=NO;
+    Img_TransparentBG.exclusiveTouch=YES;
+    
+    [View_PunnetSquare addSubview:Img_TransparentBG];
+    
+    Img_PunnetSquare=[[UIImageView alloc]init];
+    
+    [Img_PunnetSquare setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_iphone.png", objMCSS.strImageName]]];
+    
+    [Img_PunnetSquare setFrame:CGRectMake(10, 158, 300, 125)];
+    
+    Img_PunnetSquare.center=self.view.center;
+    
+    [View_PunnetSquare addSubview:Img_PunnetSquare];
+    
+    View_PunnetSquare.exclusiveTouch=YES;
+    
+    [Bn_ClosePunnetSquare setFrame:CGRectMake(282, Img_PunnetSquare.frame.origin.y-23,Bn_ShowPunnetSquare.frame.size.width, Bn_ShowPunnetSquare.frame.size.height)];
+    
+    Bn_ClosePunnetSquare.hidden=NO;
+    
+    [View_PunnetSquare addSubview:Bn_ClosePunnetSquare];
+}
+-(void)Fn_AnimateZoomIn
+{
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
+     {
+         [ImgOption setFrame:CGRectMake(10, 123, 300, 125)];
+         
+         Bn_ShowPunnetSquare.hidden=YES;
+     }
+                     completion:^(BOOL finished)
+     {
+         ImgOption.hidden=NO;
+         
+         [md Fn_ZoomImgWithView:View_PunnetSquare];
+     }];
+}
+-(void)Fn_AnimateZoomOut
+{
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
+     {
+         [ImgOption setFrame:CGRectMake(75, 88, (ImgOption.frame.size.width/2), (ImgOption.frame.size.height/2)) ];
+     }
+                     completion:^(BOOL finished)
+     {
+         Bn_ShowPunnetSquare.hidden=NO;
+     }];
+}
+//images
 //---------------------------------------------------------
 
 
@@ -594,6 +684,20 @@
     
     [self Fn_AddFeedbackPopup:x_point andy:y_point andText:cell.strFeedback];
 }
+//images
+-(IBAction)Bn_ShowPunnetSquare_Tapped:(id)sender
+{
+    [self Fn_AnimateZoomIn];
+}
+-(IBAction)Bn_ClosePunnetSquare_Tapped:(id)sender;
+{
+    [View_PunnetSquare removeFromSuperview];
+    
+    ImgOption.hidden=NO;
+    
+    [self Fn_AnimateZoomOut];
+}
+//images
 //---------------------------------------------------------
 
 
