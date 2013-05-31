@@ -882,7 +882,7 @@
 }
 -(IBAction)onShowAnswer:(id)sender
 {
-    //
+    NSLog(@"Type:%d",objQue.intType);
     switch (objQue.intType) {
         case QUESTION_TYPE_MCMS:
             [dragDropView handleShowAnswers];

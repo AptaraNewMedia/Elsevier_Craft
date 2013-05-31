@@ -37,6 +37,7 @@
     CustomLeftBarItem *customLeftBar;
     
     NSInteger currentOrientaion;
+    int Section_Touch_Flag;
     
 }
 @end
@@ -118,6 +119,9 @@
         }
     }
     
+    
+    Section_Touch_Flag=1;
+    
 }
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
@@ -195,7 +199,12 @@
         if ([objChp thematicData] == 0)
             return 0;
         else
-            return [objChp.thematicData count];
+        {
+            if(Section_Touch_Flag==0)
+                return 0;
+            else
+                return [objChp.thematicData count];
+        }
     }
     else
         return 0;
@@ -502,6 +511,18 @@
         if (previousSectionIndex != -1) {
             customView = [arrHeaderSection objectAtIndex:previousSectionIndex];
             [customView.imgArrow setImage:imgArrowRight];
+            
+            if(Section_Touch_Flag==1)
+            {
+                [customView.imgArrow setImage:imgArrowRight];
+                Section_Touch_Flag=0;
+            }
+            else
+            {
+                [customView.imgArrow setImage:imgArrowDown];
+                Section_Touch_Flag=1;
+            }
+
         }
         
         previousSectionIndex = [sender tag];

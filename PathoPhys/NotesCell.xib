@@ -92,10 +92,10 @@
 							<object class="IBUILabel" id="550698361">
 								<reference key="NSNextResponder" ref="383583742"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{85, 1}, {450, 55}}</string>
+								<string key="NSFrame">{{85, 1}, {587, 55}}</string>
 								<reference key="NSSuperview" ref="383583742"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="671815357"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -110,31 +110,10 @@
 								<reference key="IBUIFontDescription" ref="742952286"/>
 								<reference key="IBUIFont" ref="932506907"/>
 							</object>
-							<object class="IBUILabel" id="671815357">
-								<reference key="NSNextResponder" ref="383583742"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{550, 0}, {125, 55}}</string>
-								<reference key="NSSuperview" ref="383583742"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="126142343"/>
-								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">7</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<string key="IBUIText">Label</string>
-								<reference key="IBUITextColor" ref="897841767"/>
-								<reference key="IBUIHighlightedColor" ref="897841767"/>
-								<int key="IBUIBaselineAdjustment">0</int>
-								<float key="IBUIMinimumFontSize">17</float>
-								<reference key="IBUIFontDescription" ref="742952286"/>
-								<reference key="IBUIFont" ref="932506907"/>
-							</object>
 							<object class="IBUILabel" id="126142343">
 								<reference key="NSNextResponder" ref="383583742"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{680, 1}, {100, 55}}</string>
+								<string key="NSFrame">{{680, 1}, {135, 55}}</string>
 								<reference key="NSSuperview" ref="383583742"/>
 								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -213,14 +192,6 @@
 					</object>
 					<int key="connectionID">20</int>
 				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">lbl_desc</string>
-						<reference key="source" ref="616815110"/>
-						<reference key="destination" ref="671815357"/>
-					</object>
-					<int key="connectionID">24</int>
-				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -249,7 +220,6 @@
 							<reference ref="126142343"/>
 							<reference ref="500616777"/>
 							<reference ref="550698361"/>
-							<reference ref="671815357"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -277,12 +247,6 @@
 						<reference key="parent" ref="616815110"/>
 						<string key="objectName">lblDate</string>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">23</int>
-						<reference key="object" ref="671815357"/>
-						<reference key="parent" ref="616815110"/>
-						<string key="objectName">lblDescription</string>
-					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -291,7 +255,6 @@
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="2.CustomClassName">NotesCell</string>
 				<string key="2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="23.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="3.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
