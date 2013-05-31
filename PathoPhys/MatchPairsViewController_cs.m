@@ -559,30 +559,6 @@
     
     return strTemp;
 }
--(void)disableEditFields
-{
-    
-	int i = 0;
-	
-	while (i < [questionArray count]) {
-		
-		LeftMatchView_IPad *bt = [questionArray objectAtIndex:i];
-		bt.customBt.enabled = NO;
-        bt.dotBt.enabled = NO;
-		i++;
-	}
-	
-	i = 0;
-	
-	while (i < [answerArray count]) {
-		
-		RightMatchView_Ipad *bt = [answerArray objectAtIndex:i];
-		bt.customBt.enabled = NO;
-        bt.dotBt.enabled = NO;
-		i++;
-	}
-	
-}
 -(void)handleRevealScore
 {
 	
@@ -760,6 +736,30 @@
 	}
 	strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
 	return flag1;
+}
+-(void)disableEditFields
+{
+    
+	int i = 0;
+	
+	while (i < [questionArray count]) {
+		
+		LeftMatchView_IPad *bt = [questionArray objectAtIndex:i];
+		bt.customBt.enabled = NO;
+        bt.dotBt.enabled = NO;
+		i++;
+	}
+	
+	i = 0;
+	
+	while (i < [answerArray count]) {
+		
+		RightMatchView_Ipad *bt = [answerArray objectAtIndex:i];
+		bt.customBt.enabled = NO;
+        bt.dotBt.enabled = NO;
+		i++;
+	}
+	
 }
 -(void)handleShowAnswers
 {

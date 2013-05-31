@@ -37,5 +37,6 @@
 -(NSString *)fn_CheckAnswersBeforeSubmit;
 -(void)fn_OnSubmitTapped;
 -(void)handleShowAnswers;
+-(void)Fn_disableAllDraggableSubjects;
 
 @end

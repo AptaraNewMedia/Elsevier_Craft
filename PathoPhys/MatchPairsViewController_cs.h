@@ -35,4 +35,5 @@
 -(void)fn_ShowSelected:(NSString *)visitedAnswers;
 -(void)fn_OnSubmitTapped;
 -(void)handleShowAnswers;
+-(void)disableEditFields;
 @end

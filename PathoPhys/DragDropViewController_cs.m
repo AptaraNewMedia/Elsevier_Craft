@@ -197,12 +197,6 @@
 
     
 }
--(void)Fn_disableAllDraggableSubjects
-{
-    for(UIButton *subview in [imgDropView subviews]) {
-        [self.view removeGestureRecognizer:uiTapGestureRecognizer];
-    }
-}
 -(void)rotateScrollViewButtonsForLandscape
 {
     int counter= 0;
@@ -458,6 +452,13 @@
     }
     return flag1;
 }
+-(void)Fn_disableAllDraggableSubjects
+{
+    for(UIButton *subview in [imgDropView subviews]) {
+        [self.view removeGestureRecognizer:uiTapGestureRecognizer];
+    }
+}
+
 -(void)handleShowAnswers
 {
     int i = 0;

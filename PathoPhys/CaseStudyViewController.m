@@ -331,8 +331,10 @@
 
     switch (objQue.intType) {
         case QUESTION_TYPE_MCMS:
+            [dragDropView Fn_disableAllDraggableSubjects];
             break;
         case QUESTION_TYPE_MATCHTERMS:
+            [matchPairsView disableEditFields];
             break;
         case QUESTION_TYPE_MCSS:
             singleSelectionView.tblOptions.allowsSelection = NO;
