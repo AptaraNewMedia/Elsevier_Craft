@@ -196,10 +196,12 @@
     int y = 5, x= 20;
     int numOfRows = 1;
     float bnwidth = 0;
+    float bnheight = 0;
     
     for(UIView *myView in [scrollViewDrag subviews]){
         if([myView isKindOfClass:[CustomDragButton class]]){
             bnwidth = myView.frame.size.width;
+            bnheight = myView.frame.size.height;
             counter++;
            
             [myView removeFromSuperview];
@@ -216,7 +218,7 @@
     }
     
     
-    [scrollViewDrag setContentSize:CGSizeMake(20 + (numOfRows * bnwidth) + ((numOfRows-1) * 10), 93)];
+    [scrollViewDrag setContentSize:CGSizeMake(20 + (numOfRows * bnwidth) + ((numOfRows-1) * 10), 2 * bnheight + 40)];
 }
 -(void)rotateScrollViewButtonsForLandscape
 {

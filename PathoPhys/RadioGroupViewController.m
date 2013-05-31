@@ -290,7 +290,8 @@
         }
         
         [radioView.lblQuestion setText: [NSString stringWithFormat:@"  %@", objRB.strQuestionText]];
-        [radioView.lblQuestion setFrame:CGRectMake(0, 0, option_hiding_width, 32)];        
+        [radioView.lblQuestion setFrame:CGRectMake(0, 0, option_hiding_width, 32)];
+        radioView.lblQuestion.numberOfLines = 2;
         
         [radioView.btnOption1 setTag:i];
         [radioView.btnOption2 setTag:i];
@@ -342,7 +343,6 @@
             
             [radioView.feedbackBt setFrame:CGRectMake(width_ans + 22 + 10, 0, 30, 38)];
             int_y = int_y + 45;
-            
         }
         else {
             int_y = int_y + 50;
@@ -352,15 +352,19 @@
         [arrRadios addObject:radioView];
         [scrollRadioOption addSubview:radioView];
         
+               
+        
     }
     if([UIScreen mainScreen].bounds.size.height == 568.0){
         [scrollRadioOption setFrame:CGRectMake(5, 120, 320, 285)];
         [scrollRadioOption setScrollEnabled:YES];
-         scrollRadioOption.contentSize=CGSizeMake(scrollRadioOption.frame.size.width, int_y);
+         scrollRadioOption.contentSize=CGSizeMake(scrollRadioOption.frame.size.width, int_y + 50);
     }
     else{
          scrollRadioOption.contentSize=CGSizeMake(scrollRadioOption.frame.size.width, int_y);
     }
+    
+    
    
 }
 -(CGSize)getSize:(NSString *)str
