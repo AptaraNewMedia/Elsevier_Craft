@@ -200,7 +200,10 @@
 //---------------------------------------------------------
 -(void)Fn_createInvisibleBtn
 {
-    if([[DEVICE_TYPE substringToIndex:6] isEqualToString:@"iPhone"]) {
+//    NSLog(@"DEVICE_TYPE: %@",DEVICE_TYPE);
+//    if(DEVICE_TYPE.length > 6){
+//    
+    if([DEVICE_TYPE isEqualToString:@"iPhone"]) {
         tblOptions.allowsSelection=NO;
     }
     else {
@@ -212,6 +215,7 @@
         [btnInvisible addTarget:self action:@selector(onInvisible:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btnInvisible];
     }
+ 
 }
 -(NSString *)fn_getFeeback:(int)intfeed
 {
