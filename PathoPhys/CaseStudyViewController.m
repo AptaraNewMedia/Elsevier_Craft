@@ -279,7 +279,7 @@
         
         objNotes = [[Notes alloc] init];
         objNotes.intMode = 1;
-        objNotes.strNoteTitle = [NSString stringWithFormat:@"CS-%d, %@, Q%d", intCurrentCaseStudy_ChapterId, strCurrentThematicName, question_no];
+        objNotes.strNoteTitle = [NSString stringWithFormat:@"CS-%d, %@, Q%d", intCurrentCaseStudy_ChapterId-39, strCurrentThematicName, question_no];
     }
     else {
         NOTES_MODE = 2;
