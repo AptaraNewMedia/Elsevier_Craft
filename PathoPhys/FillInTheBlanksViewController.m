@@ -359,30 +359,73 @@
 {
     int i = 0;
     
+    int id_12_1 = 0;
+    int id_12_2 = 0;
+    int id_13_1 = 0;
+    
     for (UIView *dropArea in _dragDropManager.dropAreas) {
         for(UIView *view in [dropArea subviews]) {
             [view removeFromSuperview];
         }
         
         NSString *sa = [[objFillBlanks.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
-
-        for (int x=0; x<draggableSubjects.count; x++) {
-            CustomDragButton *viewBeingDragged = [draggableSubjects objectAtIndex:x];
-            NSString *ss = [viewBeingDragged.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-            if ([[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
-                [dropArea addSubview:viewBeingDragged];
-                viewBeingDragged.frame = CGRectMake(0, 0, viewBeingDragged.frame.size.width, viewBeingDragged.frame.size.height);
-                [viewBeingDragged.ansImage setImage:[UIImage imageNamed:@"Btn_feed_true.png"]];
-                NSString *feeback = [self fn_getFeeback:viewBeingDragged.tag AndCorrect:@"correct"];
-                if (feeback.length > 0) {
-                    viewBeingDragged.feedbackBt.hidden = NO;
-                    viewBeingDragged.strFeedback = feeback;
-                    [viewBeingDragged addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
-                    
+        
+        if (id_12_1 == 1 || id_12_2 == 2 || id_13_1 == 1 ) {
+            for (int x=draggableSubjects.count-1; x>0; x--) {
+                CustomDragButton *viewBeingDragged = [draggableSubjects objectAtIndex:x];
+                NSString *ss = [viewBeingDragged.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+                
+                if ([[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
+                    [dropArea addSubview:viewBeingDragged];
+                    viewBeingDragged.frame = CGRectMake(0, 0, viewBeingDragged.frame.size.width, viewBeingDragged.frame.size.height);
+                    [viewBeingDragged.ansImage setImage:[UIImage imageNamed:@"Btn_feed_true.png"]];
+                    NSString *feeback = [self fn_getFeeback:viewBeingDragged.tag AndCorrect:@"correct"];
+                    if (feeback.length > 0) {
+                        viewBeingDragged.feedbackBt.hidden = NO;
+                        viewBeingDragged.strFeedback = feeback;
+                        [viewBeingDragged addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
+                        
+                    }
+                    break;
                 }
-                break;
+                
+            }
+            id_12_1 = 0;
+            id_12_2 = 0;
+            id_13_1 = 0;
+        }
+        else {
+            for (int x=0; x<draggableSubjects.count; x++) {
+                CustomDragButton *viewBeingDragged = [draggableSubjects objectAtIndex:x];
+                NSString *ss = [viewBeingDragged.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+                
+                if ([[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
+                    [dropArea addSubview:viewBeingDragged];
+                    viewBeingDragged.frame = CGRectMake(0, 0, viewBeingDragged.frame.size.width, viewBeingDragged.frame.size.height);
+                    [viewBeingDragged.ansImage setImage:[UIImage imageNamed:@"Btn_feed_true.png"]];
+                    NSString *feeback = [self fn_getFeeback:viewBeingDragged.tag AndCorrect:@"correct"];
+                    if (feeback.length > 0) {
+                        viewBeingDragged.feedbackBt.hidden = NO;
+                        viewBeingDragged.strFeedback = feeback;
+                        [viewBeingDragged addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
+                        
+                    }
+                    break;
+                }
+                
             }
         }
+        
+        if ([[sa lowercaseString] isEqualToString:@"adrenalineandnoradrenaline"]) {
+            id_12_1 = 1;
+        }
+        else if ([[sa lowercaseString] isEqualToString:@"heartrateandbp"]) {
+            id_12_2 = 1;
+        }
+        else if ([[sa lowercaseString] isEqualToString:@"antidiuretichormoneandaldosterone"]) {
+            id_13_1 = 1;
+        }        
+        
         i++;
     }
     [self handleRevealScore];
