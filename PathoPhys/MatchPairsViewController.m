@@ -496,6 +496,9 @@
     if (size.height < 30) {
         size.height = 30;
     }
+    else if (size.height == 30) {
+        size.height = 40;
+    }
     return size.height;
 }
 -(void)Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue

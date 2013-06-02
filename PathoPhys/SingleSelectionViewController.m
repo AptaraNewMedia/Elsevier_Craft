@@ -521,7 +521,7 @@
     [self Fn_createInvisibleBtn];
     [parentObject Fn_DisableSubmit];
     int check =  [self checkForAnswer];
-    if (check == 2) {
+    if (check == 2 || check == 3) {
         [parentObject Fn_ShowAnswer];
     }
 }
