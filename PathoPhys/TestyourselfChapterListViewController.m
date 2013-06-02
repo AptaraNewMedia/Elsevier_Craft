@@ -194,14 +194,18 @@
     return [arr_chaptersTestAndFlashcard count];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+
+    
     if (section == openSectionIndex) {
         Chapters *objChp = (Chapters *)[arr_chaptersTestAndFlashcard objectAtIndex:openSectionIndex];
         if ([objChp thematicData] == 0)
             return 0;
         else
         {
-            if(Section_Touch_Flag==0)
+            if(Section_Touch_Flag==0){
+                Section_Touch_Flag = 1;
                 return 0;
+            }
             else
                 return [objChp.thematicData count];
         }
@@ -308,7 +312,9 @@
     return 0;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    //md.str_Title = [arr_chapterList objectAtIndex:indexPath.row];   
+     NSLog(@"SELECT");
+    
+    //md.str_Title = [arr_chapterList objectAtIndex:indexPath.row];
 
         Chapters *objChap = (Chapters *)[arr_chaptersTestAndFlashcard objectAtIndex:indexPath.section];
         intCurrentTestYourSelf_ChapterId = objChap.intChapterId;
@@ -390,9 +396,8 @@
 
 }
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-   
-    NSLog(@"%d", indexPath.row);
-    
+   NSLog(@"DESELECT");
+        
     Chapters *objChap = (Chapters *)[arr_chaptersTestAndFlashcard objectAtIndex:indexPath.section];
     ThematicArea *objThematic;
     if(objChap.intIsThematicArea!=0) {
@@ -480,9 +485,15 @@
     }
     return 0.0;
 }
+
+
 - (void)sectionTouched:(UIButton*)sender{
+    
     Chapters *objChap = (Chapters *)[arr_chaptersTestAndFlashcard objectAtIndex:[sender tag]];
     if([objChap.thematicData count] == 0) {
+        
+        NSLog(@"No Thematic Area");
+        
         intCurrentTestYourSelf_ChapterId = objChap.intChapterId;
         intCurrentTestYourSelf_ThematicId = -1;
         str_BarTitle = [NSString stringWithFormat:@"%@", objChap.strChapterTitle];        
@@ -503,32 +514,63 @@
         
     }
     else {
+         openSectionIndex = [sender tag];
         
-        openSectionIndex = [sender tag];
-        customView = [arrHeaderSection objectAtIndex:[sender tag]];
-        [customView.imgArrow setImage:imgArrowDown];
-        
-        if (previousSectionIndex != -1) {
-            customView = [arrHeaderSection objectAtIndex:previousSectionIndex];
+        if (previousSectionIndex == openSectionIndex) {
+            [self setAllArrowsRight];
+            customView = [arrHeaderSection objectAtIndex:openSectionIndex];
             [customView.imgArrow setImage:imgArrowRight];
+            previousSectionIndex = -1;
+            Section_Touch_Flag = 0;
+            [myTableView reloadData];
             
-            if(Section_Touch_Flag==1)
-            {
-                [customView.imgArrow setImage:imgArrowRight];
-                Section_Touch_Flag=0;
-            }
-            else
-            {
-                [customView.imgArrow setImage:imgArrowDown];
-                Section_Touch_Flag=1;
-            }
-
+        }
+        else{
+        
+            [self setAllArrowsRight];
+            customView = [arrHeaderSection objectAtIndex:openSectionIndex];
+            [customView.imgArrow setImage:imgArrowDown];
+            [myTableView reloadData];
+            previousSectionIndex = [sender tag];
         }
         
-        previousSectionIndex = [sender tag];
-        [myTableView reloadData];
+//
+//        if (previousSectionIndex != -1) {
+//             customView = [arrHeaderSection objectAtIndex:previousSectionIndex];
+//            [customView.imgArrow setImage:imgArrowRight];
+//            
+//            if(Section_Touch_Flag==1)
+//            {
+//                [customView.imgArrow setImage:imgArrowRight];
+//                Section_Touch_Flag=0;
+//            }
+//            else
+//            {
+//                [customView.imgArrow setImage:imgArrowDown];
+//                Section_Touch_Flag=1;
+//            }
+//
+//        }
+//        else{
+//           
+//        }
+//        
+//        previousSectionIndex = [sender tag];
+//        [myTableView reloadData];
     }
+//    Section_Touch_Flag = 0;
 }
+
+- (void) setAllArrowsRight{
+    for( int i =0; i < [arrHeaderSection count]; i++){
+        customView = [arrHeaderSection objectAtIndex:i];
+        [customView.imgArrow setImage:imgArrowRight];
+    }
+    [myTableView reloadData];
+}
+
+
+
 //=======================================================================================
 
 

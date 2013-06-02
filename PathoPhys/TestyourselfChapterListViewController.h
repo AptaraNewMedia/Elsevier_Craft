@@ -12,5 +12,5 @@
 
 
 - (IBAction)Bn_Back_Tapped:(id)sender;
-
+- (void) setAllArrowsRight;
 @end

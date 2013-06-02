@@ -16,6 +16,6 @@
 @property (nonatomic, assign) NSInteger openSectionIndex;
 
 - (IBAction)Bn_Back_Tapped:(id)sender;
-
+- (void) setAllArrowsRight;
 
 @end

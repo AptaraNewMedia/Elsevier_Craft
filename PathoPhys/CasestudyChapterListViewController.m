@@ -39,6 +39,7 @@
     CustomRightBarItem *customRightBar;
     CustomLeftBarItem *customLeftBar;
     NSInteger currentOrientaion;
+    int Section_Touch_Flag;
 }
 
 @end
@@ -121,6 +122,8 @@
             myview.exclusiveTouch = YES;
         }
     }
+    
+     Section_Touch_Flag=1;
 }
 
 - (void) viewWillAppear:(BOOL)animated{
@@ -198,7 +201,14 @@
         if ([objChp thematicData] == 0)
             return 0;
         else
-            return [objChp.thematicData count];
+        {
+            if(Section_Touch_Flag==0){
+                Section_Touch_Flag = 1;
+                return 0;
+            }
+            else
+                return [objChp.thematicData count];
+        }
     }
     else
         return 0;
@@ -487,21 +497,49 @@
         
     }
     else {
-        
         openSectionIndex = [sender tag];
-        customView = [arrHeaderSection objectAtIndex:[sender tag]];
-        [customView.imgArrow setImage:imgArrowDown];
         
-        if (previousSectionIndex != -1) {
-            customView = [arrHeaderSection objectAtIndex:previousSectionIndex];
+        if (previousSectionIndex == openSectionIndex) {
+            [self setAllArrowsRight];
+            customView = [arrHeaderSection objectAtIndex:openSectionIndex];
             [customView.imgArrow setImage:imgArrowRight];
+            previousSectionIndex = -1;
+            Section_Touch_Flag = 0;
+            [myTableView reloadData];
+            
         }
-        
-        previousSectionIndex = [sender tag];
-        [myTableView reloadData];
+        else{
+            
+            [self setAllArrowsRight];
+            customView = [arrHeaderSection objectAtIndex:openSectionIndex];
+            [customView.imgArrow setImage:imgArrowDown];
+            [myTableView reloadData];
+            previousSectionIndex = [sender tag];
+        }
+
+//        
+//        openSectionIndex = [sender tag];
+//        customView = [arrHeaderSection objectAtIndex:[sender tag]];
+//        [customView.imgArrow setImage:imgArrowDown];
+//        
+//        if (previousSectionIndex != -1) {
+//            customView = [arrHeaderSection objectAtIndex:previousSectionIndex];
+//            [customView.imgArrow setImage:imgArrowRight];
+//        }
+//        
+//        previousSectionIndex = [sender tag];
+//        [myTableView reloadData];
     }
 
 }
+- (void) setAllArrowsRight{
+    for( int i =0; i < [arrHeaderSection count]; i++){
+        customView = [arrHeaderSection objectAtIndex:i];
+        [customView.imgArrow setImage:imgArrowRight];
+    }
+    [myTableView reloadData];
+}
+
 //=======================================================================================
 
 
