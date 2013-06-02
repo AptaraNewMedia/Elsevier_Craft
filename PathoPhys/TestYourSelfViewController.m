@@ -947,22 +947,24 @@
         if (buttonIndex == 0)
         {
             [self Fn_SaveBookmarkingData];
+            [self.navigationController popViewControllerAnimated:YES];            
         }
         else if(buttonIndex == 1) {
             [db fnDeleteQuizTrack:objQuizTrack.intQuizTrackId];
         }
-        [self.navigationController popViewControllerAnimated:YES];
+
     }
     else if (alertView.tag == 15) {
         if (buttonIndex == 0)
         {
             [self Fn_SaveBookmarkingData];
+            [md Fn_SubTabBar];
+            [md Fn_AddMenu];
         }
         else if(buttonIndex == 1) {
-            [db fnDeleteQuizTrack:objQuizTrack.intQuizTrackId];
+            //[db fnDeleteQuizTrack:objQuizTrack.intQuizTrackId];
         }
-        [md Fn_SubTabBar];
-        [md Fn_AddMenu];
+
     }
 
 }

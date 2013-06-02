@@ -431,8 +431,18 @@ UITextView *txt_feedback;
 - (void)tabBarController:(UITabBarController *)tabBarController1 didSelectViewController:(UIViewController *)viewController
 {
     
+        categoryNumber =  tabBarController1.selectedIndex + 1;
+        [self Fn_SubTabBar];
+        [self Fn_addTabBar];
+        self.tabBarController.selectedIndex = categoryNumber - 1;
+        [self Fn_removeNoteViewPopup];
+        [self Fn_removeInfoViewPopup];
+}
+
+- (BOOL)tabBarController:(UITabBarController *)tbController shouldSelectViewController:(UIViewController *)viewController
+{
     if(isTestInProgress == 1){
-    
+        
         UIAlertView *alert = [[UIAlertView alloc] init];
         [alert setTitle:@"Pathophysquiz"];
         [alert setDelegate:self];
@@ -453,16 +463,10 @@ UITextView *txt_feedback;
         [alert setMessage:[NSString stringWithFormat:MSG_BOOKMARK_CASESTUDY]];
         [alert show];
     }
-    else {
-        categoryNumber =  tabBarController1.selectedIndex + 1;
-        [self Fn_SubTabBar];
-        [self Fn_addTabBar];
-        self.tabBarController.selectedIndex = categoryNumber - 1;
-        [self Fn_removeNoteViewPopup];
-        [self Fn_removeInfoViewPopup];
-    }
-}
 
+    return NO;
+    
+}
 // Alertview
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
