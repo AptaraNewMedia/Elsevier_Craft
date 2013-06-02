@@ -387,20 +387,20 @@
 {
     
     if (answer == userAnswer) {
-        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-            [imgViewCorrect setImage:[UIImage imageNamed:@"True_Btn_Without_Border.png"]];
-        }
-        else {
+//        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+//            [imgViewCorrect setImage:[UIImage imageNamed:@"True_Btn_Without_Border.png"]];
+//        }
+//        else {
             [imgViewCorrect setImage:[UIImage imageNamed:@"img_true.png"]];
-        }
+//        }
     }
     else {
-        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-            [imgViewCorrect setImage:[UIImage imageNamed:@"false_Without_Border.png"]];
-        }
-        else {
+//        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+//            [imgViewCorrect setImage:[UIImage imageNamed:@"false_Without_Border.png"]];
+//        }
+//        else {
             [imgViewCorrect setImage:[UIImage imageNamed:@"img_false.png"]];
-        }
+ //       }
     }
     
     strFeedback = nil;
@@ -459,13 +459,13 @@
         if (answer == userAnswer) {
             [alert setTag:2];
             [alert addButtonWithTitle:@"Ok"];
-            [alert setMessage:[NSString stringWithFormat:@"That's Correct!"]];
+            [alert setMessage:[NSString stringWithFormat:MSG_CORRECT]];
         }
         else {
             [alert setTag:3];
             [alert addButtonWithTitle:@"Answer"];
             [alert addButtonWithTitle:@"Try Again"];
-            [alert setMessage:[NSString stringWithFormat:@"That's Incorrect!"]];
+            [alert setMessage:[NSString stringWithFormat:MSG_INCORRECT]];
         }
     }
 	[alert show];

@@ -324,12 +324,12 @@
             NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
             sa = [sa lowercaseString];
             if (![ss isEqualToString:sa]) {
-                if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-                    [cell.imgAns setImage:[UIImage imageNamed:@"false_Without_Border.png"]];
-                }
-                else {
+//                if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+//                    [cell.imgAns setImage:[UIImage imageNamed:@"false_Without_Border.png"]];
+//                }
+//                else {
                     [cell.imgAns setImage:[UIImage imageNamed:@"img_false.png"]];
-                }
+//                }
                 NSString *feeback = [self fn_getFeeback:indexPath.row];
                 if (feeback.length > 0) {
                     cell.btnFeedback.hidden = NO;
@@ -337,12 +337,12 @@
                 }
                 
             }else {
-                if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-                    [cell.imgAns setImage:[UIImage imageNamed:@"True_Btn_Without_Border.png"]];
-                }
-                else {
+//                if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+//                    [cell.imgAns setImage:[UIImage imageNamed:@"True_Btn_Without_Border.png"]];
+//                }
+//                else {
                     [cell.imgAns setImage:[UIImage imageNamed:@"img_true.png"]];
-                }
+//                }
                 NSString *feeback = [self fn_getFeeback:indexPath.row];
                 if (feeback.length > 0) {
                     cell.btnFeedback.hidden = NO;
@@ -480,19 +480,19 @@
         if (flagForCheckAnswer == 1) {
             [alert setTag:2];
             [alert addButtonWithTitle:@"Ok"];
-            [alert setMessage:[NSString stringWithFormat:@"That's Correct!"]];
+            [alert setMessage:[NSString stringWithFormat:MSG_CORRECT]];
         }
         else if (flagForCheckAnswer == 3) {
             [alert setTag:3];
             [alert addButtonWithTitle:@"Answer"];
             [alert addButtonWithTitle:@"Try Again"];
-            [alert setMessage:[NSString stringWithFormat:@"Partially Correct. Please try other options as well."]];
+            [alert setMessage:[NSString stringWithFormat:MSG_PARTIALY_CORRECT]];
         }
         else {
             [alert setTag:3];
             [alert addButtonWithTitle:@"Answer"];
             [alert addButtonWithTitle:@"Try Again"];
-            [alert setMessage:[NSString stringWithFormat:@"That's Incorrect!"]];
+            [alert setMessage:[NSString stringWithFormat:MSG_INCORRECT]];
             // Please match all the items.
             
         }

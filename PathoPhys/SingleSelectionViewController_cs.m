@@ -384,19 +384,19 @@
         if (flagForCheckAnswer == 1) {
             [alert setTag:2];
             [alert addButtonWithTitle:@"Ok"];
-            [alert setMessage:[NSString stringWithFormat:@"That's Correct!"]];
+            [alert setMessage:[NSString stringWithFormat:MSG_CORRECT]];
         }
         else if (flagForCheckAnswer == 3) {
             [alert setTag:3];
             [alert addButtonWithTitle:@"Answer"];
             [alert addButtonWithTitle:@"Try Again"];
-            [alert setMessage:[NSString stringWithFormat:@"Partially Correct. Please try other options as well."]];
+            [alert setMessage:[NSString stringWithFormat:MSG_PARTIALY_CORRECT]];
         }
         else {
             [alert setTag:3];
             [alert addButtonWithTitle:@"Answer"];
             [alert addButtonWithTitle:@"Try Again"];
-            [alert setMessage:[NSString stringWithFormat:@"That's Incorrect!"]];
+            [alert setMessage:[NSString stringWithFormat:MSG_INCORRECT]];
             // Please match all the items.
             
         }

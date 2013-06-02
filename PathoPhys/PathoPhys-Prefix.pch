@@ -16,6 +16,8 @@
 
 #define MSG_CORRECT @"That's Correct!"
 #define MSG_INCORRECT @"That's Incorrect!"
+#define MSG_PARTIALY_CORRECT @"Partially Correct. Please try other options as well."
+
 
 #define MSG_BOOKMARK_TEST @"You are leaving the test. Do you want to save the state?"
 #define MSG_BOOKMARK_CASESTUDY @"You are leaving the test. Do you want to save the state?"

@@ -662,13 +662,13 @@
         if (flagForCheckAnswer == YES) {
             [alert setTag:2];
             [alert addButtonWithTitle:@"Ok"];
-            [alert setMessage:[NSString stringWithFormat:@"That's Correct!"]];
+            [alert setMessage:[NSString stringWithFormat:MSG_CORRECT]];
         }
         else {
             [alert setTag:3];
             [alert addButtonWithTitle:@"Answer"];
             [alert addButtonWithTitle:@"Try Again"];
-            [alert setMessage:[NSString stringWithFormat:@"That's Incorrect!"]];
+            [alert setMessage:[NSString stringWithFormat:MSG_INCORRECT]];
         }
     }
 	[alert show];
