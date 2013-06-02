@@ -808,6 +808,13 @@
         [imgView setImage:nil];
     }
     
+    for (RightMatchView_Ipad *rbt in answerArray) {
+        rbt.dotBt.backgroundColor = COLOR_CLEAR;
+        [rbt.ansImage setImage:nil];
+        [rbt.feedbackBt setImage:nil forState:UIControlStateNormal];
+        [rbt.feedbackBt setImage:nil forState:UIControlStateHighlighted];
+    }
+    
     for (int i=0; i<questionArray.count; i++) {
         currentColor = [self getRandomColor];        
         
@@ -840,6 +847,8 @@
                 endPoint = CGPointMake(rbt.frame.origin.x+rbt.dotBt.frame.origin.x+(rbt.dotBt.frame.size.width/2) , rbt.frame.origin.y+rbt.dotBt.frame.origin.y+(rbt.dotBt.frame.size.height/2));                
                 
                 [rbt.ansImage setImage:[UIImage imageNamed:@"img_true.png"]];
+                [rbt.feedbackBt setImage:[UIImage imageNamed:@"btn_feedback.png"] forState:UIControlStateNormal];
+                [rbt.feedbackBt setImage:[UIImage imageNamed:@"btn_feedback_highlight.png"] forState:UIControlStateHighlighted];
                 
                 NSString *feeback = [self fn_getFeeback:obj.ansID AndCorrect:@"correct"];
                 if (feeback.length > 0) {
