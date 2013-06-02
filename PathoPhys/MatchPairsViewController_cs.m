@@ -123,7 +123,7 @@
     // getting size of right side of buttons
     for (int j = 0; j < [objMatch.arrOptions2 count]; j++) {
         NSString *strOption = [objMatch.arrOptions2 objectAtIndex:j];
-        float size = [self fn_getLeftSize:strOption];
+        float size = [self fn_getRightSize:strOption];
         [arrRightSize addObject:[NSNumber numberWithFloat:size]];
     }
     
@@ -341,15 +341,30 @@
 -(float)fn_getLeftSize:(NSString *)data
 {
     CGSize constraint = CGSizeMake(LEFT_OPTION_WIDTH - (LEFT_OPTION_MARGIN * 2), 20000.0f);
-    CGSize size = [data sizeWithFont:FONT_15 constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+    UIFont *font = FONT_15;
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        font = FONT_12;
+    }
+    CGSize size = [data sizeWithFont:font constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+    if (size.height < 30) {
+        size.height = 30;
+    }
     return size.height;
 }
 -(float)fn_getRightSize:(NSString *)data
 {
     CGSize constraint = CGSizeMake(RIGHT_OPTION_WIDTH - (RIGHT_OPTION_MARGIN * 2), 40000.0f);
-    CGSize size = [data sizeWithFont:FONT_15 constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+    UIFont *font = FONT_15;
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        font = FONT_12;
+    }
+    CGSize size = [data sizeWithFont:font constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+    if (size.height < 30) {
+        size.height = 30;
+    }
     return size.height;
 }
+
 -(NSInteger)getRandomColor
 {
 	

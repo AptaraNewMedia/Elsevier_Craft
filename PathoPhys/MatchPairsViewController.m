@@ -122,7 +122,7 @@
     // getting size of right side of buttons
     for (int j = 0; j < [objMatch.arrOptions2 count]; j++) {
         NSString *strOption = [objMatch.arrOptions2 objectAtIndex:j];
-        float size = [self fn_getLeftSize:strOption];
+        float size = [self fn_getRightSize:strOption];
         [arrRightSize addObject:[NSNumber numberWithFloat:size]];
     }
     
@@ -150,7 +150,7 @@
             bt.customBt.titleLabel.font = FONT_10;
             bt.customBt.frame = CGRectMake(0, 0, 80, heightOfLabel);
             bt.dotBt.frame = CGRectMake(bt.customBt.frame.size.width+1, (heightOfLabel/2) - 5, 20, 20);
-            heightLeftScorll = heightLeftScorll + heightOfLabel + 5;
+            heightLeftScorll = heightLeftScorll + heightOfLabel + 8;
             
         }
         else {
@@ -480,6 +480,9 @@
         font = FONT_12;
     }
     CGSize size = [data sizeWithFont:font constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+    if (size.height < 30) {
+        size.height = 30;
+    }
     return size.height;
 }
 -(float)fn_getRightSize:(NSString *)data
@@ -487,9 +490,12 @@
     CGSize constraint = CGSizeMake(RIGHT_OPTION_WIDTH - (RIGHT_OPTION_MARGIN * 2), 40000.0f);
     UIFont *font = FONT_15;
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        font = FONT_10;
+        font = FONT_12;
     }
     CGSize size = [data sizeWithFont:font constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+    if (size.height < 30) {
+        size.height = 30;
+    }
     return size.height;
 }
 -(void)Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue
