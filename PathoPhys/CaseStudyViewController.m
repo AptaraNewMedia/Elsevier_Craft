@@ -391,6 +391,7 @@
     [self Fn_DisableSubmit];
     bnSubmit.hidden = NO;
     bnSubmit.enabled = YES;
+    bnShowScore.hidden = YES;
     [self fn_RemoveQuestionView];
     [md Fn_SubAddNote];
     [self Fn_LoadQuestionData];
@@ -718,13 +719,13 @@
     
     [bnNext setFrame:CGRectMake(184, 850, 63, 57)];
     [bnPrev setFrame:CGRectMake(30, 850, 63, 57)];
-    [bnSubmit setFrame:CGRectMake(620, 860, 139, 43)];
-    [bnShowScore setFrame:CGRectMake(430, 860, 139, 43)];
     
     [lblQuestionNo setFrame:CGRectMake(116, 870, 68, 26)];
     
-    [bnTryAgian setFrame:CGRectMake(620, 860, 139, 43)];
-    [bnShowAnswer setFrame:CGRectMake(430, 860, 139, 43)];
+    [bnShowAnswer setFrame:CGRectMake(320, 860, 139, 43)];
+    [bnTryAgian setFrame:CGRectMake(470, 860, 139, 43)];
+    [bnShowScore setFrame:CGRectMake(620, 860, 139, 43)];
+    [bnSubmit setFrame:CGRectMake(620, 860, 139, 43)];
 
 }
 -(void)Fn_rotateLandscape
@@ -738,12 +739,13 @@
     
     [bnNext setFrame:CGRectMake(184, 608, 63, 57)];
     [bnPrev setFrame:CGRectMake(30, 608, 63, 57)];
-    [bnSubmit setFrame:CGRectMake(873, 613, 139, 43)];
-    [bnShowScore setFrame:CGRectMake(674, 613, 139, 43)];
     [lblQuestionNo setFrame:CGRectMake(116, 620, 68, 26)];
     
-    [bnTryAgian setFrame:CGRectMake(873, 613, 139, 43)];
-    [bnShowAnswer setFrame:CGRectMake(674, 613, 139, 43)];
+    [bnShowAnswer setFrame:CGRectMake(573, 613, 139, 43)];
+    [bnTryAgian setFrame:CGRectMake(723, 613, 139, 43)];
+    [bnShowScore setFrame:CGRectMake(873, 613, 139, 43)];
+    [bnSubmit setFrame:CGRectMake(873, 613, 139, 43)];
+    
 }
 //--------------------------------------------------------
 
