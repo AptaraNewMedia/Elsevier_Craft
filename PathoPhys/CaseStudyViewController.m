@@ -391,7 +391,6 @@
     [self Fn_DisableSubmit];
     bnSubmit.hidden = NO;
     bnSubmit.enabled = YES;
-    bnShowScore.hidden = YES;
     [self fn_RemoveQuestionView];
     [md Fn_SubAddNote];
     [self Fn_LoadQuestionData];
@@ -717,14 +716,14 @@
     
     [viewMain setFrame:CGRectMake(0, 50, 767, 803)];
     
-    [bnNext setFrame:CGRectMake(184, 850, 63, 57)];
-    [bnPrev setFrame:CGRectMake(30, 850, 63, 57)];
+    [bnNext setFrame:CGRectMake(130, 850, 63, 57)];
+    [bnPrev setFrame:CGRectMake(10, 850, 63, 57)];
     
-    [lblQuestionNo setFrame:CGRectMake(116, 870, 68, 26)];
+    [lblQuestionNo setFrame:CGRectMake(90, 870,50, 26)];
     
-    [bnShowAnswer setFrame:CGRectMake(320, 860, 139, 43)];
-    [bnTryAgian setFrame:CGRectMake(470, 860, 139, 43)];
-    [bnShowScore setFrame:CGRectMake(620, 860, 139, 43)];
+    [bnShowAnswer setFrame:CGRectMake(200, 860, 139, 43)];
+    [bnTryAgian setFrame:CGRectMake(340, 860, 139, 43)];
+    [bnShowScore setFrame:CGRectMake(480, 860, 139, 43)];
     [bnSubmit setFrame:CGRectMake(620, 860, 139, 43)];
 
 }
@@ -741,9 +740,9 @@
     [bnPrev setFrame:CGRectMake(30, 608, 63, 57)];
     [lblQuestionNo setFrame:CGRectMake(116, 620, 68, 26)];
     
-    [bnShowAnswer setFrame:CGRectMake(573, 613, 139, 43)];
-    [bnTryAgian setFrame:CGRectMake(723, 613, 139, 43)];
-    [bnShowScore setFrame:CGRectMake(873, 613, 139, 43)];
+    [bnShowAnswer setFrame:CGRectMake(423, 613, 139, 43)];
+    [bnTryAgian setFrame:CGRectMake(573, 613, 139, 43)];
+    [bnShowScore setFrame:CGRectMake(723, 613, 139, 43)];
     [bnSubmit setFrame:CGRectMake(873, 613, 139, 43)];
     
 }
