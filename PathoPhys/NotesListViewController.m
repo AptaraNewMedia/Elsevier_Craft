@@ -104,6 +104,15 @@
     [md Fn_removeInfoViewPopup];
     [md Fn_removeNoteViewPopup];
     NOTES_MODE = 0;
+    
+    if([arrsearch count] > 0)
+    {
+        lbl_swipe.hidden=NO;
+    }
+    else
+    {
+        lbl_swipe.hidden=YES;
+    }
 }
 -(IBAction)onClose:(id)sender{
     if (FromMenu == 1) {
