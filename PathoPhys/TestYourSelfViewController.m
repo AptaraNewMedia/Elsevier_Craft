@@ -186,6 +186,10 @@
     UIBarButtonItem *btnBar1 = [[UIBarButtonItem alloc] initWithCustomView:customLeftBar];
     self.navigationItem.leftBarButtonItem = btnBar1;
     [customLeftBar.btnBack addTarget:self action:@selector(onBack:) forControlEvents:UIControlEventTouchUpInside];
+    [customLeftBar.btnHome removeTarget:customLeftBar action:@selector(onHome:) forControlEvents:UIControlEventTouchUpInside];
+    [customLeftBar.btnHome addTarget:self action:@selector(onHome:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
         customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(230, 0, 90, 44)];
@@ -707,6 +711,23 @@
 
 #pragma mark - Button Actions
 //-----------------------------------------
+-(IBAction)onHome:(id)sender
+{
+    if (backFromNotes) {
+        [md Fn_SubTabBar];
+        [md Fn_AddMenu];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] init];
+        [alert setTitle:@"Pathophysquiz"];
+        [alert setDelegate:self];
+        [alert setTag:15];
+        [alert addButtonWithTitle:@"YES"];
+        [alert addButtonWithTitle:@"NO"];
+        [alert setMessage:[NSString stringWithFormat:MSG_BOOKMARK_TEST]];
+        [alert show];
+    }
+}
 -(IBAction)onBack:(id)sender
 {
     if (backFromNotes) {
@@ -932,6 +953,18 @@
         }
         [self.navigationController popViewControllerAnimated:YES];
     }
+    else if (alertView.tag == 15) {
+        if (buttonIndex == 0)
+        {
+            [self Fn_SaveBookmarkingData];
+        }
+        else if(buttonIndex == 1) {
+            [db fnDeleteQuizTrack:objQuizTrack.intQuizTrackId];
+        }
+        [md Fn_SubTabBar];
+        [md Fn_AddMenu];
+    }
+
 }
 //---------------------------------------------------------
 
