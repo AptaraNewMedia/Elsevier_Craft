@@ -1189,21 +1189,30 @@
 {
     // Drag Drop
     int i = 0;
-    for (CustomDragButton *bnDrag in draggableSubjects) {
-        UIView *dropArea =  [_dragDropManager.dropAreas objectAtIndex:i];
-        [dropArea addSubview:bnDrag];
-        bnDrag.frame = CGRectMake(0, 0, bnDrag.frame.size.width, bnDrag.frame.size.height);
-        
-        [bnDrag.ansImage setImage:[UIImage imageNamed:@"Btn_feed_true.png"]];
-        NSString *feeback = [self fn_getFeeback2:bnDrag.tag AndCorrect:@"correct"];
-        if (feeback.length > 0) {
-            bnDrag.feedbackBt.hidden = NO;
-            bnDrag.strFeedback = feeback;
-            [bnDrag addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
-            
+    
+    for (UIView *dropArea in _dragDropManager.dropAreas) {
+        for(UIView *view in [dropArea subviews]) {
+            [view removeFromSuperview];
         }
-        if(objDRAGDROP.intDRAGDROPRADIOid == 25 || objDRAGDROP.intDRAGDROPRADIOid == 26 || objDRAGDROP.intDRAGDROPRADIOid == 18 || objDRAGDROP.intDRAGDROPRADIOid == 9){
-            bnDrag.feedbackBt.hidden = YES;
+        
+        NSString *sa = [[objDRAGDROP.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
+        
+        for (int x=0; x<draggableSubjects.count; x++) {
+            CustomDragButton *viewBeingDragged = [draggableSubjects objectAtIndex:x];
+            NSString *ss = [viewBeingDragged.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+            if ([[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
+                [dropArea addSubview:viewBeingDragged];
+                viewBeingDragged.frame = CGRectMake(0, 0, viewBeingDragged.frame.size.width, viewBeingDragged.frame.size.height);
+                [viewBeingDragged.ansImage setImage:[UIImage imageNamed:@"Btn_feed_true.png"]];
+                NSString *feeback = [self fn_getFeeback2:viewBeingDragged.tag AndCorrect:@"correct"];
+                if (feeback.length > 0) {
+                    viewBeingDragged.feedbackBt.hidden = NO;
+                    viewBeingDragged.strFeedback = feeback;
+                    [viewBeingDragged addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
+                    
+                }
+                break;
+            }
         }
         i++;
     }

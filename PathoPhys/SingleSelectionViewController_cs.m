@@ -74,6 +74,7 @@
     
     webQuestionText.scrollView.showsHorizontalScrollIndicator = NO;
     webQuestionText.scrollView.bounces = NO;
+    webQuestionText.opaque = NO;
     btnCasestudyText.hidden = YES;
     
     int f_size = 16;
