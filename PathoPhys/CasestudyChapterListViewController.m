@@ -482,6 +482,11 @@
         strCurrentChapterName = [NSString stringWithFormat:@"%@", objChap.strChapterTitle];
         strCurrentThematicName = [NSString stringWithFormat:@""];
         
+        [self setAllArrowsRight];
+        previousSectionIndex = -1;
+        Section_Touch_Flag = 0;
+        [myTableView reloadData];
+
         if([UIScreen mainScreen].bounds.size.height == 568.0){
             caseStudyViewController = [[CaseStudyViewController alloc] initWithNibName:@"CaseStudyViewController_iPhone5" bundle:nil];
         }

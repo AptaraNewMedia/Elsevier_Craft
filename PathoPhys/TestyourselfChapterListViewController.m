@@ -492,12 +492,15 @@
     Chapters *objChap = (Chapters *)[arr_chaptersTestAndFlashcard objectAtIndex:[sender tag]];
     if([objChap.thematicData count] == 0) {
         
-        NSLog(@"No Thematic Area");
+        [self setAllArrowsRight];
+        previousSectionIndex = -1;
+        Section_Touch_Flag = 0;
+        [myTableView reloadData];
         
         intCurrentTestYourSelf_ChapterId = objChap.intChapterId;
         intCurrentTestYourSelf_ThematicId = -1;
         str_BarTitle = [NSString stringWithFormat:@"%@", objChap.strChapterTitle];        
-       // [md Fn_AddTestYourSelf];
+
         strCurrentChapterName = [NSString stringWithFormat:@"%@", objChap.strChapterTitle];
         strCurrentThematicName = [NSString stringWithFormat:@""];
         
