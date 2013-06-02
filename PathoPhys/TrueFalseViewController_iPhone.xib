@@ -178,6 +178,7 @@
 						<string key="NSFrame">{{287, 195}, {13, 19}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -229,7 +230,7 @@
 					<object class="IBUIImageView" id="769447794">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{286, 163}, {12, 12}}</string>
+						<string key="NSFrame">{{282, 163}, {22, 22}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="635241157"/>
@@ -543,11 +544,11 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="Blue_Feedback_Btn.png">{11, 13}</string>
+			<string key="Blue_Feedback_Btn.png">{17, 20}</string>
 			<string key="Question_Box_bg.png">{320, 360}</string>
 			<string key="active_false.png">{134, 165}</string>
 			<string key="active_true.png">{134, 165}</string>
-			<string key="false_Without_Border.png">{12, 12}</string>
+			<string key="false_Without_Border.png">{36, 36}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1926</string>
 	</data>
