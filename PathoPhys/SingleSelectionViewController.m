@@ -151,6 +151,9 @@
         {
             [self.view addSubview:ImgOption];
             
+            [ImgOption setFrame:CGRectMake(75, 88, 300, 125)];
+            
+            
             [self.view addSubview:Bn_ShowPunnetSquare];
             
             [self fn_AddImg];
