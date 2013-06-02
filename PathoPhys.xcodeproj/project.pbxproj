@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		390865E8173D48E300EFE7D5 /* NotesListNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 390865E6173D48E300EFE7D5 /* NotesListNewViewController.m */; };
 		390865EB173D490600EFE7D5 /* NotesListNewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 390865EA173D490600EFE7D5 /* NotesListNewViewController.xib */; };
+		391220B6175B88840049C027 /* NotesListViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 391220B5175B88840049C027 /* NotesListViewController_iPhone5.xib */; };
 		39266832173A7AA100F29AAE /* DragDropViewController_cs_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39266831173A7AA100F29AAE /* DragDropViewController_cs_iPhone5.xib */; };
 		39266834173A7F3300F29AAE /* MatchPairsViewController_cs_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39266833173A7F3300F29AAE /* MatchPairsViewController_cs_iPhone5.xib */; };
 		39266836173A830100F29AAE /* SingleSelectionViewController_cs_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39266835173A830100F29AAE /* SingleSelectionViewController_cs_iPhone5.xib */; };
@@ -1113,6 +1114,7 @@
 		390865E5173D48E300EFE7D5 /* NotesListNewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesListNewViewController.h; sourceTree = "<group>"; };
 		390865E6173D48E300EFE7D5 /* NotesListNewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesListNewViewController.m; sourceTree = "<group>"; };
 		390865EA173D490600EFE7D5 /* NotesListNewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotesListNewViewController.xib; sourceTree = "<group>"; };
+		391220B5175B88840049C027 /* NotesListViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotesListViewController_iPhone5.xib; sourceTree = "<group>"; };
 		39266831173A7AA100F29AAE /* DragDropViewController_cs_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DragDropViewController_cs_iPhone5.xib; sourceTree = "<group>"; };
 		39266833173A7F3300F29AAE /* MatchPairsViewController_cs_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchPairsViewController_cs_iPhone5.xib; sourceTree = "<group>"; };
 		39266835173A830100F29AAE /* SingleSelectionViewController_cs_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleSelectionViewController_cs_iPhone5.xib; sourceTree = "<group>"; };
@@ -3754,6 +3756,7 @@
 				87F0535F17244727003B51A1 /* NotesListViewController.m */,
 				87F0535D17244727003B51A1 /* NotesListViewController_iPad.xib */,
 				87F578A2173906D6009E995C /* NotesListViewController_iPhone.xib */,
+				391220B5175B88840049C027 /* NotesListViewController_iPhone5.xib */,
 				390865E5173D48E300EFE7D5 /* NotesListNewViewController.h */,
 				390865E6173D48E300EFE7D5 /* NotesListNewViewController.m */,
 				390865EA173D490600EFE7D5 /* NotesListNewViewController.xib */,
@@ -5385,6 +5388,7 @@
 				87098D2E1757810A002ED3E4 /* Transparent_Bg_iPhone@2x.png in Resources */,
 				87098D2F1757810A002ED3E4 /* Zoom_icon_iPhone.png in Resources */,
 				87098D301757810A002ED3E4 /* Zoom_icon_iPhone@2x.png in Resources */,
+				391220B6175B88840049C027 /* NotesListViewController_iPhone5.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

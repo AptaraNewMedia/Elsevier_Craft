@@ -226,8 +226,10 @@ UITextView *txt_feedback;
 -(void) Fn_AddNotesList{
     [self Fn_SubNotesList];
     
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    if([UIScreen mainScreen].bounds.size.height == 568.0){
+        notesListView = [[NotesListViewController alloc] initWithNibName:@"NotesListViewController_iPhone5" bundle:nil];
+    }
+    else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
         notesListView = [[NotesListViewController alloc] initWithNibName:@"NotesListViewController_iPhone" bundle:nil];
     }
@@ -276,7 +278,6 @@ UITextView *txt_feedback;
 // Note Popup
 -(void) Fn_ShowNoteViewPopup{
     [self Fn_removeNoteViewPopup];
-    
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
         NotePopupView =[[NotesPopViewController alloc] initWithNibName:@"NotesPopViewController_iPhone" bundle:nil];
@@ -406,7 +407,10 @@ UITextView *txt_feedback;
 // Add NoteList On Menu
 -(void) Fn_AddNotesListOnMenu{
     [self Fn_SubNotesListOnMenu];
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    if([UIScreen mainScreen].bounds.size.height == 568.0){
+        notesListView = [[NotesListViewController alloc] initWithNibName:@"NotesListViewController_iPhone5" bundle:nil];
+    }
+    else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
         notesListView = [[NotesListViewController alloc] initWithNibName:@"NotesListViewController_iPhone" bundle:nil];
     }
