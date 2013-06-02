@@ -125,6 +125,9 @@
     
     [scrollViewDrag.layer setBorderWidth:1.0];
     [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
+    
+    imgScroller.delegate= self;
+    scrollViewDrag.delegate= self;
 }
 -(void)viewDidUnload
 {
@@ -1325,6 +1328,15 @@
     
     x_feedback_l = bn.frame.origin.x + bn.superview.frame.origin.x - (225) ;
     y_feedback_l = bn.frame.origin.y + bn.superview.frame.origin.y - (131);
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        x_point =bn.frame.origin.x - 45;
+        y_point =bn.frame.origin.y + 50;
+    }
+    
+    
+    
     [self Fn_AddFeedbackPopup:x_point andy:y_point andText:objRadioView.feedback];
     
 }
@@ -1338,9 +1350,13 @@
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
-        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 132);
-        y_point = bn.superview.frame.origin.y + 120;
-        y_point = y_point - visibleRect.origin.y;
+//        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 132);
+//        y_point = bn.superview.frame.origin.y + 120;
+//        y_point = y_point - visibleRect.origin.y;
+        
+        
+        x_point = bn.frame.origin.x ;
+        y_point = bn.frame.origin.y;
         
         [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
     }

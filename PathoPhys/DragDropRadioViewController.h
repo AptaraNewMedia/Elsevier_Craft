@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DragDropRadioViewController : UIViewController<UIGestureRecognizerDelegate>
+@interface DragDropRadioViewController : UIViewController<UIGestureRecognizerDelegate,UIScrollViewDelegate>
 {
     IBOutlet UIImageView *ImgQuestionBg;
     IBOutlet UIImageView *ImgQuestionTextBg;
