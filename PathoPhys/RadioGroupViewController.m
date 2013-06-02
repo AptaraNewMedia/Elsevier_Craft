@@ -160,14 +160,14 @@
     
     UIFont *font = FONT_17;
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        font = FONT_10;
+        font = FONT_8;
         if ([objRH.strQuestionId isEqualToString:@"5_4_3_2"]) {
             option_hiding_width = 100;
         }
         else {
             option_hiding_width = 150;
         }
-        option_hiding_height = 20;
+        option_hiding_height = 30;
         int_x = 5;
     }
    
@@ -178,10 +178,6 @@
     lblOptionHiding.font = font;
     lblOptionHiding.textColor = COLOR_WHITE;
     [lblOptionHiding.layer setCornerRadius:9];
-    
-    lblOption1.numberOfLines = 2;
-    lblOption2.numberOfLines = 2;
-    lblOption3.numberOfLines = 2;
     
     
     // Option 1
@@ -259,14 +255,24 @@
         lblOption2.numberOfLines = 2;
         lblOption3.numberOfLines = 2;
         
-        
+        lblOption1.lineBreakMode=NSLineBreakByCharWrapping;
         lblOption2.lineBreakMode=NSLineBreakByCharWrapping;
+        lblOption3.lineBreakMode=NSLineBreakByCharWrapping;
         
         lblOption1.frame=CGRectMake(lblOptionHiding.frame.size.width + 15, 0, max_width, option_hiding_height);
-        lblOption2.frame=CGRectMake(lblOption1.frame.origin.x+lblOption1.frame.size.width + 10, -3, max_width, option_hiding_height+3);
+        lblOption2.frame=CGRectMake(lblOption1.frame.origin.x+lblOption1.frame.size.width + 10, 0, max_width, option_hiding_height);
         if (arrcount > 3) {
             lblOption3.frame=CGRectMake(lblOption2.frame.origin.x+lblOption2.frame.size.width + 10, 0, max_width, option_hiding_height);
         }
+    }
+    else {
+        lblOption1.numberOfLines = 2;
+        lblOption2.numberOfLines = 2;
+        lblOption3.numberOfLines = 2;
+        
+        lblOption1.lineBreakMode=NSLineBreakByCharWrapping;
+        lblOption2.lineBreakMode=NSLineBreakByCharWrapping;
+        lblOption3.lineBreakMode=NSLineBreakByCharWrapping;
     }
     
     //
@@ -282,8 +288,6 @@
         // iPhone
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
             [radioView setFrame:CGRectMake(lblOptionHiding.frame.origin.x,int_y, 315, 32)];
-           // [radioView setFrame:CGRectMake(lblOptionHiding.frame.origin.x,int_y, scrollRadioOption.frame.size.width - 50, 32)];
-            
         }
         else {
             [radioView setFrame:CGRectMake(lblOptionHiding.frame.origin.x+20,int_y, scrollRadioOption.frame.size.width - 50, 32)];
@@ -355,11 +359,16 @@
                
         
     }
-    if([UIScreen mainScreen].bounds.size.height == 568.0){
-        [scrollRadioOption setFrame:CGRectMake(5, 120, 320, 285)];
-        [scrollRadioOption setScrollEnabled:YES];
-         scrollRadioOption.contentSize=CGSizeMake(scrollRadioOption.frame.size.width, int_y + 50);
-    }
+   if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+       [scrollRadioOption setFrame:CGRectMake(0, 132, 320, 180)];
+       [scrollRadioOption setScrollEnabled:YES];
+        scrollRadioOption.contentSize=CGSizeMake(scrollRadioOption.frame.size.width, int_y + 50);       
+        if([UIScreen mainScreen].bounds.size.height == 568.0){
+            [scrollRadioOption setFrame:CGRectMake(0, 140, 320, 285)];
+            [scrollRadioOption setScrollEnabled:YES];
+             scrollRadioOption.contentSize=CGSizeMake(scrollRadioOption.frame.size.width, int_y + 50);
+        }
+   }
     else{
          scrollRadioOption.contentSize=CGSizeMake(scrollRadioOption.frame.size.width, int_y);
     }

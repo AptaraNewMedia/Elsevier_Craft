@@ -40,6 +40,7 @@
 #define COLOR_DRAG_BORDER [UIColor colorWithRed:0 green:1 blue:1 alpha:1] /*#00ffff*/
 
 #define FONT_8 [UIFont fontWithName:@"Helvetica" size:8]
+#define FONT_9 [UIFont fontWithName:@"Helvetica" size:9]
 #define FONT_10 [UIFont fontWithName:@"Helvetica" size:10]
 #define FONT_11 [UIFont fontWithName:@"Helvetica" size:11]
 #define FONT_12 [UIFont fontWithName:@"Helvetica" size:12]
