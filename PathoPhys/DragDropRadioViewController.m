@@ -1344,32 +1344,28 @@
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
-        x_point =bn.frame.origin.x - 45;
-        y_point =bn.frame.origin.y + 50;
+        x_point =bn.frame.origin.x - 25;
+        y_point =bn.frame.origin.y + 130;
     }
     
-    
-    
     [self Fn_AddFeedbackPopup:x_point andy:y_point andText:objRadioView.feedback];
-    
 }
+
 -(IBAction)onFeedbackTapped2:(id)sender
 {
     UIButton *btn = sender;
     CustomDragButton *bn = [draggableSubjects objectAtIndex:btn.tag];
+    
+    NSLog(@" Feedback: %@",bn.strFeedback);
     
     float x_point;
     float y_point;
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
-//        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 132);
-//        y_point = bn.superview.frame.origin.y + 120;
-//        y_point = y_point - visibleRect.origin.y;
-        
-        
-        x_point = bn.frame.origin.x ;
-        y_point = bn.frame.origin.y;
+        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 132);
+        y_point = bn.superview.frame.origin.y + 78;
+        y_point = y_point - visibleRect.origin.y;
         
         [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
     }
