@@ -115,7 +115,17 @@
         [ImgOption setImage:nil];
     }
     else {
-        UIImage *temp = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", objMCSS.strImageName]];        
+        UIImage *temp;
+        
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+        {
+            temp = [UIImage imageNamed:[NSString stringWithFormat:@"%@_iphone.png", objMCSS.strImageName]];
+        }
+        else
+        {
+            temp = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png", objMCSS.strImageName]];
+        }
+        
         [ImgOption setImage:temp];
         [ImgOption setFrame:CGRectMake(0, 0, temp.size.width, temp.size.height)];
         
@@ -395,7 +405,15 @@
 {
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
      {
-         [ImgOption setFrame:CGRectMake(10, 123, 300, 125)];
+         if([UIScreen mainScreen].bounds.size.height == 568.0)
+         {
+             [ImgOption setFrame:CGRectMake(10, 168, 300, 125)];
+         }
+         else
+         {
+             [ImgOption setFrame:CGRectMake(10, 123, 300, 125)];
+         }
+
          
          Bn_ShowPunnetSquare.hidden=YES;
      }
