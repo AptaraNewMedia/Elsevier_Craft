@@ -463,7 +463,10 @@ UITextView *txt_feedback;
         [alert setMessage:[NSString stringWithFormat:MSG_BOOKMARK_CASESTUDY]];
         [alert show];
     }
-
+    else {
+        return YES;
+    }
+    
     return NO;
     
 }
