@@ -31,6 +31,8 @@
 		39970625170EF284008933DD /* MenuViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39970624170EF284008933DD /* MenuViewController_iPhone.xib */; };
 		399D2DCA172BAB3A0073B760 /* SingleSelectionImageViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 399D2DC7172BAB3A0073B760 /* SingleSelectionImageViewController_iPad.xib */; };
 		399D2DCB172BAB3A0073B760 /* SingleSelectionImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 399D2DC9172BAB3A0073B760 /* SingleSelectionImageViewController.m */; };
+		39A85A3E175C963D00F69822 /* 160001_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 39A85A3D175C963D00F69822 /* 160001_iphone.png */; };
+		39A85A40175C964B00F69822 /* 160001_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39A85A3F175C964B00F69822 /* 160001_iphone@2x.png */; };
 		39C449B6173A921B00E60C21 /* elsevier-logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 39C449B5173A921B00E60C21 /* elsevier-logo.jpg */; };
 		39C449B8173A9E2000E60C21 /* TestyourselfChapterListViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39C449B7173A9E2000E60C21 /* TestyourselfChapterListViewController_iPhone5.xib */; };
 		39D8D6E117391EFD0008B46E /* img_aboutus_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 39D8D46317391EFB0008B46E /* img_aboutus_bg.png */; };
@@ -1148,6 +1150,8 @@
 		399D2DC7172BAB3A0073B760 /* SingleSelectionImageViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleSelectionImageViewController_iPad.xib; sourceTree = "<group>"; };
 		399D2DC8172BAB3A0073B760 /* SingleSelectionImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleSelectionImageViewController.h; sourceTree = "<group>"; };
 		399D2DC9172BAB3A0073B760 /* SingleSelectionImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleSelectionImageViewController.m; sourceTree = "<group>"; };
+		39A85A3D175C963D00F69822 /* 160001_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 160001_iphone.png; sourceTree = "<group>"; };
+		39A85A3F175C964B00F69822 /* 160001_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "160001_iphone@2x.png"; sourceTree = "<group>"; };
 		39C449B5173A921B00E60C21 /* elsevier-logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "elsevier-logo.jpg"; sourceTree = "<group>"; };
 		39C449B7173A9E2000E60C21 /* TestyourselfChapterListViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestyourselfChapterListViewController_iPhone5.xib; sourceTree = "<group>"; };
 		39D8D46317391EFB0008B46E /* img_aboutus_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_aboutus_bg.png; sourceTree = "<group>"; };
@@ -2879,6 +2883,7 @@
 		39D8D53917391EFC0008B46E /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				39A85A3D175C963D00F69822 /* 160001_iphone.png */,
 				87B12EF5175BB41D008507A4 /* 610009_iphone.png */,
 				39D8D53A17391EFC0008B46E /* 110001_iphone.png */,
 				39D8D53B17391EFC0008B46E /* 110002_iphone.png */,
@@ -3687,6 +3692,7 @@
 		871040F21741503700C7B076 /* @2x */ = {
 			isa = PBXGroup;
 			children = (
+				39A85A3F175C964B00F69822 /* 160001_iphone@2x.png */,
 				87B12EF8175BB436008507A4 /* 110007_iphone@2x.png */,
 				87B12EF9175BB436008507A4 /* 110008_iphone@2x.png */,
 				87B12EFA175BB436008507A4 /* 110009_iphone@2x.png */,
@@ -5409,6 +5415,8 @@
 				87B12F01175BB436008507A4 /* 110010_iphone@2x.png in Resources */,
 				87B12F02175BB436008507A4 /* 190001_iphone@2x.png in Resources */,
 				87B12F03175BB436008507A4 /* 610009_iphone@2x.png in Resources */,
+				39A85A3E175C963D00F69822 /* 160001_iphone.png in Resources */,
+				39A85A40175C964B00F69822 /* 160001_iphone@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
