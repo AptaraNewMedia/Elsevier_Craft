@@ -201,6 +201,10 @@
         [bnDrag.feedbackBt setTag:i];
         [bnDrag.feedbackBt setImage:[UIImage imageNamed:@"Btn_feed.png"] forState:UIControlStateNormal];
         bnDrag.feedbackBt.hidden = YES;
+        
+        NSString *feeback = [self fn_getFeeback2:bnDrag.feedbackBt.tag AndCorrect:@"correct"];
+        bnDrag.strFeedback=feeback;
+        
         [bnDrag.feedbackBt addTarget:self action:@selector(onFeedbackTapped2:) forControlEvents:UIControlEventTouchUpInside];
         
         [scrollViewDrag addSubview:bnDrag];
@@ -1208,7 +1212,7 @@
                 if (feeback.length > 0) {
                     viewBeingDragged.feedbackBt.hidden = NO;
                     viewBeingDragged.strFeedback = feeback;
-                    [viewBeingDragged addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
+                    [viewBeingDragged addTarget:self action:@selector(onFeedbackTapped2:) forControlEvents:UIControlEventTouchUpInside];
                     
                 }
                 break;
