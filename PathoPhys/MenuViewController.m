@@ -122,6 +122,8 @@
     [md Fn_removeNoteViewPopup];
     NOTES_MODE = 0;
     
+    //Global Variables
+    isTestInProgress = 0;
     
 }
 - (void) fnAddNavigationItems

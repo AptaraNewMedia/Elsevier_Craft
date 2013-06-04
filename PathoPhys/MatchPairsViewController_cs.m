@@ -360,7 +360,7 @@
     }
     CGSize size = [data sizeWithFont:font constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     if (size.height < 30) {
-        size.height = 30;
+        size.height = 36;
     }
     else if (size.height == 30) {
         size.height = 40;

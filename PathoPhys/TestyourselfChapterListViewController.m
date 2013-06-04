@@ -125,6 +125,9 @@
 }
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+  
+    //Global Variables
+    isTestInProgress = 0;
     
     float currentVersion = 6.0;
     
