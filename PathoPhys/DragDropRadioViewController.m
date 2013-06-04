@@ -125,8 +125,8 @@
         [self rotateScrollViewButtonsForiPhone];
     }
     
-    [scrollViewDrag.layer setBorderWidth:1.0];
-    [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
+//    [scrollViewDrag.layer setBorderWidth:1.0];
+//    [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
     
     imgScroller.delegate= self;
     scrollViewDrag.delegate= self;
@@ -216,8 +216,8 @@
         
     }
     [scrollViewDrag setContentSize:CGSizeMake(scrollViewDrag.frame.size.width, y)];
-    [scrollViewDrag.layer setBorderWidth:1.0];
-    [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
+//    [scrollViewDrag.layer setBorderWidth:1.0];
+//    [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
 }
 -(void)droppablePoints
 {

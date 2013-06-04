@@ -113,8 +113,8 @@
         [self rotateScrollViewButtonsForiPhone];
     }
     
-    [scrollViewDrag.layer setBorderWidth:1.0];
-    [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
+//    [scrollViewDrag.layer setBorderWidth:1.0];
+//    [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
 }
 - (void)viewDidUnload
 {
@@ -191,8 +191,8 @@
         
     }
     [scrollViewDrag setContentSize:CGSizeMake(objDRAGDROP.fWidth, y)];
-    [scrollViewDrag.layer setBorderWidth:1.0];
-    [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
+//    [scrollViewDrag.layer setBorderWidth:1.0];
+//    [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
     
 }
 -(void)droppablePoints

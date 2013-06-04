@@ -93,8 +93,8 @@
      if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
          [self rotateScrollViewButtonsForiPhone];
      }
-    [scrollViewDrag.layer setBorderWidth:1.0];
-    [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
+//    [scrollViewDrag.layer setBorderWidth:1.0];
+//    [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
 }
 //---------------------------------------------------------
 
@@ -163,8 +163,8 @@
     }
 
     [scrollViewDrag setContentSize:CGSizeMake(objFillBlanks.fWidth, y)];
-    [scrollViewDrag.layer setBorderWidth:1.0];
-    [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
+//    [scrollViewDrag.layer setBorderWidth:1.0];
+//    [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
 }
 -(void)droppablePoints
 {
