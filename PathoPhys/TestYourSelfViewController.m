@@ -959,11 +959,11 @@
         }
     }
     
-    NSString *score = [NSString stringWithFormat:@"%d out of %d questions answered correctly.", total_score, intTotalQuestions];
+    int_currentScore =(total_score / intTotalQuestions) * 100;
+    
+    NSString *score = [NSString stringWithFormat:@"%d%% (%d out of %d questions answered correctly.)", int_currentScore , total_score, intTotalQuestions];
     
     [md Fn_AddResult:strCurrentChapterName AndThematicNAme:strCurrentThematicName AndScore:score];    
-    
-    int_currentScore =(total_score / intTotalQuestions) * 100;     
     
     objQuizTrack.intCorrectQuestion = total_score;
     objQuizTrack.intMissedQuestion = (intTotalQuestions - total_score);
