@@ -30,6 +30,8 @@
     IBOutlet UILabel *lblTitleDescription;
     IBOutlet UILabel *lblTitleDate;
     
+    IBOutlet UILabel *lblAddNote;
+    
     IBOutlet UITextField *txtSearch;
     
     NSMutableArray * arrNotes;
@@ -98,6 +100,23 @@
     
     //btnClose.hidden = YES;
     
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+        if (FromMenu == 0) {
+            [lblAddNote setFrame:CGRectMake(lblAddNote.frame.origin.x, 25, lblAddNote.frame.size.width, lblAddNote.frame.size.height)];
+            [btnClose setFrame:CGRectMake(btnClose.frame.origin.x, 20, btnClose.frame.size.width, btnClose.frame.size.height)];
+            [lblTitleSerialNo setFrame:CGRectMake(lblTitleSerialNo.frame.origin.x, 75, lblTitleSerialNo.frame.size.width, lblTitleSerialNo.frame.size.height)];
+            [lblTitleName setFrame:CGRectMake(lblTitleName.frame.origin.x, 75, lblTitleName.frame.size.width, lblTitleName.frame.size.height)];
+            [lblTitleDate setFrame:CGRectMake(lblTitleDate.frame.origin.x, 75, lblTitleDate.frame.size.width, lblTitleDate.frame.size.height)];
+            
+            [txtSearch setFrame:CGRectMake(txtSearch.frame.origin.x, 52, txtSearch.frame.size.width, txtSearch.frame.size.height)];
+            
+            [tbl setFrame:CGRectMake(tbl.frame.origin.x, 98, tbl.frame.size.width, tbl.frame.size.height)];
+        }
+        
+    }
+    else {
+        
+    }
 
 }
 -(void)viewWillAppear:(BOOL)animated {

@@ -255,7 +255,7 @@ UITextView *txt_feedback;
     else {
         [self Fn_AddNotesListOnMenu];
     }
-    
+ 
     //[self.window.rootViewController.view addSubview:notesListView.view];
     [notesListView shouldAutorotateToInterfaceOrientation:DEVICE_ORIENTATION];
 }

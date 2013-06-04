@@ -78,8 +78,7 @@
     //    lblTitle.font = FONT_20;
     //    lblTitle.textColor = COLOR_WHITE;
     
-    btnClose.hidden = YES;
-    
+    btnClose.hidden = YES;    
     
 }
 -(IBAction)onClose:(id)sender{
