@@ -213,6 +213,7 @@
     _dragDropManager = [[DragDropManager alloc] initWithDragSubjects:draggableSubjects andDropAreas:droppableAreas];
     
     uiTapGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:_dragDropManager action:@selector(dragging:)];
+    uiTapGestureRecognizer.delegate = self;
     [[self view] addGestureRecognizer:uiTapGestureRecognizer];
     
     
@@ -394,6 +395,20 @@
         [txt_feedback setFrame:CGRectMake(13, 13, 235, 104)];
         [feedbackView addSubview:txt_feedback];
         [self.view addSubview:feedbackView];
+        
+        if(xValue<200)
+        {
+            img_feedback.transform = CGAffineTransformMakeScale(-1, 1);
+            
+            [feedbackView setFrame:CGRectMake(xValue+230, yValue, 261, 131)];
+            
+            x_feedback_p=x_feedback_p+212;
+            x_feedback_l=x_feedback_l+212;
+        }
+        else
+        {
+            img_feedback.transform = CGAffineTransformMakeScale(1, 1);
+        }
     }
 }
 -(void)handleRevealScore
@@ -584,188 +599,6 @@
     }
     [self handleRevealScore];
 }
-/*
--(void)handleShowAnswers
-{
-    int i = 0;
-    
-    int id_27 = 0;
-    
-    int id_11_1 = 0;
-    int id_11_2 = 0;
-    int id_11_3 = 0;
-    int id_11_4 = 0;
-    
-    int id_12_1 = 0;
-    int id_12_2 = 0;
-    int id_12_3 = 0;
-    int id_12_4 = 0;
-    
-    int id_13_1 = 0;
-    int id_13_2 = 0;
-    int id_13_3 = 0;
-    int id_13_4 = 0;
-    
-    int id_14_1 = 0;
-    int id_14_2 = 0;
-    int id_14_3 = 0;
-    int id_14_4 = 0;
-    
-    int id_15_1 = 0;
-    int id_15_2 = 0;
-    int id_15_3 = 0;
-    int id_15_4 = 0;
-    
-    
-    for (UIView *dropArea in _dragDropManager.dropAreas) {
-        for(UIView *view in [dropArea subviews]) {
-            [view removeFromSuperview];
-        }
-        
-        NSString *sa = [[objDRAGDROP.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
-        
-        if (id_27 == 1 || id_11_1 == 1 || id_11_2 == 1 ||  id_11_3 == 1 || id_11_4 == 1 ||  id_12_1 == 1 || id_12_2 == 1 || id_12_3 == 1 ||  id_12_4 == 1 ||  id_13_1 == 1 ||  id_13_2 == 1 ||  id_13_3 == 1 ||  id_13_4 == 1 ||id_14_1 == 1 ||   id_14_2 == 1 ||  id_14_3 == 1 ||   id_14_4 == 1 || id_15_1 == 1 ||  id_15_2 == 1 ||
-            id_15_3 == 1 || id_15_4 == 1)
-        {
-            
-            for (int x=draggableSubjects.count-1; x>0; x--) {
-                CustomDragButton *viewBeingDragged = [draggableSubjects objectAtIndex:x];
-                NSString *ss = [viewBeingDragged.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-                
-                //if ([[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
-                if ([ss isEqualToString:sa]) {
-                    [dropArea addSubview:viewBeingDragged];
-                    viewBeingDragged.frame = CGRectMake(0, 0, viewBeingDragged.frame.size.width, viewBeingDragged.frame.size.height);
-                    [viewBeingDragged.ansImage setImage:[UIImage imageNamed:@"Btn_feed_true.png"]];
-                    NSString *feeback = [self fn_getFeeback:viewBeingDragged.tag AndCorrect:@"correct"];
-                    if (feeback.length > 0) {
-                        viewBeingDragged.feedbackBt.hidden = NO;
-                        viewBeingDragged.strFeedback = feeback;
-                        [viewBeingDragged addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
-                        
-                    }
-                    break;
-                }
-                
-            }
-            
-            id_11_1 = 0;
-            id_11_2 = 0;
-            id_11_3 = 0;
-            id_11_4 = 0;
-            
-            id_12_1 = 0;
-            id_12_2 = 0;
-            id_12_3 = 0;
-            id_12_4 = 0;
-            
-            id_13_1 = 0;
-            id_13_2 = 0;
-            id_13_3 = 0;
-            id_13_4 = 0;
-            
-            id_14_1 = 0;
-            id_14_2 = 0;
-            id_14_3 = 0;
-            id_14_4 = 0;
-            
-            id_15_1 = 0;
-            id_15_2 = 0;
-            id_15_3 = 0;
-            id_15_4 = 0;
-            
-        }
-        else {
-            for (int x=0; x<draggableSubjects.count; x++) {
-                CustomDragButton *viewBeingDragged = [draggableSubjects objectAtIndex:x];
-                NSString *ss = [viewBeingDragged.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-                
-                //if ([[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
-                if ([ss isEqualToString:sa]) {
-                    [dropArea addSubview:viewBeingDragged];
-                    viewBeingDragged.frame = CGRectMake(0, 0, viewBeingDragged.frame.size.width, viewBeingDragged.frame.size.height);
-                    [viewBeingDragged.ansImage setImage:[UIImage imageNamed:@"Btn_feed_true.png"]];
-                    NSString *feeback = [self fn_getFeeback:viewBeingDragged.tag AndCorrect:@"correct"];
-                    if (feeback.length > 0) {
-                        viewBeingDragged.feedbackBt.hidden = NO;
-                        viewBeingDragged.strFeedback = feeback;
-                        [viewBeingDragged addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
-                        
-                    }
-                    break;
-                }
-                
-            }
-        }
-        
-        if ([[sa lowercaseString] isEqualToString:@"mphase"]) {
-            id_27 = 1;
-        }
-        else if ([[sa lowercaseString] isEqualToString:@"mm"]) {
-            id_11_1 = 1;
-        }
-        else if ([[sa lowercaseString] isEqualToString:@"affected"]) {
-            id_11_2 = 1;
-        }
-        else if ([[sa lowercaseString] isEqualToString:@"mm"]) {
-            id_11_3 = 1;
-        }
-        else if ([[sa lowercaseString] isEqualToString:@"unaffected"]) {
-            id_11_4 = 1;
-        }
-        else if ([[sa lowercaseString] isEqualToString:@"cf,cf"]) {
-            id_12_1 = 1;
-        }
-        else if ([[sa lowercaseString] isEqualToString:@"carrier"]) {
-            id_12_2 = 1;
-        }
-        else if ([[sa lowercaseString] isEqualToString:@""]) {
-            //id_12_3 = 1;
-        }
-        else if ([[sa lowercaseString] isEqualToString:@""]) {
-            //id_12_4 = 1;
-        }
-        else if ([[sa lowercaseString] isEqualToString:@"hh"]) {
-            id_13_1 = 1;
-        }
-        else if ([[sa lowercaseString] isEqualToString:@"normal"]) {
-            id_13_2 = 1;
-        }
-        else if ([[sa lowercaseString] isEqualToString:@"hh"]) {
-            id_13_3 = 1;
-        }
-        else if ([[sa lowercaseString] isEqualToString:@"carrier"]) {
-            id_13_4 = 1;
-        }
-        else if ([[sa lowercaseString] isEqualToString:@"xnxcb"]) {
-            id_14_1 = 1;
-        }
-        else if ([[sa lowercaseString] isEqualToString:@"carrierfemale"]) {
-            id_14_2 = 1;
-        }
-        else if ([[sa lowercaseString] isEqualToString:@"xny"]) {
-            id_14_3 = 1;
-        }
-        else if ([[sa lowercaseString] isEqualToString:@"normalmale"]) {
-            id_14_4 = 1;
-        }
-        else if ([[sa lowercaseString] isEqualToString:@"xnxh"]) {
-            id_15_1 = 1;
-        }
-        else if ([[sa lowercaseString] isEqualToString:@"normalfemale"]) {
-            id_15_2 = 1;
-        }
-        else if ([[sa lowercaseString] isEqualToString:@"xhy"]) {
-            id_15_3 = 1;
-        }
-        else if ([[sa lowercaseString] isEqualToString:@"normalmale"]) {
-            id_15_4 = 1;
-        }
-        i++;
-    }
-    [self handleRevealScore];
-}
- */
 //---------------------------------------------------------
 
 
@@ -895,6 +728,17 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     feedbackView.hidden = YES;
+}
+//---------------------------------------------------------
+
+
+#pragma mark - Gesture
+//---------------------------------------------------------
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if ([touch.view isKindOfClass:[CustomDragButton class]])
+        return YES;
+    return NO;
 }
 //---------------------------------------------------------
 

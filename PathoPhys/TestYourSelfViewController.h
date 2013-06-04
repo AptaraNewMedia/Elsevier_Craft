@@ -34,4 +34,7 @@
 -(void)disableAllButtons:(int)questionNO;
 -(void)Fn_SaveBookmarkingData;
 -(void)Fn_DeleteBookmarkingData;
+
+-(IBAction)onNext:(id)sender;
+-(IBAction)onPrev:(id)sender;
 @end

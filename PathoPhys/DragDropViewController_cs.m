@@ -165,7 +165,7 @@
         [bnDrag.feedbackBt setTag:i];
         [bnDrag.feedbackBt setImage:[UIImage imageNamed:@"Btn_feed.png"] forState:UIControlStateNormal];
         bnDrag.feedbackBt.hidden = YES;
-        [bnDrag.feedbackBt addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
+        [bnDrag.feedbackBt addTarget:self action:@selector(onFeedbackTapped2:) forControlEvents:UIControlEventTouchUpInside];
         
         [scrollViewDrag addSubview:bnDrag];
         y=y+objDRAGDROP.fHeight+10;
@@ -196,6 +196,7 @@
     _dragDropManager = [[DragDropManager alloc] initWithDragSubjects:draggableSubjects andDropAreas:droppableAreas];
     
     uiTapGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:_dragDropManager action:@selector(dragging:)];
+    uiTapGestureRecognizer.delegate = self;    
     [[self view] addGestureRecognizer:uiTapGestureRecognizer];
 
     
@@ -270,34 +271,95 @@
 }
 -(void)Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue
 {
-    
     [feedbackView removeFromSuperview];
     
-    feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 261, 131)];
-    feedbackView.backgroundColor = [UIColor clearColor];
-    
-    UIView *bg = [[UIView alloc] init];
-    bg.backgroundColor = [UIColor whiteColor];
-    [bg setFrame:CGRectMake(13, 13, 235, 104)];
-    [feedbackView addSubview:bg];
-    
-    
-    UIImageView *img_feedback = [[UIImageView alloc] init];
-    img_feedback.backgroundColor = [UIColor clearColor];
-    [img_feedback setImage:[UIImage imageNamed:@"img_feedback_down_box.png"]];
-    [img_feedback setFrame:CGRectMake(0, 0, 261, 131)];
-    [feedbackView addSubview:img_feedback];
-    
-    
-    UITextView *txt_feedback = [[UITextView alloc] init];
-    txt_feedback.text = textValue;
-    txt_feedback.textColor = [UIColor whiteColor];
-    txt_feedback.backgroundColor = [UIColor clearColor];
-    txt_feedback.font = FONT_14;
-    txt_feedback.editable = NO;
-    [txt_feedback setFrame:CGRectMake(13, 13, 235, 104)];
-    [feedbackView addSubview:txt_feedback];
-    [self.view addSubview:feedbackView];    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 180, 125)];
+        
+        feedbackView.backgroundColor = [UIColor clearColor];
+        
+        UIView *bg = [[UIView alloc] init];
+        bg.backgroundColor = [UIColor whiteColor];
+        [bg setFrame:CGRectMake(12, 17, 152, 90)];
+        [feedbackView addSubview:bg];
+        
+        UIImageView *img_feedback = [[UIImageView alloc] init];
+        img_feedback.backgroundColor = [UIColor clearColor];
+        //        [img_feedback setImage:[UIImage imageNamed:@"img_feedback_down_box.png"]];
+        
+        [img_feedback setImage:[UIImage imageNamed:@"Small_Feedback_Box_004.png"]];
+        
+        [img_feedback setFrame:CGRectMake(0, 0, 180, 125)];
+        
+        [feedbackView addSubview:img_feedback];
+        
+        UITextView *txt_feedback = [[UITextView alloc] init];
+        txt_feedback.text = textValue;
+        txt_feedback.textColor = [UIColor whiteColor];
+        txt_feedback.backgroundColor = [UIColor clearColor];
+        txt_feedback.font = FONT_10;
+        txt_feedback.editable = NO;
+        [txt_feedback setFrame:CGRectMake(12, 17, 152, 90)];
+        [feedbackView addSubview:txt_feedback];
+        [self.view addSubview:feedbackView];
+        
+        if(xValue<70)
+        {
+            img_feedback.transform = CGAffineTransformMakeScale(-1, 1);
+            
+            [feedbackView setFrame:CGRectMake(xValue+125, yValue, 180, 125)];
+        }
+        else
+        {
+            img_feedback.transform = CGAffineTransformMakeScale(1, 1);
+        }
+    }
+    else
+    {
+        feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 261, 131)];
+        feedbackView.backgroundColor = [UIColor clearColor];
+        
+        UIView *bg = [[UIView alloc] init];
+        bg.backgroundColor = [UIColor whiteColor];
+        [bg setFrame:CGRectMake(13, 13, 235, 104)];
+        [feedbackView addSubview:bg];
+        
+        
+        UIImageView *img_feedback = [[UIImageView alloc] init];
+        img_feedback.backgroundColor = [UIColor clearColor];
+        [img_feedback setImage:[UIImage imageNamed:@"img_feedback_down_box.png"]];
+        
+        //    [img_feedback setImage:[UIImage imageNamed:@"Small_Feedback_Box_004.png"]];
+        
+        [img_feedback setFrame:CGRectMake(0, 0, 261, 131)];
+        [feedbackView addSubview:img_feedback];
+        
+        
+        UITextView *txt_feedback = [[UITextView alloc] init];
+        txt_feedback.text = textValue;
+        txt_feedback.textColor = [UIColor whiteColor];
+        txt_feedback.backgroundColor = [UIColor clearColor];
+        txt_feedback.font = FONT_14;
+        txt_feedback.editable = NO;
+        [txt_feedback setFrame:CGRectMake(13, 13, 235, 104)];
+        [feedbackView addSubview:txt_feedback];
+        [self.view addSubview:feedbackView];
+        
+        if(xValue<200)
+        {
+            img_feedback.transform = CGAffineTransformMakeScale(-1, 1);
+            
+            [feedbackView setFrame:CGRectMake(xValue+230, yValue, 261, 131)];
+            
+            x_feedback_p=x_feedback_p+212;
+            x_feedback_l=x_feedback_l+212;
+        }
+        else
+        {
+            img_feedback.transform = CGAffineTransformMakeScale(1, 1);
+        }
+    }
 }
 -(void)handleRevealScore
 {
@@ -318,7 +380,7 @@
                 if (feeback.length > 0) {
                     bn.feedbackBt.hidden = NO;
                     bn.strFeedback = feeback;
-                    [bn addTarget:self action:@selector(onFeedbackTapped2:) forControlEvents:UIControlEventTouchUpInside];
+                    [bn addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
                     
                 }
             }else {
@@ -327,7 +389,7 @@
                 if (feeback.length > 0) {
                     bn.feedbackBt.hidden = NO;
                     bn.strFeedback = feeback;
-                    [bn addTarget:self action:@selector(onFeedbackTapped2:) forControlEvents:UIControlEventTouchUpInside];
+                    [bn addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
                     
                 }
             }
@@ -461,7 +523,6 @@
         [self.view removeGestureRecognizer:uiTapGestureRecognizer];
     }
 }
-
 -(void)handleShowAnswers
 {
     int i = 0;
@@ -502,23 +563,38 @@
 -(IBAction)onFeedbackTapped:(id)sender
 {
     CustomDragButton *bn = sender;
-    float x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 10);
-    float y_point = bn.superview.frame.origin.y + 15;
-    y_point = y_point - visibleRect.origin.y;
     
-    x_feedback_l=x_point;
-    y_feedback_l=y_point;
+    float x_point;
+    float y_point;
     
-    x_feedback_p=x_point-238;
-    y_feedback_p=y_point+217;
-    
-    if(currentOrientaion==1 || currentOrientaion==2) // Portrait
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
-        [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:bn.strFeedback];
+        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 157);
+        y_point = bn.superview.frame.origin.y+58;
+        y_point = y_point - visibleRect.origin.y;
+        
+        [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
     }
-    else //Lanscape
+    else
     {
-        [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:bn.strFeedback];
+        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 10);
+        y_point = bn.superview.frame.origin.y + 15;
+        y_point = y_point - visibleRect.origin.y;
+        
+        x_feedback_l=x_point;
+        y_feedback_l=y_point;
+        
+        x_feedback_p=x_point-238;
+        y_feedback_p=y_point+217;
+        
+        if(currentOrientaion==1 || currentOrientaion==2) // Portrait
+        {
+            [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:bn.strFeedback];
+        }
+        else //Lanscape
+        {
+            [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:bn.strFeedback];
+        }
     }
 }
 -(IBAction)onFeedbackTapped2:(id)sender
@@ -604,6 +680,17 @@
     if (imgScroller == scrollView) {
         visibleRect.origin = imgScroller.contentOffset;
     }
+}
+//---------------------------------------------------------
+
+
+#pragma mark - Gesture
+//---------------------------------------------------------
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if ([touch.view isKindOfClass:[CustomDragButton class]])
+        return YES;
+    return NO;
 }
 //---------------------------------------------------------
 

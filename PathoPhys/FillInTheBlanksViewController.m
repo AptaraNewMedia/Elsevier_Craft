@@ -184,6 +184,7 @@
     _dragDropManager = [[DragDropManager alloc] initWithDragSubjects:draggableSubjects andDropAreas:droppableAreas];
     
     uiTapGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:_dragDropManager action:@selector(dragging:)];
+    uiTapGestureRecognizer.delegate = self;
     [[self view] addGestureRecognizer:uiTapGestureRecognizer];
     
 }
@@ -341,6 +342,20 @@
         [txt_feedback setFrame:CGRectMake(13, 13, 235, 104)];
         [feedbackView addSubview:txt_feedback];
         [self.view addSubview:feedbackView];
+        
+        if(xValue<200)
+        {
+            img_feedback.transform = CGAffineTransformMakeScale(-1, 1);
+            
+            [feedbackView setFrame:CGRectMake(xValue+230, yValue, 261, 131)];
+            
+            x_feedback_p=x_feedback_p+212;
+            x_feedback_l=x_feedback_l+212;
+        }
+        else
+        {
+            img_feedback.transform = CGAffineTransformMakeScale(1, 1);
+        }
     }
 }
 -(NSString *)fn_getFeeback:(int)intfeed AndCorrect:(NSString *)correctincorrect
@@ -685,6 +700,15 @@
 }
 //---------------------------------------------------------
 
+#pragma mark - Gesture
+//---------------------------------------------------------
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if ([touch.view isKindOfClass:[CustomDragButton class]])
+        return YES;
+    return NO;
+}
+//---------------------------------------------------------
 
 #pragma mark - Orientation
 //---------------------------------------------------------

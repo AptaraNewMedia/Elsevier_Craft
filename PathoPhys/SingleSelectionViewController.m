@@ -382,6 +382,14 @@
     
     [self Fn_createInvisibleBtn];
 }
+-(void)handleSwipeFromLeft
+{
+    [parentObject onNext:nil];
+}
+-(void)handleSwipeFromRight
+{
+    [parentObject onPrev:nil];
+}
 //images
 -(void)fn_AddImg
 {
@@ -792,14 +800,6 @@
         [feedbackView removeFromSuperview];
     }
 }
-
-
-- (void) handleSwipeFromLeft{
-    NSLog(@"Left");
-}
-- (void) handleSwipeFromRight{
-    NSLog(@"Right");
-}
 //---------------------------------------------------------
 
 
@@ -933,55 +933,8 @@
     
     cell.btnFeedback.tag = indexPath.row;
    
-    
-    if (selectedCells) {
-        
-        if ([selectedCells containsObject:[NSNumber numberWithInt:indexPath.row]]) {
-            [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone          ];
-            
-            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-                
-                NSString *ss = [objMCSS.arrOptions objectAtIndex:indexPath.row];
-                ss = [ss stringByReplacingOccurrencesOfString:@" " withString:@""];
-                ss = [ss lowercaseString];
-                int answer_count = [objMCSS.arrAnswer count];
-                for (int j = 0; j < answer_count; j++) {
-                    NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
-                    sa = [sa lowercaseString];
-                    if (![ss isEqualToString:sa]) {
-                        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-                            [cell.imgAns setImage:[UIImage imageNamed:@"false_Without_Border.png"]];
-                        }
-                        else {
-                            [cell.imgAns setImage:[UIImage imageNamed:@"img_false.png"]];
-                        }
-                        NSString *feeback = [self fn_getFeeback:indexPath.row];
-                        if (feeback.length > 0) {
-                            cell.btnFeedback.hidden = NO;
-                            cell.strFeedback = feeback;
-                        }
-                        
-                    }else {
-                        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-                            [cell.imgAns setImage:[UIImage imageNamed:@"True_Btn_Without_Border.png"]];
-                        }
-                        else {
-                            [cell.imgAns setImage:[UIImage imageNamed:@"img_true.png"]];
-                        }
-                        NSString *feeback = [self fn_getFeeback:indexPath.row];
-                        if (feeback.length > 0) {
-                            cell.btnFeedback.hidden = NO;
-                            cell.strFeedback = feeback;
-                        }
-                        break;
-                    }
-                }
-            }
-        }
-    }
-    
-    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-        if (isShowAnswer) {
+    //if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+    if (isShowAnswer) {
             [cell.btnFeedback setImage:[UIImage imageNamed:@"btn_feedback.png"] forState:UIControlStateNormal];
             
             int answer_count = [objMCSS.arrAnswer count];
@@ -1030,7 +983,53 @@
                 
             }
         }
+    else {
+        if (selectedCells) {
+            if ([selectedCells containsObject:[NSNumber numberWithInt:indexPath.row]]) {
+                [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone          ];
+                
+                if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                    
+                    NSString *ss = [objMCSS.arrOptions objectAtIndex:indexPath.row];
+                    ss = [ss stringByReplacingOccurrencesOfString:@" " withString:@""];
+                    ss = [ss lowercaseString];
+                    int answer_count = [objMCSS.arrAnswer count];
+                    for (int j = 0; j < answer_count; j++) {
+                        NSString *sa = [[objMCSS.arrAnswer objectAtIndex:j] stringByReplacingOccurrencesOfString:@" " withString:@""];
+                        sa = [sa lowercaseString];
+                        if (![ss isEqualToString:sa]) {
+                            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                                [cell.imgAns setImage:[UIImage imageNamed:@"false_Without_Border.png"]];
+                            }
+                            else {
+                                [cell.imgAns setImage:[UIImage imageNamed:@"img_false.png"]];
+                            }
+                            NSString *feeback = [self fn_getFeeback:indexPath.row];
+                            if (feeback.length > 0) {
+                                cell.btnFeedback.hidden = NO;
+                                cell.strFeedback = feeback;
+                            }
+                            
+                        }else {
+                            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+                                [cell.imgAns setImage:[UIImage imageNamed:@"True_Btn_Without_Border.png"]];
+                            }
+                            else {
+                                [cell.imgAns setImage:[UIImage imageNamed:@"img_true.png"]];
+                            }
+                            NSString *feeback = [self fn_getFeeback:indexPath.row];
+                            if (feeback.length > 0) {
+                                cell.btnFeedback.hidden = NO;
+                                cell.strFeedback = feeback;
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }        
     }
+    //}
     
     [cellArray addObject:cell];
     

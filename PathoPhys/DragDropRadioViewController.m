@@ -237,6 +237,7 @@
     
     _dragDropManager = [[DragDropManager alloc] initWithDragSubjects:draggableSubjects andDropAreas:droppableAreas];
     uiTapGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:_dragDropManager action:@selector(dragging:)];
+    uiTapGestureRecognizer.delegate = self;
     [[self view] addGestureRecognizer:uiTapGestureRecognizer];
     
 }
@@ -891,14 +892,14 @@
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
-        feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 150, 90)];
+        feedbackView = [[UIView alloc] initWithFrame:CGRectMake(xValue, yValue, 180, 125)];
+        
         feedbackView.backgroundColor = [UIColor clearColor];
         
         UIView *bg = [[UIView alloc] init];
-        bg.backgroundColor = [UIColor whiteColor];
-        [bg setFrame:CGRectMake(12, 12, 125, 65)];
+        bg.backgroundColor = [UIColor clearColor];
+        [bg setFrame:CGRectMake(12, 17, 152, 90)];
         [feedbackView addSubview:bg];
-        
         
         UIImageView *img_feedback = [[UIImageView alloc] init];
         img_feedback.backgroundColor = [UIColor clearColor];
@@ -906,9 +907,9 @@
         
         [img_feedback setImage:[UIImage imageNamed:@"Small_Feedback_Box_004.png"]];
         
-        [img_feedback setFrame:CGRectMake(0, 0, 150, 90)];
-        [feedbackView addSubview:img_feedback];
+        [img_feedback setFrame:CGRectMake(0, 0, 180, 125)];
         
+        [feedbackView addSubview:img_feedback];
         
         UITextView *txt_feedback = [[UITextView alloc] init];
         txt_feedback.text = textValue;
@@ -916,11 +917,11 @@
         txt_feedback.backgroundColor = [UIColor clearColor];
         txt_feedback.font = FONT_10;
         txt_feedback.editable = NO;
-        [txt_feedback setFrame:CGRectMake(12, 12, 125, 65)];
+        [txt_feedback setFrame:CGRectMake(12, 17, 152, 90)];
         [feedbackView addSubview:txt_feedback];
         [self.view addSubview:feedbackView];
         
-        if(xValue<70)
+        if(xValue<50)
         {
             img_feedback.transform = CGAffineTransformMakeScale(-1, 1);
             
@@ -945,9 +946,6 @@
         UIImageView *img_feedback = [[UIImageView alloc] init];
         img_feedback.backgroundColor = [UIColor clearColor];
         [img_feedback setImage:[UIImage imageNamed:@"img_feedback_down_box.png"]];
-        
-        //    [img_feedback setImage:[UIImage imageNamed:@"Small_Feedback_Box_004.png"]];
-        
         [img_feedback setFrame:CGRectMake(0, 0, 261, 131)];
         [feedbackView addSubview:img_feedback];
         
@@ -961,6 +959,20 @@
         [txt_feedback setFrame:CGRectMake(13, 13, 235, 104)];
         [feedbackView addSubview:txt_feedback];
         [self.view addSubview:feedbackView];
+        
+        if(xValue<200)
+        {
+            img_feedback.transform = CGAffineTransformMakeScale(-1, 1);
+            
+            [feedbackView setFrame:CGRectMake(xValue+230, yValue, 261, 131)];
+            
+            x_feedback_p=x_feedback_p+212;
+            x_feedback_l=x_feedback_l+212;
+        }
+        else
+        {
+            img_feedback.transform = CGAffineTransformMakeScale(1, 1);
+        }
     }
 }
 -(void)disableEditFields
@@ -1348,21 +1360,28 @@
 //---------------------------------------------------------
 -(void)Fn_Feedback_Tapped:(id)sender
 {
-    
     objRadioView = [arr_radioButtons objectAtIndex:[sender tag]];
     
     UIButton *bn = (UIButton *)sender;
-    float x_point =  imgScroller.frame.origin.x + bn.frame.origin.x + bn.superview.frame.origin.x - (225);
-    float y_point =  imgScroller.frame.origin.y + bn.frame.origin.y + bn.superview.frame.origin.y - (131);
-    y_point = y_point - visibleRect.origin.y;
     
-    x_feedback_l = bn.frame.origin.x + bn.superview.frame.origin.x - (225) ;
-    y_feedback_l = bn.frame.origin.y + bn.superview.frame.origin.y - (131);
+    float x_point;
+    float y_point;
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
-        x_point =bn.frame.origin.x - 25;
-        y_point =bn.frame.origin.y + 130;
+        x_point =bn.frame.origin.x-60;
+        y_point =bn.frame.origin.y + bn.superview.frame.origin.y+48;// + 130;
+        
+        y_point=y_point-visibleRect.origin.y;
+    }
+    else
+    {
+        x_point =  imgScroller.frame.origin.x + bn.frame.origin.x + bn.superview.frame.origin.x - (225);
+        y_point =  imgScroller.frame.origin.y + bn.frame.origin.y + bn.superview.frame.origin.y - (131);
+        y_point = y_point - visibleRect.origin.y;
+        
+        x_feedback_l = bn.frame.origin.x + bn.superview.frame.origin.x - (225) ;
+        y_feedback_l = bn.frame.origin.y + bn.superview.frame.origin.y - (131);
     }
     
     [self Fn_AddFeedbackPopup:x_point andy:y_point andText:objRadioView.feedback];
@@ -1379,9 +1398,9 @@
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
-        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 132);
-        y_point = bn.superview.frame.origin.y + 78;
-        y_point = y_point - visibleRect.origin.y;
+        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 157);
+        y_point = bn.superview.frame.origin.y + 70;
+        y_point = y_point - visibleRect.origin.y-20;
         
         [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
     }
@@ -1417,8 +1436,8 @@
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
         x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 157);
-        y_point = bn.superview.frame.origin.y+58;
-        y_point = y_point - visibleRect.origin.y;
+        y_point = bn.superview.frame.origin.y+55;
+        y_point = y_point - visibleRect.origin.y-5;
         
         [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
     }
@@ -1528,6 +1547,17 @@
 //---------------------------------------------------------
 
 
+#pragma mark - Gesture
+//---------------------------------------------------------
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if ([touch.view isKindOfClass:[CustomDragButton class]])
+        return YES;
+    return NO;
+}
+//---------------------------------------------------------
+
+
 #pragma mark - Touch
 //---------------------------------------------------------
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -1535,6 +1565,7 @@
     feedbackView.hidden = YES;
 }
 //---------------------------------------------------------
+
 
 
 #pragma mark - Orientation

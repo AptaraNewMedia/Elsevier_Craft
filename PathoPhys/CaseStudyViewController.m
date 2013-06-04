@@ -44,6 +44,9 @@
     NSInteger TryAgainFlag;    
     int int_MoveNextPre;
     BOOL backFromNotes;
+    
+    UISwipeGestureRecognizer *oneFingerSwipeLeft;
+    UISwipeGestureRecognizer *oneFingerSwipeRight;
 }
 @end
 
@@ -339,6 +342,8 @@
     backFromNotes = YES;
     
     [self fn_RemoveQuestionView];
+    [viewMain removeGestureRecognizer:oneFingerSwipeLeft];
+    [viewMain removeGestureRecognizer:oneFingerSwipeRight];    
     intCurrentQuestionIndex = questionNO - 1;
     [self Fn_LoadQuestionData];
     
@@ -383,14 +388,14 @@
 -(void)fnAddSwipeGesture
 {
     // swipe------------------------------
-    UISwipeGestureRecognizer *oneFingerSwipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onNext:)];
+    oneFingerSwipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onNext:)];
     
     [oneFingerSwipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
     
     [viewMain addGestureRecognizer:oneFingerSwipeLeft];
     
     
-    UISwipeGestureRecognizer *oneFingerSwipeRight = [[UISwipeGestureRecognizer alloc]
+    oneFingerSwipeRight = [[UISwipeGestureRecognizer alloc]
                                                      initWithTarget:self
                                                      action:@selector(onPrev:)];
     [oneFingerSwipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
@@ -739,7 +744,9 @@
             [md Fn_AddMenu];
         }
         else if(buttonIndex == 1) {
-            [db fnDeleteQuizTrack:objQuizTrack.intQuizTrackId];
+            [self Fn_DeleteBookmarkingData];
+            [md Fn_SubTabBar];
+            [md Fn_AddMenu];
         }
 
     }
