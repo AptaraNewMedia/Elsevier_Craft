@@ -27,11 +27,13 @@
     NSMutableArray * scoreArray;
     QuizTrack *objScore;
     int currentOrientation;
+    NSString *messageBody;
 }
 @end
 
 @implementation ScoreCardViewController
 
+@synthesize facebook;
  
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,6 +47,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    facebook = [[Facebook alloc] initWithAppId:@"532908203419529" andDelegate:self];
     // Do any additional setup after loading the view from its nib.    
     scoreArray = [db fnGetScores];
     lblTitle.font = FONT_20;
@@ -55,6 +58,8 @@
             myview.exclusiveTouch = YES;
         }
     }
+    
+    //[self createMessageForSharing];
 }
 
 -(void) PopupView
@@ -253,5 +258,138 @@
     [tbl reloadData];
     
 }
+
+
+- (void) createMessageForSharing{
+    ///messageBody =
+    
+    for( int i = 0; i < [scoreArray count]; i++){
+        objScore = [scoreArray objectAtIndex:i];
+        //messageBody = [messageBody stringByAppendingString:[NSString stringWithFormat:@"%@\n",objScore.strQuizTitle]];
+    
+        if(messageBody.length == 0){
+            messageBody = [NSString stringWithFormat:@"%@ - %d of %d",objScore.strQuizTitle,objScore.intCorrectQuestion, objScore.intMissedQuestion + objScore.intCorrectQuestion];
+        }
+        else{
+        messageBody = [NSString stringWithFormat:@"%@\n\n\n%@ - %d of %d",messageBody,objScore.strQuizTitle,objScore.intCorrectQuestion, objScore.intMissedQuestion + objScore.intCorrectQuestion];
+        }
+    }
+    
+    NSLog(@"messageBody: %@",messageBody);
+
+}
+
+- (IBAction)Bn_Facebook_Tapped:(id)sender{
+    [self createMessageForSharing];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"]
+        && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    if (![facebook isSessionValid]) {
+        NSArray *permissions = [[NSArray alloc] initWithObjects:
+                                @"publish_stream",
+                                nil];
+        [facebook authorize:permissions];
+    }
+    else{
+        //Temporary
+        //==========================================
+//        testscore = [NSString stringWithFormat:@"%d",int_currentScore];
+//        thematicAreaName = strCurrentThematicName;
+//        chapterName = strCurrentChapterName;
+        //==========================================
+        //NSString *messageBody = [NSString stringWithFormat:@"I just took the Pathophysiology quiz to evaluate Thematic Area:%@ of Chapter:%@ and scored %@%%! Find out how much you know Pathophysiology.",thematicAreaName,chapterName,testscore];
+        
+        NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                        nil];
+        [params setObject:@"PathoPhysioQuiz App" forKey:@"name"];
+        [params setObject:@"http://www.elsevier.com" forKey:@"link"];
+        [params setObject:@"Caption Text comes here" forKey:@"caption"];
+        //[params setObject:messageBody forKey:@"message"];
+        //[params setObject:[UIImage imageNamed:@"Default.png"] forKey:@"picture"];
+        [params setObject:messageBody forKey:@"description"];
+        [facebook dialog: @"feed"
+               andParams: params
+             andDelegate: self];
+    }
+
+}
+- (IBAction)Bn_Email_Tapped:(id)sender{
+    [self createMessageForSharing];
+    //Temporary
+    //==========================================
+//    testscore = [NSString stringWithFormat:@"%d",int_currentScore];
+//    thematicAreaName = strCurrentThematicName;
+//    chapterName = strCurrentChapterName;
+    //==========================================
+    
+    //==========================================
+    
+    if ([MFMailComposeViewController canSendMail]) {
+        NSString *emailTitle = @"Test Yourself Score";
+        // Email Content
+       // NSString *messageBody = [NSString stringWithFormat:@"I just took the Pathophysiology quiz to evaluate Thematic Area:%@ of Chapter:%@ and scored %@%%! Find out how much you know Pathophysiology.",thematicAreaName,chapterName,testscore];
+        
+        MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+        mc.mailComposeDelegate = self;
+        [mc setSubject:emailTitle];
+        [mc setMessageBody:messageBody isHTML:NO];
+        [self presentViewController:mc animated:YES completion:NULL];
+    }
+    else{
+        //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to send email. Please check if you have configured email account." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        //        [alert show];
+        NSURL *myURL = [NSURL URLWithString:@"mailto:abc@xyz.com"];
+        [[UIApplication sharedApplication] openURL:myURL];
+    }
+
+}
+
+#pragma mark Email Delegate Methods
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    NSString *message;
+    
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+        {
+            message = @"Mail cancelled";
+            NSLog(@"Mail cancelled");
+        }
+            break;
+        case MFMailComposeResultSaved:
+        {
+            message = @"Mail saved";
+            NSLog(@"Mail saved");
+        }
+            break;
+        case MFMailComposeResultSent:
+        {
+            message = @"Mail sent";
+            NSLog(@"Mail sent");
+        }
+            break;
+        case MFMailComposeResultFailed:
+        {
+            message = @"Mail sent failure";
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+        }
+            break;
+        default:
+            break;
+    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Information" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+    
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
 
 @end
