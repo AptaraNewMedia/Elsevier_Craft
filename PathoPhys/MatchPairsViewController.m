@@ -481,7 +481,7 @@
     }
     CGSize size = [data sizeWithFont:font constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     if (size.height < 30) {
-        size.height = 30;
+        size.height = 35;
     }
     return size.height;
 }
@@ -494,13 +494,14 @@
     }
     CGSize size = [data sizeWithFont:font constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     if (size.height < 30) {
-        size.height = 36;
+        size.height = 40;
     }
     else if (size.height == 30) {
-        size.height = 40;
+        size.height = 50;
     }
     return size.height;
 }
+
 -(void)Fn_AddFeedbackPopup:(float)xValue andy:(float)yValue andText:(NSString *)textValue
 {
     [feedbackView removeFromSuperview];

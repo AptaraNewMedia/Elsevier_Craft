@@ -168,7 +168,20 @@
         [bnDrag.feedbackBt addTarget:self action:@selector(onFeedbackTapped2:) forControlEvents:UIControlEventTouchUpInside];
         
         [scrollViewDrag addSubview:bnDrag];
-        y=y+objDRAGDROP.fHeight+10;
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            bnDrag.titleLabel.font = FONT_10;
+            if (objDRAGDROP.intDRAGDROPid == 1) {
+                bnDrag.titleLabel.font = FONT_8;
+            }
+            [bnDrag.ansImage setFrame:CGRectMake(objDRAGDROP.fWidth-40, -15, 22, 22)];
+            
+            bnDrag.feedbackBt.frame = CGRectMake(bnDrag.ansImage.frame.origin.x+bnDrag.ansImage.frame.size.width+1, -15, 22, 22);
+            y=y+objDRAGDROP.fHeight+2;
+        }
+        else {
+            y=y+objDRAGDROP.fHeight+10;
+        }
+
         
         [draggableSubjects addObject:bnDrag];
         [draggableSubjectsCopy addObject:bnDrag];
