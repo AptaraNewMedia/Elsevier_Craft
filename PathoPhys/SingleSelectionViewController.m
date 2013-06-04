@@ -180,6 +180,19 @@
             [tblOptions setFrame:CGRectMake(0, 95, 320, 203) ];
     }
     //images
+    
+    
+    
+    //Adding swipe functionality for tableview
+    UISwipeGestureRecognizer* gestureR;
+    gestureR = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFromLeft)];
+    gestureR.direction = UISwipeGestureRecognizerDirectionLeft;
+    [tblOptions addGestureRecognizer:gestureR];
+    
+    gestureR = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFromRight)];
+    gestureR.direction = UISwipeGestureRecognizerDirectionRight; // default
+    [tblOptions addGestureRecognizer:gestureR];
+    
 }
 - (void)viewDidUnload
 {
@@ -778,6 +791,14 @@
     if (feedbackView) {
         [feedbackView removeFromSuperview];
     }
+}
+
+
+- (void) handleSwipeFromLeft{
+    NSLog(@"Left");
+}
+- (void) handleSwipeFromRight{
+    NSLog(@"Right");
 }
 //---------------------------------------------------------
 
