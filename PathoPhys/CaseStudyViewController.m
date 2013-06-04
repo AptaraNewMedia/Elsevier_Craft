@@ -504,6 +504,10 @@
     [db fnSetQuizTrack:objQuizTrack];
 
 }
+-(void)Fn_DeleteBookmarkingData
+{
+    [db fnDeleteQuizTrack:objQuizTrack.intQuizTrackId];
+}
 //---------------------------------------------------------
 
 
@@ -681,7 +685,7 @@
             [self.navigationController popViewControllerAnimated:YES];
         }
         else if(buttonIndex == 1) {
-            [db fnDeleteQuizTrack:objQuizTrack.intQuizTrackId];
+            [self Fn_DeleteBookmarkingData];
             [self.navigationController popViewControllerAnimated:YES];
         }
     }

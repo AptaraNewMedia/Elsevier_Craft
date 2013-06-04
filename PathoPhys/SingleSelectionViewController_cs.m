@@ -389,13 +389,13 @@
         }
         else if (flagForCheckAnswer == 3) {
             [alert setTag:3];
-            [alert addButtonWithTitle:@"Answer"];
+            [alert addButtonWithTitle:@"View"];
             [alert addButtonWithTitle:@"Try Again"];
             [alert setMessage:[NSString stringWithFormat:MSG_PARTIALY_CORRECT]];
         }
         else {
             [alert setTag:3];
-            [alert addButtonWithTitle:@"Answer"];
+            [alert addButtonWithTitle:@"View"];
             [alert addButtonWithTitle:@"Try Again"];
             [alert setMessage:[NSString stringWithFormat:MSG_INCORRECT]];
             // Please match all the items.

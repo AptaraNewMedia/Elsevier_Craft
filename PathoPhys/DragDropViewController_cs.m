@@ -403,7 +403,7 @@
         }
         else {
             [alert setTag:3];
-            [alert addButtonWithTitle:@"Answer"];
+            [alert addButtonWithTitle:@"View"];
             [alert addButtonWithTitle:@"Try Again"];
             [alert setMessage:[NSString stringWithFormat:MSG_INCORRECT]];
         }

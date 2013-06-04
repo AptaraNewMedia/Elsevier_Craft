@@ -33,4 +33,5 @@
 -(void)Fn_ShowAnswer;
 -(void)disableAllButtons:(int)questionNO;
 -(void)Fn_SaveBookmarkingData;
+-(void)Fn_DeleteBookmarkingData;
 @end

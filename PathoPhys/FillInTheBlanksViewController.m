@@ -536,7 +536,7 @@
         }
         else {
             [alert setTag:3];
-            [alert addButtonWithTitle:@"Answer"];
+            [alert addButtonWithTitle:@"View"];
             [alert addButtonWithTitle:@"Try Again"];
             [alert setMessage:MSG_INCORRECT];
         }

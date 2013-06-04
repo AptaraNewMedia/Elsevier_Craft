@@ -733,6 +733,10 @@
     objQuizTrack.intComplete = 0;
     [db fnSetQuizTrack:objQuizTrack];
 }
+-(void)Fn_DeleteBookmarkingData
+{
+    [db fnDeleteQuizTrack:objQuizTrack.intQuizTrackId];
+}
 //-----------------------------------------
 
 
@@ -751,6 +755,7 @@
         [alert setTag:15];
         [alert addButtonWithTitle:@"YES"];
         [alert addButtonWithTitle:@"NO"];
+        [alert addButtonWithTitle:@"CANCEL"];
         [alert setMessage:[NSString stringWithFormat:MSG_BOOKMARK_TEST]];
         [alert show];
     }
@@ -767,6 +772,7 @@
         [alert setTag:BOOKMARKING_ALERT_TAG];
         [alert addButtonWithTitle:@"YES"];
         [alert addButtonWithTitle:@"NO"];
+        [alert addButtonWithTitle:@"CANCEL"];        
         [alert setMessage:[NSString stringWithFormat:MSG_BOOKMARK_TEST]];
         [alert show];
     }
@@ -975,7 +981,8 @@
             [self.navigationController popViewControllerAnimated:YES];            
         }
         else if(buttonIndex == 1) {
-            [db fnDeleteQuizTrack:objQuizTrack.intQuizTrackId];
+            [self Fn_DeleteBookmarkingData];
+            [self.navigationController popViewControllerAnimated:YES];
         }
 
     }

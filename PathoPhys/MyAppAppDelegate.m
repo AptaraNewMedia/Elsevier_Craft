@@ -28,6 +28,8 @@
 #import "ResultViewController.h"
 #import "NotesListNewViewController.h"
 
+#import "TestYourSelfViewController.h"
+#import "CaseStudyViewController.h"
 
 #import "GAI.h"
 
@@ -47,6 +49,8 @@ UITextView *txt_feedback;
     CasestudyTextPopup *casestudyTextView;
     ResultViewController *resultView;
     NotesListNewViewController *notesListNewViewController;
+    
+    int shouldSelectTabbarIndex;
 }
 
 @end
@@ -428,6 +432,7 @@ UITextView *txt_feedback;
     navController = nil;
 }
 
+// TabBar
 - (void)tabBarController:(UITabBarController *)tabBarController1 didSelectViewController:(UIViewController *)viewController
 {
     
@@ -441,6 +446,7 @@ UITextView *txt_feedback;
 
 - (BOOL)tabBarController:(UITabBarController *)tbController shouldSelectViewController:(UIViewController *)viewController
 {
+    shouldSelectTabbarIndex = tbController.selectedIndex;
     if(isTestInProgress == 1){
         
         UIAlertView *alert = [[UIAlertView alloc] init];
@@ -449,6 +455,7 @@ UITextView *txt_feedback;
         [alert setTag:BOOKMARKING_ALERT_TAG];
         [alert addButtonWithTitle:@"YES"];
         [alert addButtonWithTitle:@"NO"];
+        [alert addButtonWithTitle:@"Cancel"];
         [alert setMessage:[NSString stringWithFormat:MSG_BOOKMARK_TEST]];
         [alert show];
     }
@@ -460,6 +467,7 @@ UITextView *txt_feedback;
         [alert setTag:BOOKMARKING_ALERT_TAG];
         [alert addButtonWithTitle:@"YES"];
         [alert addButtonWithTitle:@"NO"];
+        [alert addButtonWithTitle:@"Cancel"];
         [alert setMessage:[NSString stringWithFormat:MSG_BOOKMARK_CASESTUDY]];
         [alert show];
     }
@@ -476,13 +484,46 @@ UITextView *txt_feedback;
     if(alertView.tag == BOOKMARKING_ALERT_TAG){
         if(buttonIndex == 0){  // YES
             NSLog(@"YES");
-            //categoryNumber =  tabBarController1.selectedIndex + 1;
+            
+            if (tabBarController.selectedIndex+1 == 2) {
+                TestYourSelfViewController *obj = (TestYourSelfViewController *)self.navController2.visibleViewController;
+                [obj Fn_SaveBookmarkingData];
+                
+            }
+            else if (tabBarController.selectedIndex+1 == 3) {
+                CaseStudyViewController *obj = (CaseStudyViewController *)self.navController3.visibleViewController;
+                [obj Fn_SaveBookmarkingData];
+                
+            }
+            
+            categoryNumber =  shouldSelectTabbarIndex + 1;
             [self Fn_SubTabBar];
             [self Fn_addTabBar];
             self.tabBarController.selectedIndex = categoryNumber - 1;
             [self Fn_removeNoteViewPopup];
             [self Fn_removeInfoViewPopup];
-        }    
+        }
+        else         if(buttonIndex == 1){  // YES
+            NSLog(@"YES");
+            
+            if (tabBarController.selectedIndex+1 == 2) {
+                TestYourSelfViewController *obj = (TestYourSelfViewController *)self.navController2.visibleViewController;
+                [obj Fn_DeleteBookmarkingData];
+                
+            }
+            else if (tabBarController.selectedIndex+1 == 3) {
+                CaseStudyViewController *obj = (CaseStudyViewController *)self.navController3.visibleViewController;
+                [obj Fn_DeleteBookmarkingData];
+                
+            }
+            
+            categoryNumber =  shouldSelectTabbarIndex + 1;
+            [self Fn_SubTabBar];
+            [self Fn_addTabBar];
+            self.tabBarController.selectedIndex = categoryNumber - 1;
+            [self Fn_removeNoteViewPopup];
+            [self Fn_removeInfoViewPopup];
+        }
     }
 }
 
