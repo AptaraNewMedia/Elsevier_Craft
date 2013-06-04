@@ -90,8 +90,8 @@
         objQuizTrack.arrVisited = [[NSMutableArray alloc] init];
         
         objQuizTrack.intCategoryId = categoryNumber;
-        objQuizTrack.intChapterId = intCurrentTestYourSelf_ChapterId;
-        objQuizTrack.intThematicId = intCurrentTestYourSelf_ThematicId;
+        objQuizTrack.intChapterId = intCurrentCaseStudy_ChapterId;
+        objQuizTrack.intThematicId = intCurrentCaseStudy_ThematicId;
         objQuizTrack.strQuizTitle = str_BarTitle;
         
         intTotalQuestions = [arrCaseStudies count];
@@ -113,9 +113,6 @@
     }
 
     //
-    if (intTotalQuestions > 0) {
-        [self Fn_LoadQuestionData];
-    }
     
     [self fnDisableBottomBarButtons];
     bnSubmit.hidden = NO;
@@ -129,6 +126,15 @@
     if(intTotalQuestions == 1){
         bnNext.enabled = NO;
     }
+    if (intCurrentQuestionIndex == intTotalQuestions-1) {
+        bnNext.enabled = NO;
+    }
+    
+    if (intTotalQuestions > 0) {
+        [self Fn_LoadQuestionData];
+    }
+    
+    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -266,6 +272,12 @@
     }
     
     [self Fn_CheckNote];
+    
+    if(TryAgainFlag != 1) {
+        if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] != 0) {
+            [self Fn_ShowScore];
+        }
+    }
 }
 -(void)Fn_CheckNote
 {
@@ -408,6 +420,24 @@
 {
     bnShowAnswer.hidden = NO;
     bnTryAgian.hidden = NO;
+    [self Fn_ShowScore];    
+}
+-(void)Fn_ShowScore
+{
+    if (intCurrentQuestionIndex == intTotalQuestions-1) {
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            if (bnSubmit.hidden) {
+                [bnShowScore setFrame:bnSubmit.frame];
+            }
+            else {
+                [bnShowScore setFrame:bnTryAgian.frame];
+            }
+            bnShowScore.hidden = NO;
+        }
+        else {
+            bnShowScore.hidden = NO;
+        }
+    }
 }
 -(void)Fn_SaveBookmarkingData
 {
@@ -492,6 +522,7 @@
         [alert setTag:15];
         [alert addButtonWithTitle:@"YES"];
         [alert addButtonWithTitle:@"NO"];
+        [alert addButtonWithTitle:@"CANCEL"];
         [alert setMessage:[NSString stringWithFormat:MSG_BOOKMARK_TEST]];
         [alert show];
     }
@@ -508,6 +539,7 @@
         [alert setTag:BOOKMARKING_ALERT_TAG];
         [alert addButtonWithTitle:@"YES"];
         [alert addButtonWithTitle:@"NO"];
+        [alert addButtonWithTitle:@"CANCEL"];        
         [alert setMessage:[NSString stringWithFormat:MSG_BOOKMARK_CASESTUDY]];
         [alert show];
     }
@@ -586,9 +618,7 @@
             break;
     }
     
-    if (intCurrentQuestionIndex == intTotalQuestions-1) {
-        bnShowScore.hidden = NO;
-    }
+    [self Fn_ShowScore];
     
 }
 -(IBAction)onShowScore:(id)sender
@@ -652,8 +682,8 @@
         }
         else if(buttonIndex == 1) {
             [db fnDeleteQuizTrack:objQuizTrack.intQuizTrackId];
+            [self.navigationController popViewControllerAnimated:YES];
         }
-
     }
     else if (alertView.tag == 15) {
         if (buttonIndex == 0)

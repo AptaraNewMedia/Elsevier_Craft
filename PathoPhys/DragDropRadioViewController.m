@@ -1212,9 +1212,12 @@
                 if (feeback.length > 0) {
                     viewBeingDragged.feedbackBt.hidden = NO;
                     viewBeingDragged.strFeedback = feeback;
-                    [viewBeingDragged addTarget:self action:@selector(onFeedbackTapped2:) forControlEvents:UIControlEventTouchUpInside];
+                    [viewBeingDragged addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
                     
                 }
+                
+                [draggableSubjects removeObjectAtIndex:x];
+                
                 break;
             }
         }

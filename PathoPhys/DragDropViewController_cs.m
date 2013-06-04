@@ -482,8 +482,8 @@
                     viewBeingDragged.feedbackBt.hidden = NO;
                     viewBeingDragged.strFeedback = feeback;
                     [viewBeingDragged addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
-                    
                 }
+                [draggableSubjects removeObjectAtIndex:x];
                 break;
             }
         }

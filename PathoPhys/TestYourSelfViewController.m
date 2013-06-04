@@ -130,20 +130,23 @@
         int_MoveNextPre = 0;
     }
     //
-    [self Fn_LoadQuestionData];
     if (intCurrentQuestionIndex == 0) {
         bnPrev.enabled = NO;
     }
     if(intTotalQuestions == 1){
         bnNext.enabled = NO;
     }
-    
+    if (intCurrentQuestionIndex == intTotalQuestions-1) {
+        bnNext.enabled = NO;
+    }    
     [self fnDisableBottomBarButtons];
     bnSubmit.hidden = NO;
     bnSubmit.enabled = YES;
     
     backFromNotes = NO;
-    
+
+    [self Fn_LoadQuestionData];
+        
     //Code for Exclusive Touch Enabling.
     for (UIView *myview in [self.view subviews]){
         if([myview isKindOfClass:[UIButton class]]){
@@ -431,6 +434,12 @@
         // Animate left to right
     }    
     [self Fn_CheckNote];
+    
+    if(TryAgainFlag != 1) {
+        if ([[objQuizTrack.arrVisited objectAtIndex:intCurrentQuestionIndex] intValue] != 0) {
+            [self Fn_ShowScore];
+        }
+    }
 }
 -(void)Fn_CheckNote
 {
@@ -603,6 +612,24 @@
 {
     bnShowAnswer.hidden = NO;
     bnTryAgian.hidden = NO;
+    [self Fn_ShowScore];    
+}
+-(void)Fn_ShowScore
+{
+    if (intCurrentQuestionIndex == intTotalQuestions-1) {
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            if (bnSubmit.hidden) {
+                [bnShowScore setFrame:bnSubmit.frame];
+            }
+            else {
+                [bnShowScore setFrame:bnTryAgian.frame];
+            }
+            bnShowScore.hidden = NO;
+        }
+        else {
+            bnShowScore.hidden = NO;
+        }
+    }
 }
 -(void)Fn_SaveBookmarkingData
 {
@@ -868,9 +895,7 @@
             break;
     }
     
-    if (intCurrentQuestionIndex == intTotalQuestions-1) {
-        bnShowScore.hidden = NO;
-    }
+    [self Fn_ShowScore];
     
 }
 -(IBAction)onShowScore:(id)sender
