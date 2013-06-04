@@ -19,6 +19,7 @@
     DRAGDROP *objDRAGDROP;
     Feedback *objFeedback;    
     NSMutableArray *draggableSubjects;
+    NSMutableArray *draggableSubjectsCopy;
     NSMutableArray *droppableAreas;
     DragDropManager *_dragDropManager;
     
@@ -95,6 +96,7 @@
     [imgScroller setContentSize:CGSizeMake(imgScroller.frame.size.width, imgViewQue.frame.size.height)];
     
     draggableSubjects = [[NSMutableArray alloc] init];
+    draggableSubjectsCopy = [[NSMutableArray alloc] init];    
     droppableAreas = [[NSMutableArray alloc] init];
     
     [self draggblePoints];
@@ -185,6 +187,7 @@
         
         
         [draggableSubjects addObject:bnDrag];
+        [draggableSubjectsCopy addObject:bnDrag];
         
     }
     [scrollViewDrag setContentSize:CGSizeMake(objDRAGDROP.fWidth, y)];
@@ -349,6 +352,17 @@
         [txt_feedback setFrame:CGRectMake(12, 17, 152, 90)];
         [feedbackView addSubview:txt_feedback];
         [self.view addSubview:feedbackView];
+        
+        if(xValue<70)
+        {
+            img_feedback.transform = CGAffineTransformMakeScale(-1, 1);
+            
+            [feedbackView setFrame:CGRectMake(xValue+125, yValue, 180, 125)];
+        }
+        else
+        {
+            img_feedback.transform = CGAffineTransformMakeScale(1, 1);
+        }
     }
     else
     {
@@ -798,7 +812,7 @@
 -(IBAction)onFeedbackTapped2:(id)sender
 {
     UIButton *btn = sender;
-    CustomDragButton *bn = [draggableSubjects objectAtIndex:btn.tag];
+    CustomDragButton *bn = [draggableSubjectsCopy objectAtIndex:btn.tag];
     
     float x_point;
     float y_point;

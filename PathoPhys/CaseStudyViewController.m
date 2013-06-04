@@ -24,6 +24,8 @@
 //
 #import "Notes.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 @interface CaseStudyViewController (){
     ChapterQuestionSet *objQue;
     
@@ -57,7 +59,6 @@
     self.title = str_BarTitle;
     [self fnAddNavigationItems];
     
-    
     //Global Variables
     isTestInProgress = 2;
 
@@ -74,6 +75,7 @@
     }
     viewMain.backgroundColor = COLOR_CLEAR;
     [self.view addSubview:viewMain];
+    [self fnAddSwipeGesture];
     
     //
     bnShowScore.hidden = YES;
@@ -374,6 +376,26 @@
 {
     [md Fn_ShowNote:2];
 }
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    self.view.userInteractionEnabled = TRUE;
+}
+-(void)fnAddSwipeGesture
+{
+    // swipe------------------------------
+    UISwipeGestureRecognizer *oneFingerSwipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onNext:)];
+    
+    [oneFingerSwipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+    
+    [viewMain addGestureRecognizer:oneFingerSwipeLeft];
+    
+    
+    UISwipeGestureRecognizer *oneFingerSwipeRight = [[UISwipeGestureRecognizer alloc]
+                                                     initWithTarget:self
+                                                     action:@selector(onPrev:)];
+    [oneFingerSwipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
+    [viewMain addGestureRecognizer:oneFingerSwipeRight];
+}
 -(void)Fn_CallOrientaion
 {
     switch (objQue.intType) {
@@ -418,6 +440,7 @@
 }
 -(void)Fn_ShowAnswer
 {
+    bnShowAnswer.enabled = YES;
     bnShowAnswer.hidden = NO;
     bnTryAgian.hidden = NO;
     [self Fn_ShowScore];    
@@ -553,6 +576,7 @@
     if (intCurrentQuestionIndex == intTotalQuestions-1) {
         return;
     }
+    self.view.userInteractionEnabled = FALSE;    
     [self fnDisableBottomBarButtons];
     bnSubmit.hidden = NO;
     bnSubmit.enabled = YES;
@@ -564,12 +588,22 @@
     if (intCurrentQuestionIndex == intTotalQuestions-1) {
         bnNext.enabled = NO;
     }
+    
+    CATransition *transition = [CATransition animation];
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.duration = 0.50;
+    transition.type=kCATransitionPush;
+    transition.subtype=kCATransitionFromRight;
+    transition.delegate = self;
+    [viewMain.layer addAnimation:transition forKey:nil];
+    
 }
 -(IBAction)onPrev:(id)sender
 {
     if (intCurrentQuestionIndex == 0) {
         return;
     }
+    self.view.userInteractionEnabled = FALSE;    
     [self fnDisableBottomBarButtons];
     bnSubmit.hidden = NO;
     bnSubmit.enabled = YES;
@@ -581,6 +615,14 @@
     if (intCurrentQuestionIndex == 0) {
         bnPrev.enabled = NO;
     }
+    
+    CATransition *transition = [CATransition animation];
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.duration = 0.50;
+    transition.type=kCATransitionPush;
+    transition.subtype=kCATransitionFromLeft;
+    transition.delegate = self;
+    [viewMain.layer addAnimation:transition forKey:nil];
     
 }
 -(IBAction)onSubmit:(id)sender
@@ -665,7 +707,7 @@
             break;
     }
     //
-    
+    bnShowAnswer.enabled = NO;
 }
 -(IBAction)onTryAgainTapped:(id)sender
 {

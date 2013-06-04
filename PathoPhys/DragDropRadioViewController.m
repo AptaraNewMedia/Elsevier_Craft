@@ -24,6 +24,7 @@
     
     RadioView *objRadioView;
     NSMutableArray *draggableSubjects;
+    NSMutableArray *draggableSubjectsCopy;
     NSMutableArray *droppableAreas;
     NSMutableArray *arr_radioButtons;
     
@@ -102,6 +103,7 @@
     [imgScroller setContentSize:CGSizeMake(imgScroller.frame.size.width, imgViewQue.frame.size.height)];
     
     draggableSubjects = [[NSMutableArray alloc] init];
+    draggableSubjectsCopy = [[NSMutableArray alloc] init];
     droppableAreas = [[NSMutableArray alloc] init];
     
     imgRadio = [UIImage imageNamed:@"table_radio_Btn.png"];
@@ -210,6 +212,7 @@
         [scrollViewDrag addSubview:bnDrag];
         y=y+objDRAGDROP.fHeight+10;
         [draggableSubjects addObject:bnDrag];
+        [draggableSubjectsCopy addObject:bnDrag];
         
     }
     [scrollViewDrag setContentSize:CGSizeMake(scrollViewDrag.frame.size.width, y)];
@@ -916,6 +919,17 @@
         [txt_feedback setFrame:CGRectMake(12, 12, 125, 65)];
         [feedbackView addSubview:txt_feedback];
         [self.view addSubview:feedbackView];
+        
+        if(xValue<70)
+        {
+            img_feedback.transform = CGAffineTransformMakeScale(-1, 1);
+            
+            [feedbackView setFrame:CGRectMake(xValue+125, yValue, 180, 125)];
+        }
+        else
+        {
+            img_feedback.transform = CGAffineTransformMakeScale(1, 1);
+        }
     }
     else
     {
@@ -1040,7 +1054,7 @@
                     if(objDRAGDROP.intDRAGDROPRADIOid == 25 || objDRAGDROP.intDRAGDROPRADIOid == 26 || objDRAGDROP.intDRAGDROPRADIOid == 18 || objDRAGDROP.intDRAGDROPRADIOid == 9){
                     }
                     else {
-                        [bn addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
+                        [bn addTarget:self action:@selector(onFeedbackTapped3:) forControlEvents:UIControlEventTouchUpInside];
                     }
                     
                 }
@@ -1053,7 +1067,7 @@
                     if(objDRAGDROP.intDRAGDROPRADIOid == 25 || objDRAGDROP.intDRAGDROPRADIOid == 26 || objDRAGDROP.intDRAGDROPRADIOid == 18 || objDRAGDROP.intDRAGDROPRADIOid == 9){
                     }
                     else {
-                        [bn addTarget:self action:@selector(Fn_Feedback_Tapped:) forControlEvents:UIControlEventTouchUpInside];
+                        [bn addTarget:self action:@selector(onFeedbackTapped3:) forControlEvents:UIControlEventTouchUpInside];
                     }
                     
                 }
@@ -1212,7 +1226,7 @@
                 if (feeback.length > 0) {
                     viewBeingDragged.feedbackBt.hidden = NO;
                     viewBeingDragged.strFeedback = feeback;
-                    [viewBeingDragged addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
+                    [viewBeingDragged addTarget:self action:@selector(onFeedbackTapped3:) forControlEvents:UIControlEventTouchUpInside];
                     
                 }
                 
@@ -1353,11 +1367,10 @@
     
     [self Fn_AddFeedbackPopup:x_point andy:y_point andText:objRadioView.feedback];
 }
-
 -(IBAction)onFeedbackTapped2:(id)sender
 {
     UIButton *btn = sender;
-    CustomDragButton *bn = [draggableSubjects objectAtIndex:btn.tag];
+    CustomDragButton *bn = [draggableSubjectsCopy objectAtIndex:btn.tag];
     
     NSLog(@" Feedback: %@",bn.strFeedback);
     
@@ -1368,6 +1381,43 @@
     {
         x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 132);
         y_point = bn.superview.frame.origin.y + 78;
+        y_point = y_point - visibleRect.origin.y;
+        
+        [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
+    }
+    else
+    {
+        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 10);
+        y_point = bn.superview.frame.origin.y + 15;
+        y_point = y_point - visibleRect.origin.y;
+        
+        x_feedback_l=x_point;
+        y_feedback_l=y_point;
+        
+        x_feedback_p=x_point-238;
+        y_feedback_p=y_point+217;
+        
+        if(currentOrientaion==1 || currentOrientaion==2) // Portrait
+        {
+            [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:bn.strFeedback];
+        }
+        else //Lanscape
+        {
+            [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:bn.strFeedback];
+        }
+    }
+}
+-(IBAction)onFeedbackTapped3:(id)sender
+{
+    CustomDragButton *bn = sender;
+    
+    float x_point;
+    float y_point;
+    
+    if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
+    {
+        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 157);
+        y_point = bn.superview.frame.origin.y+58;
         y_point = y_point - visibleRect.origin.y;
         
         [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
