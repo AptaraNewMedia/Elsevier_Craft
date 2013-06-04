@@ -23,6 +23,9 @@
     IBOutlet UILabel *lblTitleDate;
     IBOutlet UILabel *lblTitleScore;
     
+    IBOutlet UIButton *btnFB;
+    IBOutlet UIButton *btnMail;
+    
     IBOutlet UIImageView *img_Cell;
     NSMutableArray * scoreArray;
     QuizTrack *objScore;
@@ -233,6 +236,9 @@
     [lblTitleDate setFrame:CGRectMake(490,143,104,38)];
     [lblTitleScore  setFrame:CGRectMake(593,143,104,38)];
     
+    [btnFB setFrame:CGRectMake(350,630,45,40)];
+    [btnMail setFrame:CGRectMake(410,630,45,40)];
+    
     [tbl reloadData];
 }
 -(void)Fn_rotateLandscape
@@ -254,6 +260,9 @@
     [lblTitleName setFrame:CGRectMake(242,135,386,38)];
     [lblTitleDate setFrame:CGRectMake(644,135,104,38)];
     [lblTitleScore  setFrame:CGRectMake(759,135,104,38)];
+    
+    [btnFB setFrame:CGRectMake(458,484,45,40)];
+    [btnMail setFrame:CGRectMake(520,484,45,40)];
     
     [tbl reloadData];
     

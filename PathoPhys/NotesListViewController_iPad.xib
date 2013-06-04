@@ -67,7 +67,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">S. No.</string>
+						<string key="IBUIText">No.</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xMjA5MDYzNjA3IDAuMzgyNTc3NDU5OSAwLjU0ODkxMzA0MzUAA</bytes>
@@ -179,7 +179,6 @@
 						<string key="NSFrame">{{71, 211}, {843, 433}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="474181635">
 							<int key="NSColorSpace">3</int>
@@ -445,6 +444,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="btnClose">UIButton</string>
 						<string key="imgPatch">UIImageView</string>
+						<string key="lblAddNote">UILabel</string>
 						<string key="lblTitleDate">UILabel</string>
 						<string key="lblTitleDescription">UILabel</string>
 						<string key="lblTitleName">UILabel</string>
@@ -461,6 +461,10 @@
 						<object class="IBToOneOutletInfo" key="imgPatch">
 							<string key="name">imgPatch</string>
 							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lblAddNote">
+							<string key="name">lblAddNote</string>
+							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="lblTitleDate">
 							<string key="name">lblTitleDate</string>
