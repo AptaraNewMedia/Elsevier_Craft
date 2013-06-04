@@ -560,6 +560,9 @@
                     [viewBeingDragged addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
                     
                 }
+                
+                [draggableSubjects removeObjectAtIndex:x];
+                
                 break;
             }
         }
