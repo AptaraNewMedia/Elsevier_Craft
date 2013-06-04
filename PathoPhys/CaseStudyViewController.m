@@ -81,7 +81,7 @@
   
 
     // Tracking data
-    objQuizTrack = [db fnGetQuizTRack:categoryNumber AndChapterID:intCurrentTestYourSelf_ChapterId AndThematicId:intCurrentTestYourSelf_ThematicId];
+    objQuizTrack = [db fnGetQuizTRack:categoryNumber AndChapterID:intCurrentCaseStudy_ChapterId AndThematicId:intCurrentCaseStudy_ThematicId];
     if (objQuizTrack == nil) {
         // Tracking data
         objQuizTrack = [[QuizTrack alloc] init];
