@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CustomDragButton : UIButton
+@property(nonatomic,retain) UILabel *lblText;
 @property(nonatomic,retain)	UIImageView *ansImage;
 @property(nonatomic,retain)	UIButton *feedbackBt;
 @property(nonatomic,retain) NSString *strFeedback;

@@ -124,36 +124,44 @@
 -(void)draggblePoints
 {
     int y = 10;
+    int scrollHeight = 10;    
     for (int i = 0; i < [objFillBlanks.arrOptions count]; i++) {        
         
         CustomDragButton *bnDrag = [CustomDragButton buttonWithType:UIButtonTypeCustom];
-        bnDrag.frame = CGRectMake(10, y, objFillBlanks.fWidth, objFillBlanks.fHeight);
+        bnDrag.frame = CGRectMake(20, y, objFillBlanks.fWidth, objFillBlanks.fHeight+15);
         bnDrag.exclusiveTouch = YES;
         bnDrag.tag = i+1;
-        [bnDrag setTitle:[objFillBlanks.arrOptions objectAtIndex:i] forState:UIControlStateNormal];
-        [bnDrag setTitleColor:COLOR_WHITE forState:UIControlStateNormal];
-        bnDrag.titleLabel.font = FONT_14;        
-		[bnDrag setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
+        bnDrag.backgroundColor = COLOR_CLEAR;
         bnDrag.userInteractionEnabled=YES;
         
-      
-        [bnDrag.ansImage setFrame:CGRectMake(objFillBlanks.fWidth-40, -15, 22, 22)];
+        bnDrag.lblText.frame = CGRectMake(0, 15, objFillBlanks.fWidth, objFillBlanks.fHeight);
+        bnDrag.lblText.text = [objFillBlanks.arrOptions objectAtIndex:i];
+        [bnDrag.lblText setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
+        bnDrag.lblText.textColor = COLOR_WHITE;
+        bnDrag.lblText.textAlignment = UITextAlignmentCenter;
+        bnDrag.lblText.font = FONT_14;
+        bnDrag.lblText.numberOfLines = 5;
         
-        bnDrag.feedbackBt.frame = CGRectMake(bnDrag.ansImage.frame.origin.x+bnDrag.ansImage.frame.size.width+1, -15, 22, 22);
+      
+        [bnDrag.ansImage setFrame:CGRectMake(objFillBlanks.fWidth-40, 0, 22, 22)];
+        
+        bnDrag.feedbackBt.frame = CGRectMake(bnDrag.ansImage.frame.origin.x+bnDrag.ansImage.frame.size.width+1, 0, 22, 22);
         [bnDrag.feedbackBt setTag:i];
         [bnDrag.feedbackBt setImage:[UIImage imageNamed:@"Btn_feed.png"] forState:UIControlStateNormal];
-        //[bnDrag.feedbackBt setImage:[UIImage imageNamed:@"btn_feedback_highlight.png"] forState:UIControlStateHighlighted];
+        [bnDrag.feedbackBt setImage:[UIImage imageNamed:@"btn_feedback_highlight.png"] forState:UIControlStateHighlighted];
         bnDrag.feedbackBt.hidden = YES;
         [bnDrag.feedbackBt addTarget:self action:@selector(onFeedbackTapped2:) forControlEvents:UIControlEventTouchUpInside];
         
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-            bnDrag.titleLabel.font = FONT_10;
-            [bnDrag.ansImage setFrame:CGRectMake(objFillBlanks.fWidth-40, -15, 22, 22)];
-            bnDrag.feedbackBt.frame = CGRectMake(bnDrag.ansImage.frame.origin.x+bnDrag.ansImage.frame.size.width+1, -15, 22, 22);
-            y=y+45+2;
+            bnDrag.lblText.font = FONT_10;
+            [bnDrag.ansImage setFrame:CGRectMake(objFillBlanks.fWidth-40, 0, 22, 22)];
+            bnDrag.feedbackBt.frame = CGRectMake(bnDrag.ansImage.frame.origin.x+bnDrag.ansImage.frame.size.width+1, 0, 22, 22);
+            y=y+objFillBlanks.fHeight+2;
+            scrollHeight = scrollHeight+objFillBlanks.fHeight+15+2;
         }
         else {
-            y=y+45+10;
+            y=y+objFillBlanks.fHeight+10;
+            scrollHeight = scrollHeight+objFillBlanks.fHeight+15+10;
         }
         
         [scrollViewDrag addSubview:bnDrag];
@@ -162,7 +170,7 @@
         
     }
 
-    [scrollViewDrag setContentSize:CGSizeMake(objFillBlanks.fWidth, y)];
+    [scrollViewDrag setContentSize:CGSizeMake(objFillBlanks.fWidth, scrollHeight)];
 //    [scrollViewDrag.layer setBorderWidth:1.0];
 //    [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
 }
@@ -174,7 +182,7 @@
         float x_point = [[points objectAtIndex:0] floatValue];
         float y_point = [[points objectAtIndex:1] floatValue];
         UIView *bn = [[UIView alloc] init];
-        [bn setFrame:CGRectMake(x_point, y_point, objFillBlanks.fWidth, objFillBlanks.fHeight)];
+        [bn setFrame:CGRectMake(x_point, y_point-15, objFillBlanks.fWidth, objFillBlanks.fHeight+15)];
         [bn setBackgroundColor:[UIColor clearColor]];
         [imgDropView addSubview:bn];
         [droppableAreas addObject:bn];
@@ -397,7 +405,7 @@
         
         for (int x=0; x<draggableSubjects.count; x++) {
             CustomDragButton *viewBeingDragged = [draggableSubjects objectAtIndex:x];
-            NSString *ss = [viewBeingDragged.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+            NSString *ss = [viewBeingDragged.lblText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
             if ([[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
                 [dropArea addSubview:viewBeingDragged];
                 viewBeingDragged.frame = CGRectMake(0, 0, viewBeingDragged.frame.size.width, viewBeingDragged.frame.size.height);
@@ -527,7 +535,7 @@
         NSArray *arrSubviews = [dropArea subviews];
         if (arrSubviews.count > 0) {
             CustomDragButton *bn = [arrSubviews objectAtIndex:0];
-            NSString *ss = [bn.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+            NSString *ss = [bn.lblText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
             NSString *sa = [[objFillBlanks.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
             if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
                 flag1 = NO;
@@ -544,7 +552,7 @@
         NSArray *arrSubviews = [dropArea subviews];
         if (arrSubviews.count > 0) {
             CustomDragButton *bn = [arrSubviews objectAtIndex:0];
-            NSString *ss = [bn.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+            NSString *ss = [bn.lblText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
             NSString *sa = [[objFillBlanks.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
             if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
                 [bn.ansImage setImage:[UIImage imageNamed:@"Btn_feed_false.png"]];

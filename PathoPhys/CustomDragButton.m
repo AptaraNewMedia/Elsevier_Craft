@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 @implementation CustomDragButton
+@synthesize lblText;
 @synthesize ansImage;
 @synthesize feedbackBt;
 @synthesize strFeedback;
@@ -21,10 +22,12 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        
-        CALayer *l2 = [self layer];
+        lblText = [[UILabel alloc] init];
+        [self addSubview:lblText];
+
+        CALayer *l2 = [lblText layer];
 		[l2 setCornerRadius:9];
-        
+
         ansImage = [[UIImageView alloc]init];
 		[self addSubview:ansImage];
         

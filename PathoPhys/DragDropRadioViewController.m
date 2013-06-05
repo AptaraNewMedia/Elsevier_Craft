@@ -165,43 +165,32 @@
 -(void)draggblePoints
 {
     int y = 10;
+    int scrollHeight = 10;
     for (int i = 0; i < [objDRAGDROP.arrOptions count]; i++){
         
         CustomDragButton *bnDrag = [CustomDragButton buttonWithType:UIButtonTypeCustom];
-        bnDrag.frame = CGRectMake(0, y, objDRAGDROP.fWidth, objDRAGDROP.fHeight);
+        bnDrag.frame = CGRectMake(20, y, objDRAGDROP.fWidth, objDRAGDROP.fHeight+15);
         bnDrag.exclusiveTouch = YES;
         bnDrag.tag = i+1;
-        bnDrag.x = bnDrag.frame.origin.x;
-        bnDrag.y = bnDrag.frame.origin.y;
-        
-        [bnDrag setTitle:[objDRAGDROP.arrOptions objectAtIndex:i] forState:UIControlStateNormal];
-        [bnDrag setTitleColor:COLOR_WHITE forState:UIControlStateNormal];
-        [bnDrag setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
-        
-        UIFont *temp_font;
-        
-        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
-        {
-            temp_font=FONT_10;
-        }
-        else
-        {
-            temp_font=FONT_14;
-        }
-        
-        bnDrag.titleLabel.font = temp_font;
-        
-        bnDrag.titleLabel.font = temp_font;
-        
+        bnDrag.backgroundColor = COLOR_CLEAR;
         bnDrag.userInteractionEnabled=YES;
-        bnDrag.titleLabel.numberOfLines = 10;
         
-        [bnDrag.ansImage setFrame:CGRectMake(objDRAGDROP.fWidth-40, -15, 22, 22)];
+        bnDrag.lblText.frame = CGRectMake(0, 15, objDRAGDROP.fWidth, objDRAGDROP.fHeight);
+        bnDrag.lblText.text = [objDRAGDROP.arrOptions objectAtIndex:i];
+        [bnDrag.lblText setBackgroundColor:COLOR_CUSTOMBUTTON_BLUE];
+        bnDrag.lblText.textColor = COLOR_WHITE;
+        bnDrag.lblText.textAlignment = UITextAlignmentCenter;
+        bnDrag.lblText.font = FONT_14;
+        bnDrag.lblText.numberOfLines = 5;
+
+        
+        [bnDrag.ansImage setFrame:CGRectMake(objDRAGDROP.fWidth-40, 0, 22, 22)];
         
         [bnDrag.feedbackBt setTag:i];
-        bnDrag.feedbackBt.frame = CGRectMake(bnDrag.ansImage.frame.origin.x+bnDrag.ansImage.frame.size.width+1, -15, 22, 22);
+        bnDrag.feedbackBt.frame = CGRectMake(bnDrag.ansImage.frame.origin.x+bnDrag.ansImage.frame.size.width+1, 0, 22, 22);
         [bnDrag.feedbackBt setTag:i];
         [bnDrag.feedbackBt setImage:[UIImage imageNamed:@"Btn_feed.png"] forState:UIControlStateNormal];
+        [bnDrag.feedbackBt setImage:[UIImage imageNamed:@"Btn_feed.png"] forState:UIControlStateHighlighted];
         bnDrag.feedbackBt.hidden = YES;
         
         NSString *feeback = [self fn_getFeeback2:bnDrag.feedbackBt.tag AndCorrect:@"correct"];
@@ -210,12 +199,23 @@
         [bnDrag.feedbackBt addTarget:self action:@selector(onFeedbackTapped2:) forControlEvents:UIControlEventTouchUpInside];
         
         [scrollViewDrag addSubview:bnDrag];
-        y=y+objDRAGDROP.fHeight+10;
+        if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
+            bnDrag.lblText.font = FONT_10;
+            [bnDrag.ansImage setFrame:CGRectMake(objDRAGDROP.fWidth-40, 0, 22, 22)];
+            
+            bnDrag.feedbackBt.frame = CGRectMake(bnDrag.ansImage.frame.origin.x+bnDrag.ansImage.frame.size.width+1, 0, 22, 22);
+            y = y+objDRAGDROP.fHeight+2;
+            scrollHeight = scrollHeight+objDRAGDROP.fHeight+15+2;
+        }
+        else {
+            y = y+objDRAGDROP.fHeight+10;
+            scrollHeight = scrollHeight+objDRAGDROP.fHeight+15+10;
+        }
         [draggableSubjects addObject:bnDrag];
         [draggableSubjectsCopy addObject:bnDrag];
         
     }
-    [scrollViewDrag setContentSize:CGSizeMake(scrollViewDrag.frame.size.width, y)];
+    [scrollViewDrag setContentSize:CGSizeMake(scrollViewDrag.frame.size.width, scrollHeight)];
 //    [scrollViewDrag.layer setBorderWidth:1.0];
 //    [scrollViewDrag.layer setBorderColor:[COLOR_DRAG_BORDER CGColor]];
 }
@@ -228,7 +228,7 @@
         float y_point = [[points objectAtIndex:1] floatValue];
         
         UIButton *bn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [bn setFrame:CGRectMake(x_point, y_point, objDRAGDROP.fWidth, objDRAGDROP.fHeight)];
+        [bn setFrame:CGRectMake(x_point, y_point-15, objDRAGDROP.fWidth, objDRAGDROP.fHeight+15)];
         [bn setBackgroundColor:[UIColor clearColor]];
         [imgDropView addSubview:bn];
         [droppableAreas addObject:bn];
@@ -1055,7 +1055,7 @@
         NSArray *arrSubviews = [dropArea subviews];
         if (arrSubviews.count > 0) {
             CustomDragButton *bn = [arrSubviews objectAtIndex:0];
-            NSString *ss = [bn.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+            NSString *ss = [bn.lblText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
             NSString *sa = [[objDRAGDROP.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
             if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
                 [bn.ansImage setImage:[UIImage imageNamed:@"Btn_feed_false.png"]];
@@ -1180,8 +1180,8 @@
     for (UIView *dropArea in _dragDropManager.dropAreas) {
         NSArray *arrSubviews = [dropArea subviews];
         if (arrSubviews.count > 0) {
-            UIButton *bn = [arrSubviews objectAtIndex:0];
-            NSString *ss = [bn.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+            CustomDragButton *bn = [arrSubviews objectAtIndex:0];
+            NSString *ss = [bn.lblText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
             NSString *sa = [[objDRAGDROP.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
             if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
                 flag1 = NO;
@@ -1229,7 +1229,7 @@
         
         for (int x=0; x<draggableSubjects.count; x++) {
             CustomDragButton *viewBeingDragged = [draggableSubjects objectAtIndex:x];
-            NSString *ss = [viewBeingDragged.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+            NSString *ss = [viewBeingDragged.lblText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
             if ([[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
                 [dropArea addSubview:viewBeingDragged];
                 viewBeingDragged.frame = CGRectMake(0, 0, viewBeingDragged.frame.size.width, viewBeingDragged.frame.size.height);
