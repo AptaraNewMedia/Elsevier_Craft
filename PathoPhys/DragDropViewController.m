@@ -638,7 +638,7 @@
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
         x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 157);
-        y_point = bn.superview.frame.origin.y+58;
+        y_point = bn.superview.frame.origin.y+73;
         y_point = y_point - visibleRect.origin.y;
         
         [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
@@ -676,7 +676,7 @@
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
         x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 157);
-        y_point = bn.superview.frame.origin.y;// + 120;
+        y_point = bn.superview.frame.origin.y+73;// + 120;
         y_point = y_point - visibleRect.origin.y;
         
         [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];

@@ -605,7 +605,7 @@
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
         x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objFillBlanks.fWidth - 157);
-        y_point = bn.superview.frame.origin.y + 87;
+        y_point = bn.superview.frame.origin.y + 107;
         y_point = y_point - visibleRect.origin.y;
         
         [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
@@ -642,8 +642,8 @@
     
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
-        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objFillBlanks.fWidth - 132);
-        y_point = bn.superview.frame.origin.y + 120;
+        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objFillBlanks.fWidth - 132)-25;
+        y_point = bn.superview.frame.origin.y + 107;
         y_point = y_point - visibleRect.origin.y;
         
         [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
@@ -670,7 +670,7 @@
         }
     }
 }
-//---------------------------------------------------------
+//----------------------------------------------------
 
 
 #pragma mark - AlertView

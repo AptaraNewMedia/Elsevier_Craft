@@ -1386,6 +1386,21 @@
         x_point =bn.frame.origin.x-60;
         y_point =bn.frame.origin.y + bn.superview.frame.origin.y+48;// + 130;
         
+        if(objDRAGDROP.intDRAGDROPRADIOid == 26)
+        {
+            x_point=x_point-15;
+        }
+        
+        if(objDRAGDROP.intDRAGDROPRADIOid == 18)
+        {
+            x_point=x_point+15;
+        }
+        
+        if(objDRAGDROP.intDRAGDROPRADIOid == 9)
+        {
+            x_point=x_point+10;
+        }
+        
         y_point=y_point-visibleRect.origin.y;
     }
     else
@@ -1413,7 +1428,8 @@
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
         x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 157);
-        y_point = bn.superview.frame.origin.y + 70;
+        
+        y_point = bn.superview.frame.origin.y + 85;
         y_point = y_point - visibleRect.origin.y-20;
         
         [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];

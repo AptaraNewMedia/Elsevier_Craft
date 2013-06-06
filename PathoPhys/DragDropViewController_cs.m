@@ -327,7 +327,7 @@
         
         UITextView *txt_feedback = [[UITextView alloc] init];
         txt_feedback.text = textValue;
-        txt_feedback.textColor = [UIColor whiteColor];
+        txt_feedback.textColor = COLOR_CLEAR;
         txt_feedback.backgroundColor = [UIColor clearColor];
         txt_feedback.font = FONT_10;
         txt_feedback.editable = NO;
@@ -601,7 +601,7 @@
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
         x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 157);
-        y_point = bn.superview.frame.origin.y+58;
+        y_point = bn.superview.frame.origin.y+73;
         y_point = y_point - visibleRect.origin.y;
         
         [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
@@ -639,7 +639,7 @@
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone)
     {
         x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 157);
-        y_point = bn.superview.frame.origin.y+58;
+        y_point = bn.superview.frame.origin.y+73;
         y_point = y_point - visibleRect.origin.y;
         
         [self Fn_AddFeedbackPopup:x_point andy:y_point andText:bn.strFeedback];
