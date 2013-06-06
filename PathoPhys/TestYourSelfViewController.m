@@ -528,17 +528,31 @@
     [self Fn_LoadQuestionData];
     
     [self Fn_CheckNote];
-        
+    
     switch (objQue.intType) {
         case QUESTION_TYPE_MCMS:
+            [dragDropView Fn_disableAllDraggableSubjects];
+            break;
+        case QUESTION_TYPE_FILLINBLANKS:
+            [fillInTheBlanksView Fn_disableAllDraggableSubjects];
+            break;
+        case QUESTION_TYPE_RADIOBUTTONS:
+            [radioGroupView disableEditFields];
+            break;
+        case QUESTION_TYPE_TRUEFLASE:
+            [trueFalseView disableEditFields];
             break;
         case QUESTION_TYPE_MATCHTERMS:
+            [matchPairsView disableEditFields];
             break;
         case QUESTION_TYPE_MCSS:
-            singleSelectionView.tblOptions.allowsSelection = NO;
+            [singleSelectionView Fn_createInvisibleBtn];
+            break;
+        case QUESTION_TYPE_DRAGDROPRADIOBUTTONS:
+            [dragDropRadioView Fn_disableAllDraggableSubjects];
             break;
     }
-    
+
     customRightBar.btnInfo.hidden = YES;
     customRightBar.btnNote.hidden = YES;
     customRightBar.btnScore.hidden = YES;
@@ -959,7 +973,7 @@
         }
     }
     
-    int_currentScore =(total_score / intTotalQuestions) * 100;
+    int_currentScore =(total_score*100) / intTotalQuestions;
     
     NSString *score = [NSString stringWithFormat:@"%d%% (%d out of %d questions answered correctly.)", int_currentScore , total_score, intTotalQuestions];
     

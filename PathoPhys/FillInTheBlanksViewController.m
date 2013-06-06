@@ -37,6 +37,10 @@
     float x_feedback_p;
     float x_feedback_l;
     
+    UIImage *imgFeedbackNormal;
+    UIImage *imgFeedbackHighligted;
+    UIImage *imgAnswerTrue;
+    UIImage *imgAnswerFalse;
 }
 
 @property(nonatomic, retain) DragDropManager *dragDropManager;
@@ -60,6 +64,7 @@
     lblQuestionText.text = objFillBlanks.strQuestionText ;
     
     [self fn_SetFontColor];
+    [self fn_SetVariables];
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
         [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:10px;color:AA3934;font-family:helvetica;\">Drag the options and drop them on the correct blank areas. Once you are done, tap <b>Submit.</b> </body></html>" baseURL:nil];
         
@@ -116,6 +121,15 @@
     }
     
 }
+-(void)fn_SetVariables
+{    
+    //images
+    imgFeedbackNormal = [UIImage imageNamed:@"Btn_feed.png"];
+    imgFeedbackHighligted = [UIImage imageNamed:@"btn_feedback_highlight.png"];
+    imgAnswerTrue = [UIImage imageNamed:@"Btn_feed_true.png"];
+    imgAnswerFalse = [UIImage imageNamed:@"Btn_feed_false.png"];
+    
+}
 //---------------------------------------------------------
 
 
@@ -147,8 +161,8 @@
         
         bnDrag.feedbackBt.frame = CGRectMake(bnDrag.ansImage.frame.origin.x+bnDrag.ansImage.frame.size.width+1, 0, 22, 22);
         [bnDrag.feedbackBt setTag:i];
-        [bnDrag.feedbackBt setImage:[UIImage imageNamed:@"Btn_feed.png"] forState:UIControlStateNormal];
-        [bnDrag.feedbackBt setImage:[UIImage imageNamed:@"btn_feedback_highlight.png"] forState:UIControlStateHighlighted];
+        [bnDrag.feedbackBt setImage:imgFeedbackNormal forState:UIControlStateNormal];
+        [bnDrag.feedbackBt setImage:imgFeedbackHighligted forState:UIControlStateHighlighted];
         bnDrag.feedbackBt.hidden = YES;
         [bnDrag.feedbackBt addTarget:self action:@selector(onFeedbackTapped2:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -195,12 +209,6 @@
     uiTapGestureRecognizer.delegate = self;
     [[self view] addGestureRecognizer:uiTapGestureRecognizer];
     
-}
--(void)Fn_disableAllDraggableSubjects
-{
-    for(UIButton *subview in [imgDropView subviews]) {
-        [self.view removeGestureRecognizer:uiTapGestureRecognizer];
-    }
 }
 -(void)rotateScrollViewButtonsForiPhone
 {
@@ -392,6 +400,24 @@
     
     return strTemp;
 }
+-(BOOL)checkForAnswer
+{
+    int i = 0;
+    BOOL flag1 = YES;
+    for (UIView *dropArea in _dragDropManager.dropAreas) {
+        NSArray *arrSubviews = [dropArea subviews];
+        if (arrSubviews.count > 0) {
+            CustomDragButton *bn = [arrSubviews objectAtIndex:0];
+            NSString *ss = [bn.lblText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+            NSString *sa = [[objFillBlanks.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
+            if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
+                flag1 = NO;
+            }
+        }
+        i++;
+    }
+    return flag1;
+}
 -(void)handleShowAnswers
 {
     int i = 0;
@@ -409,7 +435,7 @@
             if ([[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
                 [dropArea addSubview:viewBeingDragged];
                 viewBeingDragged.frame = CGRectMake(0, 0, viewBeingDragged.frame.size.width, viewBeingDragged.frame.size.height);
-                [viewBeingDragged.ansImage setImage:[UIImage imageNamed:@"Btn_feed_true.png"]];
+                [viewBeingDragged.ansImage setImage:imgAnswerTrue];
                 NSString *feeback = [self fn_getFeeback:viewBeingDragged.tag AndCorrect:@"correct"];
                 if (feeback.length > 0) {
                     viewBeingDragged.feedbackBt.hidden = NO;
@@ -527,23 +553,11 @@
     }
     
 }
--(BOOL)checkForAnswer
+-(void)Fn_disableAllDraggableSubjects
 {
-    int i = 0;
-    BOOL flag1 = YES;
-    for (UIView *dropArea in _dragDropManager.dropAreas) {
-        NSArray *arrSubviews = [dropArea subviews];
-        if (arrSubviews.count > 0) {
-            CustomDragButton *bn = [arrSubviews objectAtIndex:0];
-            NSString *ss = [bn.lblText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-            NSString *sa = [[objFillBlanks.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
-            if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
-                flag1 = NO;
-            }
-        }
-        i++;
+    for(UIButton *subview in [imgDropView subviews]) {
+        [self.view removeGestureRecognizer:uiTapGestureRecognizer];
     }
-    return flag1;
 }
 -(void)handleRevealScore
 {
@@ -555,7 +569,7 @@
             NSString *ss = [bn.lblText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
             NSString *sa = [[objFillBlanks.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
             if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
-                [bn.ansImage setImage:[UIImage imageNamed:@"Btn_feed_false.png"]];
+                [bn.ansImage setImage:imgAnswerFalse];
                 NSString *feeback = [self fn_getFeeback:bn.tag AndCorrect:@"incorrect"];
                 if (feeback.length > 0) {
                     bn.feedbackBt.hidden = NO;
@@ -563,7 +577,7 @@
                     [bn addTarget:self action:@selector(onFeedbackTapped:) forControlEvents:UIControlEventTouchUpInside];
                 }
             }else {
-                [bn.ansImage setImage:[UIImage imageNamed:@"Btn_feed_true.png"]];
+                [bn.ansImage setImage:imgAnswerTrue];
                 NSString *feeback = [self fn_getFeeback:bn.tag AndCorrect:@"correct"];
                 if (feeback.length > 0) {
                     bn.feedbackBt.hidden = NO;

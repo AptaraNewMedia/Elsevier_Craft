@@ -474,15 +474,27 @@
         [self.view addSubview:feedbackView];
     }
 }
--(void)disableEditFields
+-(BOOL)checkForAnswer
 {
-    
+    BOOL flag1 = YES;
+    NSMutableString *strAns = [[NSMutableString alloc] init];
     for (int i =0; i <[arrRadios count]; i++) {
         radioView = [arrRadios objectAtIndex:i];
-        radioView.btnOption1.enabled = NO;
-        radioView.btnOption2.enabled = NO;
-        radioView.btnOption3.enabled = NO;
+        objRB = [objRH.arrRadioButtons objectAtIndex:i];
+        
+        NSString *ss = [radioView.selected stringByReplacingOccurrencesOfString:@" " withString:@""];
+		NSString *sa = [objRB.strAnswer stringByReplacingOccurrencesOfString:@" " withString:@""];
+        
+        if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
+			flag1 = NO;
+		}
+        if (i == [arrRadios count] - 1)
+            [strAns appendFormat:@"%@", ss];
+        else
+            [strAns appendFormat:@"%@#", ss];
     }
+    strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
+	return flag1;
 }
 -(void)handleRevealScore
 {
@@ -623,27 +635,15 @@
         [parentObject Fn_ShowAnswer];
     }
 }
--(BOOL)checkForAnswer
+-(void)disableEditFields
 {
-    BOOL flag1 = YES;
-    NSMutableString *strAns = [[NSMutableString alloc] init];
+    
     for (int i =0; i <[arrRadios count]; i++) {
         radioView = [arrRadios objectAtIndex:i];
-        objRB = [objRH.arrRadioButtons objectAtIndex:i];
-        
-        NSString *ss = [radioView.selected stringByReplacingOccurrencesOfString:@" " withString:@""];
-		NSString *sa = [objRB.strAnswer stringByReplacingOccurrencesOfString:@" " withString:@""];
-        
-        if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
-			flag1 = NO;
-		}
-        if (i == [arrRadios count] - 1)
-            [strAns appendFormat:@"%@", ss];
-        else
-            [strAns appendFormat:@"%@#", ss];
+        radioView.btnOption1.enabled = NO;
+        radioView.btnOption2.enabled = NO;
+        radioView.btnOption3.enabled = NO;
     }
-    strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
-	return flag1;
 }
 -(void)handleShowAnswers
 {

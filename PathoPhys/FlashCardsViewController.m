@@ -806,6 +806,7 @@
     btnNext.enabled = NO;
     btnPrev.enabled = NO;
     scrollGallery.userInteractionEnabled = NO;
+    scrollGallery.scrollEnabled = NO;   
     scrollViewMiddle.scrollEnabled = NO;
     Bn_Alphabet.enabled = NO;
     Bn_ByChapter.enabled = NO;

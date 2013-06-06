@@ -602,29 +602,30 @@
     
     return strTemp;
 }
--(void)disableEditFields
+-(BOOL)checkForAnswer
 {
-    
+	NSMutableString *strAns = [[NSMutableString alloc] init];
 	int i = 0;
-	
-	while (i < [questionArray count]) {
+	BOOL flag1 = YES;
+	while (i < [userAnswerArray count]) {
 		
-		LeftMatchView_IPad *bt = [questionArray objectAtIndex:i];
-		bt.customBt.enabled = NO;
-        bt.dotBt.enabled = NO;
+		T1Object_ipad *obj = [userAnswerArray objectAtIndex:i];
+		RightMatchView_Ipad *bt = [answerArray objectAtIndex:obj.ansID];
+		NSString *ss = [bt.customBt.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+		NSString *sa = [[objMatch.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
+		if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
+			flag1 = NO;
+			break;
+		}
 		i++;
+        
+        if (i == [userAnswerArray count] - 1)
+            [strAns appendFormat:@"%d$%d$%d", obj.ansID, obj.qnsID, obj.colorID];
+        else
+            [strAns appendFormat:@"%d$%d$%d#", obj.ansID, obj.qnsID, obj.colorID];
 	}
-	
-	i = 0;
-	
-	while (i < [answerArray count]) {
-		
-		RightMatchView_Ipad *bt = [answerArray objectAtIndex:i];
-		bt.customBt.enabled = NO;
-        bt.dotBt.enabled = NO;
-		i++;
-	}
-	
+	strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
+	return flag1;
 }
 -(void)handleRevealScore
 {
@@ -778,30 +779,29 @@
         [parentObject Fn_ShowAnswer];
     }
 }
--(BOOL)checkForAnswer
+-(void)disableEditFields
 {
-	NSMutableString *strAns = [[NSMutableString alloc] init];
+    
 	int i = 0;
-	BOOL flag1 = YES;
-	while (i < [userAnswerArray count]) {
+	
+	while (i < [questionArray count]) {
 		
-		T1Object_ipad *obj = [userAnswerArray objectAtIndex:i];
-		RightMatchView_Ipad *bt = [answerArray objectAtIndex:obj.ansID];
-		NSString *ss = [bt.customBt.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-		NSString *sa = [[objMatch.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
-		if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
-			flag1 = NO;
-			break;
-		}
+		LeftMatchView_IPad *bt = [questionArray objectAtIndex:i];
+		bt.customBt.enabled = NO;
+        bt.dotBt.enabled = NO;
 		i++;
-        
-        if (i == [userAnswerArray count] - 1)
-            [strAns appendFormat:@"%d$%d$%d", obj.ansID, obj.qnsID, obj.colorID];
-        else
-            [strAns appendFormat:@"%d$%d$%d#", obj.ansID, obj.qnsID, obj.colorID];
 	}
-	strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
-	return flag1;
+	
+	i = 0;
+	
+	while (i < [answerArray count]) {
+		
+		RightMatchView_Ipad *bt = [answerArray objectAtIndex:i];
+		bt.customBt.enabled = NO;
+        bt.dotBt.enabled = NO;
+		i++;
+	}
+	
 }
 -(void)handleShowAnswers
 {

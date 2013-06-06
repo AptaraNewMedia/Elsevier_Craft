@@ -358,7 +358,7 @@
             [matchPairsView disableEditFields];
             break;
         case QUESTION_TYPE_MCSS:
-            singleSelectionView.tblOptions.allowsSelection = NO;
+            [singleSelectionView Fn_createInvisibleBtn];
             break;
     }
     
@@ -683,7 +683,7 @@
         }
     }
     
-    int_currentScore =(total_score / intTotalQuestions) * 100;
+    int_currentScore =(total_score*100) / intTotalQuestions;
     
     NSString *score = [NSString stringWithFormat:@"%d%% (%d out of %d questions answered correctly.)", int_currentScore , total_score, intTotalQuestions];
    

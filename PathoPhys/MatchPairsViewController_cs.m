@@ -367,7 +367,6 @@
     }
     return size.height;
 }
-
 -(NSInteger)getRandomColor
 {
 	
@@ -577,6 +576,31 @@
     
     return strTemp;
 }
+-(BOOL)checkForAnswer
+{
+	NSMutableString *strAns = [[NSMutableString alloc] init];
+	int i = 0;
+	BOOL flag1 = YES;
+	while (i < [userAnswerArray count]) {
+		
+		T1Object_ipad *obj = [userAnswerArray objectAtIndex:i];
+		RightMatchView_Ipad *bt = [answerArray objectAtIndex:obj.ansID];
+		NSString *ss = [bt.customBt.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+		NSString *sa = [[objMatch.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
+		if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
+			flag1 = NO;
+			break;
+		}
+		i++;
+        
+        if (i == [userAnswerArray count] - 1)
+            [strAns appendFormat:@"%d$%d$%d", obj.ansID, obj.qnsID, obj.colorID];
+        else
+            [strAns appendFormat:@"%d$%d$%d#", obj.ansID, obj.qnsID, obj.colorID];
+	}
+	strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
+	return flag1;
+}
 -(void)handleRevealScore
 {
 	
@@ -729,31 +753,6 @@
     if (!check) {
         [parentObject Fn_ShowAnswer];
     }
-}
--(BOOL)checkForAnswer
-{
-	NSMutableString *strAns = [[NSMutableString alloc] init];
-	int i = 0;
-	BOOL flag1 = YES;
-	while (i < [userAnswerArray count]) {
-		
-		T1Object_ipad *obj = [userAnswerArray objectAtIndex:i];
-		RightMatchView_Ipad *bt = [answerArray objectAtIndex:obj.ansID];
-		NSString *ss = [bt.customBt.titleLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-		NSString *sa = [[objMatch.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
-		if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
-			flag1 = NO;
-			break;
-		}
-		i++;
-        
-        if (i == [userAnswerArray count] - 1)
-            [strAns appendFormat:@"%d$%d$%d", obj.ansID, obj.qnsID, obj.colorID];
-        else
-            [strAns appendFormat:@"%d$%d$%d#", obj.ansID, obj.qnsID, obj.colorID];
-	}
-	strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
-	return flag1;
 }
 -(void)disableEditFields
 {

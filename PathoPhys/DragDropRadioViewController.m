@@ -44,6 +44,11 @@
     float y_feedback_l;
     float x_feedback_p;
     float x_feedback_l;
+    
+    UIImage *imgFeedbackNormal;
+    UIImage *imgFeedbackHighligted;
+    UIImage *imgAnswerTrue;
+    UIImage *imgAnswerFalse;
 }
 
 @property(nonatomic, retain) DragDropManager *dragDropManager;
@@ -85,7 +90,7 @@
     // Do any additional setup after loading the view from its nib.
     lblQuestionText.text = objDRAGDROP.strQuestionText ;
     [self fn_SetFontColor];
-    
+    [self fn_SetVariables];
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
         [webviewInstructions loadHTMLString:@"<html><body style=\"font-size:12px;color:AA3934;font-family:arial;\">Drag the options and drop them on the correct drop areas. Select the correct category that it belongs to and tap <b>Submit.</b></body></html>" baseURL:nil];
      
@@ -157,6 +162,15 @@
     }
     
 }
+-(void)fn_SetVariables
+{
+    //images
+    imgFeedbackNormal = [UIImage imageNamed:@"Btn_feed.png"];
+    imgFeedbackHighligted = [UIImage imageNamed:@"btn_feedback_highlight.png"];
+    imgAnswerTrue = [UIImage imageNamed:@"Btn_feed_true.png"];
+    imgAnswerFalse = [UIImage imageNamed:@"Btn_feed_false.png"];
+    
+}
 //---------------------------------------------------------
 
 
@@ -189,8 +203,8 @@
         [bnDrag.feedbackBt setTag:i];
         bnDrag.feedbackBt.frame = CGRectMake(bnDrag.ansImage.frame.origin.x+bnDrag.ansImage.frame.size.width+1, 0, 22, 22);
         [bnDrag.feedbackBt setTag:i];
-        [bnDrag.feedbackBt setImage:[UIImage imageNamed:@"Btn_feed.png"] forState:UIControlStateNormal];
-        [bnDrag.feedbackBt setImage:[UIImage imageNamed:@"Btn_feed.png"] forState:UIControlStateHighlighted];
+        [bnDrag.feedbackBt setImage:imgFeedbackNormal forState:UIControlStateNormal];
+        [bnDrag.feedbackBt setImage:imgFeedbackHighligted forState:UIControlStateHighlighted];
         bnDrag.feedbackBt.hidden = YES;
         
         NSString *feeback = [self fn_getFeeback2:bnDrag.feedbackBt.tag AndCorrect:@"correct"];
@@ -756,12 +770,6 @@
         }
     }
 }
--(void)Fn_disableAllDraggableSubjects
-{
-    for(UIButton *subview in [imgDropView subviews]) {
-        [self.view removeGestureRecognizer:uiTapGestureRecognizer];
-    }
-}
 -(void)rotateScrollViewButtonsForLandscape
 {
     int counter= 0;
@@ -975,17 +983,48 @@
         }
     }
 }
--(void)disableEditFields
+-(BOOL)checkForAnswer
 {
+    int i = 0;
+    NSMutableString *strAns = [[NSMutableString alloc] init];
+    BOOL flag1 = YES;
+    for (UIView *dropArea in _dragDropManager.dropAreas) {
+        NSArray *arrSubviews = [dropArea subviews];
+        if (arrSubviews.count > 0) {
+            CustomDragButton *bn = [arrSubviews objectAtIndex:0];
+            NSString *ss = [bn.lblText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+            NSString *sa = [[objDRAGDROP.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
+            if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
+                flag1 = NO;
+                break;
+            }
+            if (i == [objDRAGDROP.arrAnswer count] - 1)
+                [strAns appendFormat:@"%@", ss];
+            else
+                [strAns appendFormat:@"%@#", ss];
+        }
+        strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
+        i++;
+    }
     
     for (int i =0; i <[arr_radioButtons count]; i++) {
         objRadioView = [arr_radioButtons objectAtIndex:i];
-        objRadioView.btnOption1.enabled = NO;
-        objRadioView.btnOption2.enabled = NO;
-        objRadioView.btnOption3.enabled = NO;
-        objRadioView.btnOption4.enabled = NO;
-        objRadioView.btnOption5.enabled = NO;
+        NSString *answer = [objDRAGDROP.arrRadioAnswers objectAtIndex:i];
+        
+        NSString *ss = [objRadioView.selected stringByReplacingOccurrencesOfString:@" " withString:@""];
+		NSString *sa = [answer stringByReplacingOccurrencesOfString:@" " withString:@""];
+        
+        if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
+			flag1 = NO;
+		}
+        if (i == [arr_radioButtons count] - 1)
+            [strAns appendFormat:@"%@", ss];
+        else
+            [strAns appendFormat:@"%@#", ss];
     }
+    strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
+    
+    return flag1;
 }
 -(void)handleRevealScore
 {
@@ -1025,7 +1064,7 @@
         }
         
         if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
-			[ansImage setImage:[UIImage imageNamed:@"Btn_feed_false.png"]];
+			[ansImage setImage:imgAnswerFalse];
             
             NSString *feeback = [self fn_getFeeback:objDRAGDROP.arrFeedback AndCorrect:@"incorrect" Andfeed:objRadioView.selectedIndex];
             if (feeback.length > 0) {
@@ -1035,7 +1074,7 @@
             
 		}else {
 			
-			[ansImage setImage:[UIImage imageNamed:@"Btn_feed_true.png"]];
+			[ansImage setImage:imgAnswerTrue];
             
             NSString *feeback = [self fn_getFeeback:objDRAGDROP.arrFeedback AndCorrect:@"correct" Andfeed:objRadioView.selectedIndex];
             if (feeback.length > 0) {
@@ -1058,7 +1097,7 @@
             NSString *ss = [bn.lblText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
             NSString *sa = [[objDRAGDROP.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
             if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
-                [bn.ansImage setImage:[UIImage imageNamed:@"Btn_feed_false.png"]];
+                [bn.ansImage setImage:imgAnswerFalse];
                 NSString *feeback = [self fn_getFeeback2:bn.tag AndCorrect:@"incorrect"];
                 if (feeback.length > 0) {
                     bn.feedbackBt.hidden = NO;
@@ -1071,7 +1110,7 @@
                     
                 }
             }else {
-                [bn.ansImage setImage:[UIImage imageNamed:@"Btn_feed_true.png"]];
+                [bn.ansImage setImage:imgAnswerTrue];
                 NSString *feeback = [self fn_getFeeback2:bn.tag AndCorrect:@"correct"];
                 if (feeback.length > 0) {
                     bn.feedbackBt.hidden = NO;
@@ -1172,48 +1211,23 @@
         [parentObject Fn_ShowAnswer];
     }
 }
--(BOOL)checkForAnswer
+-(void)Fn_disableAllDraggableSubjects
 {
-    int i = 0;
-    NSMutableString *strAns = [[NSMutableString alloc] init];
-    BOOL flag1 = YES;
-    for (UIView *dropArea in _dragDropManager.dropAreas) {
-        NSArray *arrSubviews = [dropArea subviews];
-        if (arrSubviews.count > 0) {
-            CustomDragButton *bn = [arrSubviews objectAtIndex:0];
-            NSString *ss = [bn.lblText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-            NSString *sa = [[objDRAGDROP.arrAnswer objectAtIndex:i] stringByReplacingOccurrencesOfString:@" " withString:@""];
-            if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
-                flag1 = NO;
-                break;
-            }
-            if (i == [objDRAGDROP.arrAnswer count] - 1)
-                [strAns appendFormat:@"%@", ss];
-            else
-                [strAns appendFormat:@"%@#", ss];
-        }
-        strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
-        i++;
+    for(UIButton *subview in [imgDropView subviews]) {
+        [self.view removeGestureRecognizer:uiTapGestureRecognizer];
     }
+}
+-(void)disableEditFields
+{
     
     for (int i =0; i <[arr_radioButtons count]; i++) {
         objRadioView = [arr_radioButtons objectAtIndex:i];
-        NSString *answer = [objDRAGDROP.arrRadioAnswers objectAtIndex:i];
-        
-        NSString *ss = [objRadioView.selected stringByReplacingOccurrencesOfString:@" " withString:@""];
-		NSString *sa = [answer stringByReplacingOccurrencesOfString:@" " withString:@""];
-        
-        if (![[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
-			flag1 = NO;
-		}
-        if (i == [arr_radioButtons count] - 1)
-            [strAns appendFormat:@"%@", ss];
-        else
-            [strAns appendFormat:@"%@#", ss];
+        objRadioView.btnOption1.enabled = NO;
+        objRadioView.btnOption2.enabled = NO;
+        objRadioView.btnOption3.enabled = NO;
+        objRadioView.btnOption4.enabled = NO;
+        objRadioView.btnOption5.enabled = NO;
     }
-    strVisitedAnswer = [NSString stringWithFormat:@"%@",strAns];
-    
-    return flag1;
 }
 -(void)handleShowAnswers
 {
@@ -1233,7 +1247,7 @@
             if ([[ss lowercaseString] isEqualToString:[sa lowercaseString]]) {
                 [dropArea addSubview:viewBeingDragged];
                 viewBeingDragged.frame = CGRectMake(0, 0, viewBeingDragged.frame.size.width, viewBeingDragged.frame.size.height);
-                [viewBeingDragged.ansImage setImage:[UIImage imageNamed:@"Btn_feed_true.png"]];
+                [viewBeingDragged.ansImage setImage:imgAnswerTrue];
                 NSString *feeback = [self fn_getFeeback2:viewBeingDragged.tag AndCorrect:@"correct"];
                 if (feeback.length > 0) {
                     viewBeingDragged.feedbackBt.hidden = NO;
@@ -1330,7 +1344,7 @@
                 }
                 
                 
-                [ansImage setImage:[UIImage imageNamed:@"Btn_feed_true.png"]];
+                [ansImage setImage:imgAnswerTrue];
                 
                 NSString *feeback = [self fn_getFeeback:objDRAGDROP.arrFeedback AndCorrect:@"correct" Andfeed:objRadioView.selectedIndex];
                 if (feeback.length > 0) {

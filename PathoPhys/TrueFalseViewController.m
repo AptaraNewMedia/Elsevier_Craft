@@ -281,11 +281,6 @@
     [imgViewCorrect setImage:nil];
     bnFeedback.hidden = YES;
 }
--(void)disableEditFields
-{
-    bnFalse.enabled = NO;
-    bnTrue.enabled = NO;
-}
 -(void)fnSetTrueFalse
 {
     if (objTrueFalse.intTrueid == 1 || objTrueFalse.intTrueid == 2 || objTrueFalse.intTrueid == 3 || objTrueFalse.intTrueid == 4) {
@@ -486,6 +481,11 @@
             [parentObject Fn_ShowAnswer];
         }
     }
+}
+-(void)disableEditFields
+{
+    bnFalse.enabled = NO;
+    bnTrue.enabled = NO;
 }
 -(void)handleShowAnswers
 {
