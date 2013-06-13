@@ -723,7 +723,7 @@
     else
     {
         x_point = bn.frame.origin.x - (221);
-        y_point = tblOptions.frame.origin.y + cell.frame.origin.y + bn.frame.origin.y  - (131);        
+        y_point = tblOptions.frame.origin.y + cell.frame.origin.y + bn.frame.origin.y  - (146);
         x_feedback_l = 270;
         if(currentOrientaion==3 || currentOrientaion==4)
         {

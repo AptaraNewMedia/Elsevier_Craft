@@ -128,6 +128,8 @@
 }
 - (void) fnAddNavigationItems
 {
+    
+    
     if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
         customRightBar = [[CustomRightBarItem alloc] initWithFrame:CGRectMake(230, 0, 90, 44)];
         

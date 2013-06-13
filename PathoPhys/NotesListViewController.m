@@ -20,8 +20,8 @@
 @interface NotesListViewController ()
 {
     IBOutlet UIImageView *imgPatch;
-//    IBOutlet UIImageView *imgBG;
-//    IBOutlet UILabel *lblTitle;
+    IBOutlet UIImageView *imgBG;
+    IBOutlet UILabel *lblTitle;
     IBOutlet UIButton *btnClose;
     IBOutlet UITableView *tbl;
     
@@ -115,7 +115,16 @@
         
     }
     else {
-        
+        if (FromMenu == 1) {
+            [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"img_topbar.png"] forBarMetrics:UIBarMetricsDefault];
+            self.title = @"";
+            lblTitle = [[UILabel alloc] init];
+            [lblTitle setFrame:CGRectMake(0, 0, 100, 30)];
+            lblTitle.text = @"Notes List";
+            lblTitle.textColor = COLOR_WHITE;
+            [self.navigationItem.titleView addSubview:lblTitle];
+
+        }        
     }
 
 }
@@ -575,12 +584,14 @@
     
     [self.view setFrame:CGRectMake(0,0,768,1024)];
     
+    [imgBG setImage:[UIImage imageNamed:@"img_bg_p.png"]];
+    [imgBG setFrame:CGRectMake(0, 0, 768, 1024)];
+    
+    
     [imgPatch setImage:[UIImage imageNamed:@"Portrait_Note_BG_01.png"]];
     [imgPatch  setFrame:CGRectMake(0,0,768,1024)];
 
     
-//    [imgBG setImage:[UIImage imageNamed:@"P_Img _viewNote.png"]];
-//    [imgBG setFrame:CGRectMake(40, 83, 697, 723)];
     
 //    [lblTitle setFrame:CGRectMake(88,109, 683, 36)];
     [btnClose setFrame:CGRectMake(644,118,41,36)];
@@ -590,7 +601,7 @@
     [lblTitleDescription setFrame:CGRectMake(495,208,104,38)];
     [lblTitleDate setFrame:CGRectMake(605,208,104,38)];
     [txtSearch setFrame:CGRectMake(110,171,583,30)];
-    
+    [lbl_swipe setFrame:CGRectMake(230, 860, 302, 21)];
     [tbl reloadData];
     //white_patch_with_line.png
 }
@@ -598,20 +609,25 @@
     
     [self.view setFrame:CGRectMake(0,0,1024,768)];
     
+    [imgBG setImage:[UIImage imageNamed:@"img_bg.png"]];
+    [imgBG setFrame:CGRectMake(0, 0, 1024, 768)];
+
+    
     [imgPatch setImage:[UIImage imageNamed:@"landscape_Note_box_01.png"]];
-    [imgPatch  setFrame:CGRectMake(0,0,1024,768)];
+    [imgPatch  setFrame:CGRectMake(0,-44,1024,768)];
     
 //    [imgBG setImage:[UIImage imageNamed:@"img_notelist_bg.png"]];
 //    [imgBG setFrame:CGRectMake(90, 58, 843, 633)];
     
 //    [lblTitle setFrame:CGRectMake(170, 75, 683, 36)];
-    [btnClose setFrame:CGRectMake(855,103,41,36)];
-    [tbl setFrame:CGRectMake(87,238,822,433)];
-    [lblTitleSerialNo setFrame:CGRectMake(106, 200, 61, 38)];
-    [lblTitleName setFrame:CGRectMake(370, 200, 61, 38)];
-    [lblTitleDescription setFrame:CGRectMake(650,200,104,38)];
-    [lblTitleDate setFrame:CGRectMake(785,200,104,38)];
-    [txtSearch setFrame:CGRectMake( 157,159,732,30)];
+    [btnClose setFrame:CGRectMake(855,59,41,36)];
+    [tbl setFrame:CGRectMake(87,194,822,433)];
+    [lblTitleSerialNo setFrame:CGRectMake(106, 156, 61, 38)];
+    [lblTitleName setFrame:CGRectMake(370, 156, 61, 38)];
+    [lblTitleDescription setFrame:CGRectMake(650,156,104,38)];
+    [lblTitleDate setFrame:CGRectMake(785,156,104,38)];
+    [txtSearch setFrame:CGRectMake( 157,115,732,30)];
+    [lbl_swipe setFrame:CGRectMake(361, 640, 302, 21)];
     [tbl reloadData];
 }
 @end

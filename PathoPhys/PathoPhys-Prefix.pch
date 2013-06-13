@@ -19,8 +19,8 @@
 #define MSG_PARTIALY_CORRECT @"Partially Correct. Please try other options as well."
 
 
-#define MSG_BOOKMARK_TEST @"You are leaving the test. Do you want to save the state?"
-#define MSG_BOOKMARK_CASESTUDY @"You are leaving the test. Do you want to save the state?"
+#define MSG_BOOKMARK_TEST @"You are leaving the test. Do you wish to save your progress?"
+#define MSG_BOOKMARK_CASESTUDY @"You are leaving the test. Do you wish to save your progress?"
 
 
 #define COLOR_CUSTOMBUTTON_BLUE [UIColor colorWithRed:0 green:0.478 blue:0.749 alpha:1]

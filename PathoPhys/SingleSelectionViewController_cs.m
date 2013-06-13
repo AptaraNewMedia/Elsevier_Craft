@@ -178,7 +178,7 @@
 //---------------------------------------------------------
 -(void)Fn_createInvisibleBtn
 {
-    if([[DEVICE_TYPE substringToIndex:6] isEqualToString:@"iPhone"]) {
+    if([DEVICE_TYPE isEqualToString:@"iPhone"]) {
         tblOptions.allowsSelection=NO;
     }
     else {
