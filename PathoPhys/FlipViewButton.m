@@ -10,6 +10,7 @@
 
 @implementation FlipViewButton
 @synthesize textLabel;
+@synthesize descLabel;
 @synthesize selectedButton;
 - (id)initWithFrame:(CGRect)frame
 {
@@ -23,7 +24,16 @@
 		textLabel.font=FONT_25;
 		textLabel.textAlignment=UITextAlignmentCenter;
 		textLabel.numberOfLines=20;    	
-		[self addSubview:textLabel];	
+		[self addSubview:textLabel];
+        
+        descLabel=[[UILabel alloc] init];
+		descLabel.textColor=COLOR_LIGHTGRAY;
+		descLabel.backgroundColor=COLOR_CLEAR;
+		descLabel.font=FONT_10;
+		descLabel.textAlignment=UITextAlignmentCenter;
+		descLabel.numberOfLines=2;
+        descLabel.text = @"";
+		[self addSubview:descLabel];
         
     }
     return self;

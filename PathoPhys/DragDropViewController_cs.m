@@ -609,7 +609,7 @@
     else
     {
         x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 10);
-        y_point = bn.superview.frame.origin.y + 15;
+        y_point = bn.superview.frame.origin.y + 30;
         y_point = y_point - visibleRect.origin.y;
         
         x_feedback_l=x_point;
@@ -647,7 +647,7 @@
     else
     {
         x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 10);
-        y_point = bn.superview.frame.origin.y + 15;
+        y_point = bn.superview.frame.origin.y + 30;
         y_point = y_point - visibleRect.origin.y;
         
         x_feedback_l=x_point;

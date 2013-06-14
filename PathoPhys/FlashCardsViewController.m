@@ -142,7 +142,6 @@
 {
     [md Fn_removeInfoViewPopup];
     [md Fn_removeNoteViewPopup];
-    NOTES_MODE = 0;
 }
 -(void) Fn_CheckNote:(int)index {
     
@@ -279,6 +278,11 @@
         flipViewButton.textLabel.textColor = COLOR_BLACK;
         flipViewButton.tag=i;
         flipViewButton.backgroundColor = COLOR_CLEAR;
+        
+        flipViewButton.descLabel.frame = CGRectMake(55, 360, 270, 25);
+        flipViewButton.descLabel.font = FONT_14;
+
+        
         [flipViewButton setBackgroundImage:[UIImage imageNamed:@"img_flashcard_front.png"] forState:UIControlStateNormal];
         [flipViewButton addTarget:self action:@selector(onImageClick:) forControlEvents:UIControlEventTouchUpInside];
         flipViewButton.selectedButton = 0;        
@@ -293,6 +297,7 @@
             flipViewButton.frame = CGRectMake(xOrigin, 0, 172, 225);
             flipViewButton.textLabel.frame = CGRectMake(10, 5, 140, 210);
             flipViewButton.textLabel.font = FONT_12;
+            flipViewButton.descLabel.font = FONT_9;
             [flipViewButton setBackgroundImage:[UIImage imageNamed:@"Big_grey_flash_card.png"] forState:UIControlStateNormal];
             xOrigin = xOrigin + 172;
         }
@@ -743,6 +748,7 @@
         }
         flipViewButton.textLabel.textColor = COLOR_BLACK;
         flipViewButton.textLabel.text = objFlashcardSet.strKey;
+        flipViewButton.descLabel.text = @"";
         flipViewButton.selectedButton = 0;
 	}
 	else
@@ -754,18 +760,26 @@
 		[UIView commitAnimations];		
         
         if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPhone) {
-            flipViewButton.textLabel.frame = CGRectMake(10, 5, 140, 210);
+            flipViewButton.textLabel.frame = CGRectMake(10, 5, 140, 195);
             flipViewButton.textLabel.font = FONT_12;
+            flipViewButton.descLabel.frame = CGRectMake(10, 195, 140, 20);
             [flipViewButton setBackgroundImage:[UIImage imageNamed:@"Big_blue_flash_card.png"] forState:UIControlStateNormal];
         }
         else {
-            flipViewButton.textLabel.frame = CGRectMake(55, 15, 270, 370);
+            flipViewButton.textLabel.frame = CGRectMake(55, 15, 270, 355);
             flipViewButton.textLabel.font = FONT_17;
+            flipViewButton.descLabel.frame = CGRectMake(55, 360, 270, 25);            
             [flipViewButton setBackgroundImage:[UIImage imageNamed:@"img_flashcard_back.png"] forState:UIControlStateNormal];
         }
         flipViewButton.textLabel.backgroundColor = COLOR_CLEAR;
         flipViewButton.textLabel.text = objFlashcardSet.strDefinition;
         flipViewButton.textLabel.textColor = COLOR_WHITE;
+        
+        if (objFlashcardSet.strDescription == (id)[NSNull null] || objFlashcardSet.strDescription.length == 0 )
+            flipViewButton.descLabel.text = @"";
+        else
+            flipViewButton.descLabel.text = objFlashcardSet.strDescription;
+        
         flipViewButton.selectedButton = 1;
         
 	}
@@ -1312,6 +1326,7 @@
     
     prevFlipViewIndex = intCurrentQuestionIndex;
     prevThumbTapped = intCurrentQuestionIndex;
+    [self Fn_CheckNote:intCurrentQuestionIndex];        
     [self fnThumbScrollerMove];
         
     }

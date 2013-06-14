@@ -972,9 +972,9 @@
         {
             img_feedback.transform = CGAffineTransformMakeScale(-1, 1);
             
-            [feedbackView setFrame:CGRectMake(xValue+230, yValue, 261, 131)];
+            [feedbackView setFrame:CGRectMake(xValue+213, yValue, 261, 131)];
             
-            x_feedback_p=x_feedback_p+212;
+            x_feedback_p=x_feedback_p+195;
             x_feedback_l=x_feedback_l+212;
         }
         else
@@ -1406,11 +1406,26 @@
     else
     {
         x_point =  imgScroller.frame.origin.x + bn.frame.origin.x + bn.superview.frame.origin.x - (225);
+        
         y_point =  imgScroller.frame.origin.y + bn.frame.origin.y + bn.superview.frame.origin.y - (131);
         y_point = y_point - visibleRect.origin.y;
         
-        x_feedback_l = bn.frame.origin.x + bn.superview.frame.origin.x - (225) ;
-        y_feedback_l = bn.frame.origin.y + bn.superview.frame.origin.y - (131);
+        if(currentOrientaion==1 || currentOrientaion==2) // Portrait
+        {
+            x_feedback_p = x_point;
+            y_feedback_p = y_point;
+            
+            x_feedback_l = x_point+238;
+            y_feedback_l = y_point-217;
+        }
+        else //Lanscape
+        {
+            x_feedback_l = x_point;
+            y_feedback_l = y_point;
+            
+            x_feedback_p = x_point-238;
+            y_feedback_p = y_point+217;
+        }
     }
     
     [self Fn_AddFeedbackPopup:x_point andy:y_point andText:objRadioView.feedback];
@@ -1436,8 +1451,8 @@
     }
     else
     {
-        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 10);
-        y_point = bn.superview.frame.origin.y + 15;
+        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth +15);
+        y_point = bn.superview.frame.origin.y + 24;
         y_point = y_point - visibleRect.origin.y;
         
         x_feedback_l=x_point;
@@ -1473,8 +1488,8 @@
     }
     else
     {
-        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 10);
-        y_point = bn.superview.frame.origin.y + 15;
+        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth +15);
+        y_point = bn.superview.frame.origin.y + 24;
         y_point = y_point - visibleRect.origin.y;
         
         x_feedback_l=x_point;

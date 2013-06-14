@@ -417,10 +417,10 @@
         {
             img_feedback.transform = CGAffineTransformMakeScale(-1, 1);
             
-            [feedbackView setFrame:CGRectMake(xValue+230, yValue, 261, 131)];
+            [feedbackView setFrame:CGRectMake(xValue+210, yValue, 261, 131)];
             
-            x_feedback_p=x_feedback_p+212;
-            x_feedback_l=x_feedback_l+212;
+            x_feedback_p=x_feedback_p+207;
+            x_feedback_l=x_feedback_l+217;
         }
         else
         {
@@ -645,8 +645,8 @@
     }
     else
     {
-        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 10);
-        y_point = bn.superview.frame.origin.y + 15;
+        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth +20);
+        y_point = bn.superview.frame.origin.y + 30;
         y_point = y_point - visibleRect.origin.y;
         
         x_feedback_l=x_point;
@@ -683,8 +683,8 @@
     }
     else
     {
-        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth - 10);
-        y_point = bn.superview.frame.origin.y + 15;
+        x_point = bn.frame.origin.x + bn.superview.frame.origin.x + (objDRAGDROP.fWidth +20);
+        y_point = bn.superview.frame.origin.y + 30;
         y_point = y_point - visibleRect.origin.y;
         
         x_feedback_l=x_point;

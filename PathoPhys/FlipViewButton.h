@@ -10,11 +10,14 @@
 
 @interface FlipViewButton : UIButton {
 	UILabel *textLabel;
+    
+    UILabel *descLabel;
+
 	NSInteger selectedButton;
 }
 
 @property (nonatomic,assign) NSInteger selectedButton;
 @property(nonatomic,retain) UILabel *textLabel;
-
+@property(nonatomic,retain) UILabel *descLabel;
 
 @end
