@@ -562,6 +562,7 @@
             }
             newflipViewButton.textLabel.textColor = COLOR_BLACK;
             newflipViewButton.textLabel.text = objFlashcardSet.strKey;
+            newflipViewButton.descLabel.text = @"";
             newflipViewButton.selectedButton = 0;
             
         }        
@@ -586,6 +587,7 @@
             }
             newflipViewButton.textLabel.textColor = COLOR_BLACK;
             newflipViewButton.textLabel.text = objFlashcardSet.strKey;
+            newflipViewButton.descLabel.text = @"";
             newflipViewButton.selectedButton = 0;
             
         }
