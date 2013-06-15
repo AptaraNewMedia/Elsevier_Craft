@@ -545,22 +545,23 @@
         x_point = bn.frame.origin.x - 220;
         y_point = bn.frame.origin.y - 130;
         
-        x_feedback_l = x_point + 20;
-        y_feedback_l = y_point; //OK
-        
-        //        x_feedback_p = x_point - 110;
-        //        y_feedback_p = y_point + 80;
-        
-        x_feedback_p = x_feedback_l-130;
-        
-        y_feedback_p = y_feedback_l+90;
-        
         if(currentOrientaion==1 || currentOrientaion==2) // Portrait
         {
-            [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:strFeedback];
+            x_feedback_p = x_point + 20;
+            y_feedback_p = y_point;
+            
+            x_feedback_l = x_point + 150;
+            y_feedback_l = y_point - 90; //OK
+            
+            [self Fn_AddFeedbackPopup:x_feedback_p andy:y_feedback_p andText:strFeedback];
         }
         else //Lanscape
         {
+            x_feedback_l = x_point + 20;
+            y_feedback_l = y_point; //OK
+            
+            x_feedback_p = x_feedback_l-130;
+            y_feedback_p = y_feedback_l+90;
             [self Fn_AddFeedbackPopup:x_feedback_l andy:y_feedback_l andText:strFeedback];
         }
     }
@@ -702,7 +703,7 @@
     [bnFeedback setFrame:CGRectMake(690, 414, 73, 44) ];
     [imgViewCorrect setFrame:CGRectMake(650, 423, 36, 35)];
     
-    [feedbackView setHidden:YES];
+    //[feedbackView setHidden:YES];
 }
 -(void)Fn_rotateLandscape
 {
@@ -731,7 +732,7 @@
     [bnFalse setFrame:CGRectMake(511, 218, 237, 297)];
     [bnFeedback setFrame:CGRectMake(820, 324, 73, 44) ];
     [imgViewCorrect setFrame:CGRectMake(766, 333, 36, 35)];
-    [feedbackView setHidden:YES];
+    //[feedbackView setHidden:YES];
 }
 //---------------------------------------------------------
 @end

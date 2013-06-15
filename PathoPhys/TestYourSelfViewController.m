@@ -457,7 +457,12 @@
         
         objNotes = [[Notes alloc] init];
         objNotes.intMode = 1;
-        objNotes.strNoteTitle = [NSString stringWithFormat:@"TY-%d, %@, Q%d", intCurrentTestYourSelf_ChapterId, strCurrentThematicName, question_no];
+        if(intCurrentTestYourSelf_ThematicId == -1) {
+            objNotes.strNoteTitle = [NSString stringWithFormat:@"TY-%d, Q%d", intCurrentTestYourSelf_ChapterId, question_no];
+        }
+        else {
+            objNotes.strNoteTitle = [NSString stringWithFormat:@"TY-%d, %@, Q%d", intCurrentTestYourSelf_ChapterId, strCurrentThematicName, question_no];            
+        }
     }
     else {
         NOTES_MODE = 2;

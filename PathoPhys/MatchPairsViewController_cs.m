@@ -789,6 +789,7 @@
     
     for (RightMatchView_Ipad *rbt in answerArray) {
         rbt.dotBt.backgroundColor = COLOR_CLEAR;
+        rbt.customBt.backgroundColor = COLOR_BottomGrayButton;        
         [rbt.ansImage setImage:nil];
         [rbt.feedbackBt setImage:nil forState:UIControlStateNormal];
         [rbt.feedbackBt setImage:nil forState:UIControlStateHighlighted];

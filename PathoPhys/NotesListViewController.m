@@ -348,7 +348,7 @@
         strCurrentChapterName = [NSString stringWithFormat:@"%@", objChap.strChapterTitle];
         
         ThematicArea *objThematic;
-        if(objNotes.intThematicId!=0) {
+        if(objNotes.intThematicId!=-1) {
             intCurrentTestYourSelf_ThematicId = objNotes.intThematicId;
             objThematic = (ThematicArea *)[objChap.thematicData objectAtIndex:objNotes.intThematicId - 1];        
             str_BarTitle = [NSString stringWithFormat:@"%@ - %@", objChap.strChapterTitle, objThematic.strThematicTitle];

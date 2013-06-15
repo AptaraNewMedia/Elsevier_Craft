@@ -496,10 +496,10 @@ UITextView *txt_feedback;
                 
             }
             
-            categoryNumber =  shouldSelectTabbarIndex + 1;
+            //categoryNumber =  shouldSelectTabbarIndex + 1;
             [self Fn_SubTabBar];
             [self Fn_addTabBar];
-            self.tabBarController.selectedIndex = categoryNumber - 1;
+            //self.tabBarController.selectedIndex = categoryNumber - 1;
             [self Fn_removeNoteViewPopup];
             [self Fn_removeInfoViewPopup];
         }
@@ -517,10 +517,10 @@ UITextView *txt_feedback;
                 
             }
             
-            categoryNumber =  shouldSelectTabbarIndex + 1;
+            //categoryNumber =  shouldSelectTabbarIndex + 1;
             [self Fn_SubTabBar];
             [self Fn_addTabBar];
-            self.tabBarController.selectedIndex = categoryNumber - 1;
+            //self.tabBarController.selectedIndex = categoryNumber - 1;
             [self Fn_removeNoteViewPopup];
             [self Fn_removeInfoViewPopup];
         }
