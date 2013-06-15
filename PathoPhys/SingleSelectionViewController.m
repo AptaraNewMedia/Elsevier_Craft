@@ -132,6 +132,8 @@
         isImage = YES;
     }
     
+    webviewInstructions.scrollView.scrollEnabled = NO;
+    
     isSubmit = NO;
     isShowAnswer = NO;
     
@@ -141,6 +143,7 @@
             myview.exclusiveTouch = YES;
         }
     }
+    
     
 
     

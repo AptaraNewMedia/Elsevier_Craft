@@ -496,7 +496,7 @@ UITextView *txt_feedback;
                 
             }
             
-            //categoryNumber =  shouldSelectTabbarIndex + 1;
+            categoryNumber =  shouldSelectTabbarIndex;
             [self Fn_SubTabBar];
             [self Fn_addTabBar];
             //self.tabBarController.selectedIndex = categoryNumber - 1;
@@ -517,7 +517,7 @@ UITextView *txt_feedback;
                 
             }
             
-            //categoryNumber =  shouldSelectTabbarIndex + 1;
+            categoryNumber =  shouldSelectTabbarIndex;
             [self Fn_SubTabBar];
             [self Fn_addTabBar];
             //self.tabBarController.selectedIndex = categoryNumber - 1;
